@@ -1,6 +1,6 @@
 import logging
 from collections.abc import AsyncGenerator
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from typing import Any
 
 import orjson
@@ -30,6 +30,8 @@ from backend.server.v2.chat.tools import execute_tool, tools
 from backend.util.exceptions import NotFoundError
 
 logger = logging.getLogger(__name__)
+
+UTC = timezone.utc
 
 config = backend.server.v2.chat.config.ChatConfig()
 client = AsyncOpenAI(api_key=config.api_key, base_url=config.base_url)

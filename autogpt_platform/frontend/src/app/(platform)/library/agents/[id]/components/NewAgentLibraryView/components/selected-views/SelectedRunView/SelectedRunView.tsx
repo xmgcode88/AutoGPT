@@ -4,6 +4,7 @@ import { AgentExecutionStatus } from "@/app/api/__generated__/models/agentExecut
 import type { LibraryAgent } from "@/app/api/__generated__/models/libraryAgent";
 import { Skeleton } from "@/components/__legacy__/ui/skeleton";
 import { ErrorCard } from "@/components/molecules/ErrorCard/ErrorCard";
+import { LIBRARY_ERROR_CARD_I18N } from "@/app/(platform)/library/components/errorCardI18n";
 import {
   TabsLine,
   TabsLineContent,
@@ -61,7 +62,8 @@ export function SelectedRunView({
       <ErrorCard
         responseError={responseError ?? undefined}
         httpError={httpError ?? undefined}
-        context="run"
+        context="运行"
+        i18n={LIBRARY_ERROR_CARD_I18N}
       />
     );
   }
@@ -89,11 +91,11 @@ export function SelectedRunView({
       {/* Content */}
       <TabsLine value={activeTab} onValueChange={setActiveTab}>
         <TabsLineList>
-          <TabsLineTrigger value="output">Output</TabsLineTrigger>
-          <TabsLineTrigger value="input">Your input</TabsLineTrigger>
+          <TabsLineTrigger value="output">输出</TabsLineTrigger>
+          <TabsLineTrigger value="input">输入</TabsLineTrigger>
           {run?.status === AgentExecutionStatus.REVIEW && (
             <TabsLineTrigger value="reviews">
-              Reviews ({pendingReviews.length})
+              评审（{pendingReviews.length}）
             </TabsLineTrigger>
           )}
         </TabsLineList>
@@ -101,11 +103,11 @@ export function SelectedRunView({
         <TabsLineContent value="output">
           <RunDetailCard>
             {isLoading ? (
-              <div className="text-neutral-500">Loading…</div>
+              <div className="text-neutral-500">加载中…</div>
             ) : run && "outputs" in run ? (
               <RunOutputs outputs={run.outputs as any} />
             ) : (
-              <div className="text-neutral-600">No output from this run.</div>
+              <div className="text-neutral-600">此运行没有输出。</div>
             )}
           </RunDetailCard>
         </TabsLineContent>
@@ -124,17 +126,15 @@ export function SelectedRunView({
           <TabsLineContent value="reviews">
             <RunDetailCard>
               {reviewsLoading ? (
-                <div className="text-neutral-500">Loading reviews…</div>
+                <div className="text-neutral-500">正在加载评审…</div>
               ) : pendingReviews.length > 0 ? (
                 <PendingReviewsList
                   reviews={pendingReviews}
                   onReviewComplete={refetchReviews}
-                  emptyMessage="No pending reviews for this execution"
+                  emptyMessage="此执行没有待处理的评审"
                 />
               ) : (
-                <div className="text-neutral-600">
-                  No pending reviews for this execution
-                </div>
+                <div className="text-neutral-600">此执行没有待处理的评审</div>
               )}
             </RunDetailCard>
           </TabsLineContent>

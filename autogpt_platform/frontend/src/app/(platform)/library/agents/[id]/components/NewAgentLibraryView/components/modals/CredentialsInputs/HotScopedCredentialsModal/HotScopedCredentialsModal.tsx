@@ -41,7 +41,7 @@ export function HostScopedCredentialsModal({
   const currentHost = currentUrl ? getHostFromUrl(currentUrl) : "";
 
   const formSchema = z.object({
-    host: z.string().min(1, "Host is required"),
+    host: z.string().min(1, "请输入主机"),
     title: z.string().optional(),
     headers: z.record(z.string()).optional(),
   });
@@ -50,7 +50,7 @@ export function HostScopedCredentialsModal({
     resolver: zodResolver(formSchema),
     defaultValues: {
       host: currentHost || "",
-      title: currentHost || "Manual Entry",
+      title: currentHost || "手动输入",
       headers: {},
     },
   });
@@ -67,7 +67,7 @@ export function HostScopedCredentialsModal({
     } else {
       // Reset to empty when no current host
       form.setValue("host", "");
-      form.setValue("title", "Manual Entry");
+      form.setValue("title", "手动输入");
     }
   }, [currentHost, form]);
 
@@ -129,7 +129,7 @@ export function HostScopedCredentialsModal({
 
   return (
     <Dialog
-      title={`Add sensitive headers for ${providerName}`}
+      title={`为 ${providerName} 添加敏感请求头`}
       controlled={{
         isOpen: open,
         set: (isOpen) => {
@@ -154,19 +154,19 @@ export function HostScopedCredentialsModal({
               render={({ field }) => (
                 <Input
                   id="host"
-                  label="Host Pattern"
+                  label="主机模式"
                   type="text"
                   size="small"
                   readOnly={!!currentHost}
                   hint={
                     currentHost
-                      ? "Auto-populated from the URL field. Headers will be applied to requests to this host."
-                      : "Enter the host/domain to match against request URLs (e.g., api.example.com)."
+                      ? "已从 URL 字段自动填充。请求发送到该主机时会自动附加这些请求头。"
+                      : "请输入要匹配请求 URL 的主机/域名（例如 api.example.com）。"
                   }
                   placeholder={
                     currentHost
                       ? undefined
-                      : "Enter host (e.g., api.example.com)"
+                      : "请输入主机（例如 api.example.com）"
                   }
                   {...field}
                 />
@@ -174,19 +174,18 @@ export function HostScopedCredentialsModal({
             />
 
             <div className="space-y-2">
-              <FormLabel>Headers</FormLabel>
+              <FormLabel>请求头</FormLabel>
               <FormDescription className="max-w-md">
-                Add sensitive headers (like Authorization, X-API-Key) that
-                should be automatically included in requests to the specified
-                host.
+                添加敏感请求头（如
+                Authorization、X-API-Key），将自动附加到指定主机的请求中。
               </FormDescription>
 
               {headerPairs.map((pair, index) => (
                 <div key={index} className="flex w-full items-center gap-4">
                   <Input
                     id={`header-${index}-key`}
-                    label="Header Name"
-                    placeholder="Header name (e.g., Authorization)"
+                    label="请求头名称"
+                    placeholder="请求头名称（如 Authorization）"
                     size="small"
                     value={pair.key}
                     className="flex-1"
@@ -197,11 +196,11 @@ export function HostScopedCredentialsModal({
 
                   <Input
                     id={`header-${index}-value`}
-                    label="Header Value"
+                    label="请求头值"
                     size="small"
                     type="password"
                     className="flex-2"
-                    placeholder="Header value (e.g., Bearer token123)"
+                    placeholder="请求头值（如 Bearer token123）"
                     value={pair.value}
                     onChange={(e) =>
                       updateHeaderPair(index, "value", e.target.value)
@@ -214,7 +213,7 @@ export function HostScopedCredentialsModal({
                     onClick={() => removeHeaderPair(index)}
                     disabled={headerPairs.length === 1}
                   >
-                    <TrashIcon className="size-4" /> Remove
+                    <TrashIcon className="size-4" /> 移除
                   </Button>
                 </div>
               ))}
@@ -225,13 +224,13 @@ export function HostScopedCredentialsModal({
                 size="small"
                 onClick={addHeaderPair}
               >
-                <PlusIcon className="size-4" /> Add Another Header
+                <PlusIcon className="size-4" /> 添加另一条请求头
               </Button>
             </div>
 
             <div className="pt-8">
               <Button type="submit" className="w-full" size="small">
-                Save & use these credentials
+                保存并使用这些凭据
               </Button>
             </div>
           </form>

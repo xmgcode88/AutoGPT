@@ -53,7 +53,7 @@ export function LibraryPageStateProvider({
 export function useLibraryPageContext(): LibraryPageContextType {
   const context = useContext(LibraryPageContext);
   if (!context) {
-    throw new Error("Error in context of Library page");
+    throw new Error("资源库页面上下文错误");
   }
   return context;
 }

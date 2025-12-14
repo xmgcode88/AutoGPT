@@ -35,8 +35,8 @@ export function useAPIKeyCredentialsModal({
   const credentials = useCredentials(schema, siblingInputs);
 
   const formSchema = z.object({
-    apiKey: z.string().min(1, "API Key is required"),
-    title: z.string().min(1, "Name is required"),
+    apiKey: z.string().min(1, "请输入 API 密钥"),
+    title: z.string().min(1, "请输入名称"),
     expiresAt: z.string().optional(),
   });
 

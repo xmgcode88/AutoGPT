@@ -18,22 +18,22 @@ export function TimezoneNotice() {
       <div className="mt-1 flex items-center gap-2 rounded-md border border-amber-200 bg-amber-50 p-3">
         <InfoIcon className="h-4 w-4 text-amber-600" />
         <p className="text-sm text-amber-800">
-          No timezone set. Schedule will run in UTC.
+          未设置时区，定时任务将以 UTC 运行。
           <a href="/profile/settings" className="ml-1 underline">
-            Set your timezone
+            去设置时区
           </a>
         </p>
       </div>
     );
   }
 
-  const tzName = getTimezoneDisplayName(userTimezone || "UTC");
+  const tzName = getTimezoneDisplayName(userTimezone || "UTC", "zh-CN");
 
   return (
     <div className="mt-1 flex items-center gap-2 rounded-md bg-muted/50 p-3">
       <InfoIcon className="h-4 w-4 text-muted-foreground" />
       <p className="text-sm text-muted-foreground">
-        Schedule will run in your timezone:{" "}
+        定时任务将使用你的时区运行：{" "}
         <span className="font-medium">{tzName}</span>
       </p>
     </div>

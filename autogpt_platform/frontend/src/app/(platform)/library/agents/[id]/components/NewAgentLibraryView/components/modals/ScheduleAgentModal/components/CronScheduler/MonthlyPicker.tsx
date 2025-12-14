@@ -26,7 +26,7 @@ export function MonthlyPicker({
   return (
     <div className="mb-6 space-y-2">
       <Text variant="body-medium" as="span" className="text-black">
-        Days of Month
+        每月日期
       </Text>
       <div className="flex gap-2">
         <button
@@ -34,28 +34,28 @@ export function MonthlyPicker({
           className={`h-[2.25rem] rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium leading-[16px] text-black hover:bg-zinc-100`}
           onClick={allDays}
         >
-          All Days
+          全选
         </button>
         <button
           type="button"
           className={`h-[2.25rem] rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium leading-[16px] text-black hover:bg-zinc-100`}
           onClick={customize}
         >
-          Customize
+          自定义
         </button>
         <button
           type="button"
           className="h-[2.25rem] rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium leading-[16px] text-black hover:bg-zinc-100"
           onClick={() => onChange([15])}
         >
-          15th
+          15 日
         </button>
         <button
           type="button"
           className="h-[2.25rem] rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium leading-[16px] text-black hover:bg-zinc-100"
           onClick={() => onChange([31])}
         >
-          Last Day
+          最后一天
         </button>
       </div>
 
@@ -64,7 +64,7 @@ export function MonthlyPicker({
           items={items}
           selectedValues={selected}
           onChange={(sv) => onChange(sv.map((s) => parseInt(s)))}
-          aria-label="Select days of month"
+          aria-label="选择每月日期"
         />
       )}
     </div>

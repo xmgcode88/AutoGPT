@@ -18,7 +18,7 @@ export function useScheduleDetailHeader(
   const deleteMutation = useDeleteV1DeleteExecutionSchedule({
     mutation: {
       onSuccess: () => {
-        toast({ title: "Schedule deleted" });
+        toast({ title: "定时任务已删除" });
         queryClient.invalidateQueries({
           queryKey:
             getGetV1ListExecutionSchedulesForAGraphQueryOptions(agentGraphId)
@@ -27,8 +27,8 @@ export function useScheduleDetailHeader(
       },
       onError: (error: any) =>
         toast({
-          title: "Failed to delete schedule",
-          description: error?.message || "An unexpected error occurred.",
+          title: "删除定时任务失败",
+          description: error?.message || "发生未知错误。",
           variant: "destructive",
         }),
     },

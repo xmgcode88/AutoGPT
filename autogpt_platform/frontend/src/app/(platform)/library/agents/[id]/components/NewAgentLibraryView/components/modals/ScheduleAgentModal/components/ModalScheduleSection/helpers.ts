@@ -3,8 +3,8 @@ import { z } from "zod";
 export const timeRegex = /^([01]?\d|2[0-3]):([0-5]\d)$/;
 
 export const scheduleFormSchema = z.object({
-  scheduleName: z.string().trim().min(1, "Schedule name is required"),
-  time: z.string().trim().regex(timeRegex, "Use HH:MM (24h)"),
+  scheduleName: z.string().trim().min(1, "请输入定时任务名称"),
+  time: z.string().trim().regex(timeRegex, "请使用 HH:MM（24 小时制）"),
 });
 
 export type ScheduleFormValues = z.infer<typeof scheduleFormSchema>;

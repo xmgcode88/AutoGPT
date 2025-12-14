@@ -209,7 +209,7 @@ export const CredentialsInput: FC<{
 
     if (!popup) {
       throw new Error(
-        "Failed to open popup window. Please allow popups for this site.",
+        "无法打开弹出窗口。请允许此站点的弹窗。",
       );
     }
 
@@ -234,7 +234,7 @@ export const CredentialsInput: FC<{
 
       if (!e.data.success) {
         console.error("OAuth flow failed:", e.data.message);
-        setOAuthError(`OAuth flow failed: ${e.data.message}`);
+        setOAuthError(`OAuth 登录失败：${e.data.message}`);
         setOAuth2FlowInProgress(false);
         return;
       }
@@ -260,9 +260,7 @@ export const CredentialsInput: FC<{
         console.error("Error in OAuth callback:", error);
         setOAuthError(
           // type of error is unkown so we need to use String(error)
-          `Error in OAuth callback: ${
-            error instanceof Error ? error.message : String(error)
-          }`,
+          `OAuth 回调出错：${error instanceof Error ? error.message : String(error)}`,
         );
       } finally {
         console.debug("Finalizing OAuth flow");
@@ -281,7 +279,7 @@ export const CredentialsInput: FC<{
         console.debug("OAuth flow timed out");
         controller.abort("timeout");
         setOAuth2FlowInProgress(false);
-        setOAuthError("OAuth flow timed out");
+        setOAuthError("OAuth 登录超时");
       },
       5 * 60 * 1000,
     );
@@ -338,9 +336,7 @@ export const CredentialsInput: FC<{
 
   const fieldHeader = (
     <div className="mb-2 flex gap-1">
-      <span className="text-m green text-gray-900">
-        {providerName} Credentials
-      </span>
+      <span className="text-m green text-gray-900">{providerName} 凭据</span>
       <InformationTooltip description={schema.description} />
     </div>
   );
@@ -355,7 +351,7 @@ export const CredentialsInput: FC<{
           {supportsOAuth2 && (
             <Button onClick={handleOAuthLogin} size="small">
               <ProviderIcon className="mr-2 h-4 w-4" />
-              {"Sign in with " + providerName}
+              {"使用 " + providerName + " 登录"}
             </Button>
           )}
           {supportsApiKey && (
@@ -364,7 +360,7 @@ export const CredentialsInput: FC<{
               size="small"
             >
               <ProviderIcon className="mr-2 h-4 w-4" />
-              Enter API key
+              输入 API 密钥
             </Button>
           )}
           {supportsUserPassword && (
@@ -373,7 +369,7 @@ export const CredentialsInput: FC<{
               size="small"
             >
               <ProviderIcon className="mr-2 h-4 w-4" />
-              Enter username and password
+              输入用户名和密码
             </Button>
           )}
           {supportsHostScoped && credentials.discriminatorValue && (
@@ -382,13 +378,13 @@ export const CredentialsInput: FC<{
               size="small"
             >
               <ProviderIcon className="mr-2 h-4 w-4" />
-              {`Enter sensitive headers for ${getHostFromUrl(credentials.discriminatorValue)}`}
+              {`为 ${getHostFromUrl(credentials.discriminatorValue)} 输入敏感请求头`}
             </Button>
           )}
         </div>
         {modals}
         {oAuthError && (
-          <div className="mt-2 text-red-500">Error: {oAuthError}</div>
+          <div className="mt-2 text-red-500">错误：{oAuthError}</div>
         )}
       </div>
     );
@@ -436,7 +432,7 @@ export const CredentialsInput: FC<{
                 <ProviderIcon className="mr-2 inline h-4 w-4" />
                 {credentials.title ||
                   credentials.username ||
-                  `Your ${providerName} account`}
+                  `你的 ${providerName} 账号`}
               </SelectItem>
             ))}
           {savedCredentials
@@ -470,32 +466,32 @@ export const CredentialsInput: FC<{
           {supportsOAuth2 && (
             <SelectItem value="sign-in">
               <IconUserPlus className="mr-1.5 inline" />
-              Sign in with {providerName}
+              使用 {providerName} 登录
             </SelectItem>
           )}
           {supportsApiKey && (
             <SelectItem value="add-api-key">
               <IconKeyPlus className="mr-1.5 inline" />
-              Add new API key
+              添加新的 API 密钥
             </SelectItem>
           )}
           {supportsUserPassword && (
             <SelectItem value="add-user-password">
               <IconUserPlus className="mr-1.5 inline" />
-              Add new user password
+              添加新的用户名/密码
             </SelectItem>
           )}
           {supportsHostScoped && (
             <SelectItem value="add-host-scoped">
               <IconKey className="mr-1.5 inline" />
-              Add host-scoped headers
+              添加主机范围请求头
             </SelectItem>
           )}
         </SelectContent>
       </Select>
       {modals}
       {oAuthError && (
-        <div className="mt-2 text-red-500">Error: {oAuthError}</div>
+        <div className="mt-2 text-red-500">错误：{oAuthError}</div>
       )}
     </div>
   );

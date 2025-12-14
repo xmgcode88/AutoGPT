@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import moment from "moment";
 import { GraphExecutionMeta } from "@/app/api/__generated__/models/graphExecutionMeta";
 import { RunSidebarCard } from "./RunSidebarCard";
 import { AgentExecutionStatus } from "@/app/api/__generated__/models/agentExecutionStatus";
+import { formatRelativeTime } from "@/lib/utils/time";
 import {
   CheckCircleIcon,
   ClockIcon,
@@ -70,7 +70,7 @@ export function RunListItem({
     <RunSidebarCard
       icon={statusIconMap[run.status]}
       title={title}
-      description={moment(run.started_at).fromNow()}
+      description={formatRelativeTime(run.started_at, "zh-CN")}
       onClick={onClick}
       selected={selected}
     />

@@ -79,17 +79,23 @@ export function makeCronExpression(params: CronExpressionParams): string {
   return "";
 }
 
-export function humanizeCronExpression(cronExpression: string): string {
+export function humanizeCronExpression(
+  cronExpression: string,
+  locale: string = "en-US",
+): string {
+  const isZh = locale.toLowerCase().startsWith("zh");
   const parts = cronExpression.trim().split(/\s+/);
   if (parts.length !== 5) {
-    throw new Error("Invalid cron expression format.");
+    throw new Error(
+      isZh ? "Cron 表达式格式无效。" : "Invalid cron expression format.",
+    );
   }
 
   const [minute, hour, dayOfMonth, month, dayOfWeek] = parts;
 
   // Handle every minute
   if (cronExpression === "* * * * *") {
-    return "Every minute";
+    return isZh ? "每分钟" : "Every minute";
   }
 
   // Handle minute intervals (e.g., */5 * * * *)
@@ -101,7 +107,7 @@ export function humanizeCronExpression(cronExpression: string): string {
     dayOfWeek === "*"
   ) {
     const interval = minute.substring(2);
-    return `Every ${interval} minutes`;
+    return isZh ? `每 ${interval} 分钟` : `Every ${interval} minutes`;
   }
 
   // Handle hour intervals (e.g., 30 * * * *)
@@ -112,7 +118,7 @@ export function humanizeCronExpression(cronExpression: string): string {
     month === "*" &&
     dayOfWeek === "*"
   ) {
-    return `Every hour at minute ${minute}`;
+    return isZh ? `每小时第 ${minute} 分钟` : `Every hour at minute ${minute}`;
   }
 
   // Handle every N hours (e.g., 0 */2 * * *)
@@ -124,7 +130,7 @@ export function humanizeCronExpression(cronExpression: string): string {
     dayOfWeek === "*"
   ) {
     const interval = hour.substring(2);
-    return `Every ${interval} hours`;
+    return isZh ? `每 ${interval} 小时` : `Every ${interval} hours`;
   }
 
   // Handle daily (e.g., 30 14 * * *)
@@ -135,7 +141,9 @@ export function humanizeCronExpression(cronExpression: string): string {
     !minute.includes("/") &&
     !hour.includes("/")
   ) {
-    return `Every day at ${formatTime(hour, minute)}`;
+    return isZh
+      ? `每天 ${formatTime(hour, minute)}`
+      : `Every day at ${formatTime(hour, minute)}`;
   }
 
   // Handle weekly (e.g., 30 14 * * 1,3,5)
@@ -146,8 +154,10 @@ export function humanizeCronExpression(cronExpression: string): string {
     !minute.includes("/") &&
     !hour.includes("/")
   ) {
-    const days = getDayNames(dayOfWeek);
-    return `Every ${days} at ${formatTime(hour, minute)}`;
+    const days = getDayNames(dayOfWeek, locale);
+    return isZh
+      ? `每周 ${days} ${formatTime(hour, minute)}`
+      : `Every ${days} at ${formatTime(hour, minute)}`;
   }
 
   // Handle custom minute intervals with other fields as * (e.g., every N minutes)
@@ -159,7 +169,7 @@ export function humanizeCronExpression(cronExpression: string): string {
     dayOfWeek === "*"
   ) {
     const interval = minute.split("/")[1];
-    return `Every ${interval} minutes`;
+    return isZh ? `每 ${interval} 分钟` : `Every ${interval} minutes`;
   }
 
   // Handle custom hour intervals with other fields as * (e.g., every N hours)
@@ -171,7 +181,7 @@ export function humanizeCronExpression(cronExpression: string): string {
     dayOfWeek === "*"
   ) {
     const interval = hour.split("/")[1];
-    return `Every ${interval} hours`;
+    return isZh ? `每 ${interval} 小时` : `Every ${interval} hours`;
   }
 
   // Handle specific days with custom intervals (e.g., every N days)
@@ -184,7 +194,9 @@ export function humanizeCronExpression(cronExpression: string): string {
     !hour.includes("/")
   ) {
     const interval = dayOfMonth.substring(2);
-    return `Every ${interval} days at ${formatTime(hour, minute)}`;
+    return isZh
+      ? `每 ${interval} 天 ${formatTime(hour, minute)}`
+      : `Every ${interval} days at ${formatTime(hour, minute)}`;
   }
 
   // Handle monthly (e.g., 30 14 1,15 * *)
@@ -198,8 +210,10 @@ export function humanizeCronExpression(cronExpression: string): string {
     !hour.includes("/")
   ) {
     const days = dayOfMonth.split(",").map(Number);
-    const dayList = days.join(", ");
-    return `On day ${dayList} of every month at ${formatTime(hour, minute)}`;
+    const dayList = isZh ? days.join("、") : days.join(", ");
+    return isZh
+      ? `每月 ${dayList} 日 ${formatTime(hour, minute)}`
+      : `On day ${dayList} of every month at ${formatTime(hour, minute)}`;
   }
 
   // Handle yearly (e.g., 30 14 1 1,6,12 *)
@@ -212,11 +226,15 @@ export function humanizeCronExpression(cronExpression: string): string {
     !minute.includes("/") &&
     !hour.includes("/")
   ) {
-    const months = getMonthNames(month);
-    return `Every year on the 1st day of ${months} at ${formatTime(hour, minute)}`;
+    const months = getMonthNames(month, locale);
+    return isZh
+      ? `每年 ${months} 1 日 ${formatTime(hour, minute)}`
+      : `Every year on the 1st day of ${months} at ${formatTime(hour, minute)}`;
   }
 
-  return `Cron Expression: ${cronExpression}`;
+  return isZh
+    ? `Cron 表达式：${cronExpression}`
+    : `Cron Expression: ${cronExpression}`;
 }
 
 function formatTime(hour: string, minute: string): string {
@@ -231,29 +249,36 @@ function padZero(value: string): string {
   return value.padStart(2, "0");
 }
 
-function getDayNames(dayOfWeek: string): string {
+function getDayNames(dayOfWeek: string, locale: string): string {
+  const isZh = locale.toLowerCase().startsWith("zh");
   const days = dayOfWeek.split(",").map(Number);
   const dayNames = days
     .map((d) => {
-      const names = [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ];
-      return names[d] || `Unknown(${d})`;
+      const names = isZh
+        ? ["周日", "周一", "周二", "周三", "周四", "周五", "周六"]
+        : [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+          ];
+      return names[d] || (isZh ? `未知(${d})` : `Unknown(${d})`);
     })
-    .join(", ");
+    .join(isZh ? "、" : ", ");
   return dayNames;
 }
 
-function getMonthNames(month: string): string {
+function getMonthNames(month: string, locale: string): string {
+  const isZh = locale.toLowerCase().startsWith("zh");
   const months = month.split(",").map(Number);
   const monthNames = months
     .map((m) => {
+      if (isZh) {
+        return m >= 1 && m <= 12 ? `${m}月` : `未知(${m})`;
+      }
       const names = [
         "January",
         "February",
@@ -270,6 +295,6 @@ function getMonthNames(month: string): string {
       ];
       return names[m - 1] || `Unknown(${m})`;
     })
-    .join(", ");
+    .join(isZh ? "、" : ", ");
   return monthNames;
 }

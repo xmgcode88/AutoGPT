@@ -27,24 +27,24 @@ export default function LibraryNotificationDropdown(): React.ReactNode {
       [
         {
           type: "audio",
-          title: "Audio Processing Complete",
+          title: "音频处理完成",
           id: "4",
         },
         {
           type: "text",
-          title: "LinkedIn Post Generator: YouTube to Professional Content",
+          title: "LinkedIn 帖子生成器：从 YouTube 到专业内容",
           id: "1",
           content:
             "As artificial intelligence (AI) continues to evolve, it's increasingly clear that AI isn't just a trend—it's reshaping the way we work, innovate, and solve complex problems. However, for many professionals, the question remains: How can I leverage AI to drive meaningful results in my own field? In this article, we'll explore how AI can empower businesses and individuals alike to be more efficient, make better decisions, and unlock new opportunities. Whether you're in tech, finance, healthcare, or any other industry, understanding the potential of AI can set you apart.",
         },
         {
           type: "image",
-          title: "New Image Upload",
+          title: "新图片已上传",
           id: "2",
         },
         {
           type: "video",
-          title: "Video Processing Complete",
+          title: "视频处理完成",
           id: "3",
         },
       ] as NotificationCardData[],
@@ -85,7 +85,7 @@ export default function LibraryNotificationDropdown(): React.ReactNode {
             exit={{ opacity: 0 }}
             className="hidden items-center transition-opacity duration-300 sm:inline-flex"
           >
-            Your updates
+            我的更新
             <span className="ml-2 text-[14px]">
               {notifications?.length || 0}
             </span>
@@ -97,7 +97,7 @@ export default function LibraryNotificationDropdown(): React.ReactNode {
         className="relative left-[16px] h-[80vh] w-fit overflow-y-auto rounded-[26px] bg-[#C5C5CA] p-5"
       >
         <DropdownMenuLabel className="z-10 mb-4 font-sans text-[18px] text-white">
-          Agent run updates
+          智能体运行更新
         </DropdownMenuLabel>
         <button
           className="absolute right-[10px] top-[20px] h-fit w-fit"
@@ -122,7 +122,7 @@ export default function LibraryNotificationDropdown(): React.ReactNode {
             ))
           ) : (
             <div className="w-[464px] py-4 text-center text-white">
-              No notifications present
+              暂无通知
             </div>
           )}
         </div>

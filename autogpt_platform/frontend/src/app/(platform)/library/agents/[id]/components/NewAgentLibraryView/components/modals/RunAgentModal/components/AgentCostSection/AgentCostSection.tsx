@@ -19,7 +19,7 @@ export function AgentCostSection({ flowId }: Props) {
           as="NextLink"
           href={`/build?flowID=${flowId}`}
         >
-          Open in builder
+          在构建器中打开
         </Button>
         {/* TODO: enable once we can easily link to the agent listing page from the library agent response */}
         {/* <Button variant="outline" size="small">

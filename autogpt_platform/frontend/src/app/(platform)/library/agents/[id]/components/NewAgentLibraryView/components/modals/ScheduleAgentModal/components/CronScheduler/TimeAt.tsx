@@ -6,7 +6,7 @@ import { Select } from "@/components/atoms/Select/Select";
 export function TimeAt({
   value,
   onChange,
-  label = "At",
+  label = "时间",
 }: {
   value: string;
   onChange: (v: string) => void;
@@ -94,8 +94,8 @@ export function TimeAt({
               emit(hour12, minute, mer);
             }}
             options={[
-              { label: "AM", value: "AM" },
-              { label: "PM", value: "PM" },
+              { label: "上午", value: "AM" },
+              { label: "下午", value: "PM" },
             ]}
             className="max-w-24"
           />

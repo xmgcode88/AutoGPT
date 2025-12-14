@@ -42,7 +42,7 @@ export function APIKeyCredentialsModal({
 
   return (
     <Dialog
-      title={`Add new API key for ${providerName ?? ""}`}
+      title={`为 ${providerName ?? ""} 添加新的 API 密钥`}
       controlled={{
         isOpen: open,
         set: (isOpen) => {
@@ -68,14 +68,14 @@ export function APIKeyCredentialsModal({
                 <>
                   <Input
                     id="apiKey"
-                    label="API Key"
+                    label="API 密钥"
                     type="password"
-                    placeholder="Enter API key..."
+                    placeholder="请输入 API 密钥..."
                     size="small"
                     hint={
                       schema.credentials_scopes ? (
                         <FormDescription>
-                          Required scope(s) for this block:{" "}
+                          该模块所需权限范围：{" "}
                           {schema.credentials_scopes?.map((s, i, a) => (
                             <span key={i}>
                               <code className="text-xs font-bold">{s}</code>
@@ -96,9 +96,9 @@ export function APIKeyCredentialsModal({
               render={({ field }) => (
                 <Input
                   id="title"
-                  label="Name"
+                  label="名称"
                   type="text"
-                  placeholder="Enter a name for this API key..."
+                  placeholder="请输入此 API 密钥的名称..."
                   size="small"
                   {...field}
                 />
@@ -110,16 +110,16 @@ export function APIKeyCredentialsModal({
               render={({ field }) => (
                 <Input
                   id="expiresAt"
-                  label="Expiration Date"
+                  label="过期时间"
                   type="datetime-local"
-                  placeholder="Select expiration date..."
+                  placeholder="选择过期时间..."
                   size="small"
                   {...field}
                 />
               )}
             />
             <Button type="submit" size="small" className="min-w-68">
-              Save & use this API key
+              保存并使用该 API 密钥
             </Button>
           </form>
         </Form>

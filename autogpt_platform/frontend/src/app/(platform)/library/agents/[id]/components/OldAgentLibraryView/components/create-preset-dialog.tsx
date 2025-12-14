@@ -53,19 +53,19 @@ export function CreatePresetDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Create Preset</DialogTitle>
+          <DialogTitle>创建预设</DialogTitle>
           <DialogDescription>
-            Give your preset a name and description to help identify it later.
+            为预设填写名称和描述，方便后续识别。
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid gap-2">
             <label htmlFor="preset-name" className="text-sm font-medium">
-              Name *
+              名称 *
             </label>
             <Input
               id="preset-name"
-              placeholder="Enter preset name"
+              placeholder="输入预设名称"
               value={name}
               onChange={(e) => setName(e.target.value)}
               onKeyDown={handleKeyDown}
@@ -74,11 +74,11 @@ export function CreatePresetDialog({
           </div>
           <div className="grid gap-2">
             <label htmlFor="preset-description" className="text-sm font-medium">
-              Description
+              描述
             </label>
             <Textarea
               id="preset-description"
-              placeholder="Optional description"
+              placeholder="可选描述"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               onKeyDown={handleKeyDown}
@@ -88,10 +88,10 @@ export function CreatePresetDialog({
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={handleCancel}>
-            Cancel
+            取消
           </Button>
           <Button onClick={handleSubmit} disabled={!name.trim()}>
-            Create Preset
+            创建预设
           </Button>
         </DialogFooter>
       </DialogContent>

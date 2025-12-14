@@ -5,6 +5,14 @@ import { ErrorHeader } from "./components/ErrorHeader";
 import { ErrorMessage } from "./components/ErrorMessage";
 import { ActionButtons } from "./components/ActionButtons";
 
+export type ErrorCardI18n = {
+  title?: string;
+  intro?: (context: string) => string;
+  retryButton?: string;
+  reportButton?: string;
+  helpButton?: string;
+};
+
 export interface ErrorCardProps {
   isSuccess?: boolean;
   responseError?: {
@@ -19,6 +27,7 @@ export interface ErrorCardProps {
   context?: string;
   onRetry?: () => void;
   className?: string;
+  i18n?: ErrorCardI18n;
 }
 
 export function ErrorCard({
@@ -28,6 +37,7 @@ export function ErrorCard({
   context = "data",
   onRetry,
   className = "",
+  i18n,
 }: ErrorCardProps) {
   if (isSuccess && !responseError && !httpError) {
     return null;
@@ -46,16 +56,25 @@ export function ErrorCard({
     ? getErrorMessage(responseError)
     : getHttpErrorMessage(httpError);
 
+  const introText =
+    i18n?.intro?.(context) ??
+    `We had the following error when retrieving ${context ?? "your data"}:`;
+
   return (
     <CardWrapper className={className}>
       <div className="relative space-y-4 p-6">
-        <ErrorHeader />
-        <ErrorMessage errorMessage={errorMessage} context={context} />
+        <ErrorHeader title={i18n?.title} />
+        <ErrorMessage errorMessage={errorMessage} introText={introText} />
         <ActionButtons
           onRetry={onRetry}
           responseError={responseError}
           httpError={httpError}
           context={context}
+          labels={{
+            retry: i18n?.retryButton,
+            report: i18n?.reportButton,
+            help: i18n?.helpButton,
+          }}
         />
       </div>
     </CardWrapper>

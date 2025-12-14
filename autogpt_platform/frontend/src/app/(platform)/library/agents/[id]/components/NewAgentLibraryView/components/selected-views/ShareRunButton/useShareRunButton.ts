@@ -54,21 +54,20 @@ export function useShareRunButton({
         setShareToken(response.data.share_token);
         setIsShared(true);
         toast({
-          title: "Sharing enabled",
-          description:
-            "Your agent run is now publicly accessible via the share link.",
+          title: "已启用分享",
+          description: "该运行已通过分享链接公开可访问。",
         });
       } else {
         toast({
-          title: "Error",
-          description: "Failed to enable sharing. Please try again.",
+          title: "错误",
+          description: "启用分享失败，请重试。",
           variant: "destructive",
         });
       }
     } catch {
       toast({
-        title: "Error",
-        description: "Failed to enable sharing. Please try again.",
+        title: "错误",
+        description: "启用分享失败，请重试。",
         variant: "destructive",
       });
     }
@@ -84,13 +83,13 @@ export function useShareRunButton({
       setIsShared(false);
       setShareToken(null);
       toast({
-        title: "Sharing disabled",
-        description: "The share link is no longer accessible.",
+        title: "已停止分享",
+        description: "分享链接已不可访问。",
       });
     } catch {
       toast({
-        title: "Error",
-        description: "Failed to disable sharing. Please try again.",
+        title: "错误",
+        description: "停止分享失败，请重试。",
         variant: "destructive",
       });
     }
@@ -102,13 +101,13 @@ export function useShareRunButton({
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
       toast({
-        title: "Copied!",
-        description: "Share link copied to clipboard.",
+        title: "已复制！",
+        description: "分享链接已复制到剪贴板。",
       });
     } catch {
       toast({
-        title: "Error",
-        description: "Failed to copy link. Please try again.",
+        title: "错误",
+        description: "复制链接失败，请重试。",
         variant: "destructive",
       });
     }

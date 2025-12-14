@@ -34,31 +34,31 @@ export function ModalRunSection() {
         <div className="flex flex-col gap-4">
           <div className="flex flex-col space-y-2">
             <label className="flex items-center gap-1 text-sm font-medium">
-              Trigger Name
-              <InformationTooltip description="Name of the trigger you are setting up" />
+              触发器名称
+              <InformationTooltip description="你正在配置的触发器名称" />
             </label>
             <Input
               id="trigger_name"
-              label="Trigger Name"
+              label="触发器名称"
               size="small"
               hideLabel
               value={presetName}
-              placeholder="Enter trigger name"
+              placeholder="请输入触发器名称"
               onChange={(e) => setPresetName(e.target.value)}
             />
           </div>
           <div className="flex flex-col space-y-2">
             <label className="flex items-center gap-1 text-sm font-medium">
-              Trigger Description
-              <InformationTooltip description="Description of the trigger you are setting up" />
+              触发器描述
+              <InformationTooltip description="你正在配置的触发器描述" />
             </label>
             <Input
               id="trigger_description"
-              label="Trigger Description"
+              label="触发器描述"
               size="small"
               hideLabel
               value={presetDescription}
-              placeholder="Enter trigger description"
+              placeholder="请输入触发器描述"
               onChange={(e) => setPresetDescription(e.target.value)}
             />
           </div>
@@ -71,7 +71,7 @@ export function ModalRunSection() {
           <InfoIcon className="mt-0.5 h-4 w-4 text-blue-600" />
           <div>
             <h4 className="text-sm font-medium text-blue-900">
-              How to use this agent
+              如何使用该智能体
             </h4>
             <p className="mt-1 whitespace-pre-wrap text-sm text-blue-800">
               {agent.instructions}
@@ -128,7 +128,7 @@ export function ModalRunSection() {
               return (
                 <div key={key} className="flex flex-col gap-4">
                   <Text variant="body-medium" as="h3">
-                    {toDisplayName(credential.provider)} credentials
+                    {toDisplayName(credential.provider)} 凭据
                   </Text>
                   <div className="flex flex-col gap-3">
                     <div className="flex items-center justify-between text-sm">
@@ -137,7 +137,7 @@ export function ModalRunSection() {
                         as="span"
                         className="!text-neutral-600"
                       >
-                        Name
+                        名称
                       </Text>
                       <Text
                         variant="body"
@@ -153,7 +153,7 @@ export function ModalRunSection() {
                         as="span"
                         className="!text-neutral-900"
                       >
-                        {credential.title || "Untitled"}
+                        {credential.title || "未命名"}
                       </Text>
                       <span className="font-mono text-neutral-400">
                         {"*".repeat(25)}

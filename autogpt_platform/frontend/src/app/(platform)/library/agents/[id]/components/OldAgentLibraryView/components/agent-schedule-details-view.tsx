@@ -26,7 +26,7 @@ import { formatScheduleTime } from "@/lib/timezone-utils";
 import { useGetV1GetUserTimezone } from "@/app/api/__generated__/endpoints/auth/auth";
 import { PlayIcon } from "lucide-react";
 
-import { AgentRunStatus } from "./agent-run-status-chip";
+import { AgentRunStatus, AgentRunStatusChip } from "./agent-run-status-chip";
 
 export function AgentScheduleDetailsView({
   graph,
@@ -57,18 +57,16 @@ export function AgentScheduleDetailsView({
   const infoStats: { label: string; value: React.ReactNode }[] = useMemo(() => {
     return [
       {
-        label: "Status",
-        value:
-          selectedRunStatus.charAt(0).toUpperCase() +
-          selectedRunStatus.slice(1),
+        label: "状态",
+        value: <AgentRunStatusChip status={selectedRunStatus} />,
       },
       {
-        label: "Schedule",
-        value: humanizeCronExpression(schedule.cron),
+        label: "定时",
+        value: humanizeCronExpression(schedule.cron, "zh-CN"),
       },
       {
-        label: "Next run",
-        value: formatScheduleTime(schedule.next_run_time, userTimezone),
+        label: "下次运行",
+        value: formatScheduleTime(schedule.next_run_time, userTimezone, "zh-CN"),
       },
     ];
   }, [schedule, selectedRunStatus, userTimezone]);
@@ -112,7 +110,7 @@ export function AgentScheduleDetailsView({
         label: (
           <>
             <PlayIcon className="mr-2 size-4" />
-            Run now
+            立即运行
           </>
         ),
         callback: runNow,
@@ -121,7 +119,7 @@ export function AgentScheduleDetailsView({
         label: (
           <>
             <IconCross className="mr-2 size-4 px-0.5" />
-            Delete schedule
+            删除定时任务
           </>
         ),
         callback: () => doDeleteSchedule(schedule.id),
@@ -136,7 +134,7 @@ export function AgentScheduleDetailsView({
       <div className="flex flex-1 flex-col gap-4">
         <Card className="agpt-box">
           <CardHeader>
-            <CardTitle className="font-poppins text-lg">Info</CardTitle>
+            <CardTitle className="font-poppins text-lg">信息</CardTitle>
           </CardHeader>
 
           <CardContent>
@@ -153,7 +151,7 @@ export function AgentScheduleDetailsView({
 
         <Card className="agpt-box">
           <CardHeader>
-            <CardTitle className="font-poppins text-lg">Input</CardTitle>
+            <CardTitle className="font-poppins text-lg">输入</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col gap-4">
             {agentRunInputs !== undefined ? (
@@ -173,9 +171,9 @@ export function AgentScheduleDetailsView({
       {/* Run / Agent Actions */}
       <aside className="w-48 xl:w-56">
         <div className="flex flex-col gap-8">
-          <ActionButtonGroup title="Run actions" actions={runActions} />
+          <ActionButtonGroup title="运行操作" actions={runActions} />
 
-          <ActionButtonGroup title="Agent actions" actions={agentActions} />
+          <ActionButtonGroup title="智能体操作" actions={agentActions} />
         </div>
       </aside>
     </div>

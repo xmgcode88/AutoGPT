@@ -154,8 +154,8 @@ export function RunAgentModal({
                       <AgentSectionHeader
                         title={
                           defaultRunType === "automatic-trigger"
-                            ? "Trigger Setup"
-                            : "Agent Setup"
+                            ? "触发器配置"
+                            : "智能体配置"
                         }
                       />
                       <ModalRunSection />
@@ -166,7 +166,7 @@ export function RunAgentModal({
 
               {/* Agent Details Section */}
               <div className="mt-8">
-                <AgentSectionHeader title="Agent Details" />
+                <AgentSectionHeader title="智能体详情" />
                 <AgentDetails agent={agent} />
               </div>
             </div>
@@ -184,7 +184,7 @@ export function RunAgentModal({
                 }
               >
                 <AlarmIcon size={16} />
-                Schedule Agent
+                设置定时运行
               </Button>
               <RunActions
                 defaultRunType={defaultRunType}

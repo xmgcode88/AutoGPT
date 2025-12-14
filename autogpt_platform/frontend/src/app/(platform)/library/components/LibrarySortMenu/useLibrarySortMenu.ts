@@ -12,11 +12,11 @@ export const useLibrarySortMenu = () => {
   const getSortLabel = (sort: LibraryAgentSort) => {
     switch (sort) {
       case LibraryAgentSort.createdAt:
-        return "Creation Date";
+        return "创建时间";
       case LibraryAgentSort.updatedAt:
-        return "Last Modified";
+        return "最近修改";
       default:
-        return "Last Modified";
+        return "最近修改";
     }
   };
 

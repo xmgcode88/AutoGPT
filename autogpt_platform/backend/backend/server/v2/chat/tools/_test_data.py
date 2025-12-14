@@ -1,5 +1,5 @@
 import uuid
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from os import getenv
 
 import pytest
@@ -15,6 +15,8 @@ from backend.data.user import get_or_create_user
 from backend.integrations.credentials_store import IntegrationCredentialsStore
 from backend.server.v2.chat.model import ChatSession
 from backend.server.v2.store import db as store_db
+
+UTC = timezone.utc
 
 
 def make_session(user_id: str | None = None):

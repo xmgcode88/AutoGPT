@@ -10,11 +10,11 @@ import {
   StopIcon,
   TrashIcon,
 } from "@phosphor-icons/react";
-import moment from "moment";
 import { AgentActionsDropdown } from "../AgentActionsDropdown";
 import { RunStatusBadge } from "../SelectedRunView/components/RunStatusBadge";
 import { ShareRunButton } from "../ShareRunButton/ShareRunButton";
 import { FloatingSafeModeToggle } from "@/components/molecules/FloatingSafeModeToggle/FloatingSafeModeToggle";
+import { formatDurationSeconds, formatRelativeTime } from "@/lib/utils/time";
 import { useRunDetailHeader } from "./useRunDetailHeader";
 
 type Props = {
@@ -70,7 +70,7 @@ export function RunDetailHeader({
                   onClick={handleRunAgain}
                   loading={isRunningAgain}
                 >
-                  <PlayIcon size={16} /> Run again
+                  <PlayIcon size={16} /> 再次运行
                 </Button>
                 {shareExecutionResultsEnabled && (
                   <ShareRunButton
@@ -91,7 +91,7 @@ export function RunDetailHeader({
                     size="small"
                     onClick={() => handleShowDeleteDialog(true)}
                   >
-                    <TrashIcon size={16} /> Delete run
+                    <TrashIcon size={16} /> 删除运行
                   </Button>
                 ) : null}
                 {openInBuilderHref ? (
@@ -102,7 +102,7 @@ export function RunDetailHeader({
                     href={openInBuilderHref}
                     target="_blank"
                   >
-                    <ArrowSquareOutIcon size={16} /> Edit run
+                    <ArrowSquareOutIcon size={16} /> 编辑运行
                   </Button>
                 ) : null}
                 {canStop ? (
@@ -112,7 +112,7 @@ export function RunDetailHeader({
                     onClick={handleStopRun}
                     disabled={isStopping}
                   >
-                    <StopIcon size={14} /> Stop agent
+                    <StopIcon size={14} /> 停止智能体
                   </Button>
                 ) : null}
                 <AgentActionsDropdown agent={agent} />
@@ -122,17 +122,17 @@ export function RunDetailHeader({
           {run ? (
             <div className="mt-1 flex flex-wrap items-center gap-2 gap-y-1 text-zinc-600">
               <Text variant="small" className="!text-zinc-600">
-                Started {moment(run.started_at).fromNow()}
+                开始于 {formatRelativeTime(run.started_at, "zh-CN")}
               </Text>
               <span className="mx-1 inline-block text-zinc-200">|</span>
               <Text variant="small" className="!text-zinc-600">
-                Version: {run.graph_version}
+                版本：{run.graph_version}
               </Text>
               {run.stats?.node_exec_count !== undefined && (
                 <>
                   <span className="mx-1 inline-block text-zinc-200">|</span>
                   <Text variant="small" className="!text-zinc-600">
-                    Steps: {run.stats.node_exec_count}
+                    步骤：{run.stats.node_exec_count}
                   </Text>
                 </>
               )}
@@ -140,8 +140,7 @@ export function RunDetailHeader({
                 <>
                   <span className="mx-1 inline-block text-zinc-200">|</span>
                   <Text variant="small" className="!text-zinc-600">
-                    Duration:{" "}
-                    {moment.duration(run.stats.duration, "seconds").humanize()}
+                    时长：{formatDurationSeconds(run.stats.duration, "zh-CN")}
                   </Text>
                 </>
               )}
@@ -149,7 +148,7 @@ export function RunDetailHeader({
                 <>
                   <span className="mx-1 inline-block text-zinc-200">|</span>
                   <Text variant="small" className="!text-zinc-600">
-                    Cost: ${(run.stats.cost / 100).toFixed(2)}
+                    费用：${(run.stats.cost / 100).toFixed(2)}
                   </Text>
                 </>
               )}
@@ -176,28 +175,25 @@ export function RunDetailHeader({
           set: handleShowDeleteDialog,
         }}
         styling={{ maxWidth: "32rem" }}
-        title="Delete run"
+        title="删除运行"
       >
         <Dialog.Content>
           <div>
-            <Text variant="large">
-              Are you sure you want to delete this run? This action cannot be
-              undone.
-            </Text>
+            <Text variant="large">确定要删除这次运行吗？此操作无法撤销。</Text>
             <Dialog.Footer>
               <Button
                 variant="secondary"
                 disabled={isDeleting}
                 onClick={() => handleShowDeleteDialog(false)}
               >
-                Cancel
+                取消
               </Button>
               <Button
                 variant="destructive"
                 onClick={handleDeleteRun}
                 loading={isDeleting}
               >
-                Delete
+                删除
               </Button>
             </Dialog.Footer>
           </div>

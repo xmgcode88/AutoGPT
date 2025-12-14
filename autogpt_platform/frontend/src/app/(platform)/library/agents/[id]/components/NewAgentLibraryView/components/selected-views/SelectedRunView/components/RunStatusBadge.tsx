@@ -61,6 +61,16 @@ const statusIconMap: Record<AgentExecutionStatus, StatusIconMap> = {
   },
 };
 
+const statusLabelMap: Record<AgentExecutionStatus, string> = {
+  INCOMPLETE: "未完成",
+  QUEUED: "排队中",
+  RUNNING: "运行中",
+  REVIEW: "待评审",
+  COMPLETED: "已完成",
+  TERMINATED: "已终止",
+  FAILED: "失败",
+};
+
 type Props = {
   status: AgentExecutionStatus;
 };
@@ -74,11 +84,8 @@ export function RunStatusBadge({ status }: Props) {
       )}
     >
       {statusIconMap[status].icon}
-      <Text
-        variant="small-medium"
-        className={cn(statusIconMap[status].textColor, "capitalize")}
-      >
-        {status.toLowerCase()}
+      <Text variant="small-medium" className={statusIconMap[status].textColor}>
+        {statusLabelMap[status]}
       </Text>
     </div>
   );

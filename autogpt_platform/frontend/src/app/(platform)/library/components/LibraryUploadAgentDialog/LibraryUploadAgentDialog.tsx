@@ -26,12 +26,12 @@ import { useLibraryUploadAgentDialog } from "./useLibraryUploadAgentDialog";
 const fileTypes = ["JSON"];
 
 const fileSchema = z.custom<File>((val) => val instanceof File, {
-  message: "Must be a File object",
+  message: "请选择文件",
 });
 
 export const uploadAgentFormSchema = z.object({
   agentFile: fileSchema,
-  agentName: z.string().min(1, "Agent name is required"),
+  agentName: z.string().min(1, "请输入智能体名称"),
   agentDescription: z.string(),
 });
 
@@ -57,16 +57,14 @@ export default function LibraryUploadAgentDialog(): React.ReactNode {
           className="w-fit sm:w-[177px]"
         >
           <Upload className="h-5 w-5 sm:mr-2" />
-          <span className="hidden items-center sm:inline-flex">
-            Upload an agent
-          </span>
+          <span className="hidden items-center sm:inline-flex">上传智能体</span>
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="mb-8 text-center">Upload Agent</DialogTitle>
+          <DialogTitle className="mb-8 text-center">上传智能体</DialogTitle>
           <DialogDescription>
-            Upload your agent by providing a name, description, and JSON file.
+            请提供名称、描述和 JSON 文件以上传你的智能体。
           </DialogDescription>
         </DialogHeader>
 
@@ -77,7 +75,7 @@ export default function LibraryUploadAgentDialog(): React.ReactNode {
               name="agentName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Agent name</FormLabel>
+                  <FormLabel>智能体名称</FormLabel>
                   <FormControl>
                     <Input {...field} className="w-full rounded-[10px]" />
                   </FormControl>
@@ -91,7 +89,7 @@ export default function LibraryUploadAgentDialog(): React.ReactNode {
               name="agentDescription"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>描述</FormLabel>
                   <FormControl>
                     <Textarea {...field} className="w-full rounded-[10px]" />
                   </FormControl>
@@ -124,10 +122,10 @@ export default function LibraryUploadAgentDialog(): React.ReactNode {
                         handleChange={handleChange}
                         name="file"
                         types={fileTypes}
-                        label={"Upload your agent here..!!"}
-                        uploadedLabel={"Uploading Successful"}
+                        label={"在此上传智能体..."}
+                        uploadedLabel={"上传成功"}
                         required={true}
-                        hoverTitle={"Drop your agent here...!!"}
+                        hoverTitle={"将智能体拖到这里..."}
                         maxSize={10}
                         classes={"drop-style"}
                         onDrop={() => {
@@ -155,9 +153,9 @@ export default function LibraryUploadAgentDialog(): React.ReactNode {
                             </div>
                           ) : (
                             <>
-                              <span>Drop your agent here</span>
-                              <span>or</span>
-                              <span>Click to upload</span>
+                              <span>将智能体拖到这里</span>
+                              <span>或</span>
+                              <span>点击上传</span>
                             </>
                           )}
                         </div>
@@ -178,10 +176,10 @@ export default function LibraryUploadAgentDialog(): React.ReactNode {
               {isUploading ? (
                 <div className="flex items-center gap-2">
                   <div className="h-4 w-4 animate-spin rounded-full border-b-2 border-t-2 border-white"></div>
-                  <span>Uploading...</span>
+                  <span>上传中...</span>
                 </div>
               ) : (
-                "Upload Agent"
+                "上传智能体"
               )}
             </Button>
           </form>

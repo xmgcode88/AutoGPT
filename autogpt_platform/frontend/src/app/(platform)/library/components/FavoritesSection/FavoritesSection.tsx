@@ -35,11 +35,11 @@ export default function FavoritesSection() {
       <div className="flex items-center gap-[10px] p-2 pb-[10px]">
         <Heart className="h-5 w-5 fill-red-500 text-red-500" />
         <span className="font-poppin text-[18px] font-semibold leading-[28px] text-neutral-800">
-          Favorites
+          收藏
         </span>
         {!isLoading && (
           <span className="font-sans text-[14px] font-normal leading-6">
-            {agentCount} {agentCount === 1 ? "agent" : "agents"}
+            {agentCount} 个智能体
           </span>
         )}
       </div>

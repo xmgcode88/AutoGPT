@@ -45,7 +45,7 @@ const NotificationCard = ({
             1/4
           </p>
           <p className="h-[26px] rounded-[45px] bg-green-100 px-[9px] py-[3px] font-sans text-[12px] font-medium text-green-800">
-            Success
+            成功
           </p>
         </div>
 
@@ -64,7 +64,7 @@ const NotificationCard = ({
 
       <div className="space-y-[6px] p-0">
         <p className="font-sans text-[14px] font-medium leading-[20px] text-neutral-500">
-          New Output Ready!
+          新输出已就绪！
         </p>
         <h2 className="font-poppin text-[20px] font-medium leading-7 text-neutral-800">
           {title}
@@ -165,7 +165,7 @@ const NotificationCard = ({
           </Button>
         </div>
         <Button className="h-[40px] rounded-[52px] bg-neutral-800 px-4 py-2">
-          See run
+          查看运行
         </Button>
       </div>
     </div>

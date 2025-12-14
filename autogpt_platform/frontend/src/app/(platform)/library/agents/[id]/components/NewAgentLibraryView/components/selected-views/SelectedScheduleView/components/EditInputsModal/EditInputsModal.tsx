@@ -36,12 +36,12 @@ export function EditInputsModal({ agent, schedule }: Props) {
           size="small"
           className="absolute -right-2 -top-2"
         >
-          <PencilSimpleIcon className="size-4" /> Edit inputs
+          <PencilSimpleIcon className="size-4" /> 编辑输入
         </Button>
       </Dialog.Trigger>
       <Dialog.Content>
         <div className="flex flex-col gap-4">
-          <Text variant="h3">Edit inputs</Text>
+          <Text variant="h3">编辑输入</Text>
           <div className="flex flex-col gap-4">
             {Object.entries(inputFields).map(([key, fieldSchema]) => (
               <div key={key} className="flex flex-col gap-1.5">
@@ -65,7 +65,7 @@ export function EditInputsModal({ agent, schedule }: Props) {
               onClick={() => setIsOpen(false)}
               className="min-w-32"
             >
-              Cancel
+              取消
             </Button>
             <Button
               variant="primary"
@@ -74,7 +74,7 @@ export function EditInputsModal({ agent, schedule }: Props) {
               loading={isSaving}
               className="min-w-32"
             >
-              {isSaving ? "Saving…" : "Save"}
+              {isSaving ? "保存中…" : "保存"}
             </Button>
           </div>
         </Dialog.Footer>

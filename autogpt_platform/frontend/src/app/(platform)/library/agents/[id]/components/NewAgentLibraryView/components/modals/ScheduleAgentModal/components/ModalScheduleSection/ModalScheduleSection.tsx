@@ -44,14 +44,14 @@ export function ModalScheduleSection({
     <div className="mt-6">
       <Input
         id="schedule-name"
-        label="Schedule Name"
+        label="定时任务名称"
         value={scheduleName}
         size="small"
         onChange={(e) => {
           handleScheduleNameChange(e);
           validateNow({ scheduleName: e.target.value });
         }}
-        placeholder="Enter a name for this schedule"
+        placeholder="请输入定时任务名称"
         error={errors.scheduleName}
         className="max-w-80"
       />
@@ -59,8 +59,7 @@ export function ModalScheduleSection({
       {recommendedScheduleCron && (
         <div className="mb-4 rounded-md bg-blue-50 p-3">
           <Text variant="body" className="text-blue-800">
-            💡 This agent has a recommended schedule that has been pre-filled
-            below. You can modify it as needed.
+            💡 该智能体提供了推荐的定时设置，已为你预填。你可以按需修改。
           </Text>
         </div>
       )}

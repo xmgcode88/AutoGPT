@@ -9,6 +9,11 @@ interface ActionButtonsProps {
   responseError?: ErrorCardProps["responseError"];
   httpError?: ErrorCardProps["httpError"];
   context: string;
+  labels?: {
+    retry?: string;
+    report?: string;
+    help?: string;
+  };
 }
 
 export function ActionButtons({
@@ -16,13 +21,14 @@ export function ActionButtons({
   responseError,
   httpError,
   context,
+  labels,
 }: ActionButtonsProps) {
   return (
     <div className="flex flex-col flex-wrap gap-3 pt-2 sm:flex-row">
       {onRetry && (
         <Button onClick={onRetry} variant="outline" size="small">
           <ArrowClockwise size={16} weight="bold" />
-          Try Again
+          {labels?.retry ?? "Try Again"}
         </Button>
       )}
 
@@ -32,7 +38,7 @@ export function ActionButtons({
         size="small"
       >
         <Bug size={16} weight="bold" />
-        Report Error
+        {labels?.report ?? "Report Error"}
       </Button>
 
       <Button
@@ -44,7 +50,7 @@ export function ActionButtons({
         rel="noopener noreferrer"
       >
         <DiscordLogo size={16} weight="fill" />
-        Get Help
+        {labels?.help ?? "Get Help"}
       </Button>
     </div>
   );

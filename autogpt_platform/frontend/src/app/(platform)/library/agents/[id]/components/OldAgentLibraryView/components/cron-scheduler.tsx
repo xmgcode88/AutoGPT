@@ -12,28 +12,28 @@ import { Button } from "@/components/__legacy__/ui/button";
 import { CronFrequency, makeCronExpression } from "@/lib/cron-expression-utils";
 
 const weekDays = [
-  { label: "Su", value: 0 },
-  { label: "Mo", value: 1 },
-  { label: "Tu", value: 2 },
-  { label: "We", value: 3 },
-  { label: "Th", value: 4 },
-  { label: "Fr", value: 5 },
-  { label: "Sa", value: 6 },
+  { label: "日", value: 0 },
+  { label: "一", value: 1 },
+  { label: "二", value: 2 },
+  { label: "三", value: 3 },
+  { label: "四", value: 4 },
+  { label: "五", value: 5 },
+  { label: "六", value: 6 },
 ];
 
 const months = [
-  { label: "Jan", value: "January" },
-  { label: "Feb", value: "February" },
-  { label: "Mar", value: "March" },
-  { label: "Apr", value: "April" },
-  { label: "May", value: "May" },
-  { label: "Jun", value: "June" },
-  { label: "Jul", value: "July" },
-  { label: "Aug", value: "August" },
-  { label: "Sep", value: "September" },
-  { label: "Oct", value: "October" },
-  { label: "Nov", value: "November" },
-  { label: "Dec", value: "December" },
+  { label: "1月", value: "January" },
+  { label: "2月", value: "February" },
+  { label: "3月", value: "March" },
+  { label: "4月", value: "April" },
+  { label: "5月", value: "May" },
+  { label: "6月", value: "June" },
+  { label: "7月", value: "July" },
+  { label: "8月", value: "August" },
+  { label: "9月", value: "September" },
+  { label: "10月", value: "October" },
+  { label: "11月", value: "November" },
+  { label: "12月", value: "December" },
 ];
 
 type CronSchedulerProps = {
@@ -225,31 +225,31 @@ export function CronScheduler({
   return (
     <div className="max-w-md space-y-6">
       <div className="space-y-4">
-        <Label className="text-base font-medium">Repeat</Label>
+        <Label className="text-base font-medium">重复</Label>
 
         <Select
           value={frequency}
           onValueChange={(value: CronFrequency) => setFrequency(value)}
         >
           <SelectTrigger>
-            <SelectValue placeholder="Select frequency" />
+            <SelectValue placeholder="选择频率" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="hourly">Every Hour</SelectItem>
-            <SelectItem value="daily">Daily</SelectItem>
-            <SelectItem value="weekly">Weekly</SelectItem>
-            <SelectItem value="monthly">Monthly</SelectItem>
-            <SelectItem value="yearly">Yearly</SelectItem>
-            <SelectItem value="custom">Custom</SelectItem>
+            <SelectItem value="hourly">每小时</SelectItem>
+            <SelectItem value="daily">每天</SelectItem>
+            <SelectItem value="weekly">每周</SelectItem>
+            <SelectItem value="monthly">每月</SelectItem>
+            <SelectItem value="yearly">每年</SelectItem>
+            <SelectItem value="custom">自定义</SelectItem>
           </SelectContent>
         </Select>
 
         {frequency === "hourly" && (
           <div className="flex items-center gap-2">
-            <Label>At minute</Label>
+            <Label>分钟</Label>
             <Select value={selectedMinute} onValueChange={setSelectedMinute}>
               <SelectTrigger className="w-24">
-                <SelectValue placeholder="Select minute" />
+                <SelectValue placeholder="选择分钟" />
               </SelectTrigger>
               <SelectContent>
                 {[0, 15, 30, 45].map((min) => (
@@ -264,7 +264,7 @@ export function CronScheduler({
 
         {frequency === "custom" && (
           <div className="flex items-center gap-2">
-            <Label>Every</Label>
+            <Label>每</Label>
             <Input
               type="number"
               min="1"
@@ -287,9 +287,9 @@ export function CronScheduler({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="minutes">Minutes</SelectItem>
-                <SelectItem value="hours">Hours</SelectItem>
-                <SelectItem value="days">Days</SelectItem>
+                <SelectItem value="minutes">分钟</SelectItem>
+                <SelectItem value="hours">小时</SelectItem>
+                <SelectItem value="days">天</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -299,7 +299,7 @@ export function CronScheduler({
       {frequency === "weekly" && (
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <Label>On</Label>
+            <Label>重复于</Label>
             <Button
               variant="outline"
               className="h-8 px-2 py-1 text-xs"
@@ -312,22 +312,22 @@ export function CronScheduler({
               }}
             >
               {selectedWeekDays.length === weekDays.length
-                ? "Deselect All"
-                : "Select All"}
+                ? "取消全选"
+                : "全选"}
             </Button>
             <Button
               variant="outline"
               className="h-8 px-2 py-1 text-xs"
               onClick={() => setSelectedWeekDays([1, 2, 3, 4, 5])}
             >
-              Weekdays
+              工作日
             </Button>
             <Button
               variant="outline"
               className="h-8 px-2 py-1 text-xs"
               onClick={() => setSelectedWeekDays([0, 6])}
             >
-              Weekends
+              周末
             </Button>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -352,14 +352,14 @@ export function CronScheduler({
           </div>
           {selectedWeekDays.length === 0 && (
             <p className="text-sm text-red-500">
-              Please select at least one day of the week
+              请选择至少一个星期几
             </p>
           )}
         </div>
       )}
       {frequency === "monthly" && (
         <div className="space-y-4">
-          <Label>Days of Month</Label>
+          <Label>每月日期</Label>
           <div className="flex gap-2">
             <Button
               variant={selectedMonthDays.length === 31 ? "default" : "outline"}
@@ -369,7 +369,7 @@ export function CronScheduler({
                 );
               }}
             >
-              All Days
+              全选
             </Button>
             <Button
               variant={
@@ -381,19 +381,19 @@ export function CronScheduler({
                 setSelectedMonthDays([]);
               }}
             >
-              Customize
+              自定义
             </Button>
             <Button
               variant="outline"
               onClick={() => setSelectedMonthDays([15])}
             >
-              15th
+              15 日
             </Button>
             <Button
               variant="outline"
               onClick={() => setSelectedMonthDays([31])}
             >
-              Last Day
+              最后一天
             </Button>
           </div>
           {selectedMonthDays.length < 31 && (
@@ -420,14 +420,14 @@ export function CronScheduler({
           )}
           {selectedMonthDays.length === 0 && (
             <p className="text-sm text-red-500">
-              Please select at least one day of the month
+              请选择至少一个日期
             </p>
           )}
         </div>
       )}
       {frequency === "yearly" && (
         <div className="space-y-4">
-          <Label>Months</Label>
+          <Label>月份</Label>
           <div className="flex gap-2">
             <Button
               variant="outline"
@@ -443,8 +443,8 @@ export function CronScheduler({
               }}
             >
               {selectedMonths.length === months.length
-                ? "Deselect All"
-                : "Select All"}
+                ? "取消全选"
+                : "全选"}
             </Button>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -472,7 +472,7 @@ export function CronScheduler({
           </div>
           {selectedMonths.length === 0 && (
             <p className="text-sm text-red-500">
-              Please select at least one month
+              请选择至少一个月份
             </p>
           )}
         </div>
@@ -480,7 +480,7 @@ export function CronScheduler({
 
       {frequency !== "hourly" && (
         <div className="flex items-center gap-4 space-y-2">
-          <Label className="pt-2">At</Label>
+          <Label className="pt-2">时间</Label>
           <Input
             type="time"
             value={selectedTime}

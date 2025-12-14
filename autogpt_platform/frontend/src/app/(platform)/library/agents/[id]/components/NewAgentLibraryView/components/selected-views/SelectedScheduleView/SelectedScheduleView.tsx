@@ -5,6 +5,7 @@ import type { LibraryAgent } from "@/app/api/__generated__/models/libraryAgent";
 import { Skeleton } from "@/components/__legacy__/ui/skeleton";
 import { Text } from "@/components/atoms/Text/Text";
 import { ErrorCard } from "@/components/molecules/ErrorCard/ErrorCard";
+import { LIBRARY_ERROR_CARD_I18N } from "@/app/(platform)/library/components/errorCardI18n";
 import {
   TabsLine,
   TabsLineContent,
@@ -48,7 +49,7 @@ export function SelectedScheduleView({
             ? {
                 message: String(
                   (error as unknown as { message?: string })?.message ||
-                    "Failed to load schedule",
+                    "加载定时任务失败",
                 ),
               }
             : undefined
@@ -61,7 +62,8 @@ export function SelectedScheduleView({
               }
             : undefined
         }
-        context="schedule"
+        context="定时任务"
+        i18n={LIBRARY_ERROR_CARD_I18N}
       />
     );
   }
@@ -87,7 +89,7 @@ export function SelectedScheduleView({
               run={undefined}
               scheduleRecurrence={
                 schedule
-                  ? `${humanizeCronExpression(schedule.cron || "")} · ${getTimezoneDisplayName(schedule.timezone || userTzRes || "UTC")}`
+                  ? `${humanizeCronExpression(schedule.cron || "", "zh-CN")} · ${getTimezoneDisplayName(schedule.timezone || userTzRes || "UTC", "zh-CN")}`
                   : undefined
               }
             />
@@ -104,8 +106,8 @@ export function SelectedScheduleView({
 
       <TabsLine defaultValue="input">
         <TabsLineList>
-          <TabsLineTrigger value="input">Your input</TabsLineTrigger>
-          <TabsLineTrigger value="schedule">Schedule</TabsLineTrigger>
+          <TabsLineTrigger value="input">输入</TabsLineTrigger>
+          <TabsLineTrigger value="schedule">定时</TabsLineTrigger>
         </TabsLineList>
 
         <TabsLineContent value="input">
@@ -127,7 +129,7 @@ export function SelectedScheduleView({
         <TabsLineContent value="schedule">
           <RunDetailCard>
             {isLoading || !schedule ? (
-              <div className="text-neutral-500">Loading…</div>
+              <div className="text-neutral-500">加载中…</div>
             ) : (
               <div className="relative flex flex-col gap-8">
                 {
@@ -139,27 +141,28 @@ export function SelectedScheduleView({
                 }
                 <div className="flex flex-col gap-1.5">
                   <Text variant="body-medium" className="!text-black">
-                    Name
+                    名称
                   </Text>
                   <p className="text-sm text-zinc-600">{schedule.name}</p>
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <Text variant="body-medium" className="!text-black">
-                    Recurrence
+                    重复
                   </Text>
                   <p className="text-sm text-zinc-600">
-                    {humanizeCronExpression(schedule.cron)}
-                    {" • "}
+                    {humanizeCronExpression(schedule.cron, "zh-CN")}
+                    {" · "}
                     <span className="text-xs text-zinc-600">
                       {getTimezoneDisplayName(
                         schedule.timezone || userTzRes || "UTC",
+                        "zh-CN",
                       )}
                     </span>
                   </p>
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <Text variant="body-medium" className="!text-black">
-                    Next run
+                    下次运行
                   </Text>
                   <p className="text-sm text-zinc-600">
                     {formatInTimezone(
@@ -173,11 +176,13 @@ export function SelectedScheduleView({
                         minute: "2-digit",
                         hour12: false,
                       },
+                      "zh-CN",
                     )}{" "}
-                    •{" "}
+                    ·{" "}
                     <span className="text-xs text-zinc-600">
                       {getTimezoneDisplayName(
                         schedule.timezone || userTzRes || "UTC",
+                        "zh-CN",
                       )}
                     </span>
                   </p>

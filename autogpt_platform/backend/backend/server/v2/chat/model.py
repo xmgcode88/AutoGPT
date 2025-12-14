@@ -1,6 +1,6 @@
 import logging
 import uuid
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 
 from openai.types.chat import (
     ChatCompletionAssistantMessageParam,
@@ -24,6 +24,7 @@ from backend.util.exceptions import RedisError
 
 logger = logging.getLogger(__name__)
 config = ChatConfig()
+UTC = timezone.utc
 
 
 class ChatMessage(BaseModel):

@@ -9,7 +9,7 @@ type Props = {
 export function OAuthFlowWaitingModal({ open, onClose, providerName }: Props) {
   return (
     <Dialog
-      title={`Waiting on ${providerName} sign-in process...`}
+      title={`正在等待 ${providerName} 登录...`}
       controlled={{
         isOpen: open,
         set: (isOpen) => {
@@ -20,9 +20,9 @@ export function OAuthFlowWaitingModal({ open, onClose, providerName }: Props) {
     >
       <Dialog.Content>
         <p className="text-sm text-zinc-600">
-          Complete the sign-in process in the pop-up window.
+          请在弹窗中完成登录流程。
           <br />
-          Closing this dialog will cancel the sign-in process.
+          关闭此对话框将取消登录流程。
         </p>
       </Dialog.Content>
     </Dialog>

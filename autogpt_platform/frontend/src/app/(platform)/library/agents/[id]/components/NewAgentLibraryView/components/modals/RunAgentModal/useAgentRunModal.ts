@@ -45,7 +45,7 @@ export function useAgentRunModal(
   );
   const [presetName, setPresetName] = useState<string>("");
   const [presetDescription, setPresetDescription] = useState<string>("");
-  const defaultScheduleName = useMemo(() => `Run ${agent.name}`, [agent.name]);
+  const defaultScheduleName = useMemo(() => `运行 ${agent.name}`, [agent.name]);
   const [scheduleName, setScheduleName] = useState(defaultScheduleName);
   const [cronExpression, setCronExpression] = useState(
     agent.recommended_schedule_cron || "0 9 * * 1",
@@ -70,7 +70,7 @@ export function useAgentRunModal(
       onSuccess: (response) => {
         if (response.status === 200) {
           toast({
-            title: "Agent execution started",
+            title: "已开始执行智能体",
           });
           callbacks?.onRun?.(response.data as unknown as GraphExecutionMeta);
           // Invalidate runs list for this graph
@@ -88,8 +88,8 @@ export function useAgentRunModal(
       },
       onError: (error: any) => {
         toast({
-          title: "❌ Failed to execute agent",
-          description: error.message || "An unexpected error occurred.",
+          title: "❌ 执行智能体失败",
+          description: error.message || "发生未知错误。",
           variant: "destructive",
         });
       },
@@ -101,7 +101,7 @@ export function useAgentRunModal(
       onSuccess: (response) => {
         if (response.status === 200) {
           toast({
-            title: "Schedule created",
+            title: "定时任务已创建",
           });
           callbacks?.onCreateSchedule?.(response.data);
           // Invalidate schedules list for this graph
@@ -120,8 +120,8 @@ export function useAgentRunModal(
       },
       onError: (error: any) => {
         toast({
-          title: "❌ Failed to create schedule",
-          description: error.message || "An unexpected error occurred.",
+          title: "❌ 创建定时任务失败",
+          description: error.message || "发生未知错误。",
           variant: "destructive",
         });
       },
@@ -133,7 +133,7 @@ export function useAgentRunModal(
       onSuccess: (response: any) => {
         if (response.status === 200) {
           toast({
-            title: "Trigger setup complete",
+            title: "触发器配置完成",
           });
           callbacks?.onSetupTrigger?.(response.data);
           setIsOpen(false);
@@ -141,8 +141,8 @@ export function useAgentRunModal(
       },
       onError: (error: any) => {
         toast({
-          title: "❌ Failed to setup trigger",
-          description: error.message || "An unexpected error occurred.",
+          title: "❌ 配置触发器失败",
+          description: error.message || "发生未知错误。",
           variant: "destructive",
         });
       },
@@ -235,8 +235,8 @@ export function useAgentRunModal(
         );
 
       toast({
-        title: "⚠️ Missing required inputs",
-        description: `Please provide: ${allMissingFields.map((k) => `"${k}"`).join(", ")}`,
+        title: "⚠️ 缺少必填项",
+        description: `请填写：${allMissingFields.map((k) => `"${k}"`).join(", ")}`,
         variant: "destructive",
       });
     },
@@ -261,8 +261,8 @@ export function useAgentRunModal(
       // Setup trigger
       if (!scheduleName.trim()) {
         toast({
-          title: "⚠️ Trigger name required",
-          description: "Please provide a name for your trigger.",
+          title: "⚠️ 需要触发器名称",
+          description: "请为触发器填写名称。",
           variant: "destructive",
         });
         return;
@@ -271,7 +271,7 @@ export function useAgentRunModal(
       setupTriggerMutation.mutate({
         data: {
           name: presetName || scheduleName,
-          description: presetDescription || `Trigger for ${agent.name}`,
+          description: presetDescription || `用于 ${agent.name} 的触发器`,
           graph_id: agent.graph_id,
           graph_version: agent.graph_version,
           trigger_config: inputValues,
@@ -312,8 +312,8 @@ export function useAgentRunModal(
 
     if (!scheduleName.trim()) {
       toast({
-        title: "⚠️ Schedule name required",
-        description: "Please provide a name for your schedule.",
+        title: "⚠️ 需要定时任务名称",
+        description: "请为定时任务填写名称。",
         variant: "destructive",
       });
       return;

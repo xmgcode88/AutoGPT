@@ -27,24 +27,24 @@ export function FrequencySelect({
     <>
       <Select
         id="repeat"
-        label="Repeats"
+        label="重复"
         size="small"
         value={value}
         onValueChange={(v) => onChange(v as CronFrequency)}
         options={[
-          { label: "Every Hour", value: "hourly" },
-          { label: "Daily", value: "daily" },
-          { label: "Weekly", value: "weekly" },
-          { label: "Monthly", value: "monthly" },
-          { label: "Yearly", value: "yearly" },
-          { label: "Custom", value: "custom" },
+          { label: "每小时", value: "hourly" },
+          { label: "每天", value: "daily" },
+          { label: "每周", value: "weekly" },
+          { label: "每月", value: "monthly" },
+          { label: "每年", value: "yearly" },
+          { label: "自定义", value: "custom" },
         ]}
         className="max-w-80"
       />
       {value === "hourly" && (
         <Select
           id="at-minute"
-          label="At minute"
+          label="分钟"
           size="small"
           value={selectedMinute}
           onValueChange={(v) => onMinuteChange(v)}

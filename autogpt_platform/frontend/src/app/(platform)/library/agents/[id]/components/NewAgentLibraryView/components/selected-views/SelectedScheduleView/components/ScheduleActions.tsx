@@ -34,16 +34,13 @@ export function ScheduleActions({ agent, scheduleId, onDeleted }: Props) {
     setIsDeleting(true);
     try {
       await deleteSchedule({ scheduleId });
-      toast({ title: "Schedule deleted" });
+      toast({ title: "定时任务已删除" });
       setShowDeleteDialog(false);
       if (onDeleted) onDeleted();
     } catch (error: unknown) {
       toast({
-        title: "Failed to delete schedule",
-        description:
-          error instanceof Error
-            ? error.message
-            : "An unexpected error occurred.",
+        title: "删除定时任务失败",
+        description: error instanceof Error ? error.message : "发生未知错误。",
         variant: "destructive",
       });
     } finally {
@@ -61,7 +58,7 @@ export function ScheduleActions({ agent, scheduleId, onDeleted }: Props) {
             as="NextLink"
             href={openInBuilderHref}
           >
-            <ArrowSquareOut size={14} /> Open in builder
+            <ArrowSquareOut size={14} /> 在构建器中打开
           </Button>
         )}
         <Button
@@ -70,14 +67,14 @@ export function ScheduleActions({ agent, scheduleId, onDeleted }: Props) {
           as="NextLink"
           href={`/build?flowID=${agent.graph_id}&flowVersion=${agent.graph_version}`}
         >
-          <PencilSimpleIcon size={16} /> Edit agent
+          <PencilSimpleIcon size={16} /> 编辑智能体
         </Button>
         <Button
           variant="secondary"
           size="small"
           onClick={() => setShowDeleteDialog(true)}
         >
-          <TrashIcon size={16} /> Delete
+          <TrashIcon size={16} /> 删除
         </Button>
       </div>
 
@@ -87,13 +84,12 @@ export function ScheduleActions({ agent, scheduleId, onDeleted }: Props) {
           set: setShowDeleteDialog,
         }}
         styling={{ maxWidth: "32rem" }}
-        title="Delete schedule"
+        title="删除定时任务"
       >
         <Dialog.Content>
           <div>
             <Text variant="large">
-              Are you sure you want to delete this schedule? This action cannot
-              be undone.
+              确定要删除这个定时任务吗？此操作无法撤销。
             </Text>
             <Dialog.Footer>
               <Button
@@ -101,14 +97,14 @@ export function ScheduleActions({ agent, scheduleId, onDeleted }: Props) {
                 disabled={isDeleting}
                 onClick={() => setShowDeleteDialog(false)}
               >
-                Cancel
+                取消
               </Button>
               <Button
                 variant="destructive"
                 onClick={handleDelete}
                 loading={isDeleting}
               >
-                Delete
+                删除
               </Button>
             </Dialog.Footer>
           </div>

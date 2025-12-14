@@ -41,7 +41,7 @@ export function useEditInputsModal(
         body: JSON.stringify({ inputs: values }),
       });
       if (!res.ok) {
-        let message = "Failed to update schedule inputs";
+        let message = "更新定时任务输入失败";
         const data = await res.json();
         message = data?.message || data?.detail || message;
         throw new Error(message);
@@ -53,13 +53,13 @@ export function useEditInputsModal(
         ),
       });
       toast({
-        title: "Schedule inputs updated",
+        title: "定时任务输入已更新",
       });
       setIsOpen(false);
     } catch (error: any) {
       toast({
-        title: "Failed to update schedule inputs",
-        description: error?.message || "An unexpected error occurred.",
+        title: "更新定时任务输入失败",
+        description: error?.message || "发生未知错误。",
         variant: "destructive",
       });
     }

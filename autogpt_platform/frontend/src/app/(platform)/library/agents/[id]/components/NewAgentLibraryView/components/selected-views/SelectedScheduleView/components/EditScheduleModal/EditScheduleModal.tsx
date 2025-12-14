@@ -46,22 +46,22 @@ export function EditScheduleModal({ graphId, schedule }: Props) {
           size="small"
           className="absolute -right-2 -top-2"
         >
-          <PencilSimpleIcon className="size-4" /> Edit schedule
+          <PencilSimpleIcon className="size-4" /> 编辑定时任务
         </Button>
       </Dialog.Trigger>
       <Dialog.Content>
         <div className="flex flex-col gap-6">
-          <Text variant="h3">Edit schedule</Text>
+          <Text variant="h3">编辑定时任务</Text>
           <Input
             id="schedule-name"
-            label="Name"
+            label="名称"
             value={name}
             onChange={(e) => setName(e.target.value)}
             error={errors.scheduleName}
           />
           <Select
             id="repeat"
-            label="Repeats"
+            label="重复"
             value={repeat}
             onValueChange={setRepeat}
             options={repeatOptions}
@@ -71,12 +71,12 @@ export function EditScheduleModal({ graphId, schedule }: Props) {
               items={dayItems}
               selectedValues={selectedDays}
               onChange={setSelectedDays}
-              aria-label="Select days"
+              aria-label="选择日期"
             />
           )}
           <Input
             id="schedule-time"
-            label="At"
+            label="时间"
             value={time}
             onChange={(e) => setTime(e.target.value.trim())}
             placeholder="00:00"
@@ -91,7 +91,7 @@ export function EditScheduleModal({ graphId, schedule }: Props) {
               onClick={() => setIsOpen(false)}
               className="min-w-32"
             >
-              Cancel
+              取消
             </Button>
             <Button
               variant="primary"
@@ -100,7 +100,7 @@ export function EditScheduleModal({ graphId, schedule }: Props) {
               loading={isPending}
               className="min-w-32"
             >
-              {isPending ? "Saving…" : "Save"}
+              {isPending ? "保存中…" : "保存"}
             </Button>
           </div>
         </Dialog.Footer>

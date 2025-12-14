@@ -13,6 +13,7 @@ export function formatInTimezone(
   date: string | Date,
   timezone: string,
   options?: Intl.DateTimeFormatOptions,
+  locale: string = "en-US",
 ): string {
   const dateObj = typeof date === "string" ? new Date(date) : date;
 
@@ -26,14 +27,14 @@ export function formatInTimezone(
   };
 
   try {
-    return new Intl.DateTimeFormat("en-US", {
+    return new Intl.DateTimeFormat(locale, {
       ...defaultOptions,
       timeZone: timezone === "not-set" ? undefined : timezone,
     }).format(dateObj);
   } catch {
     // Fallback to local timezone if invalid timezone
     console.warn(`Invalid timezone "${timezone}", using local timezone`);
-    return new Intl.DateTimeFormat("en-US", defaultOptions).format(dateObj);
+    return new Intl.DateTimeFormat(locale, defaultOptions).format(dateObj);
   }
 }
 
@@ -71,6 +72,7 @@ export function getTimezoneAbbreviation(timezone: string): string {
 export function formatScheduleTime(
   nextRunTime: string | Date,
   displayTimezone: string = "UTC",
+  locale: string = "en-US",
 ): string {
   const date =
     typeof nextRunTime === "string" ? new Date(nextRunTime) : nextRunTime;
@@ -82,7 +84,7 @@ export function formatScheduleTime(
     hour: "2-digit",
     minute: "2-digit",
     timeZoneName: "short",
-  });
+  }, locale);
 
   return formatted;
 }
@@ -92,9 +94,12 @@ export function formatScheduleTime(
  * @param timezone - IANA timezone identifier
  * @returns Human-readable name
  */
-export function getTimezoneDisplayName(timezone: string): string {
+export function getTimezoneDisplayName(
+  timezone: string,
+  locale: string = "en-US",
+): string {
   if (timezone === "not-set") {
-    return "Not set";
+    return locale.toLowerCase().startsWith("zh") ? "未设置" : "Not set";
   }
 
   if (timezone === "UTC") {

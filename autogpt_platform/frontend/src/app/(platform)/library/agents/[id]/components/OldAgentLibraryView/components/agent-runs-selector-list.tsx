@@ -87,7 +87,7 @@ export function AgentRunsSelectorList({
           onClick={onSelectDraftNewRun}
           leftIcon={<Plus className="h-6 w-6" />}
         >
-          New {agent.has_external_trigger ? "trigger" : "run"}
+          新建{agent.has_external_trigger ? "触发器" : "运行"}
         </Button>
       ) : null}
 
@@ -97,7 +97,7 @@ export function AgentRunsSelectorList({
           className="cursor-pointer gap-2 rounded-full text-base"
           onClick={() => setActiveListTab("runs")}
         >
-          <span>Runs</span>
+          <span>运行</span>
           <span className="text-neutral-600">
             {agentRunCount ?? <LoadingSpinner className="size-4" />}
           </span>
@@ -108,7 +108,7 @@ export function AgentRunsSelectorList({
           className="cursor-pointer gap-2 rounded-full text-base"
           onClick={() => setActiveListTab("scheduled")}
         >
-          <span>Scheduled</span>
+          <span>定时</span>
           <span className="text-neutral-600">{schedules.length}</span>
         </Badge>
       </div>
@@ -141,7 +141,7 @@ export function AgentRunsSelectorList({
                   onClick={onSelectDraftNewRun}
                   leftIcon={<Plus className="h-6 w-6" />}
                 >
-                  New {agent.has_external_trigger ? "trigger" : "run"}
+                  新建{agent.has_external_trigger ? "触发器" : "运行"}
                 </Button>
               )}
 

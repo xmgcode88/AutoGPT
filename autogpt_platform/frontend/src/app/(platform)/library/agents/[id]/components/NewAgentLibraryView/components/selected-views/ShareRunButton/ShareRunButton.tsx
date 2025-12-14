@@ -43,10 +43,7 @@ export function ShareRunButton({
   });
 
   return (
-    <Dialog
-      title="Share Agent Run"
-      styling={{ maxWidth: "36rem", minWidth: "auto" }}
-    >
+    <Dialog title="分享运行" styling={{ maxWidth: "36rem", minWidth: "auto" }}>
       <Dialog.Trigger>
         <Button
           variant={isShared ? "primary" : "secondary"}
@@ -54,7 +51,7 @@ export function ShareRunButton({
           className={isShared ? "relative" : ""}
         >
           <ShareFatIcon size={16} />
-          {isShared ? "Shared" : "Share"}
+          {isShared ? "已分享" : "分享"}
         </Button>
       </Dialog.Trigger>
 
@@ -62,8 +59,8 @@ export function ShareRunButton({
         <div className="flex flex-col gap-4">
           <Text variant="large">
             {isShared
-              ? "Your agent run is currently shared. Anyone with the link can view the output."
-              : "Generate a public link to share this agent run output with others."}
+              ? "该运行当前已分享，任何拥有链接的人都可以查看输出。"
+              : "生成一个公开链接，用于与他人分享本次运行的输出。"}
           </Text>
 
           {!isShared ? (
@@ -72,10 +69,8 @@ export function ShareRunButton({
                 <Alert>
                   <WarningIcon className="h-4 w-4" />
                   <Text variant="body">
-                    When you enable sharing, the output of this agent run will
-                    be publicly accessible to anyone with the link. The page
-                    will include a noindex directive to discourage search engine
-                    crawling, but this cannot be guaranteed.
+                    启用分享后，本次运行的输出将对所有拥有链接的人公开可见。分享页会包含
+                    noindex 指令以降低被搜索引擎收录的可能性，但无法完全保证。
                   </Text>
                 </Alert>
               </div>
@@ -84,7 +79,7 @@ export function ShareRunButton({
                 loading={loading}
                 className="mt-6 w-full"
               >
-                Enable Sharing
+                启用分享
               </Button>
             </>
           ) : (
@@ -94,7 +89,7 @@ export function ShareRunButton({
                   type="text"
                   value={shareUrl}
                   readOnly
-                  label="Share URL"
+                  label="分享链接"
                   id="share-url"
                   size="small"
                   className="!m-0"
@@ -112,9 +107,8 @@ export function ShareRunButton({
               <Alert>
                 <WarningIcon className="h-4 w-4" />
                 <AlertDescription>
-                  This link is publicly accessible. Only share it with people
-                  you trust. The shared page includes noindex directives to
-                  discourage search engines.
+                  该链接公开可访问，请仅分享给你信任的人。分享页包含 noindex
+                  指令以降低被 搜索引擎收录的可能性。
                 </AlertDescription>
               </Alert>
               <Button
@@ -123,7 +117,7 @@ export function ShareRunButton({
                 variant="destructive"
                 className="mt-6 w-full"
               >
-                Stop Sharing
+                停止分享
               </Button>
             </>
           )}

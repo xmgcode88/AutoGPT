@@ -28,7 +28,7 @@ export function DeleteScheduleButton({ agent, scheduleId, onDeleted }: Props) {
       }}
       loading={isDeleting}
     >
-      <TrashIcon size={16} /> Delete schedule
+      <TrashIcon size={16} /> 删除定时任务
     </Button>
   );
 }

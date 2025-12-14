@@ -60,12 +60,12 @@ export function RunAgentInputs({
       innerInputElement = (
         <DSInput
           id={`${baseId}-number`}
-          label={schema.title ?? placeholder ?? "Number"}
+          label={schema.title ?? placeholder ?? "数字"}
           hideLabel
           size="small"
           type="number"
           value={value ?? ""}
-          placeholder={placeholder || "Enter number"}
+          placeholder={placeholder || "请输入数字"}
           onChange={(e) =>
             onChange(Number((e.target as HTMLInputElement).value))
           }
@@ -78,13 +78,13 @@ export function RunAgentInputs({
       innerInputElement = (
         <DSInput
           id={`${baseId}-textarea`}
-          label={schema.title ?? placeholder ?? "Text"}
+          label={schema.title ?? placeholder ?? "文本"}
           hideLabel
           size="small"
           type="textarea"
           rows={3}
           value={value ?? ""}
-          placeholder={placeholder || "Enter text"}
+          placeholder={placeholder || "请输入文本"}
           onChange={(e) => onChange((e.target as HTMLInputElement).value)}
           {...props}
         />
@@ -112,7 +112,7 @@ export function RunAgentInputs({
       innerInputElement = (
         <>
           <span className="text-sm text-gray-500">
-            {placeholder || (value ? "Enabled" : "Disabled")}
+            {placeholder || (value ? "已启用" : "已禁用")}
           </span>
           <Switch
             className="ml-auto"
@@ -128,7 +128,7 @@ export function RunAgentInputs({
       innerInputElement = (
         <DSInput
           id={`${baseId}-date`}
-          label={schema.title ?? placeholder ?? "Date"}
+          label={schema.title ?? placeholder ?? "日期"}
           hideLabel
           size="small"
           type="date"
@@ -141,7 +141,7 @@ export function RunAgentInputs({
               onChange(new Date(y, m - 1, d));
             }
           }}
-          placeholder={placeholder || "Pick a date"}
+          placeholder={placeholder || "选择日期"}
           {...props}
         />
       );
@@ -157,13 +157,13 @@ export function RunAgentInputs({
       innerInputElement = (
         <DSInput
           id={`${baseId}-datetime`}
-          label={schema.title ?? placeholder ?? "Date time"}
+          label={schema.title ?? placeholder ?? "日期时间"}
           hideLabel
           size="small"
           type="datetime-local"
           value={value ?? ""}
           onChange={(e) => onChange((e.target as HTMLInputElement).value)}
-          placeholder={placeholder || "Enter date and time"}
+          placeholder={placeholder || "请输入日期和时间"}
           {...props}
         />
       );
@@ -191,12 +191,12 @@ export function RunAgentInputs({
         innerInputElement = (
           <DSSelect
             id={`${baseId}-select`}
-            label={schema.title ?? placeholder ?? "Select"}
+            label={schema.title ?? placeholder ?? "选择"}
             hideLabel
             value={value ?? ""}
             size="small"
             onValueChange={(val: string) => onChange(val)}
-            placeholder={placeholder || "Select an option"}
+            placeholder={placeholder || "请选择"}
             options={schema.enum
               .filter((opt) => opt)
               .map((opt) => ({ value: opt, label: String(opt) }))}
@@ -239,7 +239,7 @@ export function RunAgentInputs({
       const tableSchema = schema as BlockIOTableSubSchema;
       const headers = tableSchema.items?.properties
         ? Object.keys(tableSchema.items.properties)
-        : ["Column 1", "Column 2", "Column 3"];
+        : ["列 1", "列 2", "列 3"];
 
       const tableData: TableRow[] = Array.isArray(value) ? value : [];
 
@@ -294,7 +294,7 @@ export function RunAgentInputs({
                             updateRow(rowIndex, header, e.target.value)
                           }
                           className="w-full rounded border px-2 py-1 dark:border-gray-700 dark:bg-gray-900"
-                          placeholder={`Enter ${header}`}
+                          placeholder={`请输入 ${header}`}
                         />
                       </td>
                     ))}
@@ -322,7 +322,7 @@ export function RunAgentInputs({
             className="w-full"
           >
             <PlusIcon className="mr-2 h-4 w-4" weight="bold" />
-            Add Row
+            添加行
           </Button>
         </div>
       );
@@ -334,13 +334,13 @@ export function RunAgentInputs({
       innerInputElement = (
         <DSInput
           id={`${baseId}-text`}
-          label={schema.title ?? placeholder ?? "Text"}
+          label={schema.title ?? placeholder ?? "文本"}
           hideLabel
           size="small"
           type="text"
           value={value ?? ""}
           onChange={(e) => onChange((e.target as HTMLInputElement).value)}
-          placeholder={placeholder || "Enter text"}
+          placeholder={placeholder || "请输入文本"}
           {...props}
         />
       );

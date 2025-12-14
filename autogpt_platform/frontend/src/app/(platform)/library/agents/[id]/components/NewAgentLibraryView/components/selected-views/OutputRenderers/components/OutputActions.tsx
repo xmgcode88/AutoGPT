@@ -70,7 +70,7 @@ export function OutputActions({
         variant={isPrimary ? "primary" : "ghost"}
         size={isPrimary ? "small" : "icon"}
         onClick={handleCopyAll}
-        aria-label="Copy all text outputs"
+        aria-label="复制所有文本输出"
         className={cn(isPrimary ? "min-w-0" : "")}
       >
         {copied ? (
@@ -83,14 +83,14 @@ export function OutputActions({
             )}
           />
         )}
-        {isPrimary && <span>Copy All</span>}
+        {isPrimary && <span>全部复制</span>}
       </Button>
 
       <Button
         variant={isPrimary ? "primary" : "ghost"}
         size={isPrimary ? "small" : "icon"}
         onClick={handleDownloadAll}
-        aria-label="Download outputs"
+        aria-label="下载输出"
         className={cn(isPrimary ? "min-w-0" : "")}
       >
         <DownloadIcon
@@ -99,7 +99,7 @@ export function OutputActions({
             isPrimary ? "text-white" : "text-neutral-500",
           )}
         />
-        {isPrimary && <span>Download All</span>}
+        {isPrimary && <span>全部下载</span>}
       </Button>
     </div>
   );

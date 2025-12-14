@@ -266,8 +266,8 @@ export function CronScheduler({
             onChange={setSelectedTime}
             label={
               frequency === "custom" && customInterval.unit === "days"
-                ? "Starting at"
-                : "At"
+                ? "开始于"
+                : "时间"
             }
           />
         )}

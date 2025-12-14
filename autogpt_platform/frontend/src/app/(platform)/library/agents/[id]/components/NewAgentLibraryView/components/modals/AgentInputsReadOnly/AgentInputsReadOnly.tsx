@@ -31,7 +31,7 @@ export function AgentInputsReadOnly({
   const hasCredentials = credentialInputs && credentialEntries.length > 0;
 
   if (!hasInputs && !hasCredentials) {
-    return <div className="text-neutral-600">No input for this run.</div>;
+    return <div className="text-neutral-600">该运行没有输入。</div>;
   }
 
   return (
@@ -61,18 +61,18 @@ export function AgentInputsReadOnly({
             return (
               <div key={key} className="flex flex-col gap-4">
                 <h3 className="text-lg font-medium text-neutral-900">
-                  {toDisplayName(credential.provider)} credentials
+                  {toDisplayName(credential.provider)} 凭据
                 </h3>
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-neutral-600">Name</span>
+                    <span className="text-neutral-600">名称</span>
                     <span className="text-neutral-600">
                       {getCredentialTypeDisplayName(credential.type)}
                     </span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-neutral-900">
-                      {credential.title || "Untitled"}
+                      {credential.title || "未命名"}
                     </span>
                     <span className="font-mono text-neutral-400">
                       {"*".repeat(25)}

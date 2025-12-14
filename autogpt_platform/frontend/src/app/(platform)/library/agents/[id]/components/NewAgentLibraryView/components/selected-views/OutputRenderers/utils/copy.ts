@@ -98,7 +98,7 @@ export async function copyToClipboard(copyContent: CopyContent): Promise<void> {
 export async function fetchAndCopyImage(imageUrl: string): Promise<void> {
   try {
     const response = await fetch(imageUrl);
-    if (!response.ok) throw new Error("Failed to fetch image");
+    if (!response.ok) throw new Error("获取图片失败");
 
     const blob = await response.blob();
     const mimeType = blob.type || "image/png";

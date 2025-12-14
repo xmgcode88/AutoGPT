@@ -41,16 +41,13 @@ export function AgentActionsDropdown({ agent }: Props) {
 
     try {
       await deleteAgent({ libraryAgentId: agent.id });
-      toast({ title: "Agent deleted" });
+      toast({ title: "智能体已删除" });
       setShowDeleteDialog(false);
       router.push("/library");
     } catch (error: unknown) {
       toast({
-        title: "Failed to delete agent",
-        description:
-          error instanceof Error
-            ? error.message
-            : "An unexpected error occurred.",
+        title: "删除智能体失败",
+        description: error instanceof Error ? error.message : "发生未知错误。",
         variant: "destructive",
       });
     } finally {
@@ -68,13 +65,13 @@ export function AgentActionsDropdown({ agent }: Props) {
       if (res.status === 200) {
         const filename = `${agent.name}_v${agent.graph_version}.json`;
         exportAsJSONFile(res.data as any, filename);
-        toast({ title: "Agent exported" });
+        toast({ title: "智能体已导出" });
       } else {
-        toast({ title: "Failed to export agent", variant: "destructive" });
+        toast({ title: "导出智能体失败", variant: "destructive" });
       }
     } catch (e: any) {
       toast({
-        title: "Failed to export agent",
+        title: "导出智能体失败",
         description: e?.message,
         variant: "destructive",
       });
@@ -86,7 +83,7 @@ export function AgentActionsDropdown({ agent }: Props) {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="secondary" size="small" className="min-w-fit">
-            •••
+            更多
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
@@ -96,20 +93,20 @@ export function AgentActionsDropdown({ agent }: Props) {
               target="_blank"
               className="flex items-center gap-2"
             >
-              <PencilSimpleIcon size={16} /> Edit agent
+              <PencilSimpleIcon size={16} /> 编辑智能体
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={handleExport}
             className="flex items-center gap-2"
           >
-            <FileArrowDownIcon size={16} /> Export agent
+            <FileArrowDownIcon size={16} /> 导出智能体
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => setShowDeleteDialog(true)}
             className="flex items-center gap-2"
           >
-            <TrashIcon size={16} /> Delete agent
+            <TrashIcon size={16} /> 删除智能体
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -120,13 +117,12 @@ export function AgentActionsDropdown({ agent }: Props) {
           set: setShowDeleteDialog,
         }}
         styling={{ maxWidth: "32rem" }}
-        title="Delete agent"
+        title="删除智能体"
       >
         <Dialog.Content>
           <div>
             <Text variant="large">
-              Are you sure you want to delete this agent? This action cannot be
-              undone.
+              确定要删除这个智能体吗？此操作无法撤销。
             </Text>
             <Dialog.Footer>
               <Button
@@ -134,14 +130,14 @@ export function AgentActionsDropdown({ agent }: Props) {
                 disabled={isDeleting}
                 onClick={() => setShowDeleteDialog(false)}
               >
-                Cancel
+                取消
               </Button>
               <Button
                 variant="destructive"
                 onClick={handleDelete}
                 loading={isDeleting}
               >
-                Delete
+                删除
               </Button>
             </Dialog.Footer>
           </div>

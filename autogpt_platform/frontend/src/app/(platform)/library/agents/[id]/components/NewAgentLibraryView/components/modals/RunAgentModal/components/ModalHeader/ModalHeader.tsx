@@ -15,12 +15,12 @@ export function ModalHeader({ agent }: ModalHeaderProps) {
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
-        <Badge variant="info">New Run</Badge>
+        <Badge variant="info">新建运行</Badge>
       </div>
       <div>
         <Text variant="h3">{agent.name}</Text>
         {!isUnknownCreator ? (
-          <Text variant="body-medium">by {agent.creator_name}</Text>
+          <Text variant="body-medium">作者：{agent.creator_name}</Text>
         ) : null}
         <ShowMoreText
           previewLimit={80}
@@ -35,10 +35,9 @@ export function ModalHeader({ agent }: ModalHeaderProps) {
           <div className="mt-4 flex items-center gap-2">
             <ClockIcon className="h-4 w-4 text-gray-500" />
             <p className="text-sm text-gray-600">
-              <strong>Tip:</strong> For best results, run this agent{" "}
-              {humanizeCronExpression(
-                agent.recommended_schedule_cron,
-              ).toLowerCase()}
+              <strong>提示：</strong> 为了获得最佳效果，建议按{" "}
+              {humanizeCronExpression(agent.recommended_schedule_cron, "zh-CN")}{" "}
+              运行该智能体
             </p>
           </div>
         )}
@@ -48,7 +47,7 @@ export function ModalHeader({ agent }: ModalHeaderProps) {
           <div className="mt-4 flex items-start gap-2">
             <InfoIcon className="mt-0.5 h-4 w-4 flex-shrink-0 text-gray-500" />
             <div className="text-sm text-gray-600">
-              <strong>Setup Instructions:</strong>{" "}
+              <strong>配置说明：</strong>{" "}
               <span className="whitespace-pre-wrap">{agent.instructions}</span>
             </div>
           </div>

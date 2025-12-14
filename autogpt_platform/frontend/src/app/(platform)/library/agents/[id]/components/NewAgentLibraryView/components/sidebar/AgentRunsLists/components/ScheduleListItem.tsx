@@ -2,10 +2,10 @@
 
 import React from "react";
 import { GraphExecutionJobInfo } from "@/app/api/__generated__/models/graphExecutionJobInfo";
-import moment from "moment";
 import { RunSidebarCard } from "./RunSidebarCard";
 import { IconWrapper } from "./RunIconWrapper";
 import { ClockClockwiseIcon } from "@phosphor-icons/react";
+import { formatRelativeTime } from "@/lib/utils/time";
 
 interface ScheduleListItemProps {
   schedule: GraphExecutionJobInfo;
@@ -21,7 +21,7 @@ export function ScheduleListItem({
   return (
     <RunSidebarCard
       title={schedule.name}
-      description={moment(schedule.next_run_time).fromNow()}
+      description={formatRelativeTime(schedule.next_run_time, "zh-CN")}
       onClick={onClick}
       selected={selected}
       icon={

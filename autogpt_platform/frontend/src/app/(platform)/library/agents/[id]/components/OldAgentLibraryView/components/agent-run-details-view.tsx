@@ -1,5 +1,4 @@
 "use client";
-import moment from "moment";
 import React, { useCallback, useMemo, useEffect } from "react";
 
 import {
@@ -32,7 +31,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/atoms/Tooltip/BaseTooltip";
-import { useToastOnFail } from "@/components/molecules/Toast/use-toast";
+import { toast } from "@/components/molecules/Toast/use-toast";
 
 import { AgentRunStatus, agentRunStatusMap } from "./agent-run-status-chip";
 import useCredits from "@/hooks/useCredits";
@@ -41,6 +40,18 @@ import { analytics } from "@/services/analytics";
 import { useOnboarding } from "@/providers/onboarding/onboarding-provider";
 import { PendingReviewsList } from "@/components/organisms/PendingReviewsList/PendingReviewsList";
 import { usePendingReviewsForExecution } from "@/hooks/usePendingReviews";
+import { formatDurationSeconds, formatRelativeTime } from "@/lib/utils/time";
+
+const runStatusLabelMap: Record<AgentRunStatus, string> = {
+  draft: "草稿",
+  queued: "排队中",
+  running: "运行中",
+  review: "审核中",
+  success: "成功",
+  stopped: "已停止",
+  failed: "失败",
+  scheduled: "定时",
+};
 
 export function AgentRunDetailsView({
   agent,
@@ -75,7 +86,18 @@ export function AgentRunDetailsView({
     refetch: refetchReviews,
   } = usePendingReviewsForExecution(run.id);
 
-  const toastOnFail = useToastOnFail();
+  const toastOnFail = useCallback(
+    (action: string) => (error: any) => {
+      const err = error as Error;
+      toast({
+        title: `无法${action}`,
+        description: err.message ?? "发生未知错误。",
+        variant: "destructive",
+        duration: 10000,
+      });
+    },
+    [],
+  );
 
   // Refetch pending reviews when execution status changes to REVIEW
   useEffect(() => {
@@ -88,21 +110,24 @@ export function AgentRunDetailsView({
     if (!run) return [];
     return [
       {
-        label: "Status",
-        value: runStatus.charAt(0).toUpperCase() + runStatus.slice(1),
+        label: "状态",
+        value: runStatusLabelMap[runStatus],
       },
       {
-        label: "Started",
-        value: `${moment(run.started_at).fromNow()}, ${moment(run.started_at).format("HH:mm")}`,
+        label: "开始",
+        value: `${formatRelativeTime(run.started_at, "zh-CN")}，${new Date(run.started_at).toLocaleTimeString(
+          "zh-CN",
+          { hour: "2-digit", minute: "2-digit", hour12: false },
+        )}`,
       },
       ...(run.stats
         ? [
             {
-              label: "Duration",
-              value: moment.duration(run.stats.duration, "seconds").humanize(),
+              label: "时长",
+              value: formatDurationSeconds(run.stats.duration, "zh-CN"),
             },
-            { label: "Steps", value: run.stats.node_exec_count },
-            { label: "Cost", value: formatCredits(run.stats.cost) },
+            { label: "步骤", value: run.stats.node_exec_count },
+            { label: "费用", value: formatCredits(run.stats.cost) },
           ]
         : []),
     ];
@@ -157,7 +182,7 @@ export function AgentRunDetailsView({
           });
           onRun(id);
         })
-        .catch(toastOnFail("execute agent preset"));
+        .catch(toastOnFail("执行智能体预设"));
     }
 
     return api
@@ -175,7 +200,7 @@ export function AgentRunDetailsView({
         completeStep("RE_RUN_AGENT");
         onRun(id);
       })
-      .catch(toastOnFail("execute agent"));
+      .catch(toastOnFail("执行智能体"));
   }, [api, graph, run, onRun, toastOnFail]);
 
   const stopRun = useCallback(
@@ -221,7 +246,7 @@ export function AgentRunDetailsView({
               label: (
                 <>
                   <IconSquare className="mr-2 size-4" />
-                  Stop run
+                  停止运行
                 </>
               ),
               variant: "secondary",
@@ -239,7 +264,7 @@ export function AgentRunDetailsView({
               label: (
                 <>
                   <IconRefresh className="mr-2 size-4" />
-                  Run again
+                  再次运行
                 </>
               ),
               callback: runAgain,
@@ -250,13 +275,13 @@ export function AgentRunDetailsView({
       ...(agent.can_access_graph
         ? [
             {
-              label: "Open run in builder",
+              label: "在构建器中打开",
               href: `/build?flowID=${run.graph_id}&flowVersion=${run.graph_version}&flowExecutionID=${run.id}`,
             },
           ]
         : []),
-      { label: "Create preset from run", callback: doCreatePresetFromRun },
-      { label: "Delete run", variant: "secondary", callback: doDeleteRun },
+      { label: "从本次运行创建预设", callback: doCreatePresetFromRun },
+      { label: "删除运行", variant: "secondary", callback: doDeleteRun },
     ],
     [
       runStatus,
@@ -278,7 +303,7 @@ export function AgentRunDetailsView({
       <div className="flex flex-1 flex-col gap-4">
         <Card className="agpt-box">
           <CardHeader>
-            <CardTitle className="font-poppins text-lg">Info</CardTitle>
+            <CardTitle className="font-poppins text-lg">信息</CardTitle>
           </CardHeader>
 
           <CardContent>
@@ -293,7 +318,7 @@ export function AgentRunDetailsView({
             {run.status === "FAILED" && (
               <div className="mt-4 rounded-md border border-red-200 bg-red-50 p-3 dark:border-red-800 dark:bg-red-900/20">
                 <p className="text-sm text-red-800 dark:text-red-200">
-                  <strong>Error:</strong>{" "}
+                  <strong>错误：</strong>{" "}
                   {run.stats?.error ||
                     "The execution failed due to an internal error. You can re-run the agent to retry."}
                 </p>
@@ -307,7 +332,7 @@ export function AgentRunDetailsView({
           <Card className="agpt-box">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 font-poppins text-lg">
-                Task Summary
+                任务摘要
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
@@ -315,9 +340,7 @@ export function AgentRunDetailsView({
                     </TooltipTrigger>
                     <TooltipContent>
                       <p className="max-w-xs">
-                        This AI-generated summary describes how the agent
-                        handled your task. It’s an experimental feature and may
-                        occasionally be inaccurate.
+                        该摘要由 AI 自动生成，用于描述智能体如何处理你的任务。此功能仍处于实验阶段，可能偶尔不准确。
                       </p>
                     </TooltipContent>
                   </Tooltip>
@@ -334,7 +357,7 @@ export function AgentRunDetailsView({
                 <div className="flex items-center gap-3 rounded-lg bg-neutral-50 p-3">
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-medium text-neutral-600">
-                      Success Estimate:
+                      成功率预估：
                     </span>
                     <div className="flex items-center gap-2">
                       <div className="relative h-2 w-16 overflow-hidden rounded-full bg-neutral-200">
@@ -365,15 +388,14 @@ export function AgentRunDetailsView({
                       </TooltipTrigger>
                       <TooltipContent>
                         <p className="max-w-xs">
-                          AI-generated estimate of how well this execution
-                          achieved its intended purpose. This score indicates
+                          AI 生成的预估分数，用于衡量本次执行达到预期目标的程度。该分数表示：
                           {run.stats.correctness_score >= 0.8
-                            ? " the agent was highly successful."
+                            ? "智能体非常成功。"
                             : run.stats.correctness_score >= 0.6
-                              ? " the agent was mostly successful with minor issues."
+                              ? "智能体基本成功，但存在一些小问题。"
                               : run.stats.correctness_score >= 0.4
-                                ? " the agent was partially successful with some gaps."
-                                : " the agent had limited success with significant issues."}
+                                ? "智能体部分成功，但仍有一些缺口。"
+                                : "智能体成功率较低，存在明显问题。"}
                         </p>
                       </TooltipContent>
                     </Tooltip>
@@ -393,7 +415,7 @@ export function AgentRunDetailsView({
           <Card className="agpt-box">
             <CardHeader>
               <CardTitle className="font-poppins text-lg">
-                Pending Reviews ({pendingReviews.length})
+                待处理评审（{pendingReviews.length}）
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -403,11 +425,11 @@ export function AgentRunDetailsView({
                 <PendingReviewsList
                   reviews={pendingReviews}
                   onReviewComplete={refetchReviews}
-                  emptyMessage="No pending reviews for this execution"
+                  emptyMessage="此执行没有待处理的评审"
                 />
               ) : (
                 <div className="py-4 text-neutral-600">
-                  No pending reviews for this execution
+                  此执行没有待处理的评审
                 </div>
               )}
             </CardContent>
@@ -416,7 +438,7 @@ export function AgentRunDetailsView({
 
         <Card className="agpt-box">
           <CardHeader>
-            <CardTitle className="font-poppins text-lg">Input</CardTitle>
+            <CardTitle className="font-poppins text-lg">输入</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col gap-4">
             {agentRunInputs !== undefined ? (
@@ -436,9 +458,9 @@ export function AgentRunDetailsView({
       {/* Run / Agent Actions */}
       <aside className="w-48 xl:w-56">
         <div className="flex flex-col gap-8">
-          <ActionButtonGroup title="Run actions" actions={runActions} />
+          <ActionButtonGroup title="运行操作" actions={runActions} />
 
-          <ActionButtonGroup title="Agent actions" actions={agentActions} />
+          <ActionButtonGroup title="智能体操作" actions={agentActions} />
         </div>
       </aside>
     </div>

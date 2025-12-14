@@ -8,10 +8,10 @@ const statusData: Record<
   AgentStatus,
   { label: string; variant: keyof typeof statusStyles }
 > = {
-  active: { label: "Active", variant: "success" },
-  error: { label: "Error", variant: "destructive" },
-  broken: { label: "Broken", variant: "destructive" },
-  inactive: { label: "Inactive", variant: "secondary" },
+  active: { label: "启用", variant: "success" },
+  error: { label: "错误", variant: "destructive" },
+  broken: { label: "损坏", variant: "destructive" },
+  inactive: { label: "禁用", variant: "secondary" },
 };
 
 const statusStyles = {

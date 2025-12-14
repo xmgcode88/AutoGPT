@@ -12,7 +12,7 @@ export function AgentDetails({ agent }: Props) {
     <div className="mt-4 flex flex-col gap-5">
       <div>
         <Text variant="body-medium" className="mb-1 !text-black">
-          Version
+          版本
         </Text>
         <div className="flex items-center gap-2">
           <Text variant="body" className="!text-zinc-700">
@@ -20,26 +20,26 @@ export function AgentDetails({ agent }: Props) {
           </Text>
           {agent.is_latest_version && (
             <Badge variant="success" size="small">
-              Latest
+              最新
             </Badge>
           )}
         </div>
       </div>
       <div>
         <Text variant="body-medium" className="mb-1 !text-black">
-          Last Updated
+          最近更新
         </Text>
         <Text variant="body" className="!text-zinc-700">
-          {formatDate(agent.updated_at)}
+          {formatDate(agent.updated_at, "zh-CN")}
         </Text>
       </div>
       {agent.has_external_trigger && (
         <div>
           <Text variant="body-medium" className="mb-1">
-            Trigger Type
+            触发类型
           </Text>
           <Text variant="body" className="!text-neutral-700">
-            External Webhook
+            外部 Webhook
           </Text>
         </div>
       )}

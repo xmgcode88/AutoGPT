@@ -37,7 +37,7 @@ export function useRunDetailHeader(
     try {
       await deleteRun({ graphExecId: run?.id ?? "" });
 
-      toast({ title: "Run deleted" });
+      toast({ title: "运行已删除" });
 
       await queryClient.refetchQueries({
         queryKey:
@@ -50,11 +50,8 @@ export function useRunDetailHeader(
       setShowDeleteDialog(false);
     } catch (error: unknown) {
       toast({
-        title: "Failed to delete run",
-        description:
-          error instanceof Error
-            ? error.message
-            : "An unexpected error occurred.",
+        title: "删除运行失败",
+        description: error instanceof Error ? error.message : "发生未知错误。",
         variant: "destructive",
       });
     }
@@ -67,7 +64,7 @@ export function useRunDetailHeader(
         graphExecId: run?.id ?? "",
       });
 
-      toast({ title: "Run stopped" });
+      toast({ title: "运行已停止" });
 
       await queryClient.invalidateQueries({
         queryKey:
@@ -76,11 +73,8 @@ export function useRunDetailHeader(
       });
     } catch (error: unknown) {
       toast({
-        title: "Failed to stop run",
-        description:
-          error instanceof Error
-            ? error.message
-            : "An unexpected error occurred.",
+        title: "停止运行失败",
+        description: error instanceof Error ? error.message : "发生未知错误。",
         variant: "destructive",
       });
     }
@@ -89,15 +83,15 @@ export function useRunDetailHeader(
   async function handleRunAgain() {
     if (!run) {
       toast({
-        title: "Run not found",
-        description: "Run not found",
+        title: "未找到运行",
+        description: "未找到运行",
         variant: "destructive",
       });
       return;
     }
 
     try {
-      toast({ title: "Run started" });
+      toast({ title: "运行已开始" });
 
       const res = await executeRun({
         graphId: run.graph_id,
@@ -119,11 +113,8 @@ export function useRunDetailHeader(
       if (newRunId && onSelectRun) onSelectRun(newRunId);
     } catch (error: unknown) {
       toast({
-        title: "Failed to start run",
-        description:
-          error instanceof Error
-            ? error.message
-            : "An unexpected error occurred.",
+        title: "启动运行失败",
+        description: error instanceof Error ? error.message : "发生未知错误。",
         variant: "destructive",
       });
     }

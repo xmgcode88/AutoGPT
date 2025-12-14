@@ -79,7 +79,7 @@ export function RunOutputs({ outputs }: RunOutputsProps) {
   }, [outputs]);
 
   if (!items.length) {
-    return <div className="text-neutral-600">No output from this run.</div>;
+    return <div className="text-neutral-600">此运行没有输出。</div>;
   }
 
   return (

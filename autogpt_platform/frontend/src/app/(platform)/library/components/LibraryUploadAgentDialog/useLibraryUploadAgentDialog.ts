@@ -21,8 +21,8 @@ export const useLibraryUploadAgentDialog = () => {
         onSuccess: ({ data }) => {
           setIsOpen(false);
           toast({
-            title: "Success",
-            description: "Agent uploaded successfully",
+            title: "成功",
+            description: "智能体上传成功",
             variant: "default",
           });
           const qID = "flowID";
@@ -30,8 +30,8 @@ export const useLibraryUploadAgentDialog = () => {
         },
         onError: () => {
           toast({
-            title: "Error",
-            description: "Error Uploading agent",
+            title: "错误",
+            description: "上传智能体时出错",
             variant: "destructive",
           });
         },
@@ -48,7 +48,7 @@ export const useLibraryUploadAgentDialog = () => {
 
   const onSubmit = async (values: z.infer<typeof uploadAgentFormSchema>) => {
     if (!agentObject) {
-      form.setError("root", { message: "No Agent object to save" });
+      form.setError("root", { message: "没有可保存的智能体对象" });
       return;
     }
 
@@ -82,7 +82,7 @@ export const useLibraryUploadAgentDialog = () => {
           )
         ) {
           throw new Error(
-            "Invalid agent file. Please upload a valid agent.json file that has been previously exported from the AutoGPT platform. The file must contain the required fields: name, description, nodes, and links.",
+            "无效的智能体文件。请上传一个从 AutoGPT Platform 导出的有效 agent.json 文件。文件必须包含字段：name、description、nodes、links。",
           );
         }
         const agent = obj as Graph;
@@ -98,9 +98,9 @@ export const useLibraryUploadAgentDialog = () => {
         console.error("Error loading agent file:", error);
 
         toast({
-          title: "Invalid Agent File",
+          title: "无效的智能体文件",
           description:
-            "Please upload a valid agent.json file that has been previously exported from the AutoGPT platform. The file must contain the required fields: name, description, nodes, and links.",
+            "请上传一个从 AutoGPT Platform 导出的有效 agent.json 文件。文件必须包含字段：name、description、nodes、links。",
           duration: 5000,
           variant: "destructive",
         });

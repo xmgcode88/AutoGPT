@@ -100,7 +100,7 @@ export function AgentRunOutputView({
         <Card className="agpt-box" style={{ maxWidth: "950px" }}>
           <CardHeader>
             <div className="flex items-center justify-between">
-              <CardTitle className="font-poppins text-lg">Output</CardTitle>
+              <CardTitle className="font-poppins text-lg">输出</CardTitle>
               {outputItems.length > 0 && (
                 <OutputActions
                   items={outputItems.map((item) => ({
@@ -130,7 +130,7 @@ export function AgentRunOutputView({
                 ))
               ) : (
                 <p className="text-sm text-muted-foreground">
-                  No outputs to display
+                  没有可显示的输出
                 </p>
               )
             ) : (
@@ -141,7 +141,7 @@ export function AgentRunOutputView({
       ) : (
         <Card className="agpt-box" style={{ maxWidth: "950px" }}>
           <CardHeader>
-            <CardTitle className="font-poppins text-lg">Output</CardTitle>
+            <CardTitle className="font-poppins text-lg">输出</CardTitle>
           </CardHeader>
 
           <CardContent

@@ -36,6 +36,16 @@ To run the AutoGPT Platform, follow these steps:
 
    This command will start all the necessary backend services defined in the `docker-compose.yml` file in detached mode.
 
+### Windows quick start
+
+If you are on Windows 11 or a similar PowerShell host, you have two options:
+
+- **All-in-Docker**: `.\start-platform.ps1` (starts backend + frontend containers via `docker compose`). Pass `-ForceEnvCopy` if you need to regenerate the platform `.env` file. If pulls fail due to an unreachable Docker registry mirror (for example `hub-mirror.c.163.com`), re-run with `-FixDockerMirrors` (or remove the bad mirror in Docker Desktop Settings > Docker Engine and restart Docker Desktop).
+- **Local Python + local frontend** (Supabase already running in Docker): `.\start-local.ps1` (or double-click `start-local.cmd`) starts the 6 backend Python services via Poetry plus the frontend via `pnpm dev`. Stop with `.\stop-local.ps1` (or `stop-local.cmd`). Pass `-Install` on first run and `-SkipMigrate` to skip prisma migrations.
+- **Local Python + 7 CMD windows** (Windows): double-click `start-local-windows.cmd` (runs migrations + opens 6 backend cmd windows + 1 frontend cmd window). If you want to skip migrations, use `start-local-windows-no-migrate.cmd`.
+- Stop local CMD services: double-click `stop-local-windows.cmd` (kills listeners on ports `8001,8002,8003,8005,8006,8007,3000`).
+- If you see `invalid PYTHONUTF8 environment variable value`, run `fix-python-utf8.cmd` (or `fix-python-utf8.cmd --persist`).
+
 4. After all the services are in ready state, open your browser and navigate to `http://localhost:3000` to access the AutoGPT Platform frontend.
 
 ### Running Just Core services

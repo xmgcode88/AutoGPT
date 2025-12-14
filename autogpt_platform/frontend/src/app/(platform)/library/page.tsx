@@ -8,7 +8,7 @@ import { LibraryPageStateProvider } from "./components/state-provider";
 
 export default function LibraryPage() {
   useEffect(() => {
-    document.title = "Library – AutoGPT Platform";
+    document.title = "资源库 - AutoGPT Platform";
   }, []);
 
   return (

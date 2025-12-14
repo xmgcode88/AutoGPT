@@ -5,18 +5,18 @@ import { Text } from "@/components/atoms/Text/Text";
 import { MultiToggle } from "@/components/molecules/MultiToggle/MultiToggle";
 
 const months = [
-  { label: "Jan", value: 1 },
-  { label: "Feb", value: 2 },
-  { label: "Mar", value: 3 },
-  { label: "Apr", value: 4 },
-  { label: "May", value: 5 },
-  { label: "Jun", value: 6 },
-  { label: "Jul", value: 7 },
-  { label: "Aug", value: 8 },
-  { label: "Sep", value: 9 },
-  { label: "Oct", value: 10 },
-  { label: "Nov", value: 11 },
-  { label: "Dec", value: 12 },
+  { label: "1月", value: 1 },
+  { label: "2月", value: 2 },
+  { label: "3月", value: 3 },
+  { label: "4月", value: 4 },
+  { label: "5月", value: 5 },
+  { label: "6月", value: 6 },
+  { label: "7月", value: 7 },
+  { label: "8月", value: 8 },
+  { label: "9月", value: 9 },
+  { label: "10月", value: 10 },
+  { label: "11月", value: 11 },
+  { label: "12月", value: 12 },
 ];
 
 export function YearlyPicker({
@@ -36,7 +36,7 @@ export function YearlyPicker({
   return (
     <div className="mb-6 space-y-2">
       <Text variant="body-medium" as="span" className="text-black">
-        Months
+        月份
       </Text>
       <div className="flex gap-2">
         <button
@@ -44,14 +44,14 @@ export function YearlyPicker({
           className="h-[2.25rem] rounded-full border border-zinc-700 px-4 py-2 text-sm font-medium leading-[16px] text-black hover:bg-zinc-100"
           onClick={toggleAll}
         >
-          {values.length === months.length ? "Deselect All" : "Select All"}
+          {values.length === months.length ? "取消全选" : "全选"}
         </button>
       </div>
       <MultiToggle
         items={items}
         selectedValues={selected}
         onChange={(sv) => onChange(sv.map((s) => parseInt(s)))}
-        aria-label="Select months"
+        aria-label="选择月份"
       />
     </div>
   );

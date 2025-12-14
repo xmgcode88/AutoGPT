@@ -29,9 +29,9 @@ export function PasswordCredentialsModal({
   const credentials = useCredentials(schema, siblingInputs);
 
   const formSchema = z.object({
-    username: z.string().min(1, "Username is required"),
-    password: z.string().min(1, "Password is required"),
-    title: z.string().min(1, "Name is required"),
+    username: z.string().min(1, "请输入用户名"),
+    password: z.string().min(1, "请输入密码"),
+    title: z.string().min(1, "请输入名称"),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -69,7 +69,7 @@ export function PasswordCredentialsModal({
 
   return (
     <Dialog
-      title={`Add new username & password for ${providerName}`}
+      title={`为 ${providerName} 添加新的用户名和密码`}
       controlled={{
         isOpen: open,
         set: (isOpen) => {
@@ -93,9 +93,9 @@ export function PasswordCredentialsModal({
               render={({ field }) => (
                 <Input
                   id="username"
-                  label="Username"
+                  label="用户名"
                   type="text"
-                  placeholder="Enter username..."
+                  placeholder="请输入用户名..."
                   size="small"
                   {...field}
                 />
@@ -107,9 +107,9 @@ export function PasswordCredentialsModal({
               render={({ field }) => (
                 <Input
                   id="password"
-                  label="Password"
+                  label="密码"
                   type="password"
-                  placeholder="Enter password..."
+                  placeholder="请输入密码..."
                   size="small"
                   {...field}
                 />
@@ -121,16 +121,16 @@ export function PasswordCredentialsModal({
               render={({ field }) => (
                 <Input
                   id="title"
-                  label="Name"
+                  label="名称"
                   type="text"
-                  placeholder="Enter a name for this user login..."
+                  placeholder="请输入此登录方式的名称..."
                   size="small"
                   {...field}
                 />
               )}
             />
             <Button type="submit" size="small" className="min-w-68">
-              Save & use this user login
+              保存并使用该登录方式
             </Button>
           </form>
         </Form>

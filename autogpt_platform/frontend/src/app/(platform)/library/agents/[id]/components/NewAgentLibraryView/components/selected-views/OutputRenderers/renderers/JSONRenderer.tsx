@@ -139,7 +139,7 @@ function JSONViewer({ data }: { data: any }) {
               <CaretDown className="size-3" />
             )}
             <span className="ml-1 text-muted-foreground">
-              Array({itemCount})
+              数组({itemCount})
             </span>
           </button>
           {!isCollapsed && (
@@ -175,7 +175,7 @@ function JSONViewer({ data }: { data: any }) {
             ) : (
               <CaretDown className="size-3" />
             )}
-            <span className="ml-1 text-muted-foreground">Object</span>
+            <span className="ml-1 text-muted-foreground">对象</span>
           </button>
           {!isCollapsed && (
             <div className="ml-4 mt-1">

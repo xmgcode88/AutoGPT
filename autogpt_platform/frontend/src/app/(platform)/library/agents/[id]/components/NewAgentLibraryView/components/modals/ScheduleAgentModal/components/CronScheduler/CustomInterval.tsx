@@ -15,7 +15,7 @@ export function CustomInterval({
     <div className="flex items-end gap-3">
       <Input
         id="custom-interval-value"
-        label="Every"
+        label="每"
         type="number"
         min={1}
         value={value.value}
@@ -27,14 +27,14 @@ export function CustomInterval({
       />
       <Select
         id="custom-interval-unit"
-        label="Interval"
+        label="单位"
         size="small"
         value={value.unit}
         onValueChange={(v) => onChange({ ...value, unit: v as any })}
         options={[
-          { label: "Minutes", value: "minutes" },
-          { label: "Hours", value: "hours" },
-          { label: "Days", value: "days" },
+          { label: "分钟", value: "minutes" },
+          { label: "小时", value: "hours" },
+          { label: "天", value: "days" },
         ]}
         className="max-w-40"
       />

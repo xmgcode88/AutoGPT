@@ -18,12 +18,65 @@ export function formatTimeAgo(dateStr: string): string {
   return `${diffDays}d ago`;
 }
 
-export function formatDate(date: Date) {
-  return new Intl.DateTimeFormat("en-US", {
+export function formatDate(date: Date | string, locale: string = "en-US") {
+  return new Intl.DateTimeFormat(locale, {
     year: "numeric",
     month: "short",
     day: "numeric",
     hour: "2-digit",
     minute: "2-digit",
   }).format(new Date(date));
+}
+
+export function formatRelativeTime(
+  date: Date | string,
+  locale: string = "en-US",
+): string {
+  const dateObj = new Date(date);
+  if (Number.isNaN(dateObj.getTime())) return "";
+
+  const diffSeconds = Math.round((dateObj.getTime() - Date.now()) / 1000);
+  const absSeconds = Math.abs(diffSeconds);
+
+  const rtf = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
+
+  if (absSeconds < 60) return rtf.format(diffSeconds, "second");
+  if (absSeconds < 60 * 60)
+    return rtf.format(Math.round(diffSeconds / 60), "minute");
+  if (absSeconds < 60 * 60 * 24)
+    return rtf.format(Math.round(diffSeconds / (60 * 60)), "hour");
+  return rtf.format(Math.round(diffSeconds / (60 * 60 * 24)), "day");
+}
+
+export function formatDurationSeconds(
+  seconds: number,
+  locale: string = "en-US",
+): string {
+  const totalSeconds = Math.max(0, Math.round(seconds || 0));
+  const isZh = locale.toLowerCase().startsWith("zh");
+
+  if (totalSeconds < 60) {
+    return isZh
+      ? `${totalSeconds} 秒`
+      : `${totalSeconds} ${totalSeconds === 1 ? "second" : "seconds"}`;
+  }
+
+  const totalMinutes = Math.round(totalSeconds / 60);
+  if (totalMinutes < 60) {
+    return isZh
+      ? `${totalMinutes} 分钟`
+      : `${totalMinutes} ${totalMinutes === 1 ? "minute" : "minutes"}`;
+  }
+
+  const totalHours = Math.round(totalMinutes / 60);
+  if (totalHours < 24) {
+    return isZh
+      ? `${totalHours} 小时`
+      : `${totalHours} ${totalHours === 1 ? "hour" : "hours"}`;
+  }
+
+  const totalDays = Math.round(totalHours / 24);
+  return isZh
+    ? `${totalDays} 天`
+    : `${totalDays} ${totalDays === 1 ? "day" : "days"}`;
 }

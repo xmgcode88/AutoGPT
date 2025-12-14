@@ -14,8 +14,8 @@ type Props = {
 
 export function EmptyAgentRuns({ agent }: Props) {
   const isPublished = Boolean(agent.marketplace_listing);
-  const createdAt = formatDate(agent.created_at);
-  const updatedAt = formatDate(agent.updated_at);
+  const createdAt = formatDate(agent.created_at, "zh-CN");
+  const updatedAt = formatDate(agent.updated_at, "zh-CN");
   const isUpdated = updatedAt !== createdAt;
 
   return (
@@ -27,11 +27,10 @@ export function EmptyAgentRuns({ agent }: Props) {
             <div className="flex items-center justify-between gap-2">
               <div className="flex flex-col items-center gap-2">
                 <Text variant="h3" className="text-center text-[1.375rem]">
-                  Ready to get started?
+                  准备开始了吗？
                 </Text>
                 <Text variant="large" className="text-center">
-                  Run your agent and this space will fill with your agent&apos;s
-                  activity
+                  运行你的智能体，这里将显示它的活动记录
                 </Text>
               </div>
             </div>
@@ -42,7 +41,7 @@ export function EmptyAgentRuns({ agent }: Props) {
                   size="large"
                   className="inline-flex w-[19.75rem]"
                 >
-                  Setup your task
+                  配置任务
                 </Button>
               }
               agent={agent}
@@ -54,12 +53,12 @@ export function EmptyAgentRuns({ agent }: Props) {
       {isPublished ? (
         <div className="mt-4 flex flex-col gap-10 rounded-large border border-zinc-200 p-6 lg:mt-0 lg:w-[29.5rem]">
           <Text variant="label" className="text-zinc-500">
-            About this agent
+            关于此智能体
           </Text>
           <div className="flex flex-col gap-2">
             <Text variant="h4">{agent.name}</Text>
             <Text variant="body">
-              by{" "}
+              作者：{" "}
               <Link
                 href={`/marketplace/creator/${agent.marketplace_listing?.creator.slug}`}
                 variant="secondary"
@@ -69,22 +68,20 @@ export function EmptyAgentRuns({ agent }: Props) {
             </Text>
           </div>
           <ShowMoreText previewLimit={170} variant="body" className="-mt-4">
-            {agent.description ||
-              `Note: If you're using Docker Compose watch mode (docker compose watch), it will automatically rebuild on file changes. Since you're using docker compose up -d, manual rebuilds are needed.
-You can test the endpoint from your frontend; it should return the marketplace_listing field when an agent has been published, or null if it hasn't.`}
+            {agent.description || "暂无描述。"}
           </ShowMoreText>
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-20">
               <div className="flex flex-col gap-2">
                 <Text variant="body-medium" className="text-black">
-                  Agent created on
+                  创建时间
                 </Text>
                 <Text variant="body">{createdAt}</Text>
               </div>
               {isUpdated ? (
                 <div className="flex flex-col gap-2">
                   <Text variant="body-medium" className="text-black">
-                    Agent updated on
+                    更新时间
                   </Text>
                   <Text variant="body">{updatedAt}</Text>
                 </div>
@@ -92,10 +89,10 @@ You can test the endpoint from your frontend; it should return the marketplace_l
             </div>
             <div className="mt-4 flex items-center gap-2">
               <Button variant="secondary" size="small">
-                Edit agent
+                编辑智能体
               </Button>
               <Button variant="secondary" size="small">
-                Export agent to file
+                导出智能体到文件
               </Button>
             </div>
           </div>

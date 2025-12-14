@@ -204,8 +204,10 @@ export default function LibraryAgentCard({
       });
 
       toast({
-        title: newIsFavorite ? "Added to favorites" : "Removed from favorites",
-        description: `${name} has been ${newIsFavorite ? "added to" : "removed from"} your favorites.`,
+        title: newIsFavorite ? "已添加到收藏" : "已从收藏移除",
+        description: newIsFavorite
+          ? `${name} 已添加到你的收藏。`
+          : `${name} 已从你的收藏中移除。`,
       });
     } catch (error) {
       // Revert on error
@@ -214,8 +216,8 @@ export default function LibraryAgentCard({
       updateQueryData(!newIsFavorite);
 
       toast({
-        title: "Error",
-        description: "Failed to update favorite status. Please try again.",
+        title: "错误",
+        description: "更新收藏状态失败，请重试。",
         variant: "destructive",
       });
     } finally {
@@ -252,7 +254,7 @@ export default function LibraryAgentCard({
         ) : (
           <Image
             src={image_url}
-            alt={`${name} preview image`}
+            alt={`${name} 预览图`}
             fill
             className="object-cover"
           />
@@ -268,9 +270,7 @@ export default function LibraryAgentCard({
               !isFavorite && "opacity-0 group-hover:opacity-100",
             )}
             disabled={isUpdating}
-            aria-label={
-              isFavorite ? "Remove from favorites" : "Add to favorites"
-            }
+            aria-label={isFavorite ? "从收藏中移除" : "添加到收藏"}
           >
             <Heart
               size={20}
@@ -292,7 +292,7 @@ export default function LibraryAgentCard({
                   ? creator_image_url
                   : "/avatar-placeholder.png"
               }
-              alt={`${name} creator avatar`}
+              alt={`${name} 创建者头像`}
             />
             <AvatarFallback size={64}>{name.charAt(0)}</AvatarFallback>
           </Avatar>
@@ -318,7 +318,7 @@ export default function LibraryAgentCard({
             href={`/library/agents/${id}`}
             className="text-lg font-semibold text-neutral-800 hover:underline dark:text-neutral-200"
           >
-            See runs
+            查看运行记录
           </Link>
 
           {can_access_graph && (
@@ -326,7 +326,7 @@ export default function LibraryAgentCard({
               href={`/build?flowID=${graph_id}`}
               className="text-lg font-semibold text-neutral-800 hover:underline dark:text-neutral-200"
             >
-              Open in builder
+              在构建器中打开
             </Link>
           )}
         </div>

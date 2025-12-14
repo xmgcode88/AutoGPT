@@ -2,7 +2,11 @@ import React from "react";
 import { Text } from "@/components/atoms/Text/Text";
 import { Warning } from "@phosphor-icons/react";
 
-export function ErrorHeader() {
+export function ErrorHeader({
+  title = "Something went wrong",
+}: {
+  title?: string;
+}) {
   return (
     <div className="flex items-center gap-3">
       <div className="flex-shrink-0">
@@ -10,7 +14,7 @@ export function ErrorHeader() {
       </div>
       <div>
         <Text variant="large-semibold" className="text-zinc-800">
-          Something went wrong
+          {title}
         </Text>
       </div>
     </div>

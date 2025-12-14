@@ -22,7 +22,7 @@ export function useScheduleAgentModal(
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  const defaultScheduleName = useMemo(() => `Run ${agent.name}`, [agent.name]);
+  const defaultScheduleName = useMemo(() => `运行 ${agent.name}`, [agent.name]);
   const [scheduleName, setScheduleName] = useState(defaultScheduleName);
   const [cronExpression, setCronExpression] = useState(
     agent.recommended_schedule_cron || "0 9 * * 1",
@@ -33,7 +33,7 @@ export function useScheduleAgentModal(
       onSuccess: (response) => {
         if (response.status === 200) {
           toast({
-            title: "Schedule created",
+            title: "定时任务已创建",
           });
           callbacks?.onCreateSchedule?.(response.data);
           // Invalidate schedules list for this graph
@@ -50,8 +50,8 @@ export function useScheduleAgentModal(
       },
       onError: (error: any) => {
         toast({
-          title: "❌ Failed to create schedule",
-          description: error.message || "An unexpected error occurred.",
+          title: "❌ 创建定时任务失败",
+          description: error.message || "发生未知错误。",
           variant: "destructive",
         });
       },
@@ -62,11 +62,11 @@ export function useScheduleAgentModal(
     (scheduleName: string, cronExpression: string) => {
       if (!scheduleName.trim()) {
         toast({
-          title: "⚠️ Schedule name required",
-          description: "Please provide a name for your schedule.",
+          title: "⚠️ 需要定时任务名称",
+          description: "请为定时任务填写名称。",
           variant: "destructive",
         });
-        return Promise.reject(new Error("Schedule name required"));
+        return Promise.reject(new Error("需要定时任务名称"));
       }
 
       return new Promise<void>((resolve, reject) => {

@@ -41,7 +41,7 @@ export function CronSchedulerDialog(props: CronSchedulerDialogProps) {
     open,
     setOpen,
     defaultCronExpression = "",
-    title = "Schedule Task",
+    title = "设置定时任务",
   } = props;
 
   const { toast } = useToast();
@@ -57,7 +57,7 @@ export function CronSchedulerDialog(props: CronSchedulerDialogProps) {
       select: (res) => (res.status === 200 ? res.data.timezone : undefined),
     },
   });
-  const timezoneDisplay = getTimezoneDisplayName(userTimezone || "UTC");
+  const timezoneDisplay = getTimezoneDisplayName(userTimezone || "UTC", "zh-CN");
 
   // Reset state when dialog opens
   useEffect(() => {
@@ -72,7 +72,7 @@ export function CronSchedulerDialog(props: CronSchedulerDialogProps) {
   const handleDone = () => {
     if (props.mode === "with-name" && !scheduleName.trim()) {
       toast({
-        title: "Please enter a schedule name",
+        title: "请输入定时任务名称",
         variant: "destructive",
       });
       return;
@@ -82,8 +82,8 @@ export function CronSchedulerDialog(props: CronSchedulerDialogProps) {
     if (!cronExpression || cronExpression.trim() === "") {
       toast({
         variant: "destructive",
-        title: "Invalid schedule",
-        description: "Please enter a valid cron expression",
+        title: "无效的定时任务",
+        description: "请输入有效的 Cron 表达式",
       });
       return;
     }
@@ -107,11 +107,11 @@ export function CronSchedulerDialog(props: CronSchedulerDialogProps) {
         <div className="flex flex-col gap-4">
           {props.mode === "with-name" && (
             <div className="flex max-w-[448px] flex-col space-y-2">
-              <label className="text-sm font-medium">Schedule Name</label>
+              <label className="text-sm font-medium">定时任务名称</label>
               <Input
                 value={scheduleName}
                 onChange={(e) => setScheduleName(e.target.value)}
-                placeholder="Enter a name for this schedule"
+                placeholder="输入定时任务名称"
               />
             </div>
           )}
@@ -127,9 +127,9 @@ export function CronSchedulerDialog(props: CronSchedulerDialogProps) {
             <div className="flex items-center gap-2 rounded-md border border-amber-200 bg-amber-50 p-3">
               <InfoIcon className="h-4 w-4 text-amber-600" />
               <p className="text-sm text-amber-800">
-                No timezone set. Schedule will run in UTC.
+                未设置时区。定时任务将以 UTC 运行。
                 <a href="/profile/settings" className="ml-1 underline">
-                  Set your timezone
+                  去设置
                 </a>
               </p>
             </div>
@@ -137,7 +137,7 @@ export function CronSchedulerDialog(props: CronSchedulerDialogProps) {
             <div className="flex items-center gap-2 rounded-md bg-muted/50 p-3">
               <InfoIcon className="h-4 w-4 text-muted-foreground" />
               <p className="text-sm text-muted-foreground">
-                Schedule will run in your timezone:{" "}
+                定时任务将使用你的时区运行：{" "}
                 <span className="font-medium">{timezoneDisplay}</span>
               </p>
             </div>
@@ -145,9 +145,9 @@ export function CronSchedulerDialog(props: CronSchedulerDialogProps) {
         </div>
         <div className="mt-8 flex justify-end space-x-2">
           <Button variant="outline" onClick={() => setOpen(false)}>
-            Cancel
+            取消
           </Button>
-          <Button onClick={handleDone}>Done</Button>
+          <Button onClick={handleDone}>完成</Button>
         </div>
       </Dialog.Content>
     </Dialog>
@@ -160,7 +160,7 @@ export function CronExpressionDialog({
   setOpen,
   onSubmit,
   defaultCronExpression,
-  title = "Set Schedule",
+  title = "设置定时",
 }: {
   open: boolean;
   setOpen: (open: boolean) => void;
@@ -186,7 +186,7 @@ export function ScheduleTaskDialog({
   onSubmit,
   defaultScheduleName,
   defaultCronExpression,
-  title = "Schedule Task",
+  title = "设置定时任务",
 }: {
   open: boolean;
   setOpen: (open: boolean) => void;

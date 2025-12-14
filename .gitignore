@@ -179,3 +179,5 @@ autogpt_platform/backend/settings.py
 .test-contents
 .claude/settings.local.json
 /autogpt_platform/backend/logs
+/autogpt_platform/.logs
+/autogpt_platform/.run

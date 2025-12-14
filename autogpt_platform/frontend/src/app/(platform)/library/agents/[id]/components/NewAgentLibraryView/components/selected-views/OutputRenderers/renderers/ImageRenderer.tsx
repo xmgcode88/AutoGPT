@@ -108,7 +108,7 @@ function renderImage(
   metadata?: OutputMetadata,
 ): React.ReactNode {
   const imageUrl = String(value);
-  const altText = metadata?.filename || "Output image";
+  const altText = metadata?.filename || "输出图片";
 
   return (
     <div className="group relative">

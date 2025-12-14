@@ -70,7 +70,7 @@ export function ScheduleAgentModal({
       <Dialog.Content>
         <div className="flex h-full flex-col">
           <Text variant="lead" as="h2" className="!font-medium !text-black">
-            Schedule run
+            设置定时运行
           </Text>
 
           {/* Content */}
@@ -92,7 +92,7 @@ export function ScheduleAgentModal({
               onClick={handleClose}
               disabled={isCreatingSchedule}
             >
-              Cancel
+              取消
             </Button>
             <Button
               variant="primary"
@@ -100,7 +100,7 @@ export function ScheduleAgentModal({
               loading={isCreatingSchedule}
               disabled={!canSchedule}
             >
-              Schedule
+              创建定时任务
             </Button>
           </div>
         </div>

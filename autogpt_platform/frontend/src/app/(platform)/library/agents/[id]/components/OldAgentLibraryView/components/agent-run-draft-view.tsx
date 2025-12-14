@@ -171,8 +171,8 @@ export function AgentRunDraftView({
         .concat(missingInputs)
         .concat(missingCredentials);
       toast({
-        title: "⚠️ Not all required inputs are set",
-        description: `Please set ${allMissingFields.map((k) => `\`${k}\``).join(", ")}`,
+        title: "还有必填项未填写",
+        description: `请填写：${allMissingFields.map((k) => `\`${k}\``).join("，")}`,
       });
     },
     [missingInputs, missingCredentials],
@@ -406,7 +406,7 @@ export function AgentRunDraftView({
             {
               label: (
                 <>
-                  <CalendarClockIcon className="mr-2 size-4" /> Schedule run
+                  <CalendarClockIcon className="mr-2 size-4" /> 定时运行
                 </>
               ),
               variant: "accent",
@@ -416,7 +416,7 @@ export function AgentRunDraftView({
             {
               label: (
                 <>
-                  <IconPlay className="mr-2 size-4" /> Manual run
+                  <IconPlay className="mr-2 size-4" /> 手动运行
                 </>
               ),
               callback: doRun,
@@ -443,7 +443,7 @@ export function AgentRunDraftView({
             {
               label: (
                 <>
-                  <IconPlay className="mr-2 size-4" /> Set up trigger
+                  <IconPlay className="mr-2 size-4" /> 设置触发器
                 </>
               ),
               variant: "accent",
@@ -463,7 +463,7 @@ export function AgentRunDraftView({
               ? {
                   label: (
                     <>
-                      <IconCross className="mr-2.5 size-3.5" /> Disable trigger
+                      <IconCross className="mr-2.5 size-3.5" /> 禁用触发器
                     </>
                   ),
                   variant: "destructive",
@@ -472,7 +472,7 @@ export function AgentRunDraftView({
               : {
                   label: (
                     <>
-                      <IconPlay className="mr-2 size-4" /> Enable trigger
+                      <IconPlay className="mr-2 size-4" /> 启用触发器
                     </>
                   ),
                   variant: "accent",
@@ -486,7 +486,7 @@ export function AgentRunDraftView({
             {
               label: (
                 <>
-                  <IconSave className="mr-2 size-4" /> Save changes
+                  <IconSave className="mr-2 size-4" /> 保存更改
                 </>
               ),
               callback: doUpdatePreset,
@@ -501,7 +501,7 @@ export function AgentRunDraftView({
               label: (
                 <>
                   <Trash2Icon className="mr-2 size-4" />
-                  Delete {graph.has_external_trigger ? "trigger" : "preset"}
+                  删除{graph.has_external_trigger ? "触发器" : "预设"}
                 </>
               ),
               callback: () => doDeletePreset(agentPreset.id),
@@ -537,34 +537,31 @@ export function AgentRunDraftView({
     <div className={cn("agpt-div flex gap-6", className)}>
       <div className="flex min-w-0 flex-1 flex-col gap-4">
         {graph.trigger_setup_info && agentPreset && (
-          <Card className="agpt-box">
-            <CardHeader className="flex-row items-center justify-between">
-              <CardTitle className="font-poppins text-lg">
-                Trigger status
-              </CardTitle>
-              {triggerStatus && <AgentStatusChip status={triggerStatus} />}
-            </CardHeader>
-            <CardContent className="flex flex-col gap-4">
-              {!agentPreset.webhook_id ? (
-                /* Shouldn't happen, but technically possible */
-                <p className="text-sm text-destructive">
-                  This trigger is not attached to a webhook. Use &quot;Set up
-                  trigger&quot; to fix this.
-                </p>
-              ) : !graph.trigger_setup_info.credentials_input_name ? (
-                /* Expose webhook URL if not auto-setup */
-                <div className="text-sm">
-                  <p>
-                    This trigger is ready to be used. Use the Webhook URL below
-                    to set up the trigger connection with the service of your
-                    choosing.
+            <Card className="agpt-box">
+              <CardHeader className="flex-row items-center justify-between">
+                <CardTitle className="font-poppins text-lg">
+                  触发器状态
+                </CardTitle>
+                {triggerStatus && <AgentStatusChip status={triggerStatus} />}
+              </CardHeader>
+              <CardContent className="flex flex-col gap-4">
+                {!agentPreset.webhook_id ? (
+                  /* Shouldn't happen, but technically possible */
+                  <p className="text-sm text-destructive">
+                    此触发器未绑定到 Webhook。请使用“设置触发器”来修复。
                   </p>
-                  <div className="nodrag mt-5 flex flex-col gap-1">
-                    Webhook URL:
-                    <div className="flex gap-2 rounded-md bg-gray-50 p-2">
-                      <code className="select-all text-sm">
-                        {agentPreset.webhook.url}
-                      </code>
+                ) : !graph.trigger_setup_info.credentials_input_name ? (
+                  /* Expose webhook URL if not auto-setup */
+                  <div className="text-sm">
+                    <p>
+                      此触发器已准备就绪。请使用下方的 Webhook 地址，在你选择的服务中完成触发器连接设置。
+                    </p>
+                    <div className="nodrag mt-5 flex flex-col gap-1">
+                      Webhook 地址：
+                      <div className="flex gap-2 rounded-md bg-gray-50 p-2">
+                        <code className="select-all text-sm">
+                          {agentPreset.webhook.url}
+                        </code>
                       <Button
                         variant="outline"
                         size="icon"
@@ -573,7 +570,7 @@ export function AgentRunDraftView({
                           agentPreset.webhook &&
                           navigator.clipboard.writeText(agentPreset.webhook.url)
                         }
-                        title="Copy webhook URL"
+                        title="复制 Webhook 地址"
                       >
                         <CopyIcon className="size-4" />
                       </Button>
@@ -582,10 +579,10 @@ export function AgentRunDraftView({
                 </div>
               ) : (
                 <p className="text-sm text-muted-foreground">
-                  This agent trigger is{" "}
+                  此智能体触发器{" "}
                   {agentPreset.is_active
-                    ? "ready. When a trigger is received, it will run with the provided settings."
-                    : "disabled. It will not respond to triggers until you enable it."}
+                    ? "已启用。当收到触发时，将按当前设置运行。"
+                    : "已禁用。在启用之前不会响应触发。"}{" "}
                 </p>
               )}
             </CardContent>
@@ -594,7 +591,7 @@ export function AgentRunDraftView({
 
         <Card className="agpt-box">
           <CardHeader>
-            <CardTitle className="font-poppins text-lg">Input</CardTitle>
+            <CardTitle className="font-poppins text-lg">输入</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col gap-4">
             {/* Schedule recommendation tip */}
@@ -602,10 +599,9 @@ export function AgentRunDraftView({
               <div className="flex items-center gap-2 rounded-md border border-violet-200 bg-violet-50 p-3">
                 <ClockIcon className="h-4 w-4 text-violet-600" />
                 <p className="text-sm text-violet-800">
-                  <strong>Tip:</strong> For best results, run this agent{" "}
-                  {humanizeCronExpression(
-                    recommendedScheduleCron,
-                  ).toLowerCase()}
+                  <strong>建议：</strong> 为了获得更好的效果，建议按{" "}
+                  {humanizeCronExpression(recommendedScheduleCron, "zh-CN")}{" "}
+                  运行该智能体。
                 </p>
               </div>
             )}
@@ -615,7 +611,7 @@ export function AgentRunDraftView({
               <div className="flex items-start gap-2 rounded-md border border-violet-200 bg-violet-50 p-3">
                 <InfoIcon className="mt-0.5 h-4 w-4 flex-shrink-0 text-violet-600" />
                 <div className="text-sm text-violet-800">
-                  <strong>Setup Instructions:</strong>{" "}
+                  <strong>设置说明：</strong>{" "}
                   <span className="whitespace-pre-wrap">
                     {graph.instructions}
                   </span>
@@ -628,14 +624,14 @@ export function AgentRunDraftView({
                 {/* Preset name and description */}
                 <div className="flex flex-col space-y-2">
                   <label className="flex items-center gap-1 text-sm font-medium">
-                    {graph.has_external_trigger ? "Trigger" : "Preset"} Name
+                    {graph.has_external_trigger ? "触发器" : "预设"}名称
                     <InformationTooltip
-                      description={`Name of the ${graph.has_external_trigger ? "trigger" : "preset"} you are setting up`}
+                      description={`你正在设置的${graph.has_external_trigger ? "触发器" : "预设"}名称`}
                     />
                   </label>
                   <Input
                     value={presetName}
-                    placeholder={`Enter ${graph.has_external_trigger ? "trigger" : "preset"} name`}
+                    placeholder={`输入${graph.has_external_trigger ? "触发器" : "预设"}名称`}
                     onChange={(e) => {
                       setPresetName(e.target.value);
                       setChangedPresetAttributes((prev) => prev.add("name"));
@@ -644,15 +640,14 @@ export function AgentRunDraftView({
                 </div>
                 <div className="flex flex-col space-y-2">
                   <label className="flex items-center gap-1 text-sm font-medium">
-                    {graph.has_external_trigger ? "Trigger" : "Preset"}{" "}
-                    Description
+                    {graph.has_external_trigger ? "触发器" : "预设"}描述
                     <InformationTooltip
-                      description={`Description of the ${graph.has_external_trigger ? "trigger" : "preset"} you are setting up`}
+                      description={`你正在设置的${graph.has_external_trigger ? "触发器" : "预设"}描述`}
                     />
                   </label>
                   <Input
                     value={presetDescription}
-                    placeholder={`Enter ${graph.has_external_trigger ? "trigger" : "preset"} description`}
+                    placeholder={`输入${graph.has_external_trigger ? "触发器" : "预设"}描述`}
                     onChange={(e) => {
                       setPresetDescription(e.target.value);
                       setChangedPresetAttributes((prev) =>
@@ -729,7 +724,7 @@ export function AgentRunDraftView({
       <aside className="w-48 xl:w-56">
         <div className="flex flex-col gap-8">
           <ActionButtonGroup
-            title={`${graph.has_external_trigger ? "Trigger" : agentPreset ? "Preset" : "Run"} actions`}
+            title={`${graph.has_external_trigger ? "触发器" : agentPreset ? "预设" : "运行"}操作`}
             actions={runActions}
           />
           <ScheduleTaskDialog
@@ -741,7 +736,7 @@ export function AgentRunDraftView({
           />
 
           {agentActions && agentActions.length > 0 && (
-            <ActionButtonGroup title="Agent actions" actions={agentActions} />
+            <ActionButtonGroup title="智能体操作" actions={agentActions} />
           )}
         </div>
       </aside>

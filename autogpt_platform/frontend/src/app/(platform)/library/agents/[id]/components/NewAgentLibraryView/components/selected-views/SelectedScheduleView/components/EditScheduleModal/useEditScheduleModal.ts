@@ -33,21 +33,21 @@ export function useEditScheduleModal(
 
   const repeatOptions = useMemo(
     () => [
-      { value: "daily", label: "Daily" },
-      { value: "weekly", label: "Weekly" },
+      { value: "daily", label: "每天" },
+      { value: "weekly", label: "每周" },
     ],
     [],
   );
 
   const dayItems = useMemo(
     () => [
-      { value: "0", label: "Su" },
-      { value: "1", label: "Mo" },
-      { value: "2", label: "Tu" },
-      { value: "3", label: "We" },
-      { value: "4", label: "Th" },
-      { value: "5", label: "Fr" },
-      { value: "6", label: "Sa" },
+      { value: "0", label: "日" },
+      { value: "1", label: "一" },
+      { value: "2", label: "二" },
+      { value: "3", label: "三" },
+      { value: "4", label: "四" },
+      { value: "5", label: "五" },
+      { value: "6", label: "六" },
     ],
     [],
   );
@@ -68,7 +68,7 @@ export function useEditScheduleModal(
     mutationFn: async () => {
       const errorsNow = validateSchedule({ scheduleName: name, time });
       setErrors(errorsNow);
-      if (Object.keys(errorsNow).length > 0) throw new Error("Invalid form");
+      if (Object.keys(errorsNow).length > 0) throw new Error("表单无效");
 
       const cron = humanizeToCron();
       const res = await fetch(`/api/schedules/${schedule.id}`, {
@@ -77,7 +77,7 @@ export function useEditScheduleModal(
         body: JSON.stringify({ name, cron }),
       });
       if (!res.ok) {
-        let message = "Failed to update schedule";
+        let message = "更新定时任务失败";
         try {
           const data = await res.json();
           message = data?.message || data?.detail || message;
@@ -101,8 +101,8 @@ export function useEditScheduleModal(
     },
     onError: (error: any) => {
       toast({
-        title: "❌ Failed to update schedule",
-        description: error?.message || "An unexpected error occurred.",
+        title: "❌ 更新定时任务失败",
+        description: error?.message || "发生未知错误。",
         variant: "destructive",
       });
     },

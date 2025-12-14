@@ -4,6 +4,7 @@ import type { GraphExecutionJobInfo } from "@/app/api/__generated__/models/graph
 import { LibraryAgent } from "@/app/api/__generated__/models/libraryAgent";
 import { Skeleton } from "@/components/__legacy__/ui/skeleton";
 import { ErrorCard } from "@/components/molecules/ErrorCard/ErrorCard";
+import { LIBRARY_ERROR_CARD_I18N } from "@/app/(platform)/library/components/errorCardI18n";
 import { InfiniteList } from "@/components/molecules/InfiniteList/InfiniteList";
 import {
   TabsLine,
@@ -51,7 +52,13 @@ export function AgentRunsLists({
   });
 
   if (error) {
-    return <ErrorCard responseError={error} />;
+    return (
+      <ErrorCard
+        responseError={error}
+        context="运行列表"
+        i18n={LIBRARY_ERROR_CARD_I18N}
+      />
+    );
   }
 
   if (loading) {
@@ -81,10 +88,10 @@ export function AgentRunsLists({
     >
       <TabsLineList>
         <TabsLineTrigger value="runs">
-          Runs <span className="ml-3 inline-block">{runsCount}</span>
+          运行 <span className="ml-3 inline-block">{runsCount}</span>
         </TabsLineTrigger>
         <TabsLineTrigger value="scheduled">
-          Scheduled <span className="ml-3 inline-block">{schedulesCount}</span>
+          定时 <span className="ml-3 inline-block">{schedulesCount}</span>
         </TabsLineTrigger>
       </TabsLineList>
 

@@ -3,6 +3,7 @@
 import { Button } from "@/components/atoms/Button/Button";
 import { Breadcrumbs } from "@/components/molecules/Breadcrumbs/Breadcrumbs";
 import { ErrorCard } from "@/components/molecules/ErrorCard/ErrorCard";
+import { LIBRARY_ERROR_CARD_I18N } from "@/app/(platform)/library/components/errorCardI18n";
 import { PlusIcon } from "@phosphor-icons/react";
 import { useEffect } from "react";
 import { RunAgentModal } from "./components/modals/RunAgentModal/RunAgentModal";
@@ -29,7 +30,7 @@ export function NewAgentLibraryView() {
 
   useEffect(() => {
     if (agent) {
-      document.title = `${agent.name} - Library - AutoGPT Platform`;
+      document.title = `${agent.name} - 资源库 - AutoGPT Platform`;
     }
   }, [agent]);
 
@@ -38,7 +39,8 @@ export function NewAgentLibraryView() {
       <ErrorCard
         isSuccess={false}
         responseError={error || undefined}
-        context="agent"
+        context="智能体"
+        i18n={LIBRARY_ERROR_CARD_I18N}
         onRetry={() => window.location.reload()}
       />
     );
@@ -64,7 +66,7 @@ export function NewAgentLibraryView() {
             <RunAgentModal
               triggerSlot={
                 <Button variant="primary" size="large" className="w-full">
-                  <PlusIcon size={20} /> New Run
+                  <PlusIcon size={20} /> 新建运行
                 </Button>
               }
               agent={agent}
@@ -90,7 +92,7 @@ export function NewAgentLibraryView() {
         <div className={!shouldShowSidebar ? "px-2" : ""}>
           <Breadcrumbs
             items={[
-              { name: "My Library", link: "/library" },
+              { name: "我的资源库", link: "/library" },
               { name: agent.name, link: `/library/agents/${agentId}` },
             ]}
           />
@@ -113,11 +115,9 @@ export function NewAgentLibraryView() {
             )
           ) : sidebarLoading ? (
             // Show loading state while sidebar is loading to prevent flash of empty state
-            <div className="text-gray-600">Loading runs...</div>
+            <div className="text-gray-600">正在加载运行记录...</div>
           ) : hasAnyItems ? (
-            <div className="text-gray-600">
-              Select a run to view its details
-            </div>
+            <div className="text-gray-600">选择一个运行以查看详情</div>
           ) : (
             <EmptyAgentRuns agent={agent} />
           )}

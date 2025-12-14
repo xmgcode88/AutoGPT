@@ -31,14 +31,14 @@ const statusData: Record<
   AgentRunStatus,
   { label: string; variant: keyof typeof statusStyles }
 > = {
-  success: { label: "Success", variant: "success" },
-  running: { label: "Running", variant: "info" },
-  failed: { label: "Failed", variant: "destructive" },
-  queued: { label: "Queued", variant: "warning" },
-  draft: { label: "Draft", variant: "secondary" },
-  stopped: { label: "Stopped", variant: "secondary" },
-  scheduled: { label: "Scheduled", variant: "secondary" },
-  review: { label: "In Review", variant: "orange" },
+  success: { label: "成功", variant: "success" },
+  running: { label: "运行中", variant: "info" },
+  failed: { label: "失败", variant: "destructive" },
+  queued: { label: "排队中", variant: "warning" },
+  draft: { label: "草稿", variant: "secondary" },
+  stopped: { label: "已停止", variant: "secondary" },
+  scheduled: { label: "定时", variant: "secondary" },
+  review: { label: "审核中", variant: "orange" },
 };
 
 const statusStyles = {

@@ -24,9 +24,7 @@ export function RunActions({
         disabled={!isRunReady || isExecuting || isSettingUpTrigger}
         loading={isExecuting || isSettingUpTrigger}
       >
-        {defaultRunType === "automatic-trigger"
-          ? "Set up Trigger"
-          : "Run Agent"}
+        {defaultRunType === "automatic-trigger" ? "配置触发器" : "运行智能体"}
       </Button>
     </div>
   );

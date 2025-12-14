@@ -16,11 +16,10 @@ export function WebhookTriggerBanner() {
           </svg>
         </div>
         <div className="ml-3">
-          <h3 className="text-sm font-medium text-blue-800">Webhook Trigger</h3>
+          <h3 className="text-sm font-medium text-blue-800">Webhook 触发器</h3>
           <div className="mt-2 text-sm text-blue-700">
             <p>
-              This will create a webhook endpoint that automatically runs your
-              agent when triggered by external events.
+              这将创建一个 webhook 端点，当外部事件触发时会自动运行你的智能体。
             </p>
           </div>
         </div>

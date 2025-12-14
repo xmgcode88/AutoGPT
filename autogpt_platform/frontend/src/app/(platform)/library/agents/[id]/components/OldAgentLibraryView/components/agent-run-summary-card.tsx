@@ -1,5 +1,4 @@
 import React from "react";
-import moment from "moment";
 
 import { cn } from "@/lib/utils";
 
@@ -16,6 +15,7 @@ import {
 import { AgentStatus, AgentStatusChip } from "./agent-status-chip";
 import { AgentRunStatus, AgentRunStatusChip } from "./agent-run-status-chip";
 import { PushPinSimpleIcon } from "@phosphor-icons/react";
+import { formatRelativeTime } from "@/lib/utils/time";
 
 export type AgentRunSummaryProps = (
   | {
@@ -72,7 +72,7 @@ export function AgentRunSummaryCard({
         )}
         {type == "preset" && (
           <div className="flex items-center text-sm font-medium text-neutral-700">
-            <PushPinSimpleIcon className="mr-1 size-4 text-foreground" /> Preset
+            <PushPinSimpleIcon className="mr-1 size-4 text-foreground" /> 预设
           </div>
         )}
         {type == "preset.triggered" && (
@@ -85,7 +85,7 @@ export function AgentRunSummaryCard({
               ) : (
                 <Link2Icon className="mr-1 size-4 text-foreground" />
               )}{" "}
-              Trigger
+              触发器
             </div>
           </div>
         )}
@@ -104,13 +104,13 @@ export function AgentRunSummaryCard({
             <DropdownMenuContent>
               {onPinAsPreset && (
                 <DropdownMenuItem onClick={onPinAsPreset}>
-                  Pin as a preset
+                  设为预设
                 </DropdownMenuItem>
               )}
 
               {/* <DropdownMenuItem onClick={onRename}>Rename</DropdownMenuItem> */}
 
-              <DropdownMenuItem onClick={onDelete}>Delete</DropdownMenuItem>
+              <DropdownMenuItem onClick={onDelete}>删除</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -118,10 +118,11 @@ export function AgentRunSummaryCard({
         {timestamp && (
           <p
             className="mt-1 text-sm font-normal text-neutral-500"
-            title={moment(timestamp).toString()}
+            title={new Date(timestamp).toLocaleString("zh-CN")}
           >
-            {moment(timestamp).isBefore() ? "Ran" : "Runs in"}{" "}
-            {moment(timestamp).fromNow()}
+            {new Date(timestamp).getTime() < Date.now()
+              ? `运行于 ${formatRelativeTime(timestamp, "zh-CN")}`
+              : `将在 ${formatRelativeTime(timestamp, "zh-CN")} 运行`}
           </p>
         )}
       </CardContent>

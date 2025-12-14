@@ -96,7 +96,7 @@ export function OldAgentLibraryView() {
   // Set page title with agent name
   useEffect(() => {
     if (agent) {
-      document.title = `${agent.name} - Library - AutoGPT Platform`;
+      document.title = `${agent.name} - 资源库 - AutoGPT Platform`;
     }
   }, [agent]);
 
@@ -437,8 +437,8 @@ export function OldAgentLibraryView() {
       .catch((error) => {
         console.error("Error copying agent:", error);
         toast({
-          title: "Error copying agent",
-          description: `An error occurred while copying the agent: ${error.message}`,
+          title: "复制智能体失败",
+          description: `复制智能体时发生错误：${error.message}`,
           variant: "destructive",
         });
       });
@@ -447,21 +447,21 @@ export function OldAgentLibraryView() {
   const agentActions: ButtonAction[] = useMemo(
     () => [
       {
-        label: "Customize agent",
+        label: "自定义智能体",
         href: `/build?flowID=${agent?.graph_id}&flowVersion=${agent?.graph_version}`,
         disabled: !agent?.can_access_graph,
       },
-      { label: "Export agent to file", callback: downloadGraph },
+      { label: "导出智能体到文件", callback: downloadGraph },
       ...(!agent?.can_access_graph
         ? [
             {
-              label: "Edit a copy",
+              label: "编辑副本",
               callback: () => setCopyAgentDialogOpen(true),
             },
           ]
         : []),
       {
-        label: "Delete agent",
+        label: "删除智能体",
         callback: () => setAgentDeleteDialogOpen(true),
       },
     ],
@@ -622,15 +622,11 @@ export function OldAgentLibraryView() {
           onOpenChange={setCopyAgentDialogOpen}
           open={copyAgentDialogOpen}
         >
-          <DialogContent>
+            <DialogContent>
             <DialogHeader>
-              <DialogTitle>You&apos;re making an editable copy</DialogTitle>
+              <DialogTitle>正在创建可编辑副本</DialogTitle>
               <DialogDescription className="pt-2">
-                The original Marketplace agent stays the same and cannot be
-                edited. We&apos;ll save a new version of this agent to your
-                Library. From there, you can customize it however you&apos;d
-                like by clicking &quot;Customize agent&quot; — this will open
-                the builder where you can see and modify the inner workings.
+                原 Marketplace 智能体保持不变且不可编辑。我们会将该智能体的新版本保存到你的资源库中。之后你可以点击“自定义智能体”打开构建器，查看并修改其内部实现。
               </DialogDescription>
             </DialogHeader>
             <DialogFooter className="justify-end">
@@ -639,10 +635,10 @@ export function OldAgentLibraryView() {
                 variant="outline"
                 onClick={() => setCopyAgentDialogOpen(false)}
               >
-                Cancel
+                取消
               </Button>
               <Button type="button" onClick={copyAgent}>
-                Continue
+                继续
               </Button>
             </DialogFooter>
           </DialogContent>
