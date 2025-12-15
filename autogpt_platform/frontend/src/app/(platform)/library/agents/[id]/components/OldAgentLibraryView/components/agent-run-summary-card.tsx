@@ -121,8 +121,8 @@ export function AgentRunSummaryCard({
             title={new Date(timestamp).toLocaleString("zh-CN")}
           >
             {new Date(timestamp).getTime() < Date.now()
-              ? `运行于 ${formatRelativeTime(timestamp, "zh-CN")}`
-              : `将在 ${formatRelativeTime(timestamp, "zh-CN")} 运行`}
+              ? `运行于 ${formatRelativeTime(new Date(timestamp), "zh-CN")}`
+              : `将在 ${formatRelativeTime(new Date(timestamp), "zh-CN")} 运行`}
           </p>
         )}
       </CardContent>

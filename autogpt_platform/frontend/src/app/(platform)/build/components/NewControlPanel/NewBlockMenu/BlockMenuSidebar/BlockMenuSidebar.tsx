@@ -5,6 +5,7 @@ import { Skeleton } from "@/components/__legacy__/ui/skeleton";
 import { ErrorCard } from "@/components/molecules/ErrorCard/ErrorCard";
 import { useBlockMenuStore } from "../../../../stores/blockMenuStore";
 import { DefaultStateType } from "../types";
+import { BUILDER_ERROR_CARD_I18N } from "@/app/(platform)/build/i18n";
 
 export const BlockMenuSidebar = () => {
   const { data, setDefaultState, defaultState, isLoading, isError, error } =
@@ -29,11 +30,12 @@ export const BlockMenuSidebar = () => {
           className="w-[12.875rem]"
           isSuccess={false}
           responseError={error || undefined}
-          context="block menu"
+          i18n={BUILDER_ERROR_CARD_I18N}
+          context="模块菜单"
           httpError={{
             status: data?.status,
-            statusText: "Internal Server Error",
-            message: (error?.detail as string) || "An error occurred",
+            statusText: "服务器内部错误",
+            message: (error?.detail as string) || "发生错误",
           }}
         />
       </div>
@@ -44,11 +46,11 @@ export const BlockMenuSidebar = () => {
 
   const topLevelMenuItems = [
     {
-      name: "Suggestion",
+      name: "推荐",
       type: "suggestion",
     },
     {
-      name: "All blocks",
+      name: "全部模块",
       type: "all_blocks",
       number: blockCounts?.all_blocks,
     },
@@ -56,17 +58,17 @@ export const BlockMenuSidebar = () => {
 
   const subMenuItems = [
     {
-      name: "Input blocks",
+      name: "输入模块",
       type: "input_blocks",
       number: blockCounts?.input_blocks,
     },
     {
-      name: "Action blocks",
+      name: "动作模块",
       type: "action_blocks",
       number: blockCounts?.action_blocks,
     },
     {
-      name: "Output blocks",
+      name: "输出模块",
       type: "output_blocks",
       number: blockCounts?.output_blocks,
     },
@@ -74,7 +76,7 @@ export const BlockMenuSidebar = () => {
 
   const bottomMenuItems = [
     {
-      name: "Integrations",
+      name: "集成",
       type: "integrations",
       number: blockCounts?.integrations,
       onClick: () => {
@@ -83,12 +85,12 @@ export const BlockMenuSidebar = () => {
       },
     },
     {
-      name: "Marketplace Agents",
+      name: "市场智能体",
       type: "marketplace_agents",
       number: blockCounts?.marketplace_agents,
     },
     {
-      name: "My Agents",
+      name: "我的智能体",
       type: "my_agents",
       number: blockCounts?.my_agents,
     },

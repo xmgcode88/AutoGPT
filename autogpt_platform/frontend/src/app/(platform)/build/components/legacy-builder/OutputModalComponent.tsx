@@ -25,7 +25,7 @@ const OutputModalComponent: FC<OutputModalProps> = ({
   return (
     <div className="nodrag nowheel fixed inset-0 flex items-center justify-center bg-white bg-opacity-60">
       <div className="w-[500px] max-w-[90%] rounded-lg border-[1.5px] bg-white p-5">
-        <strong>Output Data History</strong>
+        <strong>输出数据历史</strong>
         <div className="my-2 max-h-[384px] flex-grow overflow-y-auto rounded-md p-2">
           {executionResults.map((data, i) => (
             <>
@@ -40,7 +40,7 @@ const OutputModalComponent: FC<OutputModalProps> = ({
           ))}
         </div>
         <div className="mt-2.5 flex justify-end gap-2.5">
-          <Button onClick={onClose}>Close</Button>
+          <Button onClick={onClose}>关闭</Button>
         </div>
       </div>
     </div>

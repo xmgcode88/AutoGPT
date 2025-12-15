@@ -83,7 +83,7 @@ export const SaveControl = ({
         });
         toast({
           duration: 2000,
-          title: "All changes saved successfully!",
+          title: "已成功保存所有更改！",
         });
       }
     };
@@ -111,7 +111,7 @@ export const SaveControl = ({
             </Button>
           </PopoverTrigger>
         </TooltipTrigger>
-        <TooltipContent side="right">Save</TooltipContent>
+        <TooltipContent side="right">保存</TooltipContent>
       </Tooltip>
       <PopoverContent
         side="right"
@@ -125,11 +125,11 @@ export const SaveControl = ({
             <div className="space-y-3">
               <div>
                 <Label htmlFor="name" className="dark:text-gray-300">
-                  Name
+                  名称
                 </Label>
                 <Input
                   id="name"
-                  placeholder="Enter your agent name"
+                  placeholder="输入智能体名称"
                   value={agentName}
                   onChange={(e) => onNameChange(e.target.value)}
                   data-id="save-control-name-input"
@@ -141,11 +141,11 @@ export const SaveControl = ({
 
               <div>
                 <Label htmlFor="description" className="dark:text-gray-300">
-                  Description
+                  描述
                 </Label>
                 <Input
                   id="description"
-                  placeholder="Your agent description"
+                  placeholder="输入智能体描述"
                   value={agentDescription}
                   onChange={(e) => onDescriptionChange(e.target.value)}
                   data-id="save-control-description-input"
@@ -156,9 +156,7 @@ export const SaveControl = ({
               </div>
 
               <div>
-                <Label className="dark:text-gray-300">
-                  Recommended Schedule
-                </Label>
+                <Label className="dark:text-gray-300">推荐定时</Label>
                 <Button
                   variant="outline"
                   onClick={() => setCronScheduleDialogOpen(true)}
@@ -170,7 +168,7 @@ export const SaveControl = ({
                   <span className="min-w-0 flex-1 truncate">
                     {agentRecommendedScheduleCron
                       ? humanizeCronExpression(agentRecommendedScheduleCron)
-                      : "Set schedule"}
+                      : "设置定时"}
                   </span>
                 </Button>
               </div>
@@ -178,11 +176,11 @@ export const SaveControl = ({
               {agentMeta?.version && (
                 <div>
                   <Label htmlFor="version" className="dark:text-gray-300">
-                    Version
+                    版本
                   </Label>
                   <Input
                     id="version"
-                    placeholder="Version"
+                    placeholder="版本"
                     value={agentMeta?.version || "-"}
                     disabled
                     data-testid="save-control-version-output"
@@ -200,7 +198,7 @@ export const SaveControl = ({
               data-testid="save-control-save-agent-button"
               disabled={!canSave}
             >
-              Save Agent
+              保存智能体
             </Button>
           </CardFooter>
         </Card>
@@ -210,7 +208,7 @@ export const SaveControl = ({
         setOpen={setCronScheduleDialogOpen}
         onSubmit={handleScheduleChange}
         defaultCronExpression={agentRecommendedScheduleCron}
-        title="Recommended Schedule"
+        title="推荐定时"
       />
     </Popover>
   );

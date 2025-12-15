@@ -19,10 +19,10 @@ export function BuilderViewTabs({
       >
         <TabsList className="w-fit bg-zinc-900">
           <TabsTrigger value="old" className="text-gray-100">
-            Old
+            旧版
           </TabsTrigger>
           <TabsTrigger value="new" className="text-gray-100">
-            New
+            新版
           </TabsTrigger>
         </TabsList>
       </Tabs>

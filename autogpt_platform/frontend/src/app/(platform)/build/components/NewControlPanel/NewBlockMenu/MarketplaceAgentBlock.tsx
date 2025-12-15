@@ -72,7 +72,7 @@ export const MarketplaceAgentBlock: MarketplaceAgentBlockComponent = ({
               "truncate font-sans text-xs font-normal leading-5 text-zinc-500 group-disabled:text-zinc-400",
             )}
           >
-            By {creator_name}
+            作者：{creator_name}
           </span>
 
           <span className="font-sans text-zinc-400">•</span>
@@ -82,7 +82,7 @@ export const MarketplaceAgentBlock: MarketplaceAgentBlockComponent = ({
               "truncate font-sans text-xs font-normal leading-5 text-zinc-500 group-disabled:text-zinc-400",
             )}
           >
-            {number_of_runs} runs
+            {number_of_runs ?? 0} 次运行
           </span>
           <span className="font-sans text-zinc-400">•</span>
           <Link
@@ -91,7 +91,7 @@ export const MarketplaceAgentBlock: MarketplaceAgentBlockComponent = ({
             onClick={(e) => e.stopPropagation()}
           >
             <span className="font-sans text-xs leading-5 text-blue-700 underline">
-              Agent page
+              智能体页面
             </span>
             <ArrowSquareOutIcon
               className="h-4 w-4 text-blue-700"

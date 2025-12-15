@@ -64,9 +64,7 @@ export async function signupTestUser(
     if (ignoreOnboarding || currentUrl.includes("/marketplace")) {
       // Verify we're on marketplace
       await page
-        .getByText(
-          "汇聚来自世界各地创作者的灵感，为你带来精心设计的 AI 智能体",
-        )
+        .getByText("汇聚来自世界各地创作者的灵感，为你带来精心设计的 AI 智能体")
         .first()
         .waitFor({ state: "visible", timeout: 10000 });
 

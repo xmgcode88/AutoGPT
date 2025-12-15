@@ -45,11 +45,11 @@ export const AgentOutputs = ({ flowID }: { flowID: string | null }) => {
 
         return {
           metadata: {
-            name: node.data.hardcodedValues?.name || "Output",
+            name: node.data.hardcodedValues?.name || "输出",
             description:
-              node.data.hardcodedValues?.description || "Output from the agent",
+              node.data.hardcodedValues?.description || "来自智能体的输出",
           },
-          value: outputData ?? "No output yet",
+          value: outputData ?? "暂无输出",
           renderer,
         };
       })
@@ -82,7 +82,7 @@ export const AgentOutputs = ({ flowID }: { flowID: string | null }) => {
             </SheetTrigger>
           </TooltipTrigger>
           <TooltipContent>
-            <p>Agent Outputs</p>
+            <p>智能体输出</p>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
@@ -90,13 +90,13 @@ export const AgentOutputs = ({ flowID }: { flowID: string | null }) => {
         <SheetHeader className="px-2 py-2">
           <div className="flex items-center justify-between">
             <div>
-              <SheetTitle className="text-xl">Run Outputs</SheetTitle>
+              <SheetTitle className="text-xl">运行输出</SheetTitle>
               <SheetDescription className="mt-1 text-sm text-muted-foreground">
                 <span className="inline-flex items-center gap-1.5">
                   <span className="rounded-md bg-yellow-100 px-2 py-0.5 text-xs font-medium text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400">
-                    Beta
+                    测试版
                   </span>
-                  <span>This feature is in beta and may contain bugs</span>
+                  <span>该功能为测试版，可能存在问题</span>
                 </span>
               </SheetDescription>
             </div>
@@ -111,7 +111,7 @@ export const AgentOutputs = ({ flowID }: { flowID: string | null }) => {
                   <div key={i} className="space-y-2">
                     <div>
                       <Label className="text-base font-semibold">
-                        {output.metadata.name || "Unnamed Output"}
+                        {output.metadata.name || "未命名输出"}
                       </Label>
                       {output.metadata.description && (
                         <Label className="mt-1 block text-sm text-gray-600">
@@ -129,7 +129,7 @@ export const AgentOutputs = ({ flowID }: { flowID: string | null }) => {
                 ))
               ) : (
                 <div className="flex h-full items-center justify-center text-gray-500">
-                  <p>No output blocks available.</p>
+                  <p>暂无输出模块。</p>
                 </div>
               )}
             </div>

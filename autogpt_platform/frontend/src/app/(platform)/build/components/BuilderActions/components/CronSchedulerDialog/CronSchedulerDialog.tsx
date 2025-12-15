@@ -20,7 +20,7 @@ export function CronSchedulerDialog({
   setOpen,
 
   defaultCronExpression = "",
-  title = "Schedule Graph",
+  title = "定时运行",
   inputs,
   credentials,
 }: CronSchedulerDialogProps) {
@@ -49,8 +49,8 @@ export function CronSchedulerDialog({
         <div className="flex flex-col gap-4">
           <Input
             id="schedule-name"
-            label="Schedule Name"
-            placeholder="Enter schedule name"
+            label="计划名称"
+            placeholder="输入计划名称"
             size="small"
             className="max-w-80"
             value={scheduleName}
@@ -68,9 +68,9 @@ export function CronSchedulerDialog({
             <div className="flex items-center gap-2 rounded-xlarge border border-amber-200 bg-amber-50 p-3">
               <InfoIcon className="h-4 w-4 text-amber-600" />
               <Text variant="body" className="text-amber-800">
-                No timezone set. Schedule will run in UTC.
+                未设置时区。计划将以 UTC 运行。
                 <a href="/profile/settings" className="ml-1 underline">
-                  Set your timezone
+                  设置时区
                 </a>
               </Text>
             </div>
@@ -78,7 +78,7 @@ export function CronSchedulerDialog({
             <div className="flex items-center gap-2 rounded-xlarge bg-muted/50 p-3">
               <InfoIcon className="h-4 w-4 text-muted-foreground" />
               <Text variant="body">
-                Schedule will run in your timezone:{" "}
+                计划将按照你的时区运行：{" "}
                 <Text variant="body-medium" as="span">
                   {timezoneDisplay}
                 </Text>
@@ -92,7 +92,7 @@ export function CronSchedulerDialog({
             onClick={() => setOpen(false)}
             className="h-fit"
           >
-            Cancel
+            取消
           </Button>
           <Button
             loading={isCreatingSchedule}
@@ -100,7 +100,7 @@ export function CronSchedulerDialog({
             onClick={handleCreateSchedule}
             className="h-fit"
           >
-            {isCreatingSchedule ? "Creating schedule..." : "Done"}
+            {isCreatingSchedule ? "正在创建计划..." : "完成"}
           </Button>
         </div>
       </Dialog.Content>

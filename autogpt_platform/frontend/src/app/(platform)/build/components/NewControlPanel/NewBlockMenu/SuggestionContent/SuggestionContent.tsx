@@ -6,6 +6,7 @@ import { ErrorCard } from "@/components/molecules/ErrorCard/ErrorCard";
 import { blockMenuContainerStyle } from "../style";
 import { useBlockMenuStore } from "../../../../stores/blockMenuStore";
 import { DefaultStateType } from "../types";
+import { BUILDER_ERROR_CARD_I18N } from "@/app/(platform)/build/i18n";
 
 export const SuggestionContent = () => {
   const { setIntegration, setDefaultState } = useBlockMenuStore();
@@ -17,12 +18,13 @@ export const SuggestionContent = () => {
         <ErrorCard
           isSuccess={false}
           responseError={error || undefined}
+          i18n={BUILDER_ERROR_CARD_I18N}
           httpError={{
             status: data?.status,
-            statusText: "Request failed",
-            message: (error?.detail as string) || "An error occurred",
+            statusText: "请求失败",
+            message: (error?.detail as string) || "发生错误",
           }}
-          context="block menu"
+          context="模块菜单"
           onRetry={() => refetch()}
         />
       </div>
@@ -37,7 +39,7 @@ export const SuggestionContent = () => {
         {/* Integrations */}
         <div className="space-y-2.5 px-4">
           <p className="font-sans text-sm font-medium leading-[1.375rem] text-zinc-800">
-            Integrations
+            集成
           </p>
           <div className="grid grid-cols-3 grid-rows-2 gap-2">
             {!isLoading && suggestions
@@ -65,7 +67,7 @@ export const SuggestionContent = () => {
         {/* Top blocks */}
         <div className="space-y-2.5 px-4">
           <p className="font-sans text-sm font-medium leading-[1.375rem] text-zinc-800">
-            Top blocks
+            热门模块
           </p>
           <div className="space-y-2">
             {!isLoading && suggestions

@@ -70,9 +70,7 @@ test.describe("Marketplace Agent Page - Basic Functionality", () => {
     await isVisible(downloadButton);
     await downloadButton.click();
 
-    const downloadSuccessMessage = getText(
-      "智能体已成功下载。",
-    );
+    const downloadSuccessMessage = getText("智能体已成功下载。");
     await isVisible(downloadSuccessMessage);
   });
 

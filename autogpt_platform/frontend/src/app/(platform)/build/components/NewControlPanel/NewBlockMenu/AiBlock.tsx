@@ -48,7 +48,7 @@ export const AiBlock: React.FC<Props> = ({
             "rounded-[0.75rem] bg-zinc-200 px-[0.5rem] font-sans text-xs leading-[1.25rem] text-zinc-500",
           )}
         >
-          Supports {ai_name}
+          支持 {ai_name}
         </span>
       </div>
       <div

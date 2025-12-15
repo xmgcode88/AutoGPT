@@ -42,17 +42,16 @@ export const useCronSchedulerDialog = ({
           if (response.status === 200) {
             setOpen(false);
             toast({
-              title: "Schedule created",
-              description: "Schedule created successfully",
+              title: "计划已创建",
+              description: "已成功创建计划",
             });
           }
         },
         onError: (error) => {
           toast({
             variant: "destructive",
-            title: "Failed to create schedule",
-            description:
-              (error.detail as string) ?? "An unexpected error occurred.",
+            title: "创建计划失败",
+            description: (error.detail as string) ?? "发生未知错误。",
           });
         },
       },
@@ -68,8 +67,8 @@ export const useCronSchedulerDialog = ({
     if (!cronExpression || cronExpression.trim() === "") {
       toast({
         variant: "destructive",
-        title: "Invalid schedule",
-        description: "Please enter a valid cron expression",
+        title: "无效的计划",
+        description: "请输入有效的 Cron 表达式",
       });
       return;
     }

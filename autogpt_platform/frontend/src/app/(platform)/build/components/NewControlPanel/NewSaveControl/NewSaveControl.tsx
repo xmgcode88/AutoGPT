@@ -37,7 +37,7 @@ export const NewSaveControl = () => {
             </ControlPanelButton>
           </PopoverTrigger>
         </TooltipTrigger>
-        <TooltipContent side="right">Save</TooltipContent>
+        <TooltipContent side="right">保存</TooltipContent>
       </Tooltip>
       <PopoverContent
         side="right"
@@ -57,9 +57,9 @@ export const NewSaveControl = () => {
                     render={({ field }) => (
                       <Input
                         id="name"
-                        label="Name"
+                        label="名称"
                         size="small"
-                        placeholder="Enter your agent name"
+                        placeholder="输入智能体名称"
                         data-id="save-control-name-input"
                         data-testid="save-control-name-input"
                         maxLength={100}
@@ -76,8 +76,8 @@ export const NewSaveControl = () => {
                       <Input
                         id="description"
                         size="small"
-                        label="Description"
-                        placeholder="Your agent description"
+                        label="描述"
+                        placeholder="输入智能体描述"
                         data-id="save-control-description-input"
                         data-testid="save-control-description-input"
                         maxLength={500}
@@ -90,12 +90,12 @@ export const NewSaveControl = () => {
                   {graphVersion && (
                     <Input
                       id="version"
-                      placeholder="Version"
+                      placeholder="版本"
                       size="small"
                       value={graphVersion || "-"}
                       disabled
                       data-testid="save-control-version-output"
-                      label="Version"
+                      label="版本"
                       wrapperClassName="!mb-0"
                     />
                   )}
@@ -113,7 +113,7 @@ export const NewSaveControl = () => {
                   disabled={isSaving}
                   loading={isSaving}
                 >
-                  Save Agent
+                  保存智能体
                 </Button>
               </CardFooter>
             </form>

@@ -40,9 +40,9 @@ export const BuildActionBar: React.FC<Props> = ({
             variant="outline"
             size="primary"
             onClick={onClickAgentOutputs}
-            title="View agent outputs"
+            title="查看智能体输出"
           >
-            <LogOut className="hidden size-5 md:flex" /> Agent Outputs
+            <LogOut className="hidden size-5 md:flex" /> 智能体输出
           </Button>
         )}
 
@@ -58,11 +58,11 @@ export const BuildActionBar: React.FC<Props> = ({
             size="primary"
             onClick={onClickRunAgent}
             disabled={!onClickRunAgent}
-            title="Run the agent"
-            aria-label="Run the agent"
+            title="运行智能体"
+            aria-label="运行智能体"
             data-testid="primary-action-run-agent"
           >
-            <IconPlay /> Run
+            <IconPlay /> 运行
           </Button>
         ) : (
           <Button
@@ -70,10 +70,10 @@ export const BuildActionBar: React.FC<Props> = ({
             variant="destructive"
             size="primary"
             onClick={onClickStopRun}
-            title="Stop the agent"
+            title="停止智能体"
             data-id="primary-action-stop-agent"
           >
-            <IconSquare /> Stop
+            <IconSquare /> 停止
           </Button>
         )}
 
@@ -83,11 +83,11 @@ export const BuildActionBar: React.FC<Props> = ({
             variant="outline"
             size="primary"
             onClick={onClickScheduleButton}
-            title="Set up a run schedule for the agent"
+            title="为智能体设置定时运行"
             data-id="primary-action-schedule-agent"
           >
             <ClockIcon className="hidden h-5 w-5 md:flex" />
-            Schedule Run
+            定时运行
           </Button>
         )}
       </div>

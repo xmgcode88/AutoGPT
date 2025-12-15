@@ -4,6 +4,7 @@ import { InfiniteScroll } from "@/components/contextual/InfiniteScroll/InfiniteS
 import { usePaginatedBlocks } from "./usePaginatedBlocks";
 import { ErrorCard } from "@/components/molecules/ErrorCard/ErrorCard";
 import { blockMenuContainerStyle } from "../style";
+import { BUILDER_ERROR_CARD_I18N } from "@/app/(platform)/build/i18n";
 
 interface PaginatedBlocksContentProps {
   type?: "all" | "input" | "action" | "output" | null;
@@ -32,11 +33,12 @@ export const PaginatedBlocksContent: React.FC<PaginatedBlocksContentProps> = ({
           isSuccess={false}
           httpError={{
             status: status,
-            statusText: "Request failed",
-            message: (error?.detail as string) || "An error occurred",
+            statusText: "请求失败",
+            message: (error?.detail as string) || "发生错误",
           }}
           responseError={error || undefined}
-          context="block menu"
+          i18n={BUILDER_ERROR_CARD_I18N}
+          context="模块菜单"
           onRetry={() => refetch()}
         />
       </div>

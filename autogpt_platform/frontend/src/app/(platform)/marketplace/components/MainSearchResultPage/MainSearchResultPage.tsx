@@ -95,10 +95,7 @@ export const MainSearchResultPage = ({
                 <Separator />
               )}
               {showCreators && creatorsCount > 0 && creators && (
-                <FeaturedCreators
-                  featuredCreators={creators}
-                  title="创作者"
-                />
+                <FeaturedCreators featuredCreators={creators} title="创作者" />
               )}
             </div>
           </>

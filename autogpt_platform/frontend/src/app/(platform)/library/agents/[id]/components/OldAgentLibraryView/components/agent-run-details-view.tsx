@@ -115,10 +115,13 @@ export function AgentRunDetailsView({
       },
       {
         label: "开始",
-        value: `${formatRelativeTime(run.started_at, "zh-CN")}，${new Date(run.started_at).toLocaleTimeString(
-          "zh-CN",
-          { hour: "2-digit", minute: "2-digit", hour12: false },
-        )}`,
+        value: `${formatRelativeTime(run.started_at, "zh-CN")}，${new Date(
+          run.started_at,
+        ).toLocaleTimeString("zh-CN", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        })}`,
       },
       ...(run.stats
         ? [
@@ -340,7 +343,8 @@ export function AgentRunDetailsView({
                     </TooltipTrigger>
                     <TooltipContent>
                       <p className="max-w-xs">
-                        该摘要由 AI 自动生成，用于描述智能体如何处理你的任务。此功能仍处于实验阶段，可能偶尔不准确。
+                        该摘要由 AI
+                        自动生成，用于描述智能体如何处理你的任务。此功能仍处于实验阶段，可能偶尔不准确。
                       </p>
                     </TooltipContent>
                   </Tooltip>
@@ -388,7 +392,8 @@ export function AgentRunDetailsView({
                       </TooltipTrigger>
                       <TooltipContent>
                         <p className="max-w-xs">
-                          AI 生成的预估分数，用于衡量本次执行达到预期目标的程度。该分数表示：
+                          AI
+                          生成的预估分数，用于衡量本次执行达到预期目标的程度。该分数表示：
                           {run.stats.correctness_score >= 0.8
                             ? "智能体非常成功。"
                             : run.stats.correctness_score >= 0.6

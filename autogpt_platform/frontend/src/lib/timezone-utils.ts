@@ -78,13 +78,18 @@ export function formatScheduleTime(
     typeof nextRunTime === "string" ? new Date(nextRunTime) : nextRunTime;
 
   // Use provided timezone for display, fallback to UTC
-  const formatted = formatInTimezone(date, displayTimezone, {
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    timeZoneName: "short",
-  }, locale);
+  const formatted = formatInTimezone(
+    date,
+    displayTimezone,
+    {
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZoneName: "short",
+    },
+    locale,
+  );
 
   return formatted;
 }

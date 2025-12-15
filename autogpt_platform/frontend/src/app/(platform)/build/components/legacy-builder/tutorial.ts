@@ -142,15 +142,15 @@ export const startTutorial = (
 
   const warningText = emptyNodeList(false)
     ? ""
-    : "<br/><br/><b>Caution: Clicking next will start a tutorial and will clear the current flow.</b>";
+    : "<br/><br/><b>注意：点击“下一步”将开始教程，并清空当前流程。</b>";
 
   tour.addStep({
     id: "starting-step",
-    title: "Welcome to the Tutorial",
-    text: `This is the AutoGPT builder! ${warningText}`,
+    title: "欢迎使用教程",
+    text: `这是 AutoGPT 搭建器！${warningText}`,
     buttons: [
       {
-        text: "Skip Tutorial",
+        text: "跳过教程",
         action: () => {
           tour.cancel(); // Ends the tour
           storage.set(Key.SHEPHERD_TOUR, "skipped"); // Set the tutorial as skipped in local storage
@@ -158,7 +158,7 @@ export const startTutorial = (
         classes: "shepherd-button-secondary", // Optionally add a class for styling the skip button differently
       },
       {
-        text: "Next",
+        text: "下一步",
         action: () => {
           emptyNodeList(true);
           tour.next();
@@ -169,8 +169,8 @@ export const startTutorial = (
 
   tour.addStep({
     id: "open-block-step",
-    title: "Open Blocks Menu",
-    text: "Please click the block button to open the blocks menu.",
+    title: "打开模块菜单",
+    text: "请点击模块按钮以打开模块菜单。",
     attachTo: {
       element: '[data-id="blocks-control-popover-trigger"]',
       on: "right",
@@ -184,8 +184,8 @@ export const startTutorial = (
 
   tour.addStep({
     id: "scroll-block-menu",
-    title: "Scroll Down or Search",
-    text: 'Scroll down or search in the blocks menu for the "Calculator Block" and press the block to add it.',
+    title: "向下滚动或搜索",
+    text: "在模块菜单中向下滚动或搜索 “Calculator Block”，然后点击该模块添加。",
     attachTo: {
       element: '[data-id="blocks-control-popover-content"]',
       on: "right",
@@ -209,13 +209,13 @@ export const startTutorial = (
 
   tour.addStep({
     id: "focus-new-block",
-    title: "New Block",
-    text: "This is the Calculator Block! Let's go over how it works.",
+    title: "新模块",
+    text: "这是 Calculator Block！我们来看看它如何工作。",
     attachTo: { element: `[data-id="custom-node-1"]`, on: "left" },
     beforeShowPromise: () => waitForElement('[data-id="custom-node-1"]'),
     buttons: [
       {
-        text: "Next",
+        text: "下一步",
         action: tour.next,
       },
     ],
@@ -231,16 +231,16 @@ export const startTutorial = (
 
   tour.addStep({
     id: "input-to-block",
-    title: "Input to the Block",
-    text: "This is the input pin for the block. You can input the output of other blocks here; this block takes numbers as input.",
+    title: "模块输入",
+    text: "这是模块的输入引脚。你可以在这里接入其他模块的输出；该模块接受数字作为输入。",
     attachTo: { element: '[data-nodeid="1"]', on: "left" },
     buttons: [
       {
-        text: "Back",
+        text: "上一步",
         action: tour.back,
       },
       {
-        text: "Next",
+        text: "下一步",
         action: tour.next,
       },
     ],
@@ -248,16 +248,16 @@ export const startTutorial = (
 
   tour.addStep({
     id: "output-from-block",
-    title: "Output from the Block",
-    text: "This is the output pin for the block. You can connect this to another block to pass the output along.",
+    title: "模块输出",
+    text: "这是模块的输出引脚。你可以将其连接到其他模块以传递输出。",
     attachTo: { element: '[data-handlepos="right"]', on: "right" },
     buttons: [
       {
-        text: "Back",
+        text: "上一步",
         action: tour.back,
       },
       {
-        text: "Next",
+        text: "下一步",
         action: tour.next,
       },
     ],
@@ -265,16 +265,16 @@ export const startTutorial = (
 
   tour.addStep({
     id: "select-operation-and-input",
-    title: "Select Operation and Input Numbers",
-    text: "Select any mathematical operation you'd like to perform, and enter numbers in both input fields.",
+    title: "选择运算并输入数字",
+    text: "选择要执行的数学运算，并在两个输入框中输入数字。",
     attachTo: { element: '[data-id="input-handles"]', on: "right" },
     buttons: [
       {
-        text: "Back",
+        text: "上一步",
         action: tour.back,
       },
       {
-        text: "Next",
+        text: "下一步",
         action: tour.next,
       },
     ],
@@ -282,8 +282,8 @@ export const startTutorial = (
 
   tour.addStep({
     id: "press-initial-save-button",
-    title: "Press Save",
-    text: "First we need to save the flow before we can run it!",
+    title: "点击保存",
+    text: "在运行之前，需要先保存流程！",
     attachTo: {
       element: '[data-id="save-control-popover-trigger"]',
       on: "left",
@@ -294,7 +294,7 @@ export const startTutorial = (
     },
     buttons: [
       {
-        text: "Back",
+        text: "上一步",
         action: tour.back,
       },
     ],
@@ -305,8 +305,8 @@ export const startTutorial = (
 
   tour.addStep({
     id: "save-agent-details",
-    title: "Save the Agent",
-    text: "Enter a name for your agent, add an optional description, and then click 'Save agent' to save your flow.",
+    title: "保存智能体",
+    text: "为智能体输入名称（可选填写描述），然后点击“保存智能体”来保存流程。",
     attachTo: {
       element: '[data-id="save-control-popover-content"]',
       on: "top",
@@ -325,8 +325,8 @@ export const startTutorial = (
 
   tour.addStep({
     id: "press-run",
-    title: "Press Run",
-    text: "Start your first flow by pressing the Run button!",
+    title: "点击运行",
+    text: "点击“运行”按钮开始你的第一个流程！",
     attachTo: {
       element: '[data-testid="primary-action-run-agent"]',
       on: "top",
@@ -349,8 +349,8 @@ export const startTutorial = (
 
   tour.addStep({
     id: "wait-for-processing",
-    title: "Processing",
-    text: "Let's wait for the block to finish being processed...",
+    title: "处理中",
+    text: "请等待模块处理完成...",
     attachTo: {
       element: '[data-id^="badge-"][data-id$="-QUEUED"]',
       on: "bottom",
@@ -373,8 +373,8 @@ export const startTutorial = (
 
   tour.addStep({
     id: "check-output",
-    title: "Check the Output",
-    text: "Check here to see the output of the block after running the flow.",
+    title: "查看输出",
+    text: "在这里查看流程运行后的模块输出。",
     attachTo: { element: '[data-id="latest-output"]', on: "top" },
     beforeShowPromise: () =>
       new Promise((resolve) => {
@@ -384,7 +384,7 @@ export const startTutorial = (
       }),
     buttons: [
       {
-        text: "Next",
+        text: "下一步",
         action: tour.next,
       },
     ],
@@ -397,12 +397,12 @@ export const startTutorial = (
 
   tour.addStep({
     id: "copy-paste-block",
-    title: "Copy and Paste the Block",
-    text: "Let’s duplicate this block. Click and hold the block with your mouse, then press Ctrl+C (Cmd+C on Mac) to copy and Ctrl+V (Cmd+V on Mac) to paste.",
+    title: "复制并粘贴模块",
+    text: "我们来复制这个模块。用鼠标点击并按住模块，然后按 Ctrl+C（Mac 为 Cmd+C）复制，再按 Ctrl+V（Mac 为 Cmd+V）粘贴。",
     attachTo: { element: '[data-testid^="rf__node-"]', on: "top" },
     buttons: [
       {
-        text: "Back",
+        text: "上一步",
         action: tour.back,
       },
     ],
@@ -418,14 +418,14 @@ export const startTutorial = (
 
   tour.addStep({
     id: "focus-second-block",
-    title: "Focus on the New Block",
-    text: "This is your copied Calculator Block. Now, let’s move it to the side of the first block.",
+    title: "聚焦新模块",
+    text: "这是你复制出来的 Calculator Block。现在把它移动到第一个模块旁边。",
     attachTo: { element: '[data-testid^="rf__node-"]:nth-child(2)', on: "top" },
     beforeShowPromise: () =>
       waitForElement('[data-testid^="rf__node-"]:nth-child(2)'),
     buttons: [
       {
-        text: "Next",
+        text: "下一步",
         action: tour.next,
       },
     ],
@@ -433,8 +433,8 @@ export const startTutorial = (
 
   tour.addStep({
     id: "connect-blocks-output",
-    title: "Connect the Blocks: Output",
-    text: "Now, let's connect the output of the first Calculator Block to the input of the second Calculator Block. Drag from the output pin of the first block to the input pin (A) of the second block.",
+    title: "连接模块：输出",
+    text: "现在把第一个 Calculator Block 的输出连接到第二个 Calculator Block 的输入。将第一块的输出引脚拖到第二块的输入引脚（A）。",
     attachTo: {
       element:
         '[data-testid^="rf__node-"]:first-child [data-id$="-result-source"]',
@@ -443,7 +443,7 @@ export const startTutorial = (
 
     buttons: [
       {
-        text: "Back",
+        text: "上一步",
         action: tour.back,
       },
     ],
@@ -477,8 +477,8 @@ export const startTutorial = (
 
   tour.addStep({
     id: "connect-blocks-input",
-    title: "Connect the Blocks: Input",
-    text: "Now, connect the output to the input pin of the second block (A).",
+    title: "连接模块：输入",
+    text: "现在将输出连接到第二个模块的输入引脚（A）。",
     attachTo: {
       element: '[data-testid^="rf__node-"]:nth-child(2) [data-id$="-a-target"]',
       on: "top",
@@ -505,8 +505,8 @@ export const startTutorial = (
 
   tour.addStep({
     id: "press-run-again",
-    title: "Press Run Again",
-    text: "Now, press the Run button again to execute the flow with the new Calculator Block added!",
+    title: "再次运行",
+    text: "现在再次点击“运行”按钮，执行包含新 Calculator Block 的流程！",
     attachTo: {
       element: '[data-testid="primary-action-run-agent"]',
       on: "top",
@@ -529,15 +529,15 @@ export const startTutorial = (
 
   tour.addStep({
     id: "congratulations",
-    title: "Congratulations!",
-    text: "You have successfully created your first flow. Watch for the outputs in the blocks!",
+    title: "恭喜！",
+    text: "你已成功创建第一个流程。请在模块中查看输出！",
     beforeShowPromise: () => waitForElement('[data-id="latest-output"]'),
     when: {
       show: () => tour.modal.hide(),
     },
     buttons: [
       {
-        text: "Finish",
+        text: "完成",
         action: tour.complete,
       },
     ],

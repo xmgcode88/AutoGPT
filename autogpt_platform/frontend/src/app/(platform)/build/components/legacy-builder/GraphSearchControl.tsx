@@ -58,7 +58,7 @@ export function GraphSearchControl({
             </Button>
           </PopoverTrigger>
         </TooltipTrigger>
-        <TooltipContent side="right">Search Graph</TooltipContent>
+        <TooltipContent side="right">搜索流程</TooltipContent>
       </Tooltip>
 
       <PopoverContent

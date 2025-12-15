@@ -351,9 +351,7 @@ export function CronScheduler({
             ))}
           </div>
           {selectedWeekDays.length === 0 && (
-            <p className="text-sm text-red-500">
-              请选择至少一个星期几
-            </p>
+            <p className="text-sm text-red-500">请选择至少一个星期几</p>
           )}
         </div>
       )}
@@ -419,9 +417,7 @@ export function CronScheduler({
             </div>
           )}
           {selectedMonthDays.length === 0 && (
-            <p className="text-sm text-red-500">
-              请选择至少一个日期
-            </p>
+            <p className="text-sm text-red-500">请选择至少一个日期</p>
           )}
         </div>
       )}
@@ -442,9 +438,7 @@ export function CronScheduler({
                 }
               }}
             >
-              {selectedMonths.length === months.length
-                ? "取消全选"
-                : "全选"}
+              {selectedMonths.length === months.length ? "取消全选" : "全选"}
             </Button>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -471,9 +465,7 @@ export function CronScheduler({
             })}
           </div>
           {selectedMonths.length === 0 && (
-            <p className="text-sm text-red-500">
-              请选择至少一个月份
-            </p>
+            <p className="text-sm text-red-500">请选择至少一个月份</p>
           )}
         </div>
       )}

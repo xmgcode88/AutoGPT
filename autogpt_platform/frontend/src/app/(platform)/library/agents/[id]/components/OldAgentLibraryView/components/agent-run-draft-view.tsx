@@ -537,31 +537,30 @@ export function AgentRunDraftView({
     <div className={cn("agpt-div flex gap-6", className)}>
       <div className="flex min-w-0 flex-1 flex-col gap-4">
         {graph.trigger_setup_info && agentPreset && (
-            <Card className="agpt-box">
-              <CardHeader className="flex-row items-center justify-between">
-                <CardTitle className="font-poppins text-lg">
-                  触发器状态
-                </CardTitle>
-                {triggerStatus && <AgentStatusChip status={triggerStatus} />}
-              </CardHeader>
-              <CardContent className="flex flex-col gap-4">
-                {!agentPreset.webhook_id ? (
-                  /* Shouldn't happen, but technically possible */
-                  <p className="text-sm text-destructive">
-                    此触发器未绑定到 Webhook。请使用“设置触发器”来修复。
+          <Card className="agpt-box">
+            <CardHeader className="flex-row items-center justify-between">
+              <CardTitle className="font-poppins text-lg">触发器状态</CardTitle>
+              {triggerStatus && <AgentStatusChip status={triggerStatus} />}
+            </CardHeader>
+            <CardContent className="flex flex-col gap-4">
+              {!agentPreset.webhook_id ? (
+                /* Shouldn't happen, but technically possible */
+                <p className="text-sm text-destructive">
+                  此触发器未绑定到 Webhook。请使用“设置触发器”来修复。
+                </p>
+              ) : !graph.trigger_setup_info.credentials_input_name ? (
+                /* Expose webhook URL if not auto-setup */
+                <div className="text-sm">
+                  <p>
+                    此触发器已准备就绪。请使用下方的 Webhook
+                    地址，在你选择的服务中完成触发器连接设置。
                   </p>
-                ) : !graph.trigger_setup_info.credentials_input_name ? (
-                  /* Expose webhook URL if not auto-setup */
-                  <div className="text-sm">
-                    <p>
-                      此触发器已准备就绪。请使用下方的 Webhook 地址，在你选择的服务中完成触发器连接设置。
-                    </p>
-                    <div className="nodrag mt-5 flex flex-col gap-1">
-                      Webhook 地址：
-                      <div className="flex gap-2 rounded-md bg-gray-50 p-2">
-                        <code className="select-all text-sm">
-                          {agentPreset.webhook.url}
-                        </code>
+                  <div className="nodrag mt-5 flex flex-col gap-1">
+                    Webhook 地址：
+                    <div className="flex gap-2 rounded-md bg-gray-50 p-2">
+                      <code className="select-all text-sm">
+                        {agentPreset.webhook.url}
+                      </code>
                       <Button
                         variant="outline"
                         size="icon"

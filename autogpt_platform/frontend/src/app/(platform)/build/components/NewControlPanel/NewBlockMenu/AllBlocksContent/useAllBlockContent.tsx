@@ -75,8 +75,8 @@ export const useAllBlockContent = () => {
       Sentry.captureException(error);
       setErrorLoadingCategories((prev) => new Set(prev).add(targetCategory));
       toast({
-        title: "Error loading blocks",
-        description: "Please try again later",
+        title: "加载模块失败",
+        description: "请稍后重试",
         variant: "destructive",
       });
     } finally {

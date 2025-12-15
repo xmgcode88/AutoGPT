@@ -46,7 +46,7 @@ export const RunGraph = ({ flowID }: { flowID: string | null }) => {
           </BuilderActionButton>
         </TooltipTrigger>
         <TooltipContent>
-          {isGraphRunning ? "Stop agent" : "Run agent"}
+          {isGraphRunning ? "停止智能体" : "运行智能体"}
         </TooltipContent>
       </Tooltip>
       <RunInputDialog

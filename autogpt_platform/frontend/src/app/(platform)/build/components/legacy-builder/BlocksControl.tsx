@@ -8,6 +8,11 @@ import { ScrollArea } from "@/components/__legacy__/ui/scroll-area";
 import { CustomNode } from "@/app/(platform)/build/components/legacy-builder/CustomNode/CustomNode";
 import { beautifyString } from "@/lib/utils";
 import {
+  localizeBlockCategoryName,
+  localizeBlockDescription,
+  localizeBlockName,
+} from "@/app/(platform)/build/i18n";
+import {
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -104,7 +109,7 @@ export function BlocksControl({
           id: SpecialBlockID.AGENT,
           name: flow.name,
           description:
-            `Ver.${flow.version}` +
+            `版本 ${flow.version}` +
             (flow.description ? ` | ${flow.description}` : ""),
           categories: [{ category: "AGENT", description: "" }],
           inputSchema: flow.input_schema,
@@ -150,13 +155,13 @@ export function BlocksControl({
         notAvailable:
           (block.uiType == BlockUIType.WEBHOOK &&
             graphHasWebhookNodes &&
-            "Agents can only have one webhook-triggered block") ||
+            "智能体只能包含一个 Webhook 触发模块") ||
           (block.uiType == BlockUIType.WEBHOOK &&
             graphHasInputNodes &&
-            "Webhook-triggered blocks can't be used together with input blocks") ||
+            "Webhook 触发模块不能与输入模块一起使用") ||
           (block.uiType == BlockUIType.INPUT &&
             graphHasWebhookNodes &&
-            "Input blocks can't be used together with a webhook-triggered block") ||
+            "输入模块不能与 Webhook 触发模块一起使用") ||
           null,
       }));
   }, [
@@ -205,7 +210,7 @@ export function BlocksControl({
             </Button>
           </PopoverTrigger>
         </TooltipTrigger>
-        <TooltipContent side="right">Blocks</TooltipContent>
+        <TooltipContent side="right">模块</TooltipContent>
       </Tooltip>
       <PopoverContent
         side="right"
@@ -223,7 +228,7 @@ export function BlocksControl({
                 data-id="blocks-control-label"
                 data-testid="blocks-control-blocks-label"
               >
-                Blocks
+                模块
               </Label>
             </div>
             <div className="relative flex items-center">
@@ -231,7 +236,7 @@ export function BlocksControl({
               <Input
                 id="search-blocks"
                 type="text"
-                placeholder="Search blocks"
+                placeholder="搜索模块"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="rounded-lg px-8 py-5 dark:bg-slate-800 dark:text-white"
@@ -261,7 +266,7 @@ export function BlocksControl({
                       )
                     }
                   >
-                    {beautifyString((category || "All").toLowerCase())}
+                    {localizeBlockCategoryName(category ?? "All")}
                   </div>
                 );
               })}
@@ -313,10 +318,14 @@ export function BlocksControl({
                         data-testid={`block-name-${block.id}`}
                       >
                         <TextRenderer
-                          value={beautifyString(block.name).replace(
-                            / Block$/,
-                            "",
-                          )}
+                          value={
+                            block.uiType === BlockUIType.AGENT
+                              ? beautifyString(block.name).replace(
+                                  / Block$/,
+                                  "",
+                                )
+                              : localizeBlockName(block.name)
+                          }
                           truncateLengthLimit={45}
                         />
                       </span>
@@ -325,7 +334,11 @@ export function BlocksControl({
                         data-testid={`block-description-${block.id}`}
                       >
                         <TextRenderer
-                          value={block.description}
+                          value={localizeBlockDescription({
+                            id: block.id,
+                            name: block.name,
+                            description: block.description,
+                          })}
                           truncateLengthLimit={165}
                         />
                       </span>

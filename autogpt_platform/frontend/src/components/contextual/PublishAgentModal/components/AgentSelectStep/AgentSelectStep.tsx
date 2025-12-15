@@ -49,10 +49,7 @@ export function AgentSelectStep({
   if (isLoading) {
     return (
       <div className="mx-auto flex min-h-[70vh] w-full flex-col">
-        <StepHeader
-          title="发布智能体"
-          description="选择你要发布的项目"
-        />
+        <StepHeader title="发布智能体" description="选择你要发布的项目" />
         <div className="flex-grow p-4 sm:p-6">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: 6 }).map((_, i) => (
@@ -76,10 +73,7 @@ export function AgentSelectStep({
   if (error) {
     return (
       <div className="mx-auto flex w-full max-w-[900px] flex-col rounded-3xl">
-        <StepHeader
-          title="发布智能体"
-          description="选择你要发布的项目"
-        />
+        <StepHeader title="发布智能体" description="选择你要发布的项目" />
         <div className="inline-flex h-[370px] flex-col items-center justify-center gap-[29px] px-4 py-5 sm:px-6">
           <Text variant="lead" className="text-center text-red-600">
             加载智能体列表失败，请重试。
@@ -94,10 +88,7 @@ export function AgentSelectStep({
 
   return (
     <div className="mx-auto flex w-full max-w-[900px] flex-col rounded-3xl">
-      <StepHeader
-        title="发布智能体"
-        description="选择你要发布的项目"
-      />
+      <StepHeader title="发布智能体" description="选择你要发布的项目" />
 
       {agents.length === 0 ? (
         <div className="inline-flex h-[370px] flex-col items-center justify-center gap-[29px] px-4 py-5 sm:px-6">

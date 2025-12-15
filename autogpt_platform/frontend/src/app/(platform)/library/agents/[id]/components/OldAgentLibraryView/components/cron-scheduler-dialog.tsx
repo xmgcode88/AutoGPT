@@ -57,7 +57,10 @@ export function CronSchedulerDialog(props: CronSchedulerDialogProps) {
       select: (res) => (res.status === 200 ? res.data.timezone : undefined),
     },
   });
-  const timezoneDisplay = getTimezoneDisplayName(userTimezone || "UTC", "zh-CN");
+  const timezoneDisplay = getTimezoneDisplayName(
+    userTimezone || "UTC",
+    "zh-CN",
+  );
 
   // Reset state when dialog opens
   useEffect(() => {

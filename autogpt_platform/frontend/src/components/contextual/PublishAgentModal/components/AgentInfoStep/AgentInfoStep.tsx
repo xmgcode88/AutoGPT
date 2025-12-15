@@ -57,10 +57,7 @@ export function AgentInfoStep({
 
   return (
     <div className="mx-auto flex w-full flex-col rounded-3xl">
-      <StepHeader
-        title="发布智能体"
-        description="填写一些关于智能体的信息"
-      />
+      <StepHeader title="发布智能体" description="填写一些关于智能体的信息" />
 
       <Form {...form}>
         <form onSubmit={handleSubmit} className="flex-grow overflow-y-auto p-6">
@@ -183,9 +180,7 @@ export function AgentInfoStep({
             name="recommendedScheduleCron"
             render={({ field }) => (
               <div className="flex flex-col space-y-2">
-                <label className="text-sm font-medium">
-                  推荐计划
-                </label>
+                <label className="text-sm font-medium">推荐计划</label>
                 <p className="text-xs text-gray-600">
                   建议用户在什么时候运行这个智能体以获得最佳效果
                 </p>

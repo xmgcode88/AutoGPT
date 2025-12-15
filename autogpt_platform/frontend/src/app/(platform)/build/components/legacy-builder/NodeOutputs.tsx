@@ -52,7 +52,7 @@ export default function NodeOutputs({
   const openExpandedView = (pinName: string, pinData: any[]) => {
     setExpandedDialog({
       isOpen: true,
-      execId: title || "Node Output",
+      execId: title || "节点输出",
       pinName,
       data: pinData,
     });
@@ -68,7 +68,7 @@ export default function NodeOutputs({
         <div key={pin} className="group">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <strong className="mr-2">Pin:</strong>
+              <strong className="mr-2">引脚：</strong>
               <span>{getBeautifiedPinName(pin)}</span>
             </div>
             {(truncateLongData || dataArray.length > 10) && (
@@ -77,15 +77,15 @@ export default function NodeOutputs({
                 size="sm"
                 onClick={() => openExpandedView(pin, dataArray)}
                 className="hidden items-center gap-1 group-hover:flex"
-                title="Expand Full View"
+                title="展开完整视图"
               >
                 <Maximize2 size={14} />
-                Expand
+                展开
               </Button>
             )}
           </div>
           <div className="mt-2">
-            <strong className="mr-2">Data:</strong>
+            <strong className="mr-2">数据：</strong>
             <div className="mt-1">
               {dataArray.slice(0, 10).map((item, index) => (
                 <React.Fragment key={index}>
@@ -101,7 +101,7 @@ export default function NodeOutputs({
                   <br />
                   <b>⋮</b>
                   <br />
-                  <span>and {dataArray.length - 10} more</span>
+                  <span>还有 {dataArray.length - 10} 项</span>
                 </span>
               )}
             </div>

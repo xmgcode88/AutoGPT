@@ -36,7 +36,7 @@ export default function DataTable({
   const copyData = (pin: string, data: string) => {
     navigator.clipboard.writeText(data).then(() => {
       toast({
-        title: `"${pin}" data copied to clipboard!`,
+        title: `"${pin}" 数据已复制到剪贴板！`,
         duration: 2000,
       });
     });
@@ -45,7 +45,7 @@ export default function DataTable({
   const openExpandedView = (pinName: string, pinData: any[]) => {
     setExpandedDialog({
       isOpen: true,
-      execId: title || "Unknown Execution",
+      execId: title || "未知执行",
       pinName,
       data: pinData,
     });
@@ -61,8 +61,8 @@ export default function DataTable({
       <Table className="cursor-default select-text">
         <TableHeader>
           <TableRow>
-            <TableHead>Pin</TableHead>
-            <TableHead>Data</TableHead>
+            <TableHead>引脚</TableHead>
+            <TableHead>数据</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -78,7 +78,7 @@ export default function DataTable({
                       variant="outline"
                       size="icon"
                       onClick={() => openExpandedView(key, value)}
-                      title="Expand Full View"
+                      title="展开完整视图"
                     >
                       <Maximize2 size={18} />
                     </Button>
@@ -97,7 +97,7 @@ export default function DataTable({
                             .join(", "),
                         )
                       }
-                      title="Copy Data"
+                      title="复制数据"
                     >
                       <Clipboard size={18} />
                     </Button>

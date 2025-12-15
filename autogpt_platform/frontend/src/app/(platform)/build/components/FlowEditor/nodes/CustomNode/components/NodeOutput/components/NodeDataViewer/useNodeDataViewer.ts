@@ -81,7 +81,7 @@ export const useNodeDataViewer = (
   const copyExecutionId = () => {
     navigator.clipboard.writeText(execId).then(() => {
       toast({
-        title: "Execution ID copied to clipboard!",
+        title: "执行 ID 已复制到剪贴板！",
         duration: 2000,
       });
     });

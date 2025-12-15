@@ -58,7 +58,7 @@ export default function OttoChatWidget({
     // Add temporary processing message
     setMessages((prev) => [
       ...prev,
-      { type: "assistant", content: "Processing your question..." },
+      { type: "assistant", content: "正在处理你的问题..." },
     ]);
 
     const conversationHistory = messages.reduce<
@@ -68,7 +68,7 @@ export default function OttoChatWidget({
         msg.type === "user" &&
         i + 1 < arr.length &&
         arr[i + 1].type === "assistant" &&
-        arr[i + 1].content !== "Processing your question..."
+        arr[i + 1].content !== "正在处理你的问题..."
       ) {
         acc.push({
           query: msg.content,
@@ -89,16 +89,14 @@ export default function OttoChatWidget({
       // Check if the response contains an error
       if ("error" in data && data.error === true) {
         // Handle different error types
-        let errorMessage =
-          "Sorry, there was an error processing your message. Please try again.";
+        let errorMessage = "抱歉，处理你的消息时出错了。请重试。";
 
         if (data.answer === "Authentication required") {
-          errorMessage = "Please sign in to use the chat feature.";
+          errorMessage = "请先登录后再使用聊天功能。";
         } else if (data.answer === "Failed to connect to Otto service") {
-          errorMessage =
-            "Otto service is currently unavailable. Please try again later.";
+          errorMessage = "Otto 服务当前不可用，请稍后再试。";
         } else if (data.answer.includes("timed out")) {
-          errorMessage = "Request timed out. Please try again later.";
+          errorMessage = "请求超时，请稍后再试。";
         }
 
         // Remove processing message and add error message
@@ -119,8 +117,7 @@ export default function OttoChatWidget({
         ...prev.slice(0, -1),
         {
           type: "assistant",
-          content:
-            "An unexpected error occurred. Please refresh the page and try again.",
+          content: "发生未知错误。请刷新页面后重试。",
         },
       ]);
     } finally {
@@ -140,7 +137,7 @@ export default function OttoChatWidget({
         <button
           onClick={() => setIsOpen(true)}
           className="inline-flex h-14 w-14 items-center justify-center whitespace-nowrap rounded-2xl bg-[rgba(65,65,64,1)] text-neutral-50 shadow transition-colors hover:bg-neutral-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90 dark:focus-visible:ring-neutral-300"
-          aria-label="Open chat widget"
+          aria-label="打开聊天"
         >
           <svg
             viewBox="0 0 24 24"
@@ -168,11 +165,11 @@ export default function OttoChatWidget({
     >
       {/* Header */}
       <div className="flex items-center justify-between border-b p-4">
-        <h2 className="font-semibold">Otto Assistant</h2>
+        <h2 className="font-semibold">Otto 助手</h2>
         <button
           onClick={() => setIsOpen(false)}
           className="text-muted-foreground transition-colors hover:text-foreground"
-          aria-label="Close chat"
+          aria-label="关闭聊天"
         >
           <svg
             viewBox="0 0 24 24"
@@ -262,7 +259,7 @@ export default function OttoChatWidget({
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Type your message..."
+              placeholder="输入消息..."
               className="flex-1 rounded-md border bg-background px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
               disabled={isProcessing}
             />
@@ -271,7 +268,7 @@ export default function OttoChatWidget({
               disabled={isProcessing}
               className="rounded-md bg-primary px-4 py-2 text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
             >
-              Send
+              发送
             </button>
           </div>
           {graphID && (
@@ -299,9 +296,7 @@ export default function OttoChatWidget({
                 <circle cx="8.5" cy="8.5" r="1.5" />
                 <polyline points="21 15 16 10 5 21" />
               </svg>
-              {includeGraphData
-                ? "Graph data will be included"
-                : "Include graph data"}
+              {includeGraphData ? "将包含流程数据" : "包含流程数据"}
             </button>
           )}
         </div>

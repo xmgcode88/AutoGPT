@@ -59,7 +59,7 @@ export const NodeDataViewer: FC<NodeDataViewerProps> = ({
             </Dialog.Trigger>
           </TooltipTrigger>
           <TooltipContent>
-            <p>View Data</p>
+            <p>查看数据</p>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
@@ -68,17 +68,17 @@ export const NodeDataViewer: FC<NodeDataViewerProps> = ({
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <Text variant="large-medium" className="text-slate-900">
-                Full Output Preview
+                完整输出预览
               </Text>
             </div>
             <div className="rounded-full border border-slate-300 bg-slate-100 px-3 py-1.5 text-xs font-medium text-black">
-              {dataArray.length} item{dataArray.length !== 1 ? "s" : ""} total
+              共 {dataArray.length} 项
             </div>
           </div>
           <div className="text-sm text-gray-600">
             <div className="flex items-center gap-2">
               <Text variant="body" className="text-slate-600">
-                Execution ID:
+                执行 ID：
               </Text>
               <Text
                 variant="body-medium"
@@ -96,7 +96,7 @@ export const NodeDataViewer: FC<NodeDataViewerProps> = ({
               </Button>
             </div>
             <div className="mt-2">
-              Pin:{" "}
+              引脚：{" "}
               <span className="font-semibold">{beautifyString(pinName)}</span>
             </div>
           </div>
@@ -120,7 +120,7 @@ export const NodeDataViewer: FC<NodeDataViewerProps> = ({
                           className="min-w-0 p-1"
                           size="icon"
                           onClick={() => handleCopyItem(index)}
-                          aria-label="Copy item"
+                          aria-label="复制条目"
                         >
                           {copiedIndex === index ? (
                             <CheckIcon className="size-4 text-green-600" />
@@ -133,7 +133,7 @@ export const NodeDataViewer: FC<NodeDataViewerProps> = ({
                           size="icon"
                           className="min-w-0 p-1"
                           onClick={() => handleDownloadItem(index)}
-                          aria-label="Download item"
+                          aria-label="下载条目"
                         >
                           <DownloadIcon className="size-4 text-black" />
                         </Button>
@@ -142,9 +142,7 @@ export const NodeDataViewer: FC<NodeDataViewerProps> = ({
                   ))}
                 </div>
               ) : (
-                <div className="py-8 text-center text-gray-500">
-                  No data available
-                </div>
+                <div className="py-8 text-center text-gray-500">暂无数据</div>
               )}
             </div>
           </ScrollArea>

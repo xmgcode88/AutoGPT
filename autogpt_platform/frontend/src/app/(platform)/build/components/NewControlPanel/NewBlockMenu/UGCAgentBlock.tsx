@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React, { ButtonHTMLAttributes } from "react";
 import { highlightText } from "./helpers";
-import { formatTimeAgo } from "@/lib/utils/time";
+import { formatRelativeTime } from "@/lib/utils/time";
 import { CircleNotchIcon } from "@phosphor-icons/react";
 import { PlusIcon } from "@phosphor-icons/react/dist/ssr";
 
@@ -68,7 +68,7 @@ export const UGCAgentBlock: UGCAgentBlockComponent = ({
                 "line-clamp-1 font-sans text-xs font-normal leading-5 text-zinc-500 group-disabled:text-zinc-400",
               )}
             >
-              Edited {formatTimeAgo(edited_time.toISOString())}
+              编辑于 {formatRelativeTime(edited_time.toISOString(), "zh-CN")}
             </span>
           )}
 
@@ -79,7 +79,7 @@ export const UGCAgentBlock: UGCAgentBlockComponent = ({
               "line-clamp-1 font-sans text-xs font-normal leading-5 text-zinc-500 group-disabled:text-zinc-400",
             )}
           >
-            Version {version}
+            版本 {version}
           </span>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { usePaginatedIntegrationList } from "./usePaginatedIntegrationList";
 import { ErrorCard } from "@/components/molecules/ErrorCard/ErrorCard";
 import { blockMenuContainerStyle } from "../style";
 import { useBlockMenuStore } from "../../../../stores/blockMenuStore";
+import { BUILDER_ERROR_CARD_I18N } from "@/app/(platform)/build/i18n";
 
 export const PaginatedIntegrationList = () => {
   const { setIntegration } = useBlockMenuStore();
@@ -25,11 +26,12 @@ export const PaginatedIntegrationList = () => {
         <ErrorCard
           isSuccess={false}
           responseError={error || undefined}
-          context="block menu"
+          i18n={BUILDER_ERROR_CARD_I18N}
+          context="模块菜单"
           httpError={{
             status: status,
-            statusText: "Request failed",
-            message: (error?.detail as string) || "An error occurred",
+            statusText: "请求失败",
+            message: (error?.detail as string) || "发生错误",
           }}
           onRetry={() => refetch()}
         />

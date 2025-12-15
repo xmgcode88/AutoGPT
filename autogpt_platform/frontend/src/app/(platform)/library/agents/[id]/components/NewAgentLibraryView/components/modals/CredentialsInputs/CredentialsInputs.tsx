@@ -208,9 +208,7 @@ export const CredentialsInput: FC<{
     const popup = window.open(login_url, "_blank", "popup=true");
 
     if (!popup) {
-      throw new Error(
-        "无法打开弹出窗口。请允许此站点的弹窗。",
-      );
+      throw new Error("无法打开弹出窗口。请允许此站点的弹窗。");
     }
 
     const controller = new AbortController();

@@ -41,7 +41,7 @@ export const GraphMenuSearchBar: React.FC<GraphMenuSearchBarProps> = ({
         value={searchQuery}
         onChange={(e) => onSearchChange(e.target.value)}
         onKeyDown={onKeyDown}
-        placeholder={"Search your graph for nodes, inputs, outputs..."}
+        placeholder={"搜索流程中的节点、输入、输出..."}
         className={cn(
           "m-0 border-none p-0 font-sans text-base font-normal text-zinc-800 shadow-none outline-none",
           "placeholder:text-zinc-400 focus:shadow-none focus:outline-none focus:ring-0",

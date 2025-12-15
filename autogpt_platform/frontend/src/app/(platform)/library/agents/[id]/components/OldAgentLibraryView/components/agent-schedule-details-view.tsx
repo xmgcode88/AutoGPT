@@ -66,7 +66,11 @@ export function AgentScheduleDetailsView({
       },
       {
         label: "下次运行",
-        value: formatScheduleTime(schedule.next_run_time, userTimezone, "zh-CN"),
+        value: formatScheduleTime(
+          schedule.next_run_time,
+          userTimezone,
+          "zh-CN",
+        ),
       },
     ];
   }, [schedule, selectedRunStatus, userTimezone]);

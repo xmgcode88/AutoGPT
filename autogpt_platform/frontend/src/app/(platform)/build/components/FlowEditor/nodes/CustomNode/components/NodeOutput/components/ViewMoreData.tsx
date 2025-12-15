@@ -32,7 +32,7 @@ export const ViewMoreData = ({
   const copyExecutionId = () => {
     navigator.clipboard.writeText(execId || "N/A").then(() => {
       toast({
-        title: "Execution ID copied to clipboard!",
+        title: "执行 ID 已复制到剪贴板！",
         duration: 2000,
       });
     });
@@ -46,18 +46,18 @@ export const ViewMoreData = ({
           size="small"
           className="h-fit w-fit min-w-0 !text-xs"
         >
-          View More
+          查看更多
         </Button>
       </Dialog.Trigger>
       <Dialog.Content>
         <div className="flex flex-col gap-4">
           <Text variant="h4" className="text-slate-900">
-            Complete Output Data
+            完整输出数据
           </Text>
 
           <div className="flex items-center gap-2">
             <Text variant="body" className="text-slate-600">
-              Execution ID:
+              执行 ID：
             </Text>
             <Text
               variant="body-medium"
@@ -84,7 +84,7 @@ export const ViewMoreData = ({
                       variant="body-medium"
                       className="!font-semibold text-slate-600"
                     >
-                      Pin:
+                      引脚：
                     </Text>
                     <Text variant="body-medium" className="text-slate-700">
                       {beautifyString(key)}
@@ -95,7 +95,7 @@ export const ViewMoreData = ({
                       variant="body-medium"
                       className="!font-semibold text-slate-600"
                     >
-                      Data:
+                      数据：
                     </Text>
                     <div className="relative space-y-2">
                       {value.map((item, index) => (

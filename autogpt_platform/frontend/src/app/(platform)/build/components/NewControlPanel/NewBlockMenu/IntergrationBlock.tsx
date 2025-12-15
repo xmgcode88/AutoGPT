@@ -10,6 +10,10 @@ import { useReactFlow } from "@xyflow/react";
 import { useNodeStore } from "../../../stores/nodeStore";
 import { BlockInfo } from "@/app/api/__generated__/models/blockInfo";
 import { blockDragPreviewStyle } from "./style";
+import {
+  localizeBlockDescription,
+  localizeBlockName,
+} from "@/app/(platform)/build/i18n";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   title?: string;
@@ -61,7 +65,7 @@ export const IntegrationBlock: IntegrationBlockComponent = ({
     // preview when user drags it
     const dragPreview = document.createElement("div");
     dragPreview.style.cssText = blockDragPreviewStyle;
-    dragPreview.textContent = beautifyString(title || "");
+    dragPreview.textContent = beautifyString(localizeBlockName(title || ""));
 
     document.body.appendChild(dragPreview);
     e.dataTransfer.setDragImage(dragPreview, 0, 0);
@@ -100,7 +104,10 @@ export const IntegrationBlock: IntegrationBlockComponent = ({
               "line-clamp-1 font-sans text-sm font-medium leading-[1.375rem] text-zinc-800 group-disabled:text-zinc-400",
             )}
           >
-            {highlightText(beautifyString(title), highlightedText)}
+            {highlightText(
+              beautifyString(localizeBlockName(title)),
+              highlightedText,
+            )}
           </span>
         )}
         {description && (
@@ -109,7 +116,14 @@ export const IntegrationBlock: IntegrationBlockComponent = ({
               "line-clamp-1 font-sans text-xs font-normal leading-5 text-zinc-500 group-disabled:text-zinc-400",
             )}
           >
-            {highlightText(description, highlightedText)}
+            {highlightText(
+              localizeBlockDescription({
+                id: blockData.id,
+                name: title,
+                description,
+              }),
+              highlightedText,
+            )}
           </span>
         )}
       </div>

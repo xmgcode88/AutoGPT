@@ -55,15 +55,14 @@ const RunnerUIWrapper = forwardRef<RunnerUIWrapperRef, RunnerUIWrapperProps>(
         (node) =>
           ({
             metadata: {
-              name: node.data.hardcodedValues.name || "Output",
+              name: node.data.hardcodedValues.name || "输出",
               description:
-                node.data.hardcodedValues.description ||
-                "Output from the agent",
+                node.data.hardcodedValues.description || "来自智能体的输出",
             },
             result:
               (node.data.executionResults as any)
                 ?.map((result: any) => result?.data?.output)
-                .join("\n--\n") || "No output yet",
+                .join("\n--\n") || "暂无输出",
           }) satisfies OutputNodeInfo,
       );
     }, [nodes]);

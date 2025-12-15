@@ -1,8 +1,9 @@
 import { Button } from "@/components/__legacy__/ui/button";
 import { Skeleton } from "@/components/__legacy__/ui/skeleton";
-import { beautifyString, cn } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React, { ButtonHTMLAttributes } from "react";
+import { localizeIntegrationName } from "@/app/(platform)/build/i18n";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   name?: string;
@@ -41,7 +42,7 @@ export const IntegrationChip: IntegrationChipComponent = ({
       </div>
       {name && (
         <span className="truncate font-sans text-sm font-normal leading-[1.375rem] text-zinc-800">
-          {beautifyString(name)}
+          {localizeIntegrationName(name)}
         </span>
       )}
     </Button>

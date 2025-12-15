@@ -30,14 +30,12 @@ export const GraphLoadingBox = ({
           <div className="absolute inset-0 animate-spin rounded-full border-4 border-zinc-100 border-t-zinc-400 dark:border-gray-700 dark:border-t-blue-400"></div>
         </div>
         <div className="flex flex-col items-center gap-2">
-          {isSaving && <Text variant="h4">Saving Graph</Text>}
-          {flowContentLoading && <Text variant="h4">Loading Flow</Text>}
+          {isSaving && <Text variant="h4">正在保存流程</Text>}
+          {flowContentLoading && <Text variant="h4">正在加载流程</Text>}
 
-          {isSaving && (
-            <Text variant="small">Please wait while we save your graph...</Text>
-          )}
+          {isSaving && <Text variant="small">正在保存流程，请稍候...</Text>}
           {flowContentLoading && (
-            <Text variant="small">Please wait while we load your graph...</Text>
+            <Text variant="small">正在加载流程，请稍候...</Text>
           )}
         </div>
       </div>

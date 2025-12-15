@@ -6,6 +6,10 @@ import { useIntegrationBlocks } from "./useIntegrationBlocks";
 import { ErrorCard } from "@/components/molecules/ErrorCard/ErrorCard";
 import { InfiniteScroll } from "@/components/contextual/InfiniteScroll/InfiniteScroll";
 import { useBlockMenuStore } from "../../../../stores/blockMenuStore";
+import {
+  BUILDER_ERROR_CARD_I18N,
+  localizeIntegrationName,
+} from "@/app/(platform)/build/i18n";
 
 export const IntegrationBlocks = () => {
   const { integration, setIntegration } = useBlockMenuStore();
@@ -44,12 +48,13 @@ export const IntegrationBlocks = () => {
         <ErrorCard
           isSuccess={false}
           responseError={error || undefined}
+          i18n={BUILDER_ERROR_CARD_I18N}
           httpError={{
             status: status,
-            statusText: "Request failed",
-            message: (error?.detail as string) || "An error occurred",
+            statusText: "请求失败",
+            message: (error?.detail as string) || "发生错误",
           }}
-          context="block menu"
+          context="模块菜单"
           onRetry={() => refetch()}
         />
       </div>
@@ -72,13 +77,13 @@ export const IntegrationBlocks = () => {
                 setIntegration(undefined);
               }}
             >
-              Integrations
+              集成
             </Button>
             <p className="font-sans text-sm font-medium leading-[1.375rem] text-zinc-800">
               /
             </p>
             <p className="font-sans text-sm font-medium leading-[1.375rem] text-zinc-800">
-              {integration}
+              {localizeIntegrationName(integration ?? "")}
             </p>
           </div>
           <span className="flex h-[1.375rem] w-[1.6875rem] items-center justify-center rounded-[1.25rem] bg-[#f0f0f0] p-1.5 font-sans text-sm leading-[1.375rem] text-zinc-500 group-disabled:text-zinc-400">

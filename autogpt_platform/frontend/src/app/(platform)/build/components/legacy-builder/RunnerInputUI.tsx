@@ -73,7 +73,7 @@ export function RunnerInputDialog({
     <Dialog open={isOpen} onOpenChange={doClose}>
       <DialogContent className="flex w-[90vw] max-w-4xl flex-col p-10">
         <DialogHeader>
-          <DialogTitle className="text-2xl">Run your agent</DialogTitle>
+          <DialogTitle className="text-2xl">运行智能体</DialogTitle>
           <DialogDescription className="mt-2">{graph.name}</DialogDescription>
         </DialogHeader>
         <AgentRunDraftView

@@ -39,7 +39,7 @@ const formatOutput = (output: any): string => {
       }
       return JSON.stringify(output, null, 2);
     } catch (error) {
-      return `Error formatting output: ${(error as Error).message}`;
+      return `格式化输出时出错：${(error as Error).message}`;
     }
   }
   if (typeof output === "string") {
@@ -60,7 +60,7 @@ export function RunnerOutputUI({
     const formattedOutput = formatOutput(output);
     navigator.clipboard.writeText(formattedOutput).then(() => {
       toast({
-        title: `"${name}" output copied to clipboard!`,
+        title: `"${name}" 输出已复制到剪贴板！`,
         duration: 2000,
       });
     });
@@ -78,9 +78,9 @@ export function RunnerOutputUI({
         className="flex h-full w-full flex-col overflow-hidden sm:max-w-[600px]"
       >
         <SheetHeader className="px-2 py-2">
-          <SheetTitle className="text-xl">Run Outputs</SheetTitle>
+          <SheetTitle className="text-xl">运行输出</SheetTitle>
           <SheetDescription className="mt-1 text-sm">
-            View the outputs from your agent run.
+            查看本次智能体运行的输出。
           </SheetDescription>
         </SheetHeader>
         <div className="flex-grow overflow-y-auto px-2 py-2">
@@ -89,7 +89,7 @@ export function RunnerOutputUI({
               {graphExecutionError && (
                 <div className="rounded-md border border-red-200 bg-red-50 p-3 dark:border-red-800 dark:bg-red-900/20">
                   <p className="text-sm text-red-800 dark:text-red-200">
-                    <strong>Error:</strong> {graphExecutionError}
+                    <strong>错误：</strong> {graphExecutionError}
                   </p>
                 </div>
               )}
@@ -97,7 +97,7 @@ export function RunnerOutputUI({
                 outputs.map((output, i) => (
                   <div key={i} className="space-y-1">
                     <Label className="text-base font-semibold">
-                      {output.metadata.name || "Unnamed Output"}
+                      {output.metadata.name || "未命名输出"}
                     </Label>
 
                     {output.metadata.description && (
@@ -113,17 +113,17 @@ export function RunnerOutputUI({
                         size="icon"
                         onClick={() =>
                           copyOutput(
-                            output.metadata.name || "Unnamed Output",
+                            output.metadata.name || "未命名输出",
                             output.result,
                           )
                         }
-                        title="Copy Output"
+                        title="复制输出"
                       >
                         <Clipboard size={18} />
                       </Button>
                       <Textarea
                         readOnly
-                        value={formatOutput(output.result ?? "No output yet")}
+                        value={formatOutput(output.result ?? "暂无输出")}
                         className="w-full resize-none whitespace-pre-wrap break-words border-none bg-transparent text-sm"
                         style={{
                           height: "auto",
@@ -143,7 +143,7 @@ export function RunnerOutputUI({
                   </div>
                 ))
               ) : (
-                <p>No output blocks available.</p>
+                <p>暂无输出模块。</p>
               )}
             </div>
           </ScrollArea>

@@ -622,11 +622,12 @@ export function OldAgentLibraryView() {
           onOpenChange={setCopyAgentDialogOpen}
           open={copyAgentDialogOpen}
         >
-            <DialogContent>
+          <DialogContent>
             <DialogHeader>
               <DialogTitle>正在创建可编辑副本</DialogTitle>
               <DialogDescription className="pt-2">
-                原 Marketplace 智能体保持不变且不可编辑。我们会将该智能体的新版本保存到你的资源库中。之后你可以点击“自定义智能体”打开构建器，查看并修改其内部实现。
+                原 Marketplace
+                智能体保持不变且不可编辑。我们会将该智能体的新版本保存到你的资源库中。之后你可以点击“自定义智能体”打开构建器，查看并修改其内部实现。
               </DialogDescription>
             </DialogHeader>
             <DialogFooter className="justify-end">

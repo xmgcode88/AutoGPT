@@ -41,7 +41,7 @@ export const BlockMenuSearchBar: React.FC<BlockMenuSearchBarProps> = ({
           setLocalQuery(e.target.value);
           debouncedSetSearchQuery(e.target.value);
         }}
-        placeholder={"Blocks, Agents, Integrations or Keywords..."}
+        placeholder={"模块、智能体、集成或关键词..."}
         className={cn(
           "m-0 border-none p-0 font-sans text-base font-normal text-zinc-800 shadow-none outline-none",
           "placeholder:text-zinc-400 focus:shadow-none focus:outline-none focus:ring-0",

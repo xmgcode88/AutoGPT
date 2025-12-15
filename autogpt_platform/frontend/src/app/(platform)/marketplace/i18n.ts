@@ -42,4 +42,3 @@ export const MARKETPLACE_ERROR_CARD_I18N: ErrorCardI18n = {
   reportButton: "反馈问题",
   helpButton: "获取帮助",
 };
-

@@ -1,10 +1,7 @@
 import z from "zod";
 
 export const publishAgentSchema = z.object({
-  title: z
-    .string()
-    .min(1, "请输入标题")
-    .max(100, "标题需少于 100 个字符"),
+  title: z.string().min(1, "请输入标题").max(100, "标题需少于 100 个字符"),
   subheader: z
     .string()
     .min(1, "请输入副标题")
@@ -13,10 +10,7 @@ export const publishAgentSchema = z.object({
     .string()
     .min(1, "请输入 Slug")
     .max(50, "Slug 需少于 50 个字符")
-    .regex(
-      /^[a-z0-9-]+$/,
-      "Slug 只能包含小写字母、数字和连字符（-）",
-    ),
+    .regex(/^[a-z0-9-]+$/, "Slug 只能包含小写字母、数字和连字符（-）"),
   youtubeLink: z
     .string()
     .optional()
@@ -44,10 +38,7 @@ export const publishAgentSchema = z.object({
   instructions: z
     .string()
     .optional()
-    .refine(
-      (val) => !val || val.length <= 2000,
-      "使用说明需少于 2000 个字符",
-    ),
+    .refine((val) => !val || val.length <= 2000, "使用说明需少于 2000 个字符"),
 });
 
 export type PublishAgentFormData = z.infer<typeof publishAgentSchema>;

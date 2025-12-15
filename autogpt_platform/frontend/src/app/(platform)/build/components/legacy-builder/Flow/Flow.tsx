@@ -784,7 +784,7 @@ const FlowEditor: React.FC<{
     if (isRunning) return;
     if (!savedAgent) {
       toast({
-        title: `Please save the agent first, using the button in the left sidebar.`,
+        title: "请先使用左侧边栏的按钮保存智能体。",
       });
       return;
     }
@@ -796,7 +796,7 @@ const FlowEditor: React.FC<{
     if (isScheduling) return;
     if (!savedAgent) {
       toast({
-        title: `Please save the agent first, using the button in the left sidebar.`,
+        title: "请先使用左侧边栏的按钮保存智能体。",
       });
       return;
     }

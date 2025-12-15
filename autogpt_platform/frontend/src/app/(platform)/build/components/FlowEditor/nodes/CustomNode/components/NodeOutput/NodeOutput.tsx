@@ -26,7 +26,7 @@ export const NodeDataRenderer = ({ nodeId }: { nodeId: string }) => {
     <div className="flex flex-col gap-3 rounded-b-xl border-t border-slate-200/50 px-4 py-4">
       <div className="flex items-center justify-between">
         <Text variant="body-medium" className="!font-semibold text-slate-700">
-          Node Output
+          节点输出
         </Text>
         <Button
           variant="ghost"
@@ -46,14 +46,14 @@ export const NodeDataRenderer = ({ nodeId }: { nodeId: string }) => {
         <>
           <div className="flex max-w-[350px] flex-col gap-4">
             <div className="space-y-2">
-              <Text variant="small-medium">Input</Text>
+              <Text variant="small-medium">输入</Text>
 
               <ContentRenderer value={inputData} shortContent={false} />
 
               <div className="mt-1 flex justify-end gap-1">
                 <NodeDataViewer
                   data={inputData}
-                  pinName="Input"
+                  pinName="输入"
                   execId={executionResultId}
                 />
                 <Button
@@ -84,7 +84,7 @@ export const NodeDataRenderer = ({ nodeId }: { nodeId: string }) => {
                       variant="small-medium"
                       className="!font-semibold text-slate-600"
                     >
-                      Pin:
+                      引脚：
                     </Text>
                     <Text variant="small" className="text-slate-700">
                       {beautifyString(key)}
@@ -95,7 +95,7 @@ export const NodeDataRenderer = ({ nodeId }: { nodeId: string }) => {
                       variant="small"
                       className="!font-semibold text-slate-600"
                     >
-                      Data:
+                      数据：
                     </Text>
                     <div className="relative space-y-2">
                       {value.map((item, index) => (

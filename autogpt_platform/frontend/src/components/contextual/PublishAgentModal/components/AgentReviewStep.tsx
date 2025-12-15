@@ -61,9 +61,7 @@ export function AgentReviewStep({
           <div
             className="aspect-video h-64 w-full rounded-xl bg-neutral-200"
             role="img"
-            aria-label={
-              thumbnailSrc ? "智能体缩略图" : "缩略图占位"
-            }
+            aria-label={thumbnailSrc ? "智能体缩略图" : "缩略图占位"}
           >
             {thumbnailSrc && (
               <Image

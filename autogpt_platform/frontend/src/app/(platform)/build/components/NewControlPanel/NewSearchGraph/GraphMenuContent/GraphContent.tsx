@@ -1,7 +1,7 @@
 import React from "react";
 import { Separator } from "@/components/__legacy__/ui/separator";
 import { ScrollArea } from "@/components/__legacy__/ui/scroll-area";
-import { beautifyString, getPrimaryCategoryColor } from "@/lib/utils";
+import { getPrimaryCategoryColor } from "@/lib/utils";
 import { SearchableNode } from "../GraphMenuSearchBar/useGraphMenuSearchBar";
 import { TextRenderer } from "@/components/__legacy__/ui/render";
 import {
@@ -12,6 +12,10 @@ import {
 } from "@/components/atoms/Tooltip/BaseTooltip";
 import { GraphMenuSearchBar } from "../GraphMenuSearchBar/GraphMenuSearchBar";
 import { useGraphContent } from "./useGraphContent";
+import {
+  localizeBlockDescription,
+  localizeBlockName,
+} from "@/app/(platform)/build/i18n";
 
 interface GraphSearchContentProps {
   searchQuery: string;
@@ -54,16 +58,13 @@ export const GraphSearchContent: React.FC<GraphSearchContentProps> = ({
       <div className="flex-1 overflow-hidden">
         {searchQuery && (
           <div className="px-4 py-2 text-xs text-gray-500">
-            Found {filteredNodes.length} node
-            {filteredNodes.length !== 1 ? "s" : ""}
+            找到 {filteredNodes.length} 个节点
           </div>
         )}
         <ScrollArea className="h-full w-full">
           {filteredNodes.length === 0 ? (
             <div className="flex h-32 items-center justify-center text-sm text-gray-500 dark:text-gray-400">
-              {searchQuery
-                ? "No nodes found matching your search"
-                : "Start typing to search nodes"}
+              {searchQuery ? "未找到与搜索匹配的节点" : "开始输入以搜索节点"}
             </div>
           ) : (
             filteredNodes.map((node, index) => {
@@ -72,15 +73,9 @@ export const GraphSearchContent: React.FC<GraphSearchContentProps> = ({
                 return null;
               }
 
+              const nodeType = localizeBlockName(node.data?.blockType || "");
               const nodeTitle =
-                node.data?.metadata?.customized_name ||
-                beautifyString(node.data?.blockType || "").replace(
-                  / Block$/,
-                  "",
-                );
-              const nodeType = beautifyString(
-                node.data?.blockType || "",
-              ).replace(/ Block$/, "");
+                node.data?.metadata?.customized_name || nodeType;
 
               return (
                 <TooltipProvider key={node.id}>
@@ -114,7 +109,11 @@ export const GraphSearchContent: React.FC<GraphSearchContentProps> = ({
                               <TextRenderer
                                 value={
                                   getNodeInputOutputSummary(node) ||
-                                  node.data?.description ||
+                                  localizeBlockDescription({
+                                    id: node.data?.block_id,
+                                    name: node.data?.blockType,
+                                    description: node.data?.description,
+                                  }) ||
                                   ""
                                 }
                                 truncateLengthLimit={165}
@@ -127,11 +126,11 @@ export const GraphSearchContent: React.FC<GraphSearchContentProps> = ({
                     <TooltipContent side="right" className="max-w-xs">
                       <div className="space-y-1">
                         <div className="font-semibold">
-                          Node Type: {nodeType}
+                          节点类型：{nodeType}
                         </div>
                         {node.data?.metadata?.customized_name && (
                           <div className="text-xs text-gray-500">
-                            Custom Name: {node.data.metadata.customized_name}
+                            自定义名称：{node.data.metadata.customized_name}
                           </div>
                         )}
                       </div>

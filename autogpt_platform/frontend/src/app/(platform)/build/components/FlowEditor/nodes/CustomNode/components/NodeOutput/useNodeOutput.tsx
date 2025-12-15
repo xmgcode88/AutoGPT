@@ -23,14 +23,14 @@ export const useNodeOutput = (nodeId: string) => {
       await navigator.clipboard.writeText(text);
       setCopiedKey(key);
       toast({
-        title: "Copied to clipboard!",
+        title: "已复制到剪贴板！",
         duration: 2000,
       });
       setTimeout(() => setCopiedKey(null), 2000);
     } catch (error) {
       console.error("Failed to copy:", error);
       toast({
-        title: "Failed to copy",
+        title: "复制失败",
         variant: "destructive",
         duration: 2000,
       });

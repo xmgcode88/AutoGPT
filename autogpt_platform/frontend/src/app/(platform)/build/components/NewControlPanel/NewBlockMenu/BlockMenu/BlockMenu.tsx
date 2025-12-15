@@ -32,7 +32,7 @@ export const BlockMenu = () => {
             </ControlPanelButton>
           </PopoverTrigger>
         </TooltipTrigger>
-        <TooltipContent side="right">Blocks</TooltipContent>
+        <TooltipContent side="right">模块</TooltipContent>
       </Tooltip>
 
       <PopoverContent

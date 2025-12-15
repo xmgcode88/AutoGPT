@@ -26,11 +26,7 @@ test("user can publish an agent through the complete flow", async ({
   const publishAgentModal = getId("publish-agent-modal");
   await isVisible(publishAgentModal, 10000);
 
-  await isVisible(
-    publishAgentModal.getByText(
-      "选择你要发布的项目",
-    ),
-  );
+  await isVisible(publishAgentModal.getByText("选择你要发布的项目"));
 
   const agentToSelect = publishAgentModal.getByTestId("agent-card").first();
   await agentToSelect.click();
@@ -153,61 +149,45 @@ test("should validate all form fields in publish agent form", async ({
   const longTitle = "a".repeat(101);
   await agentTitle.fill(longTitle);
   await agentTitle.blur();
-  await isVisible(
-    publishAgentModal.getByText("标题需少于 100 个字符"),
-  );
+  await isVisible(publishAgentModal.getByText("标题需少于 100 个字符"));
 
   // Test subheader length limit (200 characters)
   const longSubheader = "b".repeat(201);
   await agentSubheader.fill(longSubheader);
   await agentSubheader.blur();
-  await isVisible(
-    publishAgentModal.getByText("副标题需少于 200 个字符"),
-  );
+  await isVisible(publishAgentModal.getByText("副标题需少于 200 个字符"));
 
   // Test slug length limit (50 characters)
   const longSlug = "c".repeat(51);
   await agentSlug.fill(longSlug);
   await agentSlug.blur();
-  await isVisible(
-    publishAgentModal.getByText("Slug 需少于 50 个字符"),
-  );
+  await isVisible(publishAgentModal.getByText("Slug 需少于 50 个字符"));
 
   // Test description length limit (1000 characters)
   const longDescription = "d".repeat(1001);
   await descriptionInput.fill(longDescription);
   await descriptionInput.blur();
-  await isVisible(
-    publishAgentModal.getByText(
-      "描述需少于 1000 个字符",
-    ),
-  );
+  await isVisible(publishAgentModal.getByText("描述需少于 1000 个字符"));
 
   // Test invalid characters in slug
   await agentSlug.fill("Invalid Slug With Spaces");
   await agentSlug.blur();
   await isVisible(
-    publishAgentModal.getByText(
-      "Slug 只能包含小写字母、数字和连字符（-）",
-    ),
+    publishAgentModal.getByText("Slug 只能包含小写字母、数字和连字符（-）"),
   );
 
   await agentSlug.clear();
   await agentSlug.fill("InvalidSlugWithCapitals");
   await agentSlug.blur();
   await isVisible(
-    publishAgentModal.getByText(
-      "Slug 只能包含小写字母、数字和连字符（-）",
-    ),
+    publishAgentModal.getByText("Slug 只能包含小写字母、数字和连字符（-）"),
   );
 
   await agentSlug.clear();
   await agentSlug.fill("invalid-slug-with-@#$");
   await agentSlug.blur();
   await isVisible(
-    publishAgentModal.getByText(
-      "Slug 只能包含小写字母、数字和连字符（-）",
-    ),
+    publishAgentModal.getByText("Slug 只能包含小写字母、数字和连字符（-）"),
   );
 
   // Test valid slug format should not show error
@@ -217,24 +197,18 @@ test("should validate all form fields in publish agent form", async ({
   await page.waitForTimeout(500);
 
   await isHidden(
-    publishAgentModal.getByText(
-      "Slug 只能包含小写字母、数字和连字符（-）",
-    ),
+    publishAgentModal.getByText("Slug 只能包含小写字母、数字和连字符（-）"),
   );
 
   // Test invalid YouTube URL
   await youtubeInput.fill("https://www.google.com/invalid-url");
   await youtubeInput.blur();
-  await isVisible(
-    publishAgentModal.getByText("请输入有效的 YouTube 链接"),
-  );
+  await isVisible(publishAgentModal.getByText("请输入有效的 YouTube 链接"));
 
   await youtubeInput.clear();
   await youtubeInput.fill("not-a-url-at-all");
   await youtubeInput.blur();
-  await isVisible(
-    publishAgentModal.getByText("请输入有效的 YouTube 链接"),
-  );
+  await isVisible(publishAgentModal.getByText("请输入有效的 YouTube 链接"));
 
   // Test valid YouTube URLs should not show error
   await youtubeInput.clear();
@@ -242,18 +216,14 @@ test("should validate all form fields in publish agent form", async ({
   await youtubeInput.blur();
   await page.waitForTimeout(500);
 
-  await isHidden(
-    publishAgentModal.getByText("请输入有效的 YouTube 链接"),
-  );
+  await isHidden(publishAgentModal.getByText("请输入有效的 YouTube 链接"));
 
   await youtubeInput.clear();
   await youtubeInput.fill("https://youtu.be/test123");
   await youtubeInput.blur();
   await page.waitForTimeout(500);
 
-  await isHidden(
-    publishAgentModal.getByText("请输入有效的 YouTube 链接"),
-  );
+  await isHidden(publishAgentModal.getByText("请输入有效的 YouTube 链接"));
 
   // 5. Test submit button enabled/disabled state
   await clearForm();

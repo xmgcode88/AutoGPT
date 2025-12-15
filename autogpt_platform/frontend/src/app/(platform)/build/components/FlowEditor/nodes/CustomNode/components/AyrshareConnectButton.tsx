@@ -21,18 +21,16 @@ export const AyrshareConnectButton = () => {
       }
       const popup = window.open(data.sso_url, "_blank", "popup=true");
       if (!popup) {
-        throw new Error(
-          "Please allow popups for this site to be able to login with Ayrshare",
-        );
+        throw new Error("请允许此站点弹出窗口，以便使用 Ayrshare 登录");
       }
       toast({
-        title: "Success",
-        description: "Please complete the authentication in the popup window",
+        title: "成功",
+        description: "请在弹出窗口中完成认证",
       });
     } catch (error) {
       toast({
-        title: "Error",
-        description: `Error getting SSO URL: ${error}`,
+        title: "错误",
+        description: `获取 SSO URL 失败：${error}`,
         variant: "destructive",
       });
     } finally {
@@ -51,7 +49,7 @@ export const AyrshareConnectButton = () => {
         loading={isLoading}
         leftIcon={<Key className="mr-2 h-4 w-4" />}
       >
-        Connect Social Media Accounts
+        连接社交媒体账号
       </Button>
     </div>
   );

@@ -9,8 +9,8 @@ import { useControlPanelStore } from "../../../stores/controlPanelStore";
 import { useSaveGraph } from "../../../hooks/useSaveGraph";
 
 const formSchema = z.object({
-  name: z.string().min(1, "Name is required").max(100),
-  description: z.string().max(500),
+  name: z.string().min(1, "请输入名称").max(100, "名称不能超过 100 个字符"),
+  description: z.string().max(500, "描述不能超过 500 个字符"),
 });
 
 type SaveableGraphFormValues = z.infer<typeof formSchema>;

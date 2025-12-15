@@ -31,7 +31,7 @@ export const ScheduleGraph = ({ flowID }: { flowID: string | null }) => {
             </BuilderActionButton>
           </TooltipTrigger>
           <TooltipContent>
-            <p>Schedule Graph</p>
+            <p>定时运行</p>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>

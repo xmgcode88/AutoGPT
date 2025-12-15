@@ -31,6 +31,7 @@ import {
   parseKeys,
   setNestedProperty,
 } from "@/lib/utils";
+import { localizeBlockCategoryName } from "@/app/(platform)/build/i18n";
 import { InfoIcon, Key } from "@phosphor-icons/react";
 import * as ContextMenu from "@radix-ui/react-context-menu";
 import {
@@ -280,9 +281,7 @@ export const CustomNode = React.memo(
           }
           const popup = window.open(data.sso_url, "_blank", "popup=true");
           if (!popup) {
-            throw new Error(
-              "Please allow popups for this site to be able to login with Ayrshare",
-            );
+            throw new Error("请允许此站点弹出窗口，以便使用 Ayrshare 登录");
           }
         } catch (error) {
           toast({
@@ -303,7 +302,7 @@ export const CustomNode = React.memo(
             ) : (
               <>
                 <Key className="mr-2 h-4 w-4" />
-                Connect Social Media Accounts
+                连接社交媒体账号
               </>
             )}
           </Button>
@@ -717,7 +716,7 @@ export const CustomNode = React.memo(
           className="flex cursor-pointer items-center rounded-md px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
         >
           <CopyIcon className="mr-2 h-5 w-5 dark:text-gray-100" />
-          <span className="dark:text-gray-100">Copy</span>
+          <span className="dark:text-gray-100">复制</span>
         </ContextMenu.Item>
         {subGraphID && (
           <ContextMenu.Item
@@ -725,7 +724,7 @@ export const CustomNode = React.memo(
             className="flex cursor-pointer items-center rounded-md px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
           >
             <ExitIcon className="mr-2 h-5 w-5 dark:text-gray-100" />
-            <span className="dark:text-gray-100">Open agent</span>
+            <span className="dark:text-gray-100">打开智能体</span>
           </ContextMenu.Item>
         )}
         <ContextMenu.Separator className="my-1 h-px bg-gray-300 dark:bg-gray-600" />
@@ -734,7 +733,7 @@ export const CustomNode = React.memo(
           className="flex cursor-pointer items-center rounded-md px-3 py-2 text-red-500 hover:bg-gray-100 dark:hover:bg-gray-700"
         >
           <TrashIcon className="mr-2 h-5 w-5 text-red-500 dark:text-red-400" />
-          <span className="dark:text-red-400">Delete</span>
+          <span className="dark:text-red-400">删除</span>
         </ContextMenu.Item>
       </ContextMenu.Content>
     );
@@ -812,7 +811,7 @@ export const CustomNode = React.memo(
                     {customTitle && (
                       <TooltipContent>
                         <p>
-                          Type:{" "}
+                          类型：{" "}
                           {beautifyString(
                             data.blockType?.replace(/Block$/, "") || data.title,
                           )}
@@ -825,7 +824,7 @@ export const CustomNode = React.memo(
                   <button
                     onClick={handleTitleEdit}
                     className="cursor-pointer rounded p-1 opacity-0 transition-opacity group-hover:opacity-100 hover:bg-gray-100"
-                    aria-label="Edit title"
+                    aria-label="编辑标题"
                   >
                     <Pencil1Icon className="h-4 w-4" />
                   </button>
@@ -838,7 +837,7 @@ export const CustomNode = React.memo(
               <div className="w-auto grow" />
 
               <button
-                aria-label="Options"
+                aria-label="选项"
                 className="cursor-pointer rounded-full border-none bg-transparent p-1 hover:bg-gray-100"
                 onClick={onContextButtonTrigger}
               >
@@ -864,7 +863,7 @@ export const CustomNode = React.memo(
                   variant="outline"
                   className={`${getPrimaryCategoryColor([category])} h-6 whitespace-nowrap rounded-full border border-gray-300 opacity-50`}
                 >
-                  {beautifyString(category.category.toLowerCase())}
+                  {localizeBlockCategoryName(category.category)}
                 </Badge>
               ))}
             </div>
@@ -932,7 +931,7 @@ export const CustomNode = React.memo(
             <>
               <LineSeparator />
               <div className="flex items-center justify-between pt-6">
-                Advanced
+                高级
                 <Switch
                   onCheckedChange={toggleAdvancedSettings}
                   checked={isAdvancedOpen}

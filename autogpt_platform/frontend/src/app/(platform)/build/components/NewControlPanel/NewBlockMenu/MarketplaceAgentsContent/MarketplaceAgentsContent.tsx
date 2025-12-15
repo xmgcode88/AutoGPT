@@ -6,6 +6,7 @@ import { ErrorCard } from "@/components/molecules/ErrorCard/ErrorCard";
 import { cn } from "@/lib/utils";
 import { InfiniteScroll } from "@/components/contextual/InfiniteScroll/InfiniteScroll";
 import { blockMenuContainerStyle } from "../style";
+import { BUILDER_ERROR_CARD_I18N } from "@/app/(platform)/build/i18n";
 
 export const MarketplaceAgentsContent = () => {
   const {
@@ -44,13 +45,13 @@ export const MarketplaceAgentsContent = () => {
       <div className="h-full p-4">
         <ErrorCard
           isSuccess={false}
-          context="block menu"
+          i18n={BUILDER_ERROR_CARD_I18N}
+          context="模块菜单"
           httpError={{
             status: status,
-            statusText: "Request failed",
+            statusText: "请求失败",
             message:
-              (listStoreAgentsError?.detail as unknown as string) ||
-              "An error occurred",
+              (listStoreAgentsError?.detail as unknown as string) || "发生错误",
           }}
           responseError={listStoreAgentsError || undefined}
           onRetry={() => refetchListStoreAgents()}

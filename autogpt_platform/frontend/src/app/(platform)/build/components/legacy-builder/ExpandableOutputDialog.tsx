@@ -113,7 +113,7 @@ const ExpandableOutputDialog: FC<ExpandableOutputDialogProps> = ({
 
     navigator.clipboard.writeText(formattedData).then(() => {
       toast({
-        title: `"${beautifyString(pinName)}" data copied to clipboard!`,
+        title: `"${beautifyString(pinName)}" 数据已复制到剪贴板！`,
         duration: 2000,
       });
     });
@@ -126,7 +126,7 @@ const ExpandableOutputDialog: FC<ExpandableOutputDialogProps> = ({
           <DialogTitle className="flex items-center justify-between pr-8">
             <div className="flex items-center gap-2">
               <Maximize2 size={20} />
-              Full Output Preview
+              完整输出预览
             </div>
             {enableEnhancedOutputHandling && (
               <div className="flex items-center gap-3">
@@ -134,7 +134,7 @@ const ExpandableOutputDialog: FC<ExpandableOutputDialogProps> = ({
                   htmlFor="enhanced-rendering-toggle"
                   className="cursor-pointer select-none text-sm font-normal text-gray-600"
                 >
-                  Enhanced Rendering
+                  增强渲染
                 </label>
                 <Switch
                   id="enhanced-rendering-toggle"
@@ -145,9 +145,9 @@ const ExpandableOutputDialog: FC<ExpandableOutputDialogProps> = ({
             )}
           </DialogTitle>
           <DialogDescription>
-            Execution ID: <span className="font-mono text-xs">{execId}</span>
+            执行 ID：<span className="font-mono text-xs">{execId}</span>
             <br />
-            Pin:{" "}
+            引脚：{" "}
             <span className="font-semibold">{beautifyString(pinName)}</span>
           </DialogDescription>
         </DialogHeader>
@@ -188,7 +188,7 @@ const ExpandableOutputDialog: FC<ExpandableOutputDialogProps> = ({
                       >
                         <div className="mb-2 flex items-center justify-between">
                           <span className="text-sm font-medium text-gray-600">
-                            Item {index + 1} of {data.length}
+                            第 {index + 1} 项 / 共 {data.length} 项
                           </span>
                           <Button
                             variant="outline"
@@ -202,7 +202,7 @@ const ExpandableOutputDialog: FC<ExpandableOutputDialogProps> = ({
                                 .writeText(itemData)
                                 .then(() => {
                                   toast({
-                                    title: `Item ${index + 1} copied to clipboard!`,
+                                    title: `第 ${index + 1} 项已复制到剪贴板！`,
                                     duration: 2000,
                                   });
                                 });
@@ -210,7 +210,7 @@ const ExpandableOutputDialog: FC<ExpandableOutputDialogProps> = ({
                             className="flex items-center gap-1"
                           >
                             <Clipboard size={14} />
-                            Copy Item
+                            复制此项
                           </Button>
                         </div>
                         <Separator className="mb-3" />
@@ -225,18 +225,14 @@ const ExpandableOutputDialog: FC<ExpandableOutputDialogProps> = ({
                   </div>
                 )
               ) : (
-                <div className="py-8 text-center text-gray-500">
-                  No data available
-                </div>
+                <div className="py-8 text-center text-gray-500">暂无数据</div>
               )}
             </div>
           </ScrollArea>
         </div>
 
         <DialogFooter className="flex justify-between">
-          <div className="text-sm text-gray-600">
-            {data.length} item{data.length !== 1 ? "s" : ""} total
-          </div>
+          <div className="text-sm text-gray-600">共 {data.length} 项</div>
           <div className="flex gap-2">
             {!useEnhancedRenderer && (
               <Button
@@ -245,10 +241,10 @@ const ExpandableOutputDialog: FC<ExpandableOutputDialogProps> = ({
                 className="flex items-center gap-1"
               >
                 <Clipboard size={16} />
-                Copy All
+                全部复制
               </Button>
             )}
-            <Button onClick={onClose}>Close</Button>
+            <Button onClick={onClose}>关闭</Button>
           </div>
         </DialogFooter>
       </DialogContent>

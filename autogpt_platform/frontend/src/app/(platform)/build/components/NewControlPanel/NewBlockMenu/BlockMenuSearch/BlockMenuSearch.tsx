@@ -45,7 +45,7 @@ export const BlockMenuSearch = () => {
 
   return (
     <div className={blockMenuContainerStyle}>
-      <Text variant="body-medium">Search results</Text>
+      <Text variant="body-medium">搜索结果</Text>
       <InfiniteScroll
         isFetchingNextPage={isFetchingNextPage}
         fetchNextPage={fetchNextPage}

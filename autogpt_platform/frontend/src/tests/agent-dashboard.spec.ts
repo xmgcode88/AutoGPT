@@ -29,9 +29,7 @@ test("submit agent button works correctly", async ({ page }) => {
   await submitAgentButton.click();
 
   await expect(getText("发布智能体")).toBeVisible();
-  await expect(
-    getText("选择你要发布的项目"),
-  ).toBeVisible();
+  await expect(getText("选择你要发布的项目")).toBeVisible();
 
   await page.locator('button[aria-label="Close"]').click();
   await expect(getText("发布智能体")).not.toBeVisible();

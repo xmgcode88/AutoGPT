@@ -26,9 +26,7 @@ export function BecomeACreator({
         <h2 className="mb-6 text-center font-poppins text-[48px] font-semibold leading-[54px] tracking-[-0.012em] text-neutral-950 dark:text-neutral-50 md:mb-8 lg:mb-12">
           构建 AI 智能体并分享
           <br />
-          <span className="text-violet-600 dark:text-violet-400">
-            你的
-          </span>
+          <span className="text-violet-600 dark:text-violet-400">你的</span>
           愿景
         </h2>
 

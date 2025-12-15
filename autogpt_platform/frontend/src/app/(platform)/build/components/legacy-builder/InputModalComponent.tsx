@@ -42,7 +42,7 @@ const InputModalComponent: FC<ModalProps> = ({
   const copyValue = () => {
     navigator.clipboard.writeText(tempValue).then(() => {
       toast({
-        title: "Input value copied to clipboard!",
+        title: "输入值已复制到剪贴板！",
         duration: 2000,
       });
     });
@@ -60,7 +60,7 @@ const InputModalComponent: FC<ModalProps> = ({
       }`}
     >
       <h2 className="mb-4 text-center text-lg font-semibold">
-        {title || "Enter input text"}
+        {title || "请输入输入内容"}
       </h2>
       <div className="nowheel relative flex-grow">
         <Textarea
@@ -79,9 +79,9 @@ const InputModalComponent: FC<ModalProps> = ({
       </div>
       <div className="mt-4 flex justify-end space-x-2">
         <Button onClick={onClose} variant="outline">
-          Cancel
+          取消
         </Button>
-        <Button onClick={handleSave}>Save</Button>
+        <Button onClick={handleSave}>保存</Button>
       </div>
     </div>
   );

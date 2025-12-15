@@ -47,7 +47,7 @@ export const NodeContextMenu = ({
       >
         <DropdownMenuItem onClick={handleCopy} className="hover:rounded-xlarge">
           <Copy className="mr-2 h-4 w-4" />
-          Copy Node
+          复制节点
         </DropdownMenuItem>
 
         {subGraphID && (
@@ -56,7 +56,7 @@ export const NodeContextMenu = ({
             className="hover:rounded-xlarge"
           >
             <ExternalLink className="mr-2 h-4 w-4" />
-            Open Agent
+            打开智能体
           </DropdownMenuItem>
         )}
 
@@ -67,7 +67,7 @@ export const NodeContextMenu = ({
           className="text-red-600 hover:rounded-xlarge"
         >
           <Trash2 className="mr-2 h-4 w-4" />
-          Delete
+          删除
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -6,6 +6,7 @@ import { NodeContextMenu } from "./NodeContextMenu";
 import { CustomNodeData } from "../CustomNode";
 import { useNodeStore } from "@/app/(platform)/build/stores/nodeStore";
 import { useState } from "react";
+import { localizeBlockName } from "@/app/(platform)/build/i18n";
 import {
   Tooltip,
   TooltipContent,
@@ -21,9 +22,12 @@ export const NodeHeader = ({
   nodeId: string;
 }) => {
   const updateNodeData = useNodeStore((state) => state.updateNodeData);
-  const title = (data.metadata?.customized_name as string) || data.title;
+  const customizedTitle = data.metadata?.customized_name as string | undefined;
+  const displayTitle = customizedTitle
+    ? customizedTitle
+    : localizeBlockName(data.title);
   const [isEditingTitle, setIsEditingTitle] = useState(false);
-  const [editedTitle, setEditedTitle] = useState(title);
+  const [editedTitle, setEditedTitle] = useState(displayTitle);
 
   const handleTitleEdit = () => {
     updateNodeData(nodeId, {
@@ -35,7 +39,7 @@ export const NodeHeader = ({
   const handleTitleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") handleTitleEdit();
     if (e.key === "Escape") {
-      setEditedTitle(title);
+      setEditedTitle(displayTitle);
       setIsEditingTitle(false);
     }
   };
@@ -68,12 +72,12 @@ export const NodeHeader = ({
                   <TooltipTrigger asChild>
                     <div>
                       <Text variant="large-semibold" className="line-clamp-1">
-                        {beautifyString(title)}
+                        {beautifyString(displayTitle)}
                       </Text>
                     </div>
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>{beautifyString(title)}</p>
+                    <p>{beautifyString(displayTitle)}</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>

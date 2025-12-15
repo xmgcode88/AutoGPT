@@ -40,7 +40,7 @@ export const RunInputDialog = ({
   return (
     <>
       <Dialog
-        title={purpose === "run" ? "Run Agent" : "Schedule Run"}
+        title={purpose === "run" ? "运行智能体" : "定时运行"}
         controlled={{
           isOpen,
           set: setIsOpen,
@@ -54,7 +54,7 @@ export const RunInputDialog = ({
               <div>
                 <div className="mb-4">
                   <Text variant="h4" className="text-gray-900">
-                    Credentials
+                    凭证
                   </Text>
                 </div>
                 <div className="px-2">
@@ -77,7 +77,7 @@ export const RunInputDialog = ({
               <div>
                 <div className="mb-4">
                   <Text variant="h4" className="text-gray-900">
-                    Inputs
+                    输入
                   </Text>
                 </div>
                 <div className="px-2">
@@ -108,7 +108,7 @@ export const RunInputDialog = ({
                   {!isExecutingGraph && (
                     <PlayIcon className="size-5 transition-transform group-hover:scale-110" />
                   )}
-                  <span className="font-semibold">Manual Run</span>
+                  <span className="font-semibold">手动运行</span>
                 </Button>
               )}
               {purpose === "schedule" && (
@@ -119,7 +119,7 @@ export const RunInputDialog = ({
                   onClick={() => setOpenCronSchedulerDialog(true)}
                 >
                   <ClockIcon className="size-5 transition-transform group-hover:scale-110" />
-                  <span className="font-semibold">Schedule Run</span>
+                  <span className="font-semibold">定时运行</span>
                 </Button>
               )}
             </div>
