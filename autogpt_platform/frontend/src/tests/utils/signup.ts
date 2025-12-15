@@ -65,7 +65,7 @@ export async function signupTestUser(
       // Verify we're on marketplace
       await page
         .getByText(
-          "Bringing you AI agents designed by thinkers from around the world",
+          "汇聚来自世界各地创作者的灵感，为你带来精心设计的 AI 智能体",
         )
         .first()
         .waitFor({ state: "visible", timeout: 10000 });

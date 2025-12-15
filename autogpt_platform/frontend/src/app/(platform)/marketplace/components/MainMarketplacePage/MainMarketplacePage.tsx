@@ -8,6 +8,7 @@ import { useMainMarketplacePage } from "./useMainMarketplacePage";
 import { FeaturedCreators } from "../FeaturedCreators/FeaturedCreators";
 import { MainMarketplacePageLoading } from "../MainMarketplacePageLoading";
 import { ErrorCard } from "@/components/molecules/ErrorCard/ErrorCard";
+import { MARKETPLACE_ERROR_CARD_I18N } from "@/app/(platform)/marketplace/i18n";
 
 export const MainMarkeplacePage = () => {
   const { featuredAgents, topAgents, featuredCreators, isLoading, hasError } =
@@ -24,10 +25,11 @@ export const MainMarkeplacePage = () => {
           <div className="flex min-h-[400px] items-center justify-center">
             <ErrorCard
               isSuccess={false}
-              responseError={{ message: "Failed to load marketplace data" }}
-              context="marketplace page"
+              responseError={{ message: "加载智能体市场数据失败" }}
+              context="智能体市场页面"
               onRetry={() => window.location.reload()}
               className="w-full max-w-md"
+              i18n={MARKETPLACE_ERROR_CARD_I18N}
             />
           </div>
         </main>
@@ -47,7 +49,7 @@ export const MainMarkeplacePage = () => {
         <Separator className="mb-6 mt-24" />
 
         {topAgents && (
-          <AgentsSection sectionTitle="Top Agents" agents={topAgents.agents} />
+          <AgentsSection sectionTitle="热门智能体" agents={topAgents.agents} />
         )}
         <Separator className="mb-[25px] mt-[60px]" />
         {featuredCreators && (
@@ -55,9 +57,9 @@ export const MainMarkeplacePage = () => {
         )}
         <Separator className="mb-[25px] mt-[60px]" />
         <BecomeACreator
-          title="Become a Creator"
-          description="Join our ever-growing community of hackers and tinkerers"
-          buttonText="Become a Creator"
+          title="成为创作者"
+          description="加入不断壮大的创作者社区，与更多同好一起创造与分享"
+          buttonText="成为创作者"
         />
       </main>
     </div>

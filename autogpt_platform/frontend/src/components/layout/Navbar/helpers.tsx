@@ -19,7 +19,7 @@ type Link = {
 
 export const loggedInLinks: Link[] = [
   {
-    name: "Marketplace",
+    name: "智能体市场",
     href: "/marketplace",
   },
   {
@@ -34,7 +34,7 @@ export const loggedInLinks: Link[] = [
 
 export const loggedOutLinks: Link[] = [
   {
-    name: "Marketplace",
+    name: "智能体市场",
     href: "/marketplace",
   },
 ];

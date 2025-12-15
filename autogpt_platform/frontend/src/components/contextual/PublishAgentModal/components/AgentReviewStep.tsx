@@ -32,11 +32,11 @@ export function AgentReviewStep({
   return (
     <div aria-labelledby="modal-title">
       <StepHeader
-        title="Agent is awaiting review"
+        title="智能体正在等待审核"
         description={
           isDashboardPage
-            ? "Once the agent is approved, it will be available in the AutoGPT marketplace."
-            : "In the meantime you can check your progress on your Creator Dashboard page"
+            ? "审核通过后，该智能体将会上线到 AutoGPT 智能体市场。"
+            : "你也可以在创作者控制台查看审核进度"
         }
       />
 
@@ -62,13 +62,13 @@ export function AgentReviewStep({
             className="aspect-video h-64 w-full rounded-xl bg-neutral-200"
             role="img"
             aria-label={
-              thumbnailSrc ? "Agent thumbnail" : "Thumbnail placeholder"
+              thumbnailSrc ? "智能体缩略图" : "缩略图占位"
             }
           >
             {thumbnailSrc && (
               <Image
                 src={thumbnailSrc}
-                alt="Agent thumbnail"
+                alt="智能体缩略图"
                 width={400}
                 height={280}
                 className="h-full w-full rounded-xl object-cover"
@@ -97,7 +97,7 @@ export function AgentReviewStep({
           onClick={onDone}
           className={isDashboardPage ? "w-1/2" : "w-full"}
         >
-          Done
+          完成
         </Button>
         {!isDashboardPage ? (
           <Button
@@ -105,7 +105,7 @@ export function AgentReviewStep({
             className="w-full"
             data-testid="view-progress-button"
           >
-            View progress
+            查看进度
           </Button>
         ) : null}
       </div>

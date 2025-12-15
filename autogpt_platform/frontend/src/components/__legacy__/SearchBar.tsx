@@ -17,7 +17,7 @@ interface SearchBarProps {
 
 /** SearchBar component for user input and search functionality. */
 export const SearchBar: React.FC<SearchBarProps> = ({
-  placeholder = 'Search for tasks like "optimise SEO"',
+  placeholder = '搜索你想完成的任务，例如“优化 SEO”',
   backgroundColor = "bg-neutral-100 dark:bg-neutral-800",
   iconColor = "text-[#646464] dark:text-neutral-400",
   textColor = "text-[#707070] dark:text-neutral-200",

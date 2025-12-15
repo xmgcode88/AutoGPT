@@ -11,7 +11,7 @@ interface FeaturedCreatorsProps {
 
 export const FeaturedCreators = ({
   featuredCreators,
-  title = "Featured Creators",
+  title = "精选创作者",
 }: FeaturedCreatorsProps) => {
   const { handleCardClick, displayedCreators } = useFeaturedCreators({
     featuredCreators,

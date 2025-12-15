@@ -13,11 +13,15 @@ export const dynamic = "force-dynamic";
 
 // FIX: Correct metadata
 export const metadata: Metadata = {
-  title: "Marketplace - AutoGPT Platform",
-  description: "Find and use AI Agents created by our community",
-  applicationName: "AutoGPT Marketplace",
+  title: "智能体市场 - AutoGPT Platform",
+  description: "发现并使用由社区创建的 AI 智能体",
+  applicationName: "AutoGPT 智能体市场",
   authors: [{ name: "AutoGPT Team" }],
   keywords: [
+    "智能体",
+    "智能体市场",
+    "自动化",
+    "人工智能",
     "AI agents",
     "automation",
     "artificial intelligence",
@@ -29,23 +33,23 @@ export const metadata: Metadata = {
     follow: true,
   },
   openGraph: {
-    title: "Marketplace - AutoGPT Platform",
-    description: "Find and use AI Agents created by our community",
+    title: "智能体市场 - AutoGPT Platform",
+    description: "发现并使用由社区创建的 AI 智能体",
     type: "website",
-    siteName: "AutoGPT Marketplace",
+    siteName: "AutoGPT 智能体市场",
     images: [
       {
         url: "/images/store-og.png",
         width: 1200,
         height: 630,
-        alt: "AutoGPT Marketplace",
+        alt: "AutoGPT 智能体市场",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Marketplace - AutoGPT Platform",
-    description: "Find and use AI Agents created by our community",
+    title: "智能体市场 - AutoGPT Platform",
+    description: "发现并使用由社区创建的 AI 智能体",
     images: ["/images/store-twitter.png"],
   },
   icons: {

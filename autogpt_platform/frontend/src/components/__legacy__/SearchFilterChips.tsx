@@ -24,9 +24,9 @@ export const SearchFilterChips: React.FC<SearchFilterChipsProps> = ({
   const [selected, setSelected] = React.useState("all");
 
   const filters: FilterOption[] = [
-    { label: "All", count: totalCount, value: "all" },
-    { label: "Agents", count: agentsCount, value: "agents" },
-    { label: "Creators", count: creatorsCount, value: "creators" },
+    { label: "全部", count: totalCount, value: "all" },
+    { label: "智能体", count: agentsCount, value: "agents" },
+    { label: "创作者", count: creatorsCount, value: "creators" },
   ];
 
   const handleFilterClick = (value: string) => {

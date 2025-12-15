@@ -81,7 +81,7 @@ export function useAgentInfoStep({
     if (images.length === 0) {
       form.setError("root", {
         type: "manual",
-        message: "At least one image is required",
+        message: "至少需要一张图片",
       });
       return;
     }
@@ -114,10 +114,10 @@ export function useAgentInfoStep({
     } catch (error) {
       Sentry.captureException(error);
       toast({
-        title: "Submit Agent Error",
+        title: "提交失败",
         description:
           (error instanceof Error ? error.message : undefined) ||
-          "An error occurred while submitting the agent. Please try again.",
+          "提交智能体时发生错误，请重试。",
         duration: 3000,
         variant: "destructive",
       });

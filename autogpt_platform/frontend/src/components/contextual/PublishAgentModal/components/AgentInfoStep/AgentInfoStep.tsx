@@ -43,23 +43,23 @@ export function AgentInfoStep({
   };
 
   const categoryOptions = [
-    { value: "productivity", label: "Productivity" },
-    { value: "writing", label: "Writing & Content" },
-    { value: "development", label: "Development" },
-    { value: "data", label: "Data & Analytics" },
-    { value: "marketing", label: "Marketing & SEO" },
-    { value: "research", label: "Research & Learning" },
-    { value: "creative", label: "Creative & Design" },
-    { value: "business", label: "Business & Finance" },
-    { value: "personal", label: "Personal Assistant" },
-    { value: "other", label: "Other" },
+    { value: "productivity", label: "效率" },
+    { value: "writing", label: "写作与内容" },
+    { value: "development", label: "开发" },
+    { value: "data", label: "数据与分析" },
+    { value: "marketing", label: "市场与 SEO" },
+    { value: "research", label: "研究与学习" },
+    { value: "creative", label: "创意与设计" },
+    { value: "business", label: "商业与金融" },
+    { value: "personal", label: "个人助手" },
+    { value: "other", label: "其他" },
   ];
 
   return (
     <div className="mx-auto flex w-full flex-col rounded-3xl">
       <StepHeader
-        title="Publish Agent"
-        description="Write a bit of details about your agent"
+        title="发布智能体"
+        description="填写一些关于智能体的信息"
       />
 
       <Form {...form}>
@@ -70,9 +70,9 @@ export function AgentInfoStep({
             render={({ field }) => (
               <Input
                 id={field.name}
-                label="Title"
+                label="标题"
                 type="text"
-                placeholder="Agent name"
+                placeholder="智能体名称"
                 error={form.formState.errors.title?.message}
                 {...field}
               />
@@ -85,9 +85,9 @@ export function AgentInfoStep({
             render={({ field }) => (
               <Input
                 id={field.name}
-                label="Subheader"
+                label="副标题"
                 type="text"
-                placeholder="A tagline for your agent"
+                placeholder="一句话介绍你的智能体"
                 error={form.formState.errors.subheader?.message}
                 {...field}
               />
@@ -100,9 +100,9 @@ export function AgentInfoStep({
             render={({ field }) => (
               <Input
                 id={field.name}
-                label="Slug"
+                label="Slug（链接标识）"
                 type="text"
-                placeholder="URL-friendly name for your agent"
+                placeholder="用于 URL 的名称（小写字母/数字/连字符）"
                 error={form.formState.errors.slug?.message}
                 {...field}
               />
@@ -123,9 +123,9 @@ export function AgentInfoStep({
             render={({ field }) => (
               <Input
                 id={field.name}
-                label="YouTube video link"
+                label="YouTube 视频链接"
                 type="url"
-                placeholder="Paste a video link here"
+                placeholder="在此粘贴视频链接"
                 error={form.formState.errors.youtubeLink?.message}
                 {...field}
               />
@@ -138,8 +138,8 @@ export function AgentInfoStep({
             render={({ field }) => (
               <Select
                 id={field.name}
-                label="Category"
-                placeholder="Select a category for your agent"
+                label="分类"
+                placeholder="请选择分类"
                 value={field.value}
                 onValueChange={field.onChange}
                 error={form.formState.errors.category?.message}
@@ -154,9 +154,9 @@ export function AgentInfoStep({
             render={({ field }) => (
               <Input
                 id={field.name}
-                label="Description"
+                label="描述"
                 type="textarea"
-                placeholder="Describe your agent and what it does"
+                placeholder="介绍你的智能体及其功能"
                 error={form.formState.errors.description?.message}
                 {...field}
               />
@@ -169,9 +169,9 @@ export function AgentInfoStep({
             render={({ field }) => (
               <Input
                 id={field.name}
-                label="Instructions"
+                label="使用说明"
                 type="textarea"
-                placeholder="Explain to users how to run this agent and what to expect"
+                placeholder="告诉用户如何运行这个智能体以及需要注意什么"
                 error={form.formState.errors.instructions?.message}
                 {...field}
               />
@@ -184,10 +184,10 @@ export function AgentInfoStep({
             render={({ field }) => (
               <div className="flex flex-col space-y-2">
                 <label className="text-sm font-medium">
-                  Recommended Schedule
+                  推荐计划
                 </label>
                 <p className="text-xs text-gray-600">
-                  Suggest when users should run this agent for best results
+                  建议用户在什么时候运行这个智能体以获得最佳效果
                 </p>
                 <Button
                   type="button"
@@ -197,8 +197,8 @@ export function AgentInfoStep({
                 >
                   <CalendarClockIcon className="mr-2 h-4 w-4" />
                   {field.value
-                    ? humanizeCronExpression(field.value)
-                    : "Set schedule"}
+                    ? humanizeCronExpression(field.value, "zh-CN")
+                    : "设置计划"}
                 </Button>
               </div>
             )}
@@ -211,7 +211,7 @@ export function AgentInfoStep({
               variant="secondary"
               className="w-full"
             >
-              Back
+              返回
             </Button>
             <Button
               type="submit"
@@ -221,7 +221,7 @@ export function AgentInfoStep({
               }
               loading={isSubmitting}
             >
-              Submit for review
+              提交审核
             </Button>
           </div>
         </form>
@@ -232,7 +232,7 @@ export function AgentInfoStep({
         setOpen={setCronScheduleDialogOpen}
         onSubmit={handleScheduleChange}
         defaultCronExpression={form.getValues("recommendedScheduleCron") || ""}
-        title="Recommended Schedule"
+        title="推荐计划"
       />
     </div>
   );

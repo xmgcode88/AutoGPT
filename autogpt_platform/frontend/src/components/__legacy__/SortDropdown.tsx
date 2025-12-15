@@ -10,10 +10,10 @@ import {
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 
 const sortOptions: SortOption[] = [
-  { label: "Most Runs", value: "runs" },
-  { label: "Highest Rated", value: "rating" },
-  { label: "Name (A-Z)", value: "name" },
-  { label: "Recently Updated", value: "updated_at" },
+  { label: "运行次数最多", value: "runs" },
+  { label: "评分最高", value: "rating" },
+  { label: "名称（A-Z）", value: "name" },
+  { label: "最近更新", value: "updated_at" },
 ];
 
 interface SortOption {
@@ -36,7 +36,7 @@ export const SortDropdown: React.FC<{
     <DropdownMenu>
       <DropdownMenuTrigger className="flex items-center gap-1.5 focus:outline-none">
         <span className="text-base text-neutral-800 dark:text-neutral-200">
-          Sort by
+          排序：
         </span>
         <span className="text-base text-neutral-800 dark:text-neutral-200">
           {selected.label}

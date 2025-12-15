@@ -21,14 +21,14 @@ test("user can publish an agent through the complete flow", async ({
   await hasUrl(page, "/marketplace");
 
   await page.goto("/marketplace");
-  await getButton("Become a creator").click();
+  await getButton("成为创作者").click();
 
   const publishAgentModal = getId("publish-agent-modal");
   await isVisible(publishAgentModal, 10000);
 
   await isVisible(
     publishAgentModal.getByText(
-      "Select your project that you'd like to publish",
+      "选择你要发布的项目",
     ),
   );
 
@@ -36,7 +36,7 @@ test("user can publish an agent through the complete flow", async ({
   await agentToSelect.click();
 
   const nextButton = publishAgentModal.getByRole("button", {
-    name: "Next",
+    name: "下一步",
     exact: true,
   });
 
@@ -44,20 +44,20 @@ test("user can publish an agent through the complete flow", async ({
   await nextButton.click();
 
   // 2. Adding details of agent
-  await isVisible(getText("Write a bit of details about your agent"));
+  await isVisible(getText("填写一些关于智能体的信息"));
 
   const agentName = "Test Agent Name";
 
-  const agentTitle = publishAgentModal.getByLabel("Title");
+  const agentTitle = publishAgentModal.getByLabel("标题");
   await agentTitle.fill(agentName);
 
-  const agentSubheader = publishAgentModal.getByLabel("Subheader");
+  const agentSubheader = publishAgentModal.getByLabel("副标题");
   await agentSubheader.fill("Test Agent Subheader");
 
-  const agentSlug = publishAgentModal.getByLabel("Slug");
+  const agentSlug = publishAgentModal.getByLabel("Slug（链接标识）");
   await agentSlug.fill("test-agent-slug");
 
-  const youtubeInput = publishAgentModal.getByLabel("Youtube video link");
+  const youtubeInput = publishAgentModal.getByLabel("YouTube 视频链接");
   await youtubeInput.fill("https://www.youtube.com/watch?v=test");
 
   const categorySelect = publishAgentModal.locator(
@@ -65,12 +65,12 @@ test("user can publish an agent through the complete flow", async ({
   );
   await categorySelect.selectOption({ value: "other" });
 
-  const descriptionInput = publishAgentModal.getByLabel("Description");
+  const descriptionInput = publishAgentModal.getByLabel("描述");
   await descriptionInput.fill(
     "This is a test agent description for the automated test.",
   );
 
-  await isEnabled(publishAgentModal.getByRole("button", { name: "Submit" }));
+  await isEnabled(publishAgentModal.getByRole("button", { name: "提交审核" }));
 });
 
 test("should display appropriate content in agent creation modal when user is logged out", async ({
@@ -79,11 +79,11 @@ test("should display appropriate content in agent creation modal when user is lo
   const { getText, getButton } = getSelectors(page);
 
   await page.goto("/marketplace");
-  await getButton("Become a creator").click();
+  await getButton("成为创作者").click();
 
   await isVisible(
     getText(
-      "Log in or create an account to publish your agents to the marketplace and join a community of creators",
+      "登录或创建账号，即可将你的智能体发布到智能体市场，并加入创作者社区",
     ),
   );
 });
@@ -99,7 +99,7 @@ test("should validate all form fields in publish agent form", async ({
   await hasUrl(page, "/marketplace");
 
   await page.goto("/marketplace");
-  await getButton("Become a creator").click();
+  await getButton("成为创作者").click();
 
   const publishAgentModal = getId("publish-agent-modal");
   await isVisible(publishAgentModal, 10000);
@@ -108,24 +108,24 @@ test("should validate all form fields in publish agent form", async ({
   await agentToSelect.click();
 
   const nextButton = publishAgentModal.getByRole("button", {
-    name: "Next",
+    name: "下一步",
     exact: true,
   });
   await nextButton.click();
 
-  await isVisible(getText("Write a bit of details about your agent"));
+  await isVisible(getText("填写一些关于智能体的信息"));
 
   // Get form elements
-  const agentTitle = publishAgentModal.getByLabel("Title");
-  const agentSubheader = publishAgentModal.getByLabel("Subheader");
-  const agentSlug = publishAgentModal.getByLabel("Slug");
-  const youtubeInput = publishAgentModal.getByLabel("Youtube video link");
+  const agentTitle = publishAgentModal.getByLabel("标题");
+  const agentSubheader = publishAgentModal.getByLabel("副标题");
+  const agentSlug = publishAgentModal.getByLabel("Slug（链接标识）");
+  const youtubeInput = publishAgentModal.getByLabel("YouTube 视频链接");
   const categorySelect = publishAgentModal.locator(
     'select[aria-hidden="true"]',
   );
-  const descriptionInput = publishAgentModal.getByLabel("Description");
+  const descriptionInput = publishAgentModal.getByLabel("描述");
   const submitButton = publishAgentModal.getByRole("button", {
-    name: "Submit",
+    name: "提交审核",
   });
 
   async function clearForm() {
@@ -140,11 +140,11 @@ test("should validate all form fields in publish agent form", async ({
   await clearForm();
   await submitButton.click();
 
-  await isVisible(publishAgentModal.getByText("Title is required"));
-  await isVisible(publishAgentModal.getByText("Subheader is required"));
-  await isVisible(publishAgentModal.getByText("Slug is required"));
-  await isVisible(publishAgentModal.getByText("Category is required"));
-  await isVisible(publishAgentModal.getByText("Description is required"));
+  await isVisible(publishAgentModal.getByText("请输入标题"));
+  await isVisible(publishAgentModal.getByText("请输入副标题"));
+  await isVisible(publishAgentModal.getByText("请输入 Slug"));
+  await isVisible(publishAgentModal.getByText("请选择分类"));
+  await isVisible(publishAgentModal.getByText("请输入描述"));
 
   // 2. Test field length limits
   await clearForm();
@@ -154,7 +154,7 @@ test("should validate all form fields in publish agent form", async ({
   await agentTitle.fill(longTitle);
   await agentTitle.blur();
   await isVisible(
-    publishAgentModal.getByText("Title must be less than 100 characters"),
+    publishAgentModal.getByText("标题需少于 100 个字符"),
   );
 
   // Test subheader length limit (200 characters)
@@ -162,7 +162,7 @@ test("should validate all form fields in publish agent form", async ({
   await agentSubheader.fill(longSubheader);
   await agentSubheader.blur();
   await isVisible(
-    publishAgentModal.getByText("Subheader must be less than 200 characters"),
+    publishAgentModal.getByText("副标题需少于 200 个字符"),
   );
 
   // Test slug length limit (50 characters)
@@ -170,7 +170,7 @@ test("should validate all form fields in publish agent form", async ({
   await agentSlug.fill(longSlug);
   await agentSlug.blur();
   await isVisible(
-    publishAgentModal.getByText("Slug must be less than 50 characters"),
+    publishAgentModal.getByText("Slug 需少于 50 个字符"),
   );
 
   // Test description length limit (1000 characters)
@@ -179,7 +179,7 @@ test("should validate all form fields in publish agent form", async ({
   await descriptionInput.blur();
   await isVisible(
     publishAgentModal.getByText(
-      "Description must be less than 1000 characters",
+      "描述需少于 1000 个字符",
     ),
   );
 
@@ -188,7 +188,7 @@ test("should validate all form fields in publish agent form", async ({
   await agentSlug.blur();
   await isVisible(
     publishAgentModal.getByText(
-      "Slug can only contain lowercase letters, numbers, and hyphens",
+      "Slug 只能包含小写字母、数字和连字符（-）",
     ),
   );
 
@@ -197,7 +197,7 @@ test("should validate all form fields in publish agent form", async ({
   await agentSlug.blur();
   await isVisible(
     publishAgentModal.getByText(
-      "Slug can only contain lowercase letters, numbers, and hyphens",
+      "Slug 只能包含小写字母、数字和连字符（-）",
     ),
   );
 
@@ -206,7 +206,7 @@ test("should validate all form fields in publish agent form", async ({
   await agentSlug.blur();
   await isVisible(
     publishAgentModal.getByText(
-      "Slug can only contain lowercase letters, numbers, and hyphens",
+      "Slug 只能包含小写字母、数字和连字符（-）",
     ),
   );
 
@@ -218,7 +218,7 @@ test("should validate all form fields in publish agent form", async ({
 
   await isHidden(
     publishAgentModal.getByText(
-      "Slug can only contain lowercase letters, numbers, and hyphens",
+      "Slug 只能包含小写字母、数字和连字符（-）",
     ),
   );
 
@@ -226,14 +226,14 @@ test("should validate all form fields in publish agent form", async ({
   await youtubeInput.fill("https://www.google.com/invalid-url");
   await youtubeInput.blur();
   await isVisible(
-    publishAgentModal.getByText("Please enter a valid YouTube URL"),
+    publishAgentModal.getByText("请输入有效的 YouTube 链接"),
   );
 
   await youtubeInput.clear();
   await youtubeInput.fill("not-a-url-at-all");
   await youtubeInput.blur();
   await isVisible(
-    publishAgentModal.getByText("Please enter a valid YouTube URL"),
+    publishAgentModal.getByText("请输入有效的 YouTube 链接"),
   );
 
   // Test valid YouTube URLs should not show error
@@ -243,7 +243,7 @@ test("should validate all form fields in publish agent form", async ({
   await page.waitForTimeout(500);
 
   await isHidden(
-    publishAgentModal.getByText("Please enter a valid YouTube URL"),
+    publishAgentModal.getByText("请输入有效的 YouTube 链接"),
   );
 
   await youtubeInput.clear();
@@ -252,7 +252,7 @@ test("should validate all form fields in publish agent form", async ({
   await page.waitForTimeout(500);
 
   await isHidden(
-    publishAgentModal.getByText("Please enter a valid YouTube URL"),
+    publishAgentModal.getByText("请输入有效的 YouTube 链接"),
   );
 
   // 5. Test submit button enabled/disabled state

@@ -64,16 +64,16 @@ export const useAgentInfo = ({ storeListingVersionId }: UseAgentInfoProps) => {
       router.push(`/library/agents/${data.id}`);
 
       toast({
-        title: "Agent Added",
-        description: "Redirecting to your library...",
+        title: "已添加智能体",
+        description: "正在跳转到你的资料库...",
         duration: 2000,
       });
     } catch (error) {
       Sentry.captureException(error);
 
       toast({
-        title: "Error",
-        description: "Failed to add agent to library. Please try again.",
+        title: "出错了",
+        description: "添加到资料库失败，请重试。",
         variant: "destructive",
       });
     }
@@ -103,14 +103,14 @@ export const useAgentInfo = ({ storeListingVersionId }: UseAgentInfoProps) => {
       });
 
       toast({
-        title: "Download Complete",
-        description: "Your agent has been successfully downloaded.",
+        title: "下载完成",
+        description: "智能体已成功下载。",
       });
     } catch (error) {
       Sentry.captureException(error);
       toast({
-        title: "Error",
-        description: "Failed to download agent. Please try again.",
+        title: "出错了",
+        description: "下载智能体失败，请重试。",
         variant: "destructive",
       });
     }

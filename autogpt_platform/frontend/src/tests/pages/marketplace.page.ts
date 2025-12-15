@@ -13,17 +13,17 @@ export class MarketplacePage extends BasePage {
 
   async getMarketplaceTitle(page: Page) {
     const { getText } = getSelectors(page);
-    return getText("Explore AI agents", { exact: false });
+    return getText("探索为", { exact: false });
   }
 
   async getCreatorsSection(page: Page) {
     const { getId, getText } = getSelectors(page);
-    return getId("creators-section") || getText("Creators", { exact: false });
+    return getId("creators-section") || getText("创作者", { exact: false });
   }
 
   async getAgentsSection(page: Page) {
     const { getId, getText } = getSelectors(page);
-    return getId("agents-section") || getText("Agents", { exact: false });
+    return getId("agents-section") || getText("智能体", { exact: false });
   }
 
   async getCreatorsLink(page: Page) {
@@ -69,17 +69,17 @@ export class MarketplacePage extends BasePage {
 
   async getFeaturedAgentsSection(page: Page) {
     const { getText } = getSelectors(page);
-    return getText("Featured agents");
+    return getText("精选智能体");
   }
 
   async getTopAgentsSection(page: Page) {
     const { getText } = getSelectors(page);
-    return getText("Top Agents");
+    return getText("热门智能体");
   }
 
   async getFeaturedCreatorsSection(page: Page) {
     const { getText } = getSelectors(page);
-    return getText("Featured Creators");
+    return getText("精选创作者");
   }
 
   async getFeaturedAgentCards(page: Page) {

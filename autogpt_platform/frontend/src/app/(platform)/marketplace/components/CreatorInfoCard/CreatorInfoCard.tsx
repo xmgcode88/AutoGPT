@@ -3,6 +3,7 @@ import Avatar, {
   AvatarImage,
 } from "@/components/atoms/Avatar/Avatar";
 import { StarRatingIcons } from "@/components/__legacy__/ui/icons";
+import { getMarketplaceCategoryLabelZh } from "@/app/(platform)/marketplace/i18n";
 
 interface CreatorInfoCardProps {
   username: string;
@@ -25,7 +26,7 @@ export const CreatorInfoCard = ({
     <div
       className="inline-flex h-auto min-h-[500px] w-full max-w-[440px] flex-col items-start justify-between rounded-[26px] bg-violet-100 p-4 dark:bg-violet-900 sm:h-[632px] sm:w-[440px] sm:p-6"
       role="article"
-      aria-label={`Creator profile for ${username}`}
+      aria-label={`创作者资料：${username}`}
     >
       <div className="flex w-full flex-col items-start justify-start gap-3.5 sm:h-[218px]">
         <Avatar className="h-[100px] w-[100px] sm:h-[130px] sm:w-[130px]">
@@ -33,7 +34,7 @@ export const CreatorInfoCard = ({
             width={130}
             height={130}
             src={avatarSrc}
-            alt={`${username}'s avatar`}
+            alt={`${username} 的头像`}
           />
           <AvatarFallback
             size={130}
@@ -60,12 +61,12 @@ export const CreatorInfoCard = ({
           <div className="h-px w-full bg-neutral-700 dark:bg-neutral-300" />
           <div className="flex flex-col items-start justify-start gap-2.5">
             <div className="w-full text-base font-medium leading-normal text-neutral-800 dark:text-neutral-200">
-              Top categories
+              热门分类
             </div>
             <div
               className="flex flex-wrap items-center gap-2.5"
               role="list"
-              aria-label="Categories"
+              aria-label="分类"
             >
               {categories.map((category, index) => (
                 <div
@@ -74,7 +75,7 @@ export const CreatorInfoCard = ({
                   role="listitem"
                 >
                   <div className="text-base font-normal leading-normal text-neutral-800 dark:text-neutral-200">
-                    {category}
+                    {getMarketplaceCategoryLabelZh(category)}
                   </div>
                 </div>
               ))}
@@ -87,7 +88,7 @@ export const CreatorInfoCard = ({
           <div className="flex w-full flex-col items-start justify-between gap-4 sm:flex-row sm:gap-0">
             <div className="flex w-full flex-col items-start justify-start gap-2.5 sm:w-[164px]">
               <div className="w-full text-base font-medium leading-normal text-neutral-800 dark:text-neutral-200">
-                Average rating
+                平均评分
               </div>
               <div className="inline-flex items-center gap-2">
                 <div className="text-[18px] font-semibold leading-[28px] text-neutral-800 dark:text-neutral-200">
@@ -96,7 +97,7 @@ export const CreatorInfoCard = ({
                 <div
                   className="flex items-center gap-px"
                   role="img"
-                  aria-label={`Rating: ${averageRating} out of 5 stars`}
+                  aria-label={`评分：${averageRating}（满分 5）`}
                 >
                   {StarRatingIcons(averageRating)}
                 </div>
@@ -104,10 +105,10 @@ export const CreatorInfoCard = ({
             </div>
             <div className="flex w-full flex-col items-start justify-start gap-2.5 sm:w-[164px]">
               <div className="w-full text-base font-medium leading-normal text-neutral-800 dark:text-neutral-200">
-                Number of runs
+                运行次数
               </div>
               <div className="text-[18px] font-semibold leading-[28px] text-neutral-800 dark:text-neutral-200">
-                {new Intl.NumberFormat().format(totalRuns)} runs
+                {new Intl.NumberFormat().format(totalRuns)} 次运行
               </div>
             </div>
           </div>

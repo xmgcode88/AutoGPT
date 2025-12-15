@@ -6,6 +6,7 @@ import Link from "next/link";
 import { User } from "@supabase/supabase-js";
 import { cn } from "@/lib/utils";
 import { useAgentInfo } from "./useAgentInfo";
+import { getMarketplaceCategoryLabelZh } from "@/app/(platform)/marketplace/i18n";
 
 interface AgentInfoProps {
   user: User | null;
@@ -58,7 +59,7 @@ export const AgentInfo = ({
       {/* Creator */}
       <div className="mb-3 flex w-full items-center gap-1.5 lg:mb-4">
         <div className="text-base font-normal text-neutral-800 dark:text-neutral-200 sm:text-lg lg:text-xl">
-          by
+          作者
         </div>
         <Link
           data-testid={"agent-creator"}
@@ -83,7 +84,7 @@ export const AgentInfo = ({
           <div className="flex gap-0.5">{StarRatingIcons(rating)}</div>
         </div>
         <div className="whitespace-nowrap text-base font-semibold text-neutral-800 dark:text-neutral-200 sm:text-lg">
-          {runs.toLocaleString()} runs
+          {runs.toLocaleString()} 次运行
         </div>
       </div>
 
@@ -104,7 +105,7 @@ export const AgentInfo = ({
             }
           >
             <span className="justify-start font-sans text-sm font-medium leading-snug text-primary-foreground">
-              {isAgentAddedToLibrary ? "See runs" : "Add to library"}
+              {isAgentAddedToLibrary ? "查看运行" : "添加到资料库"}
             </span>
           </button>
         </div>
@@ -112,14 +113,14 @@ export const AgentInfo = ({
 
       {/* Download section */}
       <p className="mt-6 text-zinc-600 dark:text-zinc-400 lg:mt-12">
-        Want to use this agent locally?{" "}
+        想在本地使用这个智能体？{" "}
         <button
           className="underline"
           onClick={() => handleDownload(agentId, name)}
           disabled={isDownloadingAgent}
           data-testid="agent-download-button"
         >
-          Download here.
+          点此下载。
         </button>
       </p>
 
@@ -131,7 +132,7 @@ export const AgentInfo = ({
         {/* Description Section */}
         <div className="w-full">
           <div className="decoration-skip-ink-none mb-1.5 text-base font-medium leading-6 text-neutral-800 dark:text-neutral-200 sm:mb-2">
-            Description
+            描述
           </div>
           <div
             data-testid={"agent-description"}
@@ -144,7 +145,7 @@ export const AgentInfo = ({
         {/* Categories */}
         <div className="flex w-full flex-col gap-1.5 sm:gap-2">
           <div className="decoration-skip-ink-none mb-1.5 text-base font-medium leading-6 text-neutral-800 dark:text-neutral-200 sm:mb-2">
-            Categories
+            分类
           </div>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {categories.map((category, index) => (
@@ -152,7 +153,7 @@ export const AgentInfo = ({
                 key={index}
                 className="decoration-skip-ink-none whitespace-nowrap rounded-full border border-neutral-600 bg-white px-2 py-0.5 text-base font-normal leading-6 text-neutral-800 underline-offset-[from-font] dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 sm:px-[16px] sm:py-[10px]"
               >
-                {category}
+                {getMarketplaceCategoryLabelZh(category)}
               </div>
             ))}
           </div>
@@ -161,13 +162,13 @@ export const AgentInfo = ({
         {/* Version History */}
         <div className="flex w-full flex-col gap-0.5 sm:gap-1">
           <div className="decoration-skip-ink-none mb-1.5 text-base font-medium leading-6 text-neutral-800 dark:text-neutral-200 sm:mb-2">
-            Version history
+            版本历史
           </div>
           <div className="decoration-skip-ink-none text-base font-normal leading-6 text-neutral-600 underline-offset-[from-font] dark:text-neutral-400">
-            Last updated {lastUpdated}
+            最后更新：{lastUpdated}
           </div>
           <div className="text-xs text-neutral-600 dark:text-neutral-400 sm:text-sm">
-            Version {version}
+            版本 {version}
           </div>
         </div>
       </div>

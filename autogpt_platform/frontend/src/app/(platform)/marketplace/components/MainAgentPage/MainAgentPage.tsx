@@ -9,6 +9,7 @@ import { AgentPageLoading } from "../AgentPageLoading";
 import { AgentsSection } from "../AgentsSection/AgentsSection";
 import { BecomeACreator } from "../BecomeACreator/BecomeACreator";
 import { useMainAgentPage } from "./useMainAgentPage";
+import { MARKETPLACE_ERROR_CARD_I18N } from "@/app/(platform)/marketplace/i18n";
 
 type MainAgentPageProps = {
   params: MarketplaceAgentPageParams;
@@ -35,10 +36,11 @@ export const MainAgentPage = ({ params }: MainAgentPageProps) => {
           <div className="flex min-h-[400px] items-center justify-center">
             <ErrorCard
               isSuccess={false}
-              responseError={{ message: "Failed to load agent data" }}
-              context="agent page"
+              responseError={{ message: "加载智能体数据失败" }}
+              context="智能体页面"
               onRetry={() => window.location.reload()}
               className="w-full max-w-md"
+              i18n={MARKETPLACE_ERROR_CARD_I18N}
             />
           </div>
         </main>
@@ -53,10 +55,11 @@ export const MainAgentPage = ({ params }: MainAgentPageProps) => {
           <div className="flex min-h-[400px] items-center justify-center">
             <ErrorCard
               isSuccess={false}
-              responseError={{ message: "Agent not found" }}
-              context="agent page"
+              responseError={{ message: "未找到该智能体" }}
+              context="智能体页面"
               onRetry={() => window.location.reload()}
               className="w-full max-w-md"
+              i18n={MARKETPLACE_ERROR_CARD_I18N}
             />
           </div>
         </main>
@@ -65,7 +68,7 @@ export const MainAgentPage = ({ params }: MainAgentPageProps) => {
   }
 
   const breadcrumbs = [
-    { name: "Marketplace", link: "/marketplace" },
+    { name: "智能体市场", link: "/marketplace" },
     {
       name: agent.creator,
       link: `/marketplace/creator/${encodeURIComponent(agent.creator)}`,
@@ -109,7 +112,7 @@ export const MainAgentPage = ({ params }: MainAgentPageProps) => {
           <AgentsSection
             margin="32px"
             agents={otherAgents.agents}
-            sectionTitle={`Other agents by ${agent.creator}`}
+            sectionTitle={`作者 ${agent.creator} 的其他智能体`}
           />
         )}
         <Separator className="mb-[25px] mt-[60px]" />
@@ -117,14 +120,14 @@ export const MainAgentPage = ({ params }: MainAgentPageProps) => {
           <AgentsSection
             margin="32px"
             agents={similarAgents.agents}
-            sectionTitle="Similar agents"
+            sectionTitle="相似智能体"
           />
         )}
         <Separator className="mb-[25px] mt-[60px]" />
         <BecomeACreator
-          title="Become a Creator"
-          description="Join our ever-growing community of hackers and tinkerers"
-          buttonText="Become a Creator"
+          title="成为创作者"
+          description="加入不断壮大的创作者社区，与更多同好一起创造与分享"
+          buttonText="成为创作者"
         />
       </main>
     </div>

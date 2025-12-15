@@ -99,8 +99,8 @@ export function useThumbnailImages({
       }
     } catch (_error) {
       toast({
-        title: "Upload failed",
-        description: "Failed to upload image. Please try again.",
+        title: "上传失败",
+        description: "图片上传失败，请重试。",
         variant: "destructive",
       });
     }
@@ -122,8 +122,8 @@ export function useThumbnailImages({
       }
     } catch (_error) {
       toast({
-        title: "Generation failed",
-        description: "Failed to generate image. Please try again.",
+        title: "生成失败",
+        description: "图片生成失败，请重试。",
         variant: "destructive",
       });
     } finally {

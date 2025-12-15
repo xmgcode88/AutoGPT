@@ -26,7 +26,7 @@ export const FeaturedSection = ({ featuredAgents }: FeaturedSectionProps) => {
   return (
     <section className="w-full">
       <h2 className="mb-8 font-poppins text-2xl font-semibold leading-7 text-neutral-800 dark:text-neutral-200">
-        Featured agents
+        精选智能体
       </h2>
 
       <Carousel

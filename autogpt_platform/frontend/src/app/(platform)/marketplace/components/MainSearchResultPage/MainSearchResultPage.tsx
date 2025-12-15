@@ -8,6 +8,7 @@ import { FeaturedCreators } from "../FeaturedCreators/FeaturedCreators";
 import { ErrorCard } from "@/components/molecules/ErrorCard/ErrorCard";
 import { MainMarketplacePageLoading } from "../MainMarketplacePageLoading";
 import { GetV2ListStoreAgentsParams } from "@/app/api/__generated__/models/getV2ListStoreAgentsParams";
+import { MARKETPLACE_ERROR_CARD_I18N } from "@/app/(platform)/marketplace/i18n";
 
 type MarketplaceSearchSort = GetV2ListStoreAgentsParams["sorted_by"];
 
@@ -46,9 +47,10 @@ export const MainSearchResultPage = ({
       <div className="flex min-h-[500px] items-center justify-center">
         <ErrorCard
           isSuccess={false}
-          responseError={{ message: "Failed to load marketplace data" }}
-          context="marketplace page"
+          responseError={{ message: "加载智能体市场数据失败" }}
+          context="智能体市场页面"
           onRetry={() => window.location.reload()}
+          i18n={MARKETPLACE_ERROR_CARD_I18N}
         />
       </div>
     );
@@ -59,7 +61,7 @@ export const MainSearchResultPage = ({
         <div className="mt-8 flex items-center">
           <div className="flex-1">
             <h2 className="text-base font-medium leading-normal text-neutral-800 dark:text-neutral-200">
-              Results for:
+              搜索结果：
             </h2>
             <h1 className="font-poppins text-2xl font-semibold leading-[32px] text-neutral-800 dark:text-neutral-100">
               {searchTerm}
@@ -85,7 +87,7 @@ export const MainSearchResultPage = ({
             <div className="min-h-[500px] max-w-[1440px] space-y-8 py-8">
               {showAgents && agentsCount > 0 && agents && (
                 <div className="mt-[36px]">
-                  <AgentsSection agents={agents} sectionTitle="Agents" />
+                  <AgentsSection agents={agents} sectionTitle="智能体" />
                 </div>
               )}
 
@@ -95,7 +97,7 @@ export const MainSearchResultPage = ({
               {showCreators && creatorsCount > 0 && creators && (
                 <FeaturedCreators
                   featuredCreators={creators}
-                  title="Creators"
+                  title="创作者"
                 />
               )}
             </div>
@@ -103,10 +105,10 @@ export const MainSearchResultPage = ({
         ) : (
           <div className="mt-20 flex flex-col items-center justify-center">
             <h3 className="mb-2 text-xl font-medium text-neutral-600 dark:text-neutral-300">
-              No results found
+              未找到结果
             </h3>
             <p className="text-neutral-500 dark:text-neutral-400">
-              Try adjusting your search terms or filters
+              试试调整搜索词或筛选条件
             </p>
           </div>
         )}

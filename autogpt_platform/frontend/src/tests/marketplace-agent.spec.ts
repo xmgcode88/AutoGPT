@@ -71,7 +71,7 @@ test.describe("Marketplace Agent Page - Basic Functionality", () => {
     await downloadButton.click();
 
     const downloadSuccessMessage = getText(
-      "Your agent has been successfully downloaded.",
+      "智能体已成功下载。",
     );
     await isVisible(downloadSuccessMessage);
   });
@@ -97,7 +97,7 @@ test.describe("Marketplace Agent Page - Basic Functionality", () => {
     await isVisible(addToLibraryButton);
     await addToLibraryButton.click();
 
-    const addSuccessMessage = getText("Redirecting to your library...");
+    const addSuccessMessage = getText("正在跳转到你的资料库...");
     await isVisible(addSuccessMessage);
 
     await page.waitForURL("**/library/agents/**");

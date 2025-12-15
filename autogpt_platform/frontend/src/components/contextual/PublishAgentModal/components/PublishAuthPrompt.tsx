@@ -10,14 +10,13 @@ export const PublishAuthPrompt = () => {
       <div className="mx-auto inline-flex h-[370px] w-full flex-col items-center justify-center gap-6 px-4 py-5 sm:px-6">
         <div className="flex flex-col items-center gap-4 text-center">
           <Text variant="h3" className="font-semibold">
-            Share your AI creations
+            分享你的 AI 创作
           </Text>
           <Text
             variant="lead"
             className="max-w-[80%] text-neutral-600 dark:text-neutral-400"
           >
-            Log in or create an account to publish your agents to the
-            marketplace and join a community of creators
+            登录或创建账号，即可将你的智能体发布到智能体市场，并加入创作者社区
           </Text>
         </div>
         <div className="flex flex-col items-center gap-3 sm:flex-row">
@@ -25,10 +24,10 @@ export const PublishAuthPrompt = () => {
             onClick={() => router.push("/login")}
             className="bg-neutral-800 text-white hover:bg-neutral-900"
           >
-            Log in
+            登录
           </Button>
           <Button onClick={() => router.push("/signup")} variant="secondary">
-            Create account
+            创建账号
           </Button>
         </div>
       </div>

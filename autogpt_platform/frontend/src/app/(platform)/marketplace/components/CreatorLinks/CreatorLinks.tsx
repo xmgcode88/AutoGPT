@@ -47,7 +47,7 @@ export const CreatorLinks = ({ links }: CreatorLinksProps) => {
   return (
     <div className="flex flex-col items-start justify-start gap-4">
       <div className="text-base font-medium leading-normal text-neutral-800 dark:text-neutral-200">
-        Other links
+        其他链接
       </div>
       <div className="flex w-full flex-wrap gap-3">
         {links.map((link, index) => (

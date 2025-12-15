@@ -39,7 +39,7 @@ export const StoreCard: React.FC<StoreCardProps> = ({
       data-testid="store-card"
       role="button"
       tabIndex={0}
-      aria-label={`${agentName} agent card`}
+      aria-label={`${agentName} 智能体卡片`}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           handleClick();
@@ -51,7 +51,7 @@ export const StoreCard: React.FC<StoreCardProps> = ({
         {agentImage && (
           <Image
             src={agentImage}
-            alt={`${agentName} preview image`}
+            alt={`${agentName} 预览图`}
             fill
             className="object-cover"
           />
@@ -62,7 +62,7 @@ export const StoreCard: React.FC<StoreCardProps> = ({
               {avatarSrc && (
                 <AvatarImage
                   src={avatarSrc}
-                  alt={`${creatorName || agentName} creator avatar`}
+                  alt={`${creatorName || agentName} 的头像`}
                 />
               )}
               <AvatarFallback size={64}>
@@ -81,7 +81,7 @@ export const StoreCard: React.FC<StoreCardProps> = ({
           </h3>
           {!hideAvatar && creatorName && (
             <p className="mt-3 truncate font-sans text-xl font-normal text-neutral-600 dark:text-neutral-400">
-              by {creatorName}
+              作者 {creatorName}
             </p>
           )}
         </div>
@@ -100,7 +100,7 @@ export const StoreCard: React.FC<StoreCardProps> = ({
         <div className="mt-5 w-full">
           <div className="flex items-center justify-between">
             <div className="text-lg font-semibold text-neutral-800 dark:text-neutral-200">
-              {runs.toLocaleString()} runs
+              {runs.toLocaleString()} 次运行
             </div>
             <div className="flex items-center gap-2">
               <span className="text-lg font-semibold text-neutral-800 dark:text-neutral-200">
@@ -109,7 +109,7 @@ export const StoreCard: React.FC<StoreCardProps> = ({
               <div
                 className="inline-flex items-center"
                 role="img"
-                aria-label={`Rating: ${rating.toFixed(1)} out of 5 stars`}
+                aria-label={`评分：${rating.toFixed(1)}（满分 5）`}
               >
                 {StarRatingIcons(rating)}
               </div>

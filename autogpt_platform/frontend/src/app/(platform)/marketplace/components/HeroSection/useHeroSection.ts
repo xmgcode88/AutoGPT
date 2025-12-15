@@ -3,11 +3,14 @@ import { Flag, useGetFlag } from "@/services/feature-flags/use-get-flag";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { DEFAULT_SEARCH_TERMS } from "./helpers";
+import { getMarketplaceSearchTermLabelZh } from "@/app/(platform)/marketplace/i18n";
+import type { FilterChip } from "../FilterChips/FilterChips";
 
 export const useHeroSection = () => {
   const router = useRouter();
   const { completeStep } = useOnboarding();
   const searchTerms = useGetFlag(Flag.MARKETPLACE_SEARCH_TERMS);
+  const resolvedSearchTerms = searchTerms || DEFAULT_SEARCH_TERMS;
 
   // Mark marketplace visit task as completed
   useEffect(() => {
@@ -21,6 +24,11 @@ export const useHeroSection = () => {
 
   return {
     onFilterChange,
-    searchTerms: searchTerms || DEFAULT_SEARCH_TERMS,
+    searchTerms: resolvedSearchTerms.map(
+      (term): FilterChip => ({
+        value: term,
+        label: getMarketplaceSearchTermLabelZh(term),
+      }),
+    ),
   };
 };

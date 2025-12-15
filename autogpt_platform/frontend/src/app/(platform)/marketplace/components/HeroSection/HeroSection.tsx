@@ -12,22 +12,25 @@ export const HeroSection = () => {
         <div className="mb-4 text-center md:mb-8">
           <h1 className="text-center">
             <span className="font-poppins text-[48px] font-semibold leading-[54px] text-neutral-950 dark:text-neutral-50">
-              Explore AI agents built for{" "}
+              探索为{" "}
             </span>
             <span className="font-poppins text-[48px] font-semibold leading-[54px] text-violet-600">
-              you
+              你
+            </span>
+            <span className="font-poppins text-[48px] font-semibold leading-[54px] text-neutral-950 dark:text-neutral-50">
+              打造的 AI 智能体
             </span>
             <br />
             <span className="font-poppins text-[48px] font-semibold leading-[54px] text-neutral-950 dark:text-neutral-50">
-              by the{" "}
+              来自{" "}
             </span>
             <span className="font-poppins text-[48px] font-semibold leading-[54px] text-blue-500">
-              community
+              社区
             </span>
           </h1>
         </div>
         <h3 className="mb:text-2xl mb-6 text-center font-sans text-xl font-normal leading-loose text-neutral-700 dark:text-neutral-300 md:mb-12">
-          Bringing you AI agents designed by thinkers from around the world
+          汇聚来自世界各地创作者的灵感，为你带来精心设计的 AI 智能体
         </h3>
         <div className="mb-4 flex justify-center sm:mb-5">
           <SearchBar height="h-[74px]" />

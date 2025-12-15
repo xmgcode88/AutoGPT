@@ -9,6 +9,7 @@ import { CreatorLinks } from "../CreatorLinks/CreatorLinks";
 import { useMainCreatorPage } from "./useMainCreatorPage";
 import { ErrorCard } from "@/components/molecules/ErrorCard/ErrorCard";
 import { CreatorPageLoading } from "../CreatorPageLoading";
+import { MARKETPLACE_ERROR_CARD_I18N } from "@/app/(platform)/marketplace/i18n";
 
 interface MainCreatorPageProps {
   params: MarketplaceCreatorPageParams;
@@ -27,10 +28,11 @@ export const MainCreatorPage = ({ params }: MainCreatorPageProps) => {
         <div className="flex min-h-[60vh] items-center justify-center">
           <ErrorCard
             isSuccess={false}
-            responseError={{ message: "Failed to load creator data" }}
-            context="creator page"
+            responseError={{ message: "加载创作者数据失败" }}
+            context="创作者页面"
             onRetry={() => window.location.reload()}
             className="w-full max-w-md"
+            i18n={MARKETPLACE_ERROR_CARD_I18N}
           />
         </div>
       </div>
@@ -43,7 +45,7 @@ export const MainCreatorPage = ({ params }: MainCreatorPageProps) => {
         <main className="mt-5 px-4">
           <Breadcrumbs
             items={[
-              { name: "Marketplace", link: "/marketplace" },
+              { name: "智能体市场", link: "/marketplace" },
               { name: creator.name, link: "#" },
             ]}
           />
@@ -61,7 +63,7 @@ export const MainCreatorPage = ({ params }: MainCreatorPageProps) => {
             </div>
             <div className="flex min-w-0 flex-1 flex-col gap-4 sm:gap-6 md:gap-8">
               <p className="text-underline-position-from-font text-decoration-skip-none text-left font-poppins text-base font-medium leading-6">
-                About
+                关于
               </p>
               <div
                 className="text-[48px] font-normal leading-[59px] text-neutral-900 dark:text-zinc-50"
@@ -80,7 +82,7 @@ export const MainCreatorPage = ({ params }: MainCreatorPageProps) => {
               <AgentsSection
                 agents={creatorAgents.agents}
                 hideAvatars={true}
-                sectionTitle={`Agents by ${creator.name}`}
+                sectionTitle={`作者 ${creator.name} 的智能体`}
               />
             )}
           </div>

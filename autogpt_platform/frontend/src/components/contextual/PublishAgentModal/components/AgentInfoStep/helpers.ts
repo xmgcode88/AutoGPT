@@ -3,19 +3,19 @@ import z from "zod";
 export const publishAgentSchema = z.object({
   title: z
     .string()
-    .min(1, "Title is required")
-    .max(100, "Title must be less than 100 characters"),
+    .min(1, "请输入标题")
+    .max(100, "标题需少于 100 个字符"),
   subheader: z
     .string()
-    .min(1, "Subheader is required")
-    .max(200, "Subheader must be less than 200 characters"),
+    .min(1, "请输入副标题")
+    .max(200, "副标题需少于 200 个字符"),
   slug: z
     .string()
-    .min(1, "Slug is required")
-    .max(50, "Slug must be less than 50 characters")
+    .min(1, "请输入 Slug")
+    .max(50, "Slug 需少于 50 个字符")
     .regex(
       /^[a-z0-9-]+$/,
-      "Slug can only contain lowercase letters, numbers, and hyphens",
+      "Slug 只能包含小写字母、数字和连字符（-）",
     ),
   youtubeLink: z
     .string()
@@ -34,19 +34,19 @@ export const publishAgentSchema = z.object({
       } catch {
         return false;
       }
-    }, "Please enter a valid YouTube URL"),
-  category: z.string().min(1, "Category is required"),
+    }, "请输入有效的 YouTube 链接"),
+  category: z.string().min(1, "请选择分类"),
   description: z
     .string()
-    .min(1, "Description is required")
-    .max(1000, "Description must be less than 1000 characters"),
+    .min(1, "请输入描述")
+    .max(1000, "描述需少于 1000 个字符"),
   recommendedScheduleCron: z.string().optional(),
   instructions: z
     .string()
     .optional()
     .refine(
       (val) => !val || val.length <= 2000,
-      "Instructions must be less than 2000 characters",
+      "使用说明需少于 2000 个字符",
     ),
 });
 

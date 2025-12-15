@@ -114,7 +114,7 @@ export function PublishAgentModal({
         }}
       >
         <Dialog.Trigger>
-          {trigger || <Button size="small">Publish Agent</Button>}
+          {trigger || <Button size="small">发布智能体</Button>}
         </Dialog.Trigger>
         <Dialog.Content>
           <div data-testid="publish-agent-modal">{renderContent()}</div>

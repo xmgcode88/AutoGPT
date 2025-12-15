@@ -48,7 +48,7 @@ export const CreatorCard = ({
           {bio}
         </p>
         <div className="text-lg font-semibold leading-7 text-neutral-800 dark:text-neutral-200">
-          {agentsUploaded} agents
+          {agentsUploaded} 个智能体
         </div>
       </div>
     </div>

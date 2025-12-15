@@ -50,8 +50,8 @@ export function AgentSelectStep({
     return (
       <div className="mx-auto flex min-h-[70vh] w-full flex-col">
         <StepHeader
-          title="Publish Agent"
-          description="Select your project that you'd like to publish"
+          title="发布智能体"
+          description="选择你要发布的项目"
         />
         <div className="flex-grow p-4 sm:p-6">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -77,15 +77,15 @@ export function AgentSelectStep({
     return (
       <div className="mx-auto flex w-full max-w-[900px] flex-col rounded-3xl">
         <StepHeader
-          title="Publish Agent"
-          description="Select your project that you'd like to publish"
+          title="发布智能体"
+          description="选择你要发布的项目"
         />
         <div className="inline-flex h-[370px] flex-col items-center justify-center gap-[29px] px-4 py-5 sm:px-6">
           <Text variant="lead" className="text-center text-red-600">
-            Failed to load agents. Please try again.
+            加载智能体列表失败，请重试。
           </Text>
           <Button onClick={() => window.location.reload()} variant="secondary">
-            Retry
+            重试
           </Button>
         </div>
       </div>
@@ -95,28 +95,26 @@ export function AgentSelectStep({
   return (
     <div className="mx-auto flex w-full max-w-[900px] flex-col rounded-3xl">
       <StepHeader
-        title="Publish Agent"
-        description="Select your project that you'd like to publish"
+        title="发布智能体"
+        description="选择你要发布的项目"
       />
 
       {agents.length === 0 ? (
         <div className="inline-flex h-[370px] flex-col items-center justify-center gap-[29px] px-4 py-5 sm:px-6">
           <Text variant="lead" className="text-center">
-            Uh-oh.. It seems like you don&apos;t have any agents in your
-            library. We&apos;d suggest you to create an agent in our builder
-            first
+            看起来你的资料库里还没有智能体。建议你先在构建器中创建一个。
           </Text>
           <Button
             onClick={onOpenBuilder}
             className="bg-neutral-800 text-white hover:bg-neutral-900"
           >
-            Open builder
+            打开构建器
           </Button>
         </div>
       ) : (
         <>
           <div className="flex-grow overflow-hidden p-4 sm:p-6">
-            <h3 className="sr-only">List of agents</h3>
+            <h3 className="sr-only">智能体列表</h3>
             <div
               className={cn(
                 scrollbarStyles,
@@ -126,7 +124,7 @@ export function AgentSelectStep({
               aria-labelledby="agentListHeading"
             >
               <div id="agentListHeading" className="sr-only">
-                Scrollable list of agents
+                可滚动的智能体列表
               </div>
               <div className="p-2">
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -164,7 +162,7 @@ export function AgentSelectStep({
                       <div className="flex flex-col gap-2 p-3">
                         <Text variant="large-medium">{agent.name}</Text>
                         <Text variant="small" className="!text-neutral-500">
-                          Edited {agent.lastEdited}
+                          最后编辑：{agent.lastEdited}
                         </Text>
                       </div>
                     </div>
@@ -180,14 +178,14 @@ export function AgentSelectStep({
               onClick={onCancel}
               className="w-full sm:flex-1"
             >
-              Back
+              返回
             </Button>
             <Button
               onClick={handleNext}
               disabled={isNextDisabled}
               className="w-full bg-neutral-800 text-white hover:bg-neutral-900 sm:flex-1"
             >
-              Next
+              下一步
             </Button>
           </div>
         </>

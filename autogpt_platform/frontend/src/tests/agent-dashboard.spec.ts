@@ -28,13 +28,13 @@ test("submit agent button works correctly", async ({ page }) => {
   await expect(submitAgentButton).toBeVisible();
   await submitAgentButton.click();
 
-  await expect(getText("Publish Agent")).toBeVisible();
+  await expect(getText("发布智能体")).toBeVisible();
   await expect(
-    getText("Select your project that you'd like to publish"),
+    getText("选择你要发布的项目"),
   ).toBeVisible();
 
   await page.locator('button[aria-label="Close"]').click();
-  await expect(getText("Publish Agent")).not.toBeVisible();
+  await expect(getText("发布智能体")).not.toBeVisible();
 });
 
 test("agent table view action works correctly for rejected agents", async ({
@@ -68,10 +68,10 @@ test("agent table view action works correctly for rejected agents", async ({
 
   const modal = page.getByTestId("publish-agent-modal");
   await expect(modal).toBeVisible();
-  const viewAgentName = modal.getByText("Agent is awaiting review");
+  const viewAgentName = modal.getByText("智能体正在等待审核");
   await expect(viewAgentName).toBeVisible();
 
-  await page.getByRole("button", { name: "Done" }).click();
+  await page.getByRole("button", { name: "完成" }).click();
   await expect(modal).not.toBeVisible();
 });
 

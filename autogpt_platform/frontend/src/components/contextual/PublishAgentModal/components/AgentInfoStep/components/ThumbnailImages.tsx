@@ -44,10 +44,10 @@ export function ThumbnailImages({
     <div className="space-y-2.5">
       <div className="flex flex-col items-start justify-start gap-1">
         <label className="text-sm font-medium leading-tight text-slate-950">
-          Thumbnail images
+          缩略图
         </label>
         <Text variant="body" className="!text-zinc-500">
-          The first image will be used as the thumbnail for your agent.
+          第一张图片将用作智能体的缩略图。
         </Text>
         {errorMessage && <p className="text-sm text-red-500">{errorMessage}</p>}
       </div>
@@ -55,14 +55,14 @@ export function ThumbnailImages({
         {selectedImage !== null && selectedImage !== undefined ? (
           <Image
             src={selectedImage}
-            alt="Selected Thumbnail"
+            alt="已选择的缩略图"
             fill
             style={{ objectFit: "cover" }}
             className="rounded-md object-cover"
           />
         ) : (
           <p className="font-sans text-sm font-normal text-neutral-600 dark:text-neutral-400">
-            No images yet
+            暂无图片
           </p>
         )}
       </div>
@@ -84,7 +84,7 @@ export function ThumbnailImages({
                 className="hidden"
               />
               <IconPlus className="h-4 w-4" />
-              <span>Add image</span>
+              <span>添加图片</span>
             </label>
             <Button
               type="button"
@@ -95,10 +95,10 @@ export function ThumbnailImages({
             >
               <MagicWand className="h-4 w-4" />
               {isGenerating
-                ? "Generating..."
+                ? "生成中..."
                 : images.length >= 5
-                  ? "Max images reached"
-                  : "Generate"}
+                  ? "已达到图片上限"
+                  : "生成"}
             </Button>
           </div>
         ) : (
@@ -113,7 +113,7 @@ export function ThumbnailImages({
                   size="small"
                   onClick={() => handleRemoveImage(index)}
                   className="absolute right-0 top-0 z-50 h-6 w-6 p-0"
-                  aria-label="Remove image"
+                  aria-label="移除图片"
                 >
                   <IconCross className="h-2 w-2 text-white" />
                 </Button>
@@ -126,7 +126,7 @@ export function ThumbnailImages({
                 >
                   <Image
                     src={src}
-                    alt={`Thumbnail ${index + 1}`}
+                    alt={`缩略图 ${index + 1}`}
                     fill
                     style={{ objectFit: "cover" }}
                     className="cursor-pointer"
@@ -144,7 +144,7 @@ export function ThumbnailImages({
                 className="!ml-4"
               >
                 <IconPlus className="h-4 w-4" />
-                <span>Add image</span>
+                <span>添加图片</span>
               </Button>
             ) : null}
           </>

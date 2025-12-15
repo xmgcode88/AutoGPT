@@ -15,11 +15,11 @@ test("check the navigation when logged out", async ({ page }) => {
   const { getButton, getText, getLink } = getSelectors(page);
 
   // Test marketplace link
-  const marketplaceLink = getLink("Marketplace");
+  const marketplaceLink = getLink("智能体市场");
   await isVisible(marketplaceLink);
   await marketplaceLink.click();
   await hasUrl(page, "/marketplace");
-  await isVisible(getText("Explore AI agents", { exact: false }));
+  await isVisible(getText("探索为", { exact: false }));
 
   // Test login button
   const loginBtn = getButton("Log In");

@@ -108,7 +108,7 @@ test.describe("Marketplace – Basic Functionality", () => {
 
     await matchesUrl(page, /\/marketplace\/search\?searchTerm=/);
 
-    const resultsHeading = page.getByText("Results for:");
+    const resultsHeading = page.getByText("搜索结果：");
     await isVisible(resultsHeading);
 
     const searchTerm = page.getByText("DummyInput").first();
@@ -136,7 +136,7 @@ test.describe("Marketplace – Edge Cases", () => {
 
     await matchesUrl(page, /\/marketplace\/search\?searchTerm=/);
 
-    const resultsHeading = page.getByText("Results for:");
+    const resultsHeading = page.getByText("搜索结果：");
     await isVisible(resultsHeading);
 
     const searchTerm = page.getByText("xyznonexistentitemxyz123");
