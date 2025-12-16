@@ -3,16 +3,25 @@
 import os
 from pathlib import Path
 
-from pydantic import Field, field_validator
-from pydantic_settings import BaseSettings
+from pydantic import Field, field_validator, model_validator
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+ENV_FILE = Path(__file__).resolve().parents[4] / ".env"
 
 
 class ChatConfig(BaseSettings):
     """Configuration for the chat system."""
 
+    model_config = SettingsConfigDict(
+        env_prefix="CHAT_",
+        env_file=ENV_FILE,
+        env_file_encoding="utf-8",
+        extra="ignore",
+    )
+
     # OpenAI API Configuration
-    model: str = Field(
-        default="qwen/qwen3-235b-a22b-2507", description="Default model to use"
+    model: str | None = Field(
+        default=None, description="Default model to use"
     )
     api_key: str | None = Field(default=None, description="OpenAI API key")
     base_url: str | None = Field(
@@ -45,32 +54,53 @@ class ChatConfig(BaseSettings):
     @classmethod
     def get_api_key(cls, v):
         """Get API key from environment if not provided."""
-        if v is None:
-            # Try to get from environment variables
-            # First check for CHAT_API_KEY (Pydantic prefix)
-            v = os.getenv("CHAT_API_KEY")
-            if not v:
-                # Fall back to OPEN_ROUTER_API_KEY
-                v = os.getenv("OPEN_ROUTER_API_KEY")
-            if not v:
-                # Fall back to OPENAI_API_KEY
-                v = os.getenv("OPENAI_API_KEY")
-        return v
+        if v:
+            return v
+
+        # Try to get from environment variables
+        return (
+            os.getenv("DEEPSEEK_API_KEY")
+            or os.getenv("OPEN_ROUTER_API_KEY")
+            or os.getenv("OPENAI_API_KEY")
+        )
 
     @field_validator("base_url", mode="before")
     @classmethod
     def get_base_url(cls, v):
         """Get base URL from environment if not provided."""
-        if v is None:
-            # Check for OpenRouter or custom base URL
-            v = os.getenv("CHAT_BASE_URL")
-            if not v:
-                v = os.getenv("OPENROUTER_BASE_URL")
-            if not v:
-                v = os.getenv("OPENAI_BASE_URL")
-            if not v:
-                v = "https://openrouter.ai/api/v1"
-        return v
+        env_base_url = (
+            os.getenv("CHAT_BASE_URL")
+            or os.getenv("OPENROUTER_BASE_URL")
+            or os.getenv("OPENAI_BASE_URL")
+        )
+
+        if env_base_url:
+            return env_base_url
+
+        return v or "https://openrouter.ai/api/v1"
+
+    @model_validator(mode="after")
+    def ensure_model(self):
+        """Ensure a model is selected, preferring env or DeepSeek defaults."""
+        if self.model:
+            return self
+
+        env_model = (
+            os.getenv("CHAT_MODEL")
+            or os.getenv("OPENAI_MODEL")
+            or os.getenv("OPENROUTER_MODEL")
+            or os.getenv("MODEL")
+        )
+
+        if env_model:
+            self.model = env_model
+        elif self.base_url and "deepseek" in self.base_url.lower():
+            # Default to DeepSeek reasoning model when pointing at DeepSeek
+            self.model = "deepseek-reasoner"
+        else:
+            self.model = "qwen/qwen3-235b-a22b-2507"
+
+        return self
 
     def get_system_prompt(self, **template_vars) -> str:
         """Load and render the system prompt from file.
@@ -109,10 +139,3 @@ class ChatConfig(BaseSettings):
 
             return content
         raise FileNotFoundError(f"System prompt file not found: {prompt_path}")
-
-    class Config:
-        """Pydantic config."""
-
-        env_file = ".env"
-        env_file_encoding = "utf-8"
-        extra = "ignore"  # Ignore extra environment variables
