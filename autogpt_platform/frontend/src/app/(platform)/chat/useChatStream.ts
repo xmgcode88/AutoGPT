@@ -1,6 +1,13 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import { toast } from "sonner";
 import type { ToolArguments, ToolResult } from "@/types/chat";
+import {
+  CHAT_ERROR_REQUEST_ABORTED_ZH,
+  CHAT_ERROR_STREAM_ERROR_ZH,
+  CHAT_ERROR_PARSE_ERROR_ZH,
+  CHAT_CONNECTION_INTERRUPTED_ZH,
+  CHAT_RETRYING_IN_ZH,
+} from "./i18n";
 
 const MAX_RETRIES = 3;
 const INITIAL_RETRY_DELAY = 1000;
@@ -85,7 +92,7 @@ export function useChatStream() {
       abortControllerRef.current = abortController;
 
       if (abortController.signal.aborted) {
-        return Promise.reject(new Error("Request aborted"));
+        return Promise.reject(new Error(CHAT_ERROR_REQUEST_ABORTED_ZH));
       }
 
       retryCountRef.current = 0;
@@ -130,14 +137,14 @@ export function useChatStream() {
               } else if (chunk.type === "error") {
                 cleanup();
                 reject(
-                  new Error(chunk.message || chunk.content || "Stream error"),
+                  new Error(chunk.message || chunk.content || CHAT_ERROR_STREAM_ERROR_ZH),
                 );
               }
             } catch (err) {
               const parseError =
                 err instanceof Error
                   ? err
-                  : new Error("Failed to parse stream chunk");
+                  : new Error(CHAT_ERROR_PARSE_ERROR_ZH);
               setError(parseError);
               cleanup();
               reject(parseError);
@@ -155,8 +162,8 @@ export function useChatStream() {
               const retryDelay =
                 INITIAL_RETRY_DELAY * Math.pow(2, retryCountRef.current - 1);
 
-              toast.info("Connection interrupted", {
-                description: `Retrying in ${retryDelay / 1000} seconds...`,
+              toast.info(CHAT_CONNECTION_INTERRUPTED_ZH, {
+                description: CHAT_RETRYING_IN_ZH(retryDelay / 1000),
               });
 
               retryTimeoutRef.current = setTimeout(() => {

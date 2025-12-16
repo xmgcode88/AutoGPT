@@ -1,5 +1,6 @@
-import { formatDistanceToNow } from "date-fns";
+import { formatTimeAgo } from "@/lib/utils/time";
 import type { ToolArguments, ToolResult } from "@/types/chat";
+import { CHAT_TIME_NOW_ZH } from "../../i18n";
 
 export type ChatMessageData =
   | {
@@ -81,8 +82,8 @@ export type ChatMessageData =
 
 export function useChatMessage(message: ChatMessageData) {
   const formattedTimestamp = message.timestamp
-    ? formatDistanceToNow(new Date(message.timestamp), { addSuffix: true })
-    : "Just now";
+    ? formatTimeAgo(message.timestamp.toString(), "zh-CN")
+    : CHAT_TIME_NOW_ZH;
 
   return {
     formattedTimestamp,

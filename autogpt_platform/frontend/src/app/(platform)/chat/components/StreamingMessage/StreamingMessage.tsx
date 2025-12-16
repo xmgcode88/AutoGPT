@@ -3,6 +3,7 @@ import { Robot } from "@phosphor-icons/react";
 import { MessageBubble } from "@/app/(platform)/chat/components/MessageBubble/MessageBubble";
 import { MarkdownContent } from "@/app/(platform)/chat/components/MarkdownContent/MarkdownContent";
 import { useStreamingMessage } from "./useStreamingMessage";
+import { CHAT_STATUS_TYPING_ZH, CHAT_MESSAGE_ASSISTANT_ZH } from "../../i18n";
 
 export interface StreamingMessageProps {
   chunks: string[];
@@ -34,7 +35,7 @@ export function StreamingMessage({
 
         {/* Timestamp */}
         <span className="mt-1 text-xs text-neutral-500 dark:text-neutral-400">
-          Typing...
+          {CHAT_STATUS_TYPING_ZH}
         </span>
       </div>
     </div>

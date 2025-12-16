@@ -61,8 +61,8 @@ export const useSaveGraph = ({
           onSuccess?.(data);
           if (showToast) {
             toast({
-              title: "Graph saved successfully",
-              description: "The graph has been saved successfully.",
+              title: "流程已保存",
+              description: "流程已成功保存。",
               variant: "default",
             });
           }
@@ -70,9 +70,8 @@ export const useSaveGraph = ({
         onError: (error) => {
           onError?.(error);
           toast({
-            title: "Error saving graph",
-            description:
-              (error as any).message ?? "An unexpected error occurred.",
+            title: "保存流程失败",
+            description: (error as any).message ?? "发生未知错误。",
             variant: "destructive",
           });
         },
@@ -91,8 +90,8 @@ export const useSaveGraph = ({
           onSuccess?.(data);
           if (showToast) {
             toast({
-              title: "Graph saved successfully",
-              description: "The graph has been saved successfully.",
+              title: "流程已保存",
+              description: "流程已成功保存。",
               variant: "default",
             });
           }
@@ -100,9 +99,8 @@ export const useSaveGraph = ({
         onError: (error) => {
           onError?.(error);
           toast({
-            title: "Error saving graph",
-            description:
-              (error as any).message ?? "An unexpected error occurred.",
+            title: "保存流程失败",
+            description: (error as any).message ?? "发生未知错误。",
             variant: "destructive",
           });
         },
@@ -120,7 +118,7 @@ export const useSaveGraph = ({
           name:
             values?.name ||
             graph.name ||
-            `New Agent ${new Date().toISOString()}`,
+            `新智能体 ${new Date().toISOString()}`,
           description: values?.description ?? graph.description ?? "",
           nodes: graphNodes,
           links: graphLinks,
@@ -129,8 +127,8 @@ export const useSaveGraph = ({
         if (graphsEquivalent(graph, data)) {
           if (showToast) {
             toast({
-              title: "No changes to save",
-              description: "The graph is the same as the saved version.",
+              title: "无变更可保存",
+              description: "当前流程与已保存版本一致。",
               variant: "default",
             });
           }
@@ -146,7 +144,7 @@ export const useSaveGraph = ({
         );
       } else {
         const data: Graph = {
-          name: values?.name || `New Agent ${new Date().toISOString()}`,
+          name: values?.name || `新智能体 ${new Date().toISOString()}`,
           description: values?.description || "",
           nodes: graphNodes,
           links: graphLinks,

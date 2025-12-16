@@ -6,6 +6,12 @@ import { toast } from "sonner";
 import { useChatSession } from "@/app/(platform)/chat/useChatSession";
 import { useSupabase } from "@/lib/supabase/hooks/useSupabase";
 import { useChatStream } from "@/app/(platform)/chat/useChatStream";
+import {
+  CHAT_CONNECTION_RESTORED_ZH,
+  CHAT_NETWORK_OFFLINE_ZH,
+  CHAT_NETWORK_OFFLINE_DESC_ZH,
+  CHAT_NETWORK_ONLINE_DESC_ZH
+} from "./i18n";
 
 export function useChatPage() {
   const router = useRouter();
@@ -87,14 +93,14 @@ export function useChatPage() {
 
   useEffect(function monitorNetworkStatus() {
     function handleOnline() {
-      toast.success("Connection restored", {
-        description: "You're back online",
+      toast.success(CHAT_CONNECTION_RESTORED_ZH, {
+        description: CHAT_NETWORK_ONLINE_DESC_ZH,
       });
     }
 
     function handleOffline() {
-      toast.error("You're offline", {
-        description: "Check your internet connection",
+      toast.error(CHAT_NETWORK_OFFLINE_ZH, {
+        description: CHAT_NETWORK_OFFLINE_DESC_ZH,
       });
     }
 

@@ -2,6 +2,12 @@ import { cn } from "@/lib/utils";
 import { PaperPlaneRightIcon } from "@phosphor-icons/react";
 import { Button } from "@/components/atoms/Button/Button";
 import { useChatInput } from "./useChatInput";
+import {
+  CHAT_INPUT_PLACEHOLDER_ZH,
+  CHAT_INPUT_LABEL_ZH,
+  CHAT_INPUT_HINT_ZH,
+  CHAT_SEND_BUTTON_LABEL_ZH,
+} from "../../i18n";
 
 export interface ChatInputProps {
   onSend: (message: string) => void;
@@ -13,7 +19,7 @@ export interface ChatInputProps {
 export function ChatInput({
   onSend,
   disabled = false,
-  placeholder = "Type your message...",
+  placeholder = CHAT_INPUT_PLACEHOLDER_ZH,
   className,
 }: ChatInputProps) {
   const { value, setValue, handleKeyDown, handleSend, textareaRef } =
@@ -34,7 +40,7 @@ export function ChatInput({
         disabled={disabled}
         rows={1}
         autoComplete="off"
-        aria-label="Chat message input"
+        aria-label={CHAT_INPUT_LABEL_ZH}
         aria-describedby="chat-input-hint"
         className={cn(
           "flex-1 resize-none rounded-lg border border-neutral-200 bg-white px-4 py-2 text-sm",
@@ -45,7 +51,7 @@ export function ChatInput({
         )}
       />
       <span id="chat-input-hint" className="sr-only">
-        Press Enter to send, Shift+Enter for new line
+        {CHAT_INPUT_HINT_ZH}
       </span>
 
       <Button
@@ -54,7 +60,7 @@ export function ChatInput({
         onClick={handleSend}
         disabled={disabled || !value.trim()}
         className="self-end"
-        aria-label="Send message"
+        aria-label={CHAT_SEND_BUTTON_LABEL_ZH}
       >
         <PaperPlaneRightIcon className="h-4 w-4" weight="fill" />
       </Button>

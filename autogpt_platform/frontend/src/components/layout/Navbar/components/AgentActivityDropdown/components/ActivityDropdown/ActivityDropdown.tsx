@@ -78,8 +78,8 @@ export function ActivityDropdown({
               <div className="relative w-full">
                 <Input
                   id="agent-search"
-                  label="Search agents"
-                  placeholder="Search runs by agent name..."
+                  label="搜索智能体"
+                  placeholder="按智能体名称搜索运行记录..."
                   hideLabel
                   size="small"
                   value={searchQuery}
@@ -92,7 +92,7 @@ export function ActivityDropdown({
                 <button
                   onClick={handleClearSearch}
                   className="absolute right-1 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center"
-                  aria-label="Clear search"
+                  aria-label="清除搜索"
                 >
                   <X size={16} className="text-gray-500" />
                 </button>
@@ -101,14 +101,14 @@ export function ActivityDropdown({
           ) : (
             <div className={styles.headerContainer}>
               <Text variant="large-semibold" className="!text-black">
-                Agent Activity
+                智能体活动
               </Text>
               {withSearch ? (
                 <Button
                   variant="ghost"
                   size="small"
                   onClick={toggleSearch}
-                  aria-label="Search agents"
+                  aria-label="搜索智能体"
                   className="relative left-3 hover:border-transparent hover:bg-transparent"
                 >
                   <MagnifyingGlass

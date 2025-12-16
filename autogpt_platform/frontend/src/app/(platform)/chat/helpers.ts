@@ -7,12 +7,12 @@
  */
 export function getToolDisplayName(toolName: string): string {
   const toolDisplayNames: Record<string, string> = {
-    find_agent: "🔍 Search Marketplace",
-    get_agent_details: "📋 Get Agent Details",
-    check_credentials: "🔑 Check Credentials",
-    setup_agent: "⚙️ Setup Agent",
-    run_agent: "▶️ Run Agent",
-    get_required_setup_info: "📝 Get Setup Requirements",
+    find_agent: "🔍 搜索市场",
+    get_agent_details: "📋 获取智能体详情",
+    check_credentials: "🔑 检查凭据",
+    setup_agent: "⚙️ 设置智能体",
+    run_agent: "▶️ 运行智能体",
+    get_required_setup_info: "📝 获取设置要求",
   };
   return toolDisplayNames[toolName] || toolName;
 }
@@ -26,15 +26,15 @@ export function getToolDisplayName(toolName: string): string {
  */
 export function getToolActionPhrase(toolName: string): string {
   const toolActionPhrases: Record<string, string> = {
-    find_agent: "Looking for agents in the marketplace",
-    agent_carousel: "Looking for agents in the marketplace",
-    get_agent_details: "Learning about the agent",
-    check_credentials: "Checking your credentials",
-    setup_agent: "Setting up the agent",
-    execution_started: "Running the agent",
-    run_agent: "Running the agent",
-    get_required_setup_info: "Getting setup requirements",
-    schedule_agent: "Scheduling the agent to run",
+    find_agent: "正在市场中搜索智能体",
+    agent_carousel: "正在市场中搜索智能体",
+    get_agent_details: "正在了解智能体",
+    check_credentials: "正在检查您的凭据",
+    setup_agent: "正在设置智能体",
+    execution_started: "正在运行智能体",
+    run_agent: "正在运行智能体",
+    get_required_setup_info: "正在获取设置要求",
+    schedule_agent: "正在调度智能体运行",
   };
 
   // Return mapped phrase or generate human-friendly fallback
@@ -50,12 +50,12 @@ export function getToolActionPhrase(toolName: string): string {
  */
 export function getToolCompletionPhrase(toolName: string): string {
   const toolCompletionPhrases: Record<string, string> = {
-    find_agent: "Finished searching the marketplace",
-    get_agent_details: "Got agent details",
-    check_credentials: "Checked credentials",
-    setup_agent: "Agent setup complete",
-    run_agent: "Agent execution started",
-    get_required_setup_info: "Got setup requirements",
+    find_agent: "已完成市场搜索",
+    get_agent_details: "已获取智能体详情",
+    check_credentials: "已检查凭据",
+    setup_agent: "智能体设置完成",
+    run_agent: "智能体执行已开始",
+    get_required_setup_info: "已获取设置要求",
   };
 
   // Return mapped phrase or generate human-friendly fallback

@@ -4,18 +4,19 @@ const MINUTES_PER_HOUR = 60;
 const HOURS_PER_DAY = 24;
 const MILLISECONDS_PER_MINUTE = SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND;
 
-export function formatTimeAgo(dateStr: string): string {
+export function formatTimeAgo(dateStr: string, locale: string = "en"): string {
   const date = new Date(dateStr);
   const now = new Date();
   const diffMs = now.getTime() - date.getTime();
   const diffMins = Math.floor(diffMs / MILLISECONDS_PER_MINUTE);
+  const isZh = locale.toLowerCase().startsWith("zh");
 
-  if (diffMins < 1) return "just now";
-  if (diffMins < SECONDS_PER_MINUTE) return `${diffMins}m ago`;
+  if (diffMins < 1) return isZh ? "刚刚" : "just now";
+  if (diffMins < SECONDS_PER_MINUTE) return isZh ? `${diffMins} 分钟前` : `${diffMins}m ago`;
   const diffHours = Math.floor(diffMins / MINUTES_PER_HOUR);
-  if (diffHours < HOURS_PER_DAY) return `${diffHours}h ago`;
+  if (diffHours < HOURS_PER_DAY) return isZh ? `${diffHours} 小时前` : `${diffHours}h ago`;
   const diffDays = Math.floor(diffHours / HOURS_PER_DAY);
-  return `${diffDays}d ago`;
+  return isZh ? `${diffDays} 天前` : `${diffDays}d ago`;
 }
 
 export function formatDate(date: Date | string, locale: string = "en-US") {

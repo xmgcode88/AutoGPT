@@ -12,6 +12,7 @@ import { ChatCredentialsSetup } from "@/app/(platform)/chat/components/ChatCrede
 import { useSupabase } from "@/lib/supabase/hooks/useSupabase";
 import { useChatMessage, type ChatMessageData } from "./useChatMessage";
 import { getToolActionPhrase } from "@/app/(platform)/chat/helpers";
+import { CHAT_MESSAGE_USER_ZH, CHAT_MESSAGE_ASSISTANT_ZH } from "../../i18n";
 export interface ChatMessageProps {
   message: ChatMessageData;
   className?: string;
@@ -43,7 +44,7 @@ export function ChatMessage({
       // This ensures the LLM calls get_required_setup_info again and proceeds with execution
       if (onSendMessage) {
         onSendMessage(
-          "I've configured the required credentials. Please check if everything is ready and proceed with setting up the agent.",
+          "我已经配置了所需的凭据。请检查一切是否准备就绪并继续设置智能体。",
         );
       }
       // Optionally dismiss the credentials prompt
@@ -93,10 +94,10 @@ export function ChatMessage({
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-                    Successfully Authenticated
+                    认证成功
                   </h3>
                   <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                    You&apos;re now signed in and ready to continue
+                    您已登录，可以继续操作
                   </p>
                 </div>
               </div>

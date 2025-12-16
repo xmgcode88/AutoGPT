@@ -1,5 +1,6 @@
 import type { ChatMessageData } from "@/app/(platform)/chat/components/ChatMessage/useChatMessage";
 import type { ToolResult } from "@/types/chat";
+import { CHAT_NO_RESULTS_FOUND_ZH } from "../../i18n";
 
 export function createUserMessage(content: string): ChatMessageData {
   return {
@@ -135,7 +136,7 @@ export function parseToolResponse(
         type: "tool_response",
         toolId,
         toolName,
-        result: (parsedResult.message as string) || "No results found",
+        result: (parsedResult.message as string) || CHAT_NO_RESULTS_FOUND_ZH,
         success: true,
         timestamp: timestamp || new Date(),
       };

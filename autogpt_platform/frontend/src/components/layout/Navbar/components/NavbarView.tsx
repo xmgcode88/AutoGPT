@@ -41,7 +41,7 @@ export function NavbarView({ isLoggedIn, previewBranchName }: NavbarViewProps) {
   const isLoadingProfile = isProfileLoading || isUserLoading;
 
   const linksWithChat = useMemo(() => {
-    const chatLink = { name: "Chat", href: "/chat" };
+    const chatLink = { name: "聊天", href: "/chat" };
     return isChatEnabled ? [...loggedInLinks, chatLink] : loggedInLinks;
   }, [isChatEnabled]);
 
@@ -112,16 +112,16 @@ export function NavbarView({ isLoggedIn, previewBranchName }: NavbarViewProps) {
               userName={profile?.username}
               menuItemGroups={[
                 {
-                  groupName: "Navigation",
+                  groupName: "导航",
                   items: linksWithChat.map((link) => ({
                     icon:
-                      link.name === "Marketplace"
+                      link.name === "智能体市场"
                         ? IconType.Marketplace
-                        : link.name === "Library"
+                        : link.name === "资源库"
                           ? IconType.Library
-                          : link.name === "Build"
+                          : link.name === "构建"
                             ? IconType.Builder
-                            : link.name === "Chat"
+                            : link.name === "聊天"
                               ? IconType.Chat
                               : link.name === "Monitor"
                                 ? IconType.Library

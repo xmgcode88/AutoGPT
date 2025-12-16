@@ -38,6 +38,10 @@ export default function BuilderPage() {
     isNewFlowEditorEnabled,
   } = useBuilderView();
 
+  useEffect(() => {
+    document.title = "构建 - AutoGPT Platform";
+  }, []);
+
   // Switch is temporary, we will remove it once our new flow editor is ready
   if (isSwitchEnabled) {
     return (

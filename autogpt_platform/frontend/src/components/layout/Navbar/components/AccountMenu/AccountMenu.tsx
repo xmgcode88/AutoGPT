@@ -110,9 +110,9 @@ export function AccountMenu({
                       </div>
                     </Link>
                   );
-                } else if (item.text === "Log out") {
+                } else if (item.text === "退出登录") {
                   return <AccountLogoutOption key={itemIndex} />;
-                } else if (item.text === "Publish an agent") {
+                } else if (item.text === "发布智能体") {
                   return (
                     <PublishAgentModal
                       key={itemIndex}

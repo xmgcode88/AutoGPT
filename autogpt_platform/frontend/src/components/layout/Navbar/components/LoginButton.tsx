@@ -22,7 +22,7 @@ export function LoginButton() {
       leftIcon={<SignInIcon className="size-4" />}
       variant="secondary"
     >
-      Log In
+      登录
     </Button>
   );
 }

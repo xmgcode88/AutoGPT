@@ -23,11 +23,11 @@ export const loggedInLinks: Link[] = [
     href: "/marketplace",
   },
   {
-    name: "Library",
+    name: "资源库",
     href: "/library",
   },
   {
-    name: "Build",
+    name: "构建",
     href: "/build",
   },
 ];
@@ -54,7 +54,7 @@ export const accountMenuItems: MenuItemGroup[] = [
     items: [
       {
         icon: IconType.Edit,
-        text: "Edit profile",
+        text: "编辑资料",
         href: "/profile",
       },
     ],
@@ -63,12 +63,12 @@ export const accountMenuItems: MenuItemGroup[] = [
     items: [
       {
         icon: IconType.LayoutDashboard,
-        text: "Creator Dashboard",
+        text: "创作者仪表板",
         href: "/profile/dashboard",
       },
       {
         icon: IconType.UploadCloud,
-        text: "Publish an agent",
+        text: "发布智能体",
       },
     ],
   },
@@ -76,7 +76,7 @@ export const accountMenuItems: MenuItemGroup[] = [
     items: [
       {
         icon: IconType.Settings,
-        text: "Settings",
+        text: "设置",
         href: "/profile/settings",
       },
     ],
@@ -85,7 +85,7 @@ export const accountMenuItems: MenuItemGroup[] = [
     items: [
       {
         icon: IconType.LogOut,
-        text: "Log out",
+        text: "退出登录",
       },
     ],
   },
@@ -97,7 +97,7 @@ export function getAccountMenuItems(userRole?: string): MenuItemGroup[] {
       items: [
         {
           icon: IconType.Edit,
-          text: "Edit profile",
+          text: "编辑资料",
           href: "/profile",
         },
       ],
@@ -106,12 +106,12 @@ export function getAccountMenuItems(userRole?: string): MenuItemGroup[] {
       items: [
         {
           icon: IconType.LayoutDashboard,
-          text: "Creator Dashboard",
+          text: "创作者仪表板",
           href: "/profile/dashboard",
         },
         {
           icon: IconType.UploadCloud,
-          text: "Publish an agent",
+          text: "发布智能体",
         },
       ],
     },
@@ -123,7 +123,7 @@ export function getAccountMenuItems(userRole?: string): MenuItemGroup[] {
       items: [
         {
           icon: IconType.Sliders,
-          text: "Admin",
+          text: "管理",
           href: "/admin/marketplace",
         },
       ],
@@ -136,7 +136,7 @@ export function getAccountMenuItems(userRole?: string): MenuItemGroup[] {
       items: [
         {
           icon: IconType.Settings,
-          text: "Settings",
+          text: "设置",
           href: "/profile/settings",
         },
       ],
@@ -145,7 +145,7 @@ export function getAccountMenuItems(userRole?: string): MenuItemGroup[] {
       items: [
         {
           icon: IconType.LogOut,
-          text: "Log out",
+          text: "退出登录",
         },
       ],
     },

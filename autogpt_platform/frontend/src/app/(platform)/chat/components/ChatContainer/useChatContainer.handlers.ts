@@ -2,6 +2,7 @@ import type { Dispatch, SetStateAction, MutableRefObject } from "react";
 import type { StreamChunk } from "@/app/(platform)/chat/useChatStream";
 import type { ChatMessageData } from "@/app/(platform)/chat/components/ChatMessage/useChatMessage";
 import { parseToolResponse, extractCredentialsNeeded } from "./helpers";
+import { CHAT_ERROR_OCCURRED_ZH } from "../../i18n";
 
 export interface HandlerDependencies {
   setHasTextChunks: Dispatch<SetStateAction<boolean>>;
@@ -201,6 +202,6 @@ export function handleStreamEnd(
 }
 
 export function handleError(chunk: StreamChunk, _deps: HandlerDependencies) {
-  const errorMessage = chunk.message || chunk.content || "An error occurred";
+  const errorMessage = chunk.message || chunk.content || CHAT_ERROR_OCCURRED_ZH;
   console.error("Stream error:", errorMessage);
 }

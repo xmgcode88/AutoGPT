@@ -71,10 +71,8 @@ export const useMarketplaceAgentsContent = () => {
       onError: (error) => {
         Sentry.captureException(error);
         toast({
-          title: "Failed to add agent to library",
-          description:
-            ((error as any).message as string) ||
-            "An unexpected error occurred.",
+          title: "添加智能体到个人库失败",
+          description: ((error as any).message as string) || "发生未知错误。",
           variant: "destructive",
         });
       },
@@ -96,7 +94,7 @@ export const useMarketplaceAgentsContent = () => {
       );
       if (status !== 200) {
         Sentry.captureException("Store listing version not found");
-        throw new Error("Store listing version not found");
+        throw new Error("未找到商店条目版本");
       }
 
       const response = await addMarketplaceAgent({
@@ -109,15 +107,14 @@ export const useMarketplaceAgentsContent = () => {
       addAgentToBuilder(libraryAgent);
 
       toast({
-        title: "Agent Added",
-        description: "Agent has been added to your library and builder",
+        title: "智能体已添加",
+        description: "智能体已添加到个人库并加入搭建器",
       });
     } catch (error) {
       Sentry.captureException(error);
       toast({
-        title: "Failed to add agent to library",
-        description:
-          ((error as any).message as string) || "An unexpected error occurred.",
+        title: "添加智能体到个人库失败",
+        description: ((error as any).message as string) || "发生未知错误。",
         variant: "destructive",
       });
     } finally {

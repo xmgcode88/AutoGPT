@@ -10,6 +10,7 @@ import {
   handleStreamEnd,
   handleError,
 } from "./useChatContainer.handlers";
+import { CHAT_ERROR_OCCURRED_ZH } from "../../i18n";
 
 export function createStreamEventDispatcher(
   deps: HandlerDependencies,
@@ -44,8 +45,8 @@ export function createStreamEventDispatcher(
       case "error":
         handleError(chunk, deps);
         // Show toast at dispatcher level to avoid circular dependencies
-        toast.error("Chat Error", {
-          description: chunk.message || chunk.content || "An error occurred",
+        toast.error("聊天错误", {
+          description: chunk.message || chunk.content || CHAT_ERROR_OCCURRED_ZH,
         });
         break;
 

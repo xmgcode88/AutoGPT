@@ -31,7 +31,10 @@ import {
   parseKeys,
   setNestedProperty,
 } from "@/lib/utils";
-import { localizeBlockCategoryName } from "@/app/(platform)/build/i18n";
+import {
+  localizeBlockCategoryName,
+  localizeBlockName,
+} from "@/app/(platform)/build/i18n";
 import { InfoIcon, Key } from "@phosphor-icons/react";
 import * as ContextMenu from "@radix-ui/react-context-menu";
 import {
@@ -195,7 +198,7 @@ export const CustomNode = React.memo(
 
     const displayTitle =
       customTitle ||
-      beautifyString(data.blockType?.replace(/Block$/, "") || data.title);
+      beautifyString(localizeBlockName(data.blockType || data.title));
 
     useEffect(() => {
       isInitialSetup.current = false;
@@ -285,8 +288,8 @@ export const CustomNode = React.memo(
           }
         } catch (error) {
           toast({
-            title: "Error",
-            description: `Error getting SSO URL: ${error}`,
+            title: "错误",
+            description: `获取 SSO 登录地址失败：${error}`,
             variant: "destructive",
           });
         } finally {
@@ -298,7 +301,7 @@ export const CustomNode = React.memo(
         <div className="flex flex-col gap-2">
           <Button type="button" onClick={handleSSOLogin} disabled={isLoading}>
             {isLoading ? (
-              "Loading..."
+              "加载中..."
             ) : (
               <>
                 <Key className="mr-2 h-4 w-4" />
@@ -795,7 +798,7 @@ export const CustomNode = React.memo(
                     onKeyDown={handleTitleKeyDown}
                     className="h-7 w-auto min-w-[100px] max-w-[200px] px-2 py-1 text-lg font-semibold"
                     placeholder={beautifyString(
-                      data.blockType?.replace(/Block$/, "") || data.title,
+                      localizeBlockName(data.blockType || data.title),
                     )}
                   />
                 ) : (
@@ -813,7 +816,7 @@ export const CustomNode = React.memo(
                         <p>
                           类型：{" "}
                           {beautifyString(
-                            data.blockType?.replace(/Block$/, "") || data.title,
+                            localizeBlockName(data.blockType || data.title),
                           )}
                         </p>
                       </TooltipContent>

@@ -11,6 +11,7 @@ import {
 import type { SessionDetailResponse } from "@/app/api/__generated__/models/sessionDetailResponse";
 import { storage, Key } from "@/services/storage/local-storage";
 import { isValidUUID } from "@/app/(platform)/chat/helpers";
+import { CHAT_SESSION_NOT_FOUND_ZH, CHAT_SESSION_CLAIMED_SUCCESSFULLY_ZH } from "./i18n";
 
 interface UseChatSessionArgs {
   urlSessionId?: string | null;
@@ -161,7 +162,7 @@ export function useChatSession({
           console.warn("Session not found on server, clearing local state");
           storage.clean(Key.CHAT_SESSION_ID);
           setSessionId(null);
-          throw new Error("Session not found");
+          throw new Error(CHAT_SESSION_NOT_FOUND_ZH);
         }
       } catch (err) {
         const error =
@@ -204,8 +205,8 @@ export function useChatSession({
           queryKey: getGetV2GetSessionQueryKey(id),
         });
         await refetch();
-        toast.success("Session claimed successfully", {
-          description: "Your chat history has been saved to your account",
+        toast.success(CHAT_SESSION_CLAIMED_SUCCESSFULLY_ZH, {
+          description: "您的聊天历史已保存到您的账户",
         });
       } catch (err: unknown) {
         const error =
@@ -224,8 +225,8 @@ export function useChatSession({
             err.response.status === 404);
         if (!is404) {
           setError(error);
-          toast.error("Failed to claim session", {
-            description: error.message || "Unable to claim session",
+          toast.error("认领会话失败", {
+            description: error.message || "无法认领会话",
           });
         }
         throw error;

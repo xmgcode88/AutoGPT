@@ -4,6 +4,12 @@ import { MessageList } from "@/app/(platform)/chat/components/MessageList/Messag
 import { QuickActionsWelcome } from "@/app/(platform)/chat/components/QuickActionsWelcome/QuickActionsWelcome";
 import { useChatContainer } from "./useChatContainer";
 import type { SessionDetailResponse } from "@/app/api/__generated__/models/sessionDetailResponse";
+import {
+  CHAT_WELCOME_TITLE_ZH,
+  CHAT_WELCOME_DESCRIPTION_ZH,
+  CHAT_LOADING_CREATING_SESSION_ZH,
+  CHAT_INPUT_PLACEHOLDER_ZH,
+} from "../../i18n";
 
 export interface ChatContainerProps {
   sessionId: string | null;
@@ -26,10 +32,10 @@ export function ChatContainer({
     });
 
   const quickActions = [
-    "Find agents for social media management",
-    "Show me agents for content creation",
-    "Help me automate my business",
-    "What can you help me with?",
+    "寻找社交媒体管理智能体",
+    "显示内容创作智能体",
+    "帮助我自动化业务",
+    "你能帮助我做什么？",
   ];
 
   return (
@@ -37,8 +43,8 @@ export function ChatContainer({
       {/* Messages or Welcome Screen */}
       {messages.length === 0 ? (
         <QuickActionsWelcome
-          title="Welcome to AutoGPT Chat"
-          description="Start a conversation to discover and run AI agents."
+          title={CHAT_WELCOME_TITLE_ZH}
+          description={CHAT_WELCOME_DESCRIPTION_ZH}
           actions={quickActions}
           onActionClick={sendMessage}
           disabled={isStreaming || !sessionId}
@@ -59,7 +65,7 @@ export function ChatContainer({
           onSend={sendMessage}
           disabled={isStreaming || !sessionId}
           placeholder={
-            sessionId ? "Type your message..." : "Creating session..."
+            sessionId ? CHAT_INPUT_PLACEHOLDER_ZH : CHAT_LOADING_CREATING_SESSION_ZH
           }
         />
       </div>

@@ -55,9 +55,8 @@ export const useMyAgentsContent = () => {
       await addLibraryAgentToBuilder(agent);
     } catch (error) {
       toast({
-        title: "Failed to add agent to builder",
-        description:
-          ((error as any).message as string) || "An unexpected error occurred.",
+        title: "添加智能体到搭建器失败",
+        description: ((error as any).message as string) || "发生未知错误。",
         variant: "destructive",
       });
     } finally {

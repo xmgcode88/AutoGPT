@@ -6,12 +6,14 @@ export interface ChatErrorStateProps {
   error: Error;
   onRetry?: () => void;
   className?: string;
+  context?: string;
 }
 
 export function ChatErrorState({
   error,
   onRetry,
   className,
+  context = "chat session",
 }: ChatErrorStateProps) {
   return (
     <div
@@ -21,7 +23,7 @@ export function ChatErrorState({
         responseError={{
           message: error.message,
         }}
-        context="chat session"
+        context={context}
         onRetry={onRetry}
         className="max-w-md"
       />

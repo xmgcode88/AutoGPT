@@ -44,8 +44,8 @@ export const useRunGraph = () => {
           // Reset running state on error
           setIsGraphRunning(false);
           toast({
-            title: (error.detail as string) ?? "An unexpected error occurred.",
-            description: "An unexpected error occurred.",
+            title: (error.detail as string) ?? "发生未知错误。",
+            description: "发生未知错误。",
             variant: "destructive",
           });
         },
@@ -58,8 +58,8 @@ export const useRunGraph = () => {
         onSuccess: () => {},
         onError: (error: any) => {
           toast({
-            title: (error.detail as string) ?? "An unexpected error occurred.",
-            description: "An unexpected error occurred.",
+            title: (error.detail as string) ?? "发生未知错误。",
+            description: "发生未知错误。",
             variant: "destructive",
           });
         },

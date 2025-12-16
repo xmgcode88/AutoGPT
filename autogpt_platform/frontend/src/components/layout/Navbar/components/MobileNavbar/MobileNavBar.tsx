@@ -52,7 +52,7 @@ export function MobileNavBar({
       <PopoverTrigger asChild>
         <Button
           variant="ghost"
-          aria-label="Open menu"
+          aria-label="打开菜单"
           className="min-w-auto flex !min-w-[3.75rem] items-center justify-center md:hidden"
           data-testid="mobile-nav-bar-trigger"
         >
@@ -61,7 +61,7 @@ export function MobileNavBar({
           ) : (
             <ListIcon className="size-6 stroke-slate-800" />
           )}
-          <span className="sr-only">Open menu</span>
+          <span className="sr-only">打开菜单</span>
         </Button>
       </PopoverTrigger>
       <AnimatePresence>
@@ -78,7 +78,7 @@ export function MobileNavBar({
                   <Avatar className="h-14 w-14">
                     <AvatarImage
                       src={avatarSrc}
-                      alt={userName || "Unknown User"}
+                      alt={userName || "未知用户"}
                     />
                     <AvatarFallback>
                       {userName?.charAt(0) || "U"}
@@ -86,10 +86,10 @@ export function MobileNavBar({
                   </Avatar>
                   <div className="relative h-14 w-full">
                     <div className="absolute left-0 top-0 text-lg font-semibold leading-7 text-[#474747]">
-                      {userName || "Unknown User"}
+                      {userName || "未知用户"}
                     </div>
                     <div className="absolute left-0 top-6 font-sans text-base font-normal leading-7 text-[#474747]">
-                      {userEmail || "No Email Set"}
+                      {userEmail || "未设置邮箱"}
                     </div>
                   </div>
                 </div>
