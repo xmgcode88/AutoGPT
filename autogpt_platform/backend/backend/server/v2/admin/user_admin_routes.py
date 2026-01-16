@@ -10,7 +10,7 @@ from backend.server.v2.admin.model import AdminUsersResponse
 logger = logging.getLogger(__name__)
 
 router = APIRouter(
-    prefix="/admin",
+    prefix="",
     tags=["admin", "users"],
     dependencies=[Security(requires_admin_user)],
 )
