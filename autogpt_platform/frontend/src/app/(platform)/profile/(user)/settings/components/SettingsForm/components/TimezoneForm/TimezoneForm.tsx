@@ -55,7 +55,7 @@ export function TimezoneForm({ user, currentTimezone = "not-set" }: Props) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Timezone</CardTitle>
+        <CardTitle>时区</CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -65,14 +65,14 @@ export function TimezoneForm({ user, currentTimezone = "not-set" }: Props) {
               name="timezone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Select your timezone</FormLabel>
+                  <FormLabel>选择您的时区</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a timezone" />
+                        <SelectValue placeholder="选择一个时区" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -88,7 +88,7 @@ export function TimezoneForm({ user, currentTimezone = "not-set" }: Props) {
               )}
             />
             <Button type="submit" disabled={isLoading} size="small">
-              {isLoading ? "Saving..." : "Save timezone"}
+              {isLoading ? "保存中..." : "保存时区"}
             </Button>
           </form>
         </Form>

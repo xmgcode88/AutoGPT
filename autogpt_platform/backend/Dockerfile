@@ -1,4 +1,4 @@
-FROM debian:13-slim AS builder
+FROM python:3.12-slim AS builder
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -19,12 +19,9 @@ RUN apt-get update --allow-releaseinfo-change --fix-missing \
 # Update package list and install Python, Node.js, and build dependencies
 RUN apt-get update \
     && apt-get install -y \
-    python3.13 \
-    python3.13-dev \
-    python3.13-venv \
-    python3-pip \
     build-essential \
     libpq5 \
+    libpq-dev \
     libz-dev \
     libssl-dev \
     postgresql-client \
@@ -37,7 +34,7 @@ ENV POETRY_VIRTUALENVS_CREATE=true
 ENV POETRY_VIRTUALENVS_IN_PROJECT=true
 ENV PATH=/opt/poetry/bin:$PATH
 
-RUN pip3 install poetry --break-system-packages
+RUN pip install poetry
 
 # Copy and install dependencies
 COPY autogpt_platform/autogpt_libs /app/autogpt_platform/autogpt_libs
@@ -50,7 +47,7 @@ COPY autogpt_platform/backend/schema.prisma ./
 COPY autogpt_platform/backend/backend/data/partial_types.py ./backend/data/partial_types.py
 RUN poetry run prisma generate
 
-FROM debian:13-slim AS server_dependencies
+FROM python:3.12-slim AS server_dependencies
 
 WORKDIR /app
 
@@ -61,11 +58,7 @@ ENV POETRY_HOME=/opt/poetry \
     DEBIAN_FRONTEND=noninteractive
 ENV PATH=/opt/poetry/bin:$PATH
 
-# Install Python without upgrading system-managed packages
-RUN apt-get update && apt-get install -y \
-    python3.13 \
-    python3-pip \
-    && rm -rf /var/lib/apt/lists/*
+# Base image already includes Python + pip
 
 # Copy only necessary files from builder
 COPY --from=builder /app /app

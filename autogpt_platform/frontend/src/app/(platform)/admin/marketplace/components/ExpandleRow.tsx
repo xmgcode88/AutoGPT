@@ -12,6 +12,7 @@ import {
 import { Badge } from "@/components/__legacy__/ui/badge";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
+import { zhCN } from "date-fns/locale";
 import {
   type StoreListingWithVersions,
   type StoreSubmission,
@@ -24,13 +25,13 @@ import { DownloadAgentAdminButton } from "./DownloadAgentButton";
 const getStatusBadge = (status: SubmissionStatus) => {
   switch (status) {
     case SubmissionStatus.PENDING:
-      return <Badge className="bg-amber-500">Pending</Badge>;
+      return <Badge className="bg-amber-500">待审核</Badge>;
     case SubmissionStatus.APPROVED:
-      return <Badge className="bg-green-500">Approved</Badge>;
+      return <Badge className="bg-green-500">已通过</Badge>;
     case SubmissionStatus.REJECTED:
-      return <Badge className="bg-red-500">Rejected</Badge>;
+      return <Badge className="bg-red-500">已拒绝</Badge>;
     default:
-      return <Badge className="bg-gray-500">Draft</Badge>;
+      return <Badge className="bg-gray-500">草稿</Badge>;
   }
 };
 
@@ -57,13 +58,13 @@ export function ExpandableRow({
           className="font-medium"
           onClick={() => setExpanded(!expanded)}
         >
-          {latestVersion?.name || "Unnamed Agent"}
+          {latestVersion?.name || "未命名智能体"}
         </TableCell>
         <TableCell onClick={() => setExpanded(!expanded)}>
-          {listing.creator_email || "Unknown"}
+          {listing.creator_email || "未知"}
         </TableCell>
         <TableCell onClick={() => setExpanded(!expanded)}>
-          {latestVersion?.sub_heading || "No description"}
+          {latestVersion?.sub_heading || "无描述"}
         </TableCell>
         <TableCell onClick={() => setExpanded(!expanded)}>
           {latestVersion?.status && getStatusBadge(latestVersion.status)}
@@ -72,8 +73,9 @@ export function ExpandableRow({
           {latestVersion?.date_submitted
             ? formatDistanceToNow(new Date(latestVersion.date_submitted), {
                 addSuffix: true,
+                locale: zhCN,
               })
-            : "Unknown"}
+            : "未知"}
         </TableCell>
         <TableCell className="text-right">
           <div className="flex justify-end gap-2">
@@ -96,22 +98,22 @@ export function ExpandableRow({
         <TableRow>
           <TableCell colSpan={7} className="border-t-0 p-0">
             <div className="bg-muted/30 px-4 py-3">
-              <h4 className="mb-2 text-sm font-semibold">Version History</h4>
+              <h4 className="mb-2 text-sm font-semibold">版本历史</h4>
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Version</TableHead>
-                    <TableHead>Status</TableHead>
+                    <TableHead>版本</TableHead>
+                    <TableHead>状态</TableHead>
                     {/* <TableHead>Changes</TableHead> */}
-                    <TableHead>Submitted</TableHead>
-                    <TableHead>Reviewed</TableHead>
-                    <TableHead>External Comments</TableHead>
-                    <TableHead>Internal Comments</TableHead>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Sub Heading</TableHead>
-                    <TableHead>Description</TableHead>
+                    <TableHead>提交时间</TableHead>
+                    <TableHead>审核时间</TableHead>
+                    <TableHead>外部备注</TableHead>
+                    <TableHead>内部备注</TableHead>
+                    <TableHead>名称</TableHead>
+                    <TableHead>副标题</TableHead>
+                    <TableHead>描述</TableHead>
                     {/* <TableHead>Categories</TableHead> */}
-                    <TableHead className="text-right">Actions</TableHead>
+                    <TableHead className="text-right">操作</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -123,7 +125,7 @@ export function ExpandableRow({
                           v{version.version || "?"}
                           {version.store_listing_version_id ===
                             listing.active_version_id && (
-                            <Badge className="ml-2 bg-blue-500">Active</Badge>
+                            <Badge className="ml-2 bg-blue-500">当前</Badge>
                           )}
                         </TableCell>
                         <TableCell>{getStatusBadge(version.status)}</TableCell>
@@ -134,9 +136,9 @@ export function ExpandableRow({
                           {version.date_submitted
                             ? formatDistanceToNow(
                                 new Date(version.date_submitted),
-                                { addSuffix: true },
+                                { addSuffix: true, locale: zhCN },
                               )
-                            : "Unknown"}
+                            : "未知"}
                         </TableCell>
                         <TableCell>
                           {version.reviewed_at
@@ -144,9 +146,10 @@ export function ExpandableRow({
                                 new Date(version.reviewed_at),
                                 {
                                   addSuffix: true,
+                                  locale: zhCN,
                                 },
                               )
-                            : "Not reviewed"}
+                            : "未审核"}
                         </TableCell>
                         <TableCell className="max-w-xs truncate">
                           {version.review_comments ? (
@@ -158,7 +161,7 @@ export function ExpandableRow({
                             </div>
                           ) : (
                             <span className="text-gray-400">
-                              No external comments
+                              无外部备注
                             </span>
                           )}
                         </TableCell>
@@ -172,7 +175,7 @@ export function ExpandableRow({
                             </div>
                           ) : (
                             <span className="text-gray-400">
-                              No internal comments
+                              无内部备注
                             </span>
                           )}
                         </TableCell>

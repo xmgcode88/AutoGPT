@@ -23,15 +23,15 @@ function SpendingDashboard({
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">User Spending</h1>
-            <p className="text-gray-500">Manage user spending balances</p>
+            <h1 className="text-3xl font-bold">用户消费</h1>
+            <p className="text-gray-500">管理用户余额</p>
           </div>
         </div>
 
         <Suspense
           key={`${page}-${status}-${search}`}
           fallback={
-            <div className="py-10 text-center">Loading submissions...</div>
+            <div className="py-10 text-center">加载记录中...</div>
           }
         >
           <AdminUserGrantHistory

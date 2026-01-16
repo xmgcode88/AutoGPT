@@ -33,6 +33,7 @@ from backend.integrations.providers import ProviderName
 from backend.util import json
 from backend.util.logging import TruncatedLogger
 from backend.util.prompt import compress_prompt, estimate_token_count
+from backend.util.settings import Settings
 from backend.util.text import TextFormatter
 
 logger = TruncatedLogger(logging.getLogger(__name__), "[LLM-Block]")
@@ -41,12 +42,16 @@ fmt = TextFormatter(autoescape=False)
 LLMProviderName = Literal[
     ProviderName.AIML_API,
     ProviderName.ANTHROPIC,
+    ProviderName.DEEPSEEK,
     ProviderName.GROQ,
     ProviderName.OLLAMA,
     ProviderName.OPENAI,
     ProviderName.OPEN_ROUTER,
     ProviderName.LLAMA_API,
+    ProviderName.MOONSHOT,
+    ProviderName.QWEN,
     ProviderName.V0,
+    ProviderName.ZHIPUAI,
 ]
 AICredentials = CredentialsMetaInput[LLMProviderName, Literal["api_key"]]
 
@@ -160,6 +165,11 @@ class LlmModel(str, Enum, metaclass=LlmModelMeta):
     KIMI_K2 = "moonshotai/kimi-k2"
     QWEN3_235B_A22B_THINKING = "qwen/qwen3-235b-a22b-thinking-2507"
     QWEN3_CODER = "qwen/qwen3-coder"
+    QWEN_PLUS = "qwen-plus"
+    QWEN_MAX = "qwen-max"
+    QWEN_TURBO = "qwen-turbo"
+    ZHIPU_GLM_4 = "glm-4"
+    ZHIPU_GLM_4_PLUS = "glm-4-plus"
     # Llama API models
     LLAMA_API_LLAMA_4_SCOUT = "Llama-4-Scout-17B-16E-Instruct-FP8"
     LLAMA_API_LLAMA4_MAVERICK = "Llama-4-Maverick-17B-128E-Instruct-FP8"
@@ -261,8 +271,8 @@ MODEL_METADATA = {
     LlmModel.MISTRAL_NEMO: ModelMetadata("open_router", 128000, 4096),
     LlmModel.COHERE_COMMAND_R_08_2024: ModelMetadata("open_router", 128000, 4096),
     LlmModel.COHERE_COMMAND_R_PLUS_08_2024: ModelMetadata("open_router", 128000, 4096),
-    LlmModel.DEEPSEEK_CHAT: ModelMetadata("open_router", 64000, 2048),
-    LlmModel.DEEPSEEK_R1_0528: ModelMetadata("open_router", 163840, 163840),
+    LlmModel.DEEPSEEK_CHAT: ModelMetadata("deepseek", 64000, 2048),
+    LlmModel.DEEPSEEK_R1_0528: ModelMetadata("deepseek", 163840, 163840),
     LlmModel.PERPLEXITY_SONAR: ModelMetadata("open_router", 127000, 8000),
     LlmModel.PERPLEXITY_SONAR_PRO: ModelMetadata("open_router", 200000, 8000),
     LlmModel.PERPLEXITY_SONAR_DEEP_RESEARCH: ModelMetadata(
@@ -289,9 +299,14 @@ MODEL_METADATA = {
     LlmModel.GROK_4_FAST: ModelMetadata("open_router", 2000000, 30000),
     LlmModel.GROK_4_1_FAST: ModelMetadata("open_router", 2000000, 30000),
     LlmModel.GROK_CODE_FAST_1: ModelMetadata("open_router", 256000, 10000),
-    LlmModel.KIMI_K2: ModelMetadata("open_router", 131000, 131000),
-    LlmModel.QWEN3_235B_A22B_THINKING: ModelMetadata("open_router", 262144, 262144),
-    LlmModel.QWEN3_CODER: ModelMetadata("open_router", 262144, 262144),
+    LlmModel.KIMI_K2: ModelMetadata("moonshot", 131000, 131000),
+    LlmModel.QWEN3_235B_A22B_THINKING: ModelMetadata("qwen", 262144, 262144),
+    LlmModel.QWEN3_CODER: ModelMetadata("qwen", 262144, 262144),
+    LlmModel.QWEN_PLUS: ModelMetadata("qwen", 128000, 8192),
+    LlmModel.QWEN_MAX: ModelMetadata("qwen", 128000, 8192),
+    LlmModel.QWEN_TURBO: ModelMetadata("qwen", 128000, 8192),
+    LlmModel.ZHIPU_GLM_4: ModelMetadata("zhipuai", 128000, 8192),
+    LlmModel.ZHIPU_GLM_4_PLUS: ModelMetadata("zhipuai", 128000, 8192),
     # Llama API models
     LlmModel.LLAMA_API_LLAMA_4_SCOUT: ModelMetadata("llama_api", 128000, 4028),
     LlmModel.LLAMA_API_LLAMA4_MAVERICK: ModelMetadata("llama_api", 128000, 4028),
@@ -403,6 +418,23 @@ def get_parallel_tool_calls_param(
     return parallel_tool_calls
 
 
+def normalize_model_name(llm_model: LlmModel) -> str:
+    value = llm_model.value
+    if "/" not in value:
+        return value
+    prefix, remainder = value.split("/", 1)
+    provider = llm_model.metadata.provider
+    if provider == "deepseek" and prefix == "deepseek":
+        return remainder
+    if provider == "qwen" and prefix == "qwen":
+        return remainder
+    if provider == "moonshot" and prefix == "moonshotai":
+        return remainder
+    if provider == "zhipuai" and prefix == "zhipuai":
+        return remainder
+    return value
+
+
 async def llm_call(
     credentials: APIKeyCredentials,
     llm_model: LlmModel,
@@ -471,6 +503,46 @@ async def llm_call(
             tools=tools_param,  # type: ignore
             parallel_tool_calls=parallel_tool_calls,
         )
+
+        tool_calls = extract_openai_tool_calls(response)
+        reasoning = extract_openai_reasoning(response)
+
+        return LLMResponse(
+            raw_response=response.choices[0].message,
+            prompt=prompt,
+            response=response.choices[0].message.content or "",
+            tool_calls=tool_calls,
+            prompt_tokens=response.usage.prompt_tokens if response.usage else 0,
+            completion_tokens=response.usage.completion_tokens if response.usage else 0,
+            reasoning=reasoning,
+        )
+    elif provider in {"deepseek", "qwen", "zhipuai", "moonshot"}:
+        settings = Settings()
+        base_url = {
+            "deepseek": settings.config.deepseek_base_url,
+            "qwen": settings.config.qwen_base_url,
+            "zhipuai": settings.config.zhipuai_base_url,
+            "moonshot": settings.config.moonshot_base_url,
+        }[provider]
+        tools_param = tools if tools else openai.NOT_GIVEN
+        client = openai.AsyncOpenAI(
+            base_url=base_url,
+            api_key=credentials.api_key.get_secret_value(),
+        )
+        parallel_tool_calls_param = get_parallel_tool_calls_param(
+            llm_model, parallel_tool_calls
+        )
+        model_name = normalize_model_name(llm_model)
+        response = await client.chat.completions.create(
+            model=model_name,
+            messages=prompt,  # type: ignore
+            max_tokens=max_tokens,
+            tools=tools_param,  # type: ignore
+            parallel_tool_calls=parallel_tool_calls_param,
+        )
+
+        if not response.choices:
+            raise ValueError(f"{provider} error: {response}")
 
         tool_calls = extract_openai_tool_calls(response)
         reasoning = extract_openai_reasoning(response)
@@ -790,7 +862,7 @@ class AIStructuredResponseGeneratorBlock(AIBlockBase):
         )
         model: LlmModel = SchemaField(
             title="LLM Model",
-            default=LlmModel.GPT4O,
+            default=LlmModel.DEEPSEEK_CHAT,
             description="The language model to use for answering the prompt.",
             advanced=False,
         )
@@ -1221,7 +1293,7 @@ class AITextGeneratorBlock(AIBlockBase):
         )
         model: LlmModel = SchemaField(
             title="LLM Model",
-            default=LlmModel.GPT4O,
+            default=LlmModel.DEEPSEEK_CHAT,
             description="The language model to use for answering the prompt.",
             advanced=False,
         )
@@ -1317,7 +1389,7 @@ class AITextSummarizerBlock(AIBlockBase):
         )
         model: LlmModel = SchemaField(
             title="LLM Model",
-            default=LlmModel.GPT4O,
+            default=LlmModel.DEEPSEEK_CHAT,
             description="The language model to use for summarizing the text.",
         )
         focus: str = SchemaField(
@@ -1534,7 +1606,7 @@ class AIConversationBlock(AIBlockBase):
         )
         model: LlmModel = SchemaField(
             title="LLM Model",
-            default=LlmModel.GPT4O,
+            default=LlmModel.DEEPSEEK_CHAT,
             description="The language model to use for the conversation.",
         )
         credentials: AICredentials = AICredentialsField()
@@ -1635,7 +1707,7 @@ class AIListGeneratorBlock(AIBlockBase):
         )
         model: LlmModel = SchemaField(
             title="LLM Model",
-            default=LlmModel.GPT4O,
+            default=LlmModel.DEEPSEEK_CHAT,
             description="The language model to use for generating the list.",
             advanced=True,
         )

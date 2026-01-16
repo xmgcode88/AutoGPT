@@ -9,16 +9,16 @@ import {
 } from "@/components/__legacy__/ui/card";
 import { APIKeysModals } from "./components/APIKeysModals/APIKeysModals";
 
-export const metadata: Metadata = { title: "API Keys - AutoGPT Platform" };
+export const metadata: Metadata = { title: "API 密钥 - AutoGPT Platform" };
 
 const ApiKeysPage = () => {
   return (
     <div className="w-full pr-4 pt-24 md:pt-0">
       <Card>
         <CardHeader>
-          <CardTitle>AutoGPT Platform API Keys</CardTitle>
+          <CardTitle>AutoGPT Platform API 密钥</CardTitle>
           <CardDescription>
-            Manage your AutoGPT Platform API keys for programmatic access
+            管理您的 AutoGPT Platform API 密钥，用于程序化访问
           </CardDescription>
         </CardHeader>
         <CardContent>

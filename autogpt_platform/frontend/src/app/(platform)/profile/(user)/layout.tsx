@@ -19,36 +19,36 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     {
       links: [
         {
-          text: "Creator Dashboard",
+          text: "创建者仪表板",
           href: "/profile/dashboard",
           icon: <IconDashboardLayout className="h-6 w-6" />,
         },
         ...(isPaymentEnabled
           ? [
               {
-                text: "Billing",
+                text: "账单",
                 href: "/profile/credits",
                 icon: <IconCoin className="h-6 w-6" />,
               },
             ]
           : []),
         {
-          text: "Integrations",
+          text: "集成",
           href: "/profile/integrations",
           icon: <IconIntegrations className="h-6 w-6" />,
         },
         {
-          text: "API Keys",
+          text: "API密钥",
           href: "/profile/api_keys",
           icon: <KeyIcon className="h-6 w-6" />,
         },
         {
-          text: "Profile",
+          text: "个人资料",
           href: "/profile",
           icon: <IconProfile className="h-6 w-6" />,
         },
         {
-          text: "Settings",
+          text: "设置",
           href: "/profile/settings",
           icon: <IconSliders className="h-6 w-6" />,
         },

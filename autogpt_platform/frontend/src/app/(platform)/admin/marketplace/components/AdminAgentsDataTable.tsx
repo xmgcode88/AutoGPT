@@ -56,19 +56,19 @@ export async function AdminAgentsDataTable({
           <TableHeader>
             <TableRow>
               <TableHead className="w-10"></TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>Creator</TableHead>
-              <TableHead>Description</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Submitted</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
+              <TableHead>名称</TableHead>
+              <TableHead>创建者</TableHead>
+              <TableHead>描述</TableHead>
+              <TableHead>状态</TableHead>
+              <TableHead>提交时间</TableHead>
+              <TableHead className="text-right">操作</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {listings.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={7} className="py-10 text-center">
-                  No submissions found
+                  暂无提交记录
                 </TableCell>
               </TableRow>
             ) : (

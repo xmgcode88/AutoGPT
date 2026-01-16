@@ -64,7 +64,7 @@ export function ApproveRejectButtons({
           }}
         >
           <CheckCircle className="mr-2 h-4 w-4" />
-          Approve
+          通过
         </Button>
       )}
       <Button
@@ -77,17 +77,16 @@ export function ApproveRejectButtons({
         }}
       >
         <XCircle className="mr-2 h-4 w-4" />
-        {isApproved ? "Revoke" : "Reject"}
+        {isApproved ? "撤销" : "拒绝"}
       </Button>
 
       {/* Approve Dialog */}
       <Dialog open={isApproveDialogOpen} onOpenChange={setIsApproveDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Approve Agent</DialogTitle>
+            <DialogTitle>通过智能体</DialogTitle>
             <DialogDescription>
-              Are you sure you want to approve this agent? This will make it
-              available in the marketplace.
+              确定通过该智能体吗？通过后将显示在市场中。
             </DialogDescription>
           </DialogHeader>
 
@@ -100,12 +99,12 @@ export function ApproveRejectButtons({
 
             <div className="grid gap-4 py-4">
               <div className="grid gap-2">
-                <Label htmlFor="comments">Comments (Optional)</Label>
+                <Label htmlFor="comments">备注（可选）</Label>
                 <Textarea
                   id="comments"
                   name="comments"
-                  placeholder="Add any comments for the agent creator"
-                  defaultValue="Meets all requirements"
+                  placeholder="给智能体创建者的备注"
+                  defaultValue="符合所有要求"
                 />
               </div>
             </div>
@@ -116,9 +115,9 @@ export function ApproveRejectButtons({
                 variant="outline"
                 onClick={() => setIsApproveDialogOpen(false)}
               >
-                Cancel
+                取消
               </Button>
-              <Button type="submit">Approve</Button>
+              <Button type="submit">通过</Button>
             </DialogFooter>
           </form>
         </DialogContent>
@@ -129,12 +128,12 @@ export function ApproveRejectButtons({
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              {isApproved ? "Revoke Approved Agent" : "Reject Agent"}
+              {isApproved ? "撤销已通过的智能体" : "拒绝智能体"}
             </DialogTitle>
             <DialogDescription>
               {isApproved
-                ? "Are you sure you want to revoke approval for this agent? This will remove it from the marketplace."
-                : "Please provide feedback on why this agent is being rejected."}
+                ? "确定撤销该智能体的通过状态吗？这将从市场中移除。"
+                : "请填写拒绝原因反馈给创建者。"}
             </DialogDescription>
           </DialogHeader>
 
@@ -147,21 +146,21 @@ export function ApproveRejectButtons({
 
             <div className="grid gap-4 py-4">
               <div className="grid gap-2">
-                <Label htmlFor="comments">Comments for Creator</Label>
+                <Label htmlFor="comments">给创建者的备注</Label>
                 <Textarea
                   id="comments"
                   name="comments"
-                  placeholder="Provide feedback for the agent creator"
+                  placeholder="请输入给创建者的反馈"
                   required
                 />
               </div>
 
               <div className="grid gap-2">
-                <Label htmlFor="internal_comments">Internal Comments</Label>
+                <Label htmlFor="internal_comments">内部备注</Label>
                 <Textarea
                   id="internal_comments"
                   name="internal_comments"
-                  placeholder="Add any internal notes (not visible to creator)"
+                  placeholder="添加内部备注（创建者不可见）"
                 />
               </div>
             </div>
@@ -172,10 +171,10 @@ export function ApproveRejectButtons({
                 variant="outline"
                 onClick={() => setIsRejectDialogOpen(false)}
               >
-                Cancel
+                取消
               </Button>
               <Button type="submit" variant="destructive">
-                {isApproved ? "Revoke" : "Reject"}
+                {isApproved ? "撤销" : "拒绝"}
               </Button>
             </DialogFooter>
           </form>

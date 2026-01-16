@@ -48,7 +48,14 @@ export async function AdminUserGrantHistory({
     const isPurchased = type === CreditTransactionType.TOP_UP;
     const isSpent = type === CreditTransactionType.USAGE;
 
-    const displayText = type;
+    const typeLabels: Record<CreditTransactionType, string> = {
+      [CreditTransactionType.TOP_UP]: "充值",
+      [CreditTransactionType.USAGE]: "消费",
+      [CreditTransactionType.REFUND]: "退款",
+      [CreditTransactionType.GRANT]: "赠送",
+      [CreditTransactionType.CARD_CHECK]: "卡验证",
+    };
+    const displayText = typeLabels[type] || type.valueOf();
     let bgColor = "";
 
     if (isGrant) {
@@ -61,20 +68,20 @@ export async function AdminUserGrantHistory({
 
     return (
       <span className={`rounded-full px-2 py-1 text-xs font-medium ${bgColor}`}>
-        {displayText.valueOf()}
+        {displayText}
       </span>
     );
   };
 
   // Helper function to format the date
   const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat("en-US", {
+    return new Intl.DateTimeFormat("zh-CN", {
       month: "short",
       day: "numeric",
       year: "numeric",
       hour: "numeric",
       minute: "numeric",
-      hour12: true,
+      hour12: false,
     }).format(new Date(date));
   };
 
@@ -89,16 +96,16 @@ export async function AdminUserGrantHistory({
         <Table>
           <TableHeader className="bg-gray-50">
             <TableRow>
-              <TableHead className="font-medium">User</TableHead>
-              <TableHead className="font-medium">Type</TableHead>
-              <TableHead className="font-medium">Date</TableHead>
-              <TableHead className="font-medium">Reason</TableHead>
-              <TableHead className="font-medium">Admin</TableHead>
-              <TableHead className="font-medium">Starting Balance</TableHead>
-              <TableHead className="font-medium">Amount</TableHead>
-              <TableHead className="font-medium">Ending Balance</TableHead>
+              <TableHead className="font-medium">用户</TableHead>
+              <TableHead className="font-medium">类型</TableHead>
+              <TableHead className="font-medium">时间</TableHead>
+              <TableHead className="font-medium">原因</TableHead>
+              <TableHead className="font-medium">管理员</TableHead>
+              <TableHead className="font-medium">起始余额</TableHead>
+              <TableHead className="font-medium">金额</TableHead>
+              <TableHead className="font-medium">结束余额</TableHead>
               {/* <TableHead className="font-medium">Current Balance</TableHead> */}
-              <TableHead className="text-right font-medium">Actions</TableHead>
+              <TableHead className="text-right font-medium">操作</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -108,7 +115,7 @@ export async function AdminUserGrantHistory({
                   colSpan={8}
                   className="py-10 text-center text-gray-500"
                 >
-                  No transactions found
+                  暂无交易记录
                 </TableCell>
               </TableRow>
             ) : (
@@ -150,7 +157,7 @@ export async function AdminUserGrantHistory({
                     <AdminAddMoneyButton
                       userId={transaction.user_id}
                       userEmail={
-                        transaction.user_email ?? "User Email wasn't attached"
+                        transaction.user_email ?? "未附带用户邮箱"
                       }
                       currentBalance={transaction.current_balance}
                       defaultAmount={
@@ -162,7 +169,7 @@ export async function AdminUserGrantHistory({
                       defaultComments={
                         transaction.transaction_type ===
                         CreditTransactionType.USAGE
-                          ? "Refund for usage"
+                          ? "使用扣费退款"
                           : undefined
                       }
                     />

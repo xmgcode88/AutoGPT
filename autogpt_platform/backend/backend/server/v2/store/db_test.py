@@ -362,6 +362,42 @@ async def test_get_user_profile(mocker):
 
 
 @pytest.mark.asyncio(loop_scope="session")
+async def test_get_user_profile_creates_when_missing(mocker):
+    mock_profile_db = mocker.patch("prisma.models.Profile.prisma")
+    mock_profile_db.return_value.find_first = mocker.AsyncMock(return_value=None)
+
+    created_profile = prisma.models.Profile(
+        id="created-profile-id",
+        name="Default User",
+        username="default-user",
+        description="",
+        links=[],
+        avatarUrl=None,
+        isFeatured=False,
+        createdAt=datetime.now(),
+        updatedAt=datetime.now(),
+        userId="user-id",
+    )
+    mock_profile_db.return_value.create = mocker.AsyncMock(
+        return_value=created_profile
+    )
+
+    mock_user = mocker.MagicMock()
+    mock_user.name = "Default User"
+    mock_user.email = "user@example.com"
+    mock_user_db = mocker.patch("prisma.models.User.prisma")
+    mock_user_db.return_value.find_unique = mocker.AsyncMock(return_value=mock_user)
+
+    result = await db.get_user_profile("user-id")
+
+    mock_profile_db.return_value.find_first.assert_awaited()
+    mock_profile_db.return_value.create.assert_awaited_once()
+    assert result.name == "Default User"
+    assert result.username == "default-user"
+    assert result.links == []
+
+
+@pytest.mark.asyncio(loop_scope="session")
 async def test_get_store_agents_with_search_parameterized(mocker):
     """Test that search query uses parameterized SQL - validates the fix works"""
 

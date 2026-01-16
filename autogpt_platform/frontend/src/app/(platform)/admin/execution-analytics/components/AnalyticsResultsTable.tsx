@@ -22,11 +22,11 @@ export function AnalyticsResultsTable({ results }: Props) {
       onClick={() => {
         navigator.clipboard.writeText(value);
         toast({
-          title: "Copied",
-          description: `${label} copied to clipboard`,
+          title: "已复制",
+          description: `已复制${label}到剪贴板`,
         });
       }}
-      title={`Click to copy ${label.toLowerCase()}`}
+      title={`点击复制${label}`}
     >
       {value.substring(0, 8)}...
       <CopyIcon className="h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100" />
@@ -45,14 +45,14 @@ export function AnalyticsResultsTable({ results }: Props) {
 
   const exportToCSV = () => {
     const headers = [
-      "Agent ID",
-      "Version",
-      "User ID",
-      "Execution ID",
-      "Status",
-      "Score",
-      "Summary Text",
-      "Error Message",
+      "智能体 ID",
+      "版本",
+      "用户 ID",
+      "执行 ID",
+      "状态",
+      "得分",
+      "摘要内容",
+      "错误信息",
     ];
 
     const csvData = results.results.map((result) => [
@@ -90,11 +90,11 @@ export function AnalyticsResultsTable({ results }: Props) {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "success":
-        return <Badge variant="success">Success</Badge>;
+        return <Badge variant="success">成功</Badge>;
       case "failed":
-        return <Badge variant="error">Failed</Badge>;
+        return <Badge variant="error">失败</Badge>;
       case "skipped":
-        return <Badge variant="info">Skipped</Badge>;
+        return <Badge variant="info">已跳过</Badge>;
       default:
         return <Badge variant="info">{status}</Badge>;
     }
@@ -119,12 +119,12 @@ export function AnalyticsResultsTable({ results }: Props) {
       {/* Summary Stats */}
       <div className="rounded-lg bg-gray-50 p-4">
         <Text variant="h3" className="mb-3">
-          Analytics Summary
+          分析汇总
         </Text>
         <div className="grid grid-cols-2 gap-4 text-sm md:grid-cols-5">
           <div>
             <Text variant="body" className="text-gray-600">
-              Total Executions:
+              总执行数：
             </Text>
             <Text variant="h4" className="font-semibold">
               {results.total_executions}
@@ -132,7 +132,7 @@ export function AnalyticsResultsTable({ results }: Props) {
           </div>
           <div>
             <Text variant="body" className="text-gray-600">
-              Processed:
+              已处理：
             </Text>
             <Text variant="h4" className="font-semibold">
               {results.processed_executions}
@@ -140,7 +140,7 @@ export function AnalyticsResultsTable({ results }: Props) {
           </div>
           <div>
             <Text variant="body" className="text-gray-600">
-              Successful:
+              成功：
             </Text>
             <Text variant="h4" className="font-semibold text-green-600">
               {results.successful_analytics}
@@ -148,7 +148,7 @@ export function AnalyticsResultsTable({ results }: Props) {
           </div>
           <div>
             <Text variant="body" className="text-gray-600">
-              Failed:
+              失败：
             </Text>
             <Text variant="h4" className="font-semibold text-red-600">
               {results.failed_analytics}
@@ -156,7 +156,7 @@ export function AnalyticsResultsTable({ results }: Props) {
           </div>
           <div>
             <Text variant="body" className="text-gray-600">
-              Skipped:
+              已跳过：
             </Text>
             <Text variant="h4" className="font-semibold text-gray-600">
               {results.skipped_executions}
@@ -173,7 +173,7 @@ export function AnalyticsResultsTable({ results }: Props) {
           disabled={results.results.length === 0}
         >
           <DownloadIcon size={16} className="mr-2" />
-          Export CSV
+          导出 CSV
         </Button>
       </div>
 
@@ -186,37 +186,37 @@ export function AnalyticsResultsTable({ results }: Props) {
                 <tr>
                   <th className="px-4 py-3 text-left">
                     <Text variant="body" className="font-medium text-gray-600">
-                      Agent ID
+                      智能体 ID
                     </Text>
                   </th>
                   <th className="px-4 py-3 text-left">
                     <Text variant="body" className="font-medium text-gray-600">
-                      Version
+                      版本
                     </Text>
                   </th>
                   <th className="px-4 py-3 text-left">
                     <Text variant="body" className="font-medium text-gray-600">
-                      User ID
+                      用户 ID
                     </Text>
                   </th>
                   <th className="px-4 py-3 text-left">
                     <Text variant="body" className="font-medium text-gray-600">
-                      Execution ID
+                      执行 ID
                     </Text>
                   </th>
                   <th className="px-4 py-3 text-left">
                     <Text variant="body" className="font-medium text-gray-600">
-                      Status
+                      状态
                     </Text>
                   </th>
                   <th className="px-4 py-3 text-left">
                     <Text variant="body" className="font-medium text-gray-600">
-                      Score
+                      得分
                     </Text>
                   </th>
                   <th className="px-4 py-3 text-left">
                     <Text variant="body" className="font-medium text-gray-600">
-                      Actions
+                      操作
                     </Text>
                   </th>
                 </tr>
@@ -226,16 +226,16 @@ export function AnalyticsResultsTable({ results }: Props) {
                   <React.Fragment key={result.exec_id}>
                     <tr className="hover:bg-gray-50">
                       <td className="px-4 py-3">
-                        {createCopyableId(result.agent_id, "Agent ID")}
+                        {createCopyableId(result.agent_id, "智能体 ID")}
                       </td>
                       <td className="px-4 py-3">
                         <Text variant="body">{result.version_id}</Text>
                       </td>
                       <td className="px-4 py-3">
-                        {createCopyableId(result.user_id, "User ID")}
+                        {createCopyableId(result.user_id, "用户 ID")}
                       </td>
                       <td className="px-4 py-3">
-                        {createCopyableId(result.exec_id, "Execution ID")}
+                        {createCopyableId(result.exec_id, "执行 ID")}
                       </td>
                       <td className="px-4 py-3">
                         {getStatusBadge(result.status)}
@@ -270,7 +270,7 @@ export function AnalyticsResultsTable({ results }: Props) {
                                   variant="body"
                                   className="mb-1 font-medium text-gray-700"
                                 >
-                                  Summary:
+                                  摘要：
                                 </Text>
                                 <Text
                                   variant="body"
@@ -287,7 +287,7 @@ export function AnalyticsResultsTable({ results }: Props) {
                                   variant="body"
                                   className="mb-1 font-medium text-red-700"
                                 >
-                                  Error:
+                                  错误：
                                 </Text>
                                 <Text
                                   variant="body"
@@ -310,7 +310,7 @@ export function AnalyticsResultsTable({ results }: Props) {
       ) : (
         <div className="py-8 text-center">
           <Text variant="body" className="text-gray-500">
-            No executions were processed.
+            没有处理任何执行记录。
           </Text>
         </div>
       )}

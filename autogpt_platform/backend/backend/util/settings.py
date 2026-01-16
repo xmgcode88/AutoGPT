@@ -252,6 +252,23 @@ class Config(UpdateTrackingModel["Config"], BaseSettings):
         "This value is then used to generate redirect URLs for OAuth flows.",
     )
 
+    deepseek_base_url: str = Field(
+        default="https://api.deepseek.com/v1",
+        description="Base URL for DeepSeek OpenAI-compatible API",
+    )
+    qwen_base_url: str = Field(
+        default="https://dashscope.aliyuncs.com/compatible-mode/v1",
+        description="Base URL for Qwen (DashScope) OpenAI-compatible API",
+    )
+    zhipuai_base_url: str = Field(
+        default="https://open.bigmodel.cn/api/paas/v4",
+        description="Base URL for ZhipuAI OpenAI-compatible API",
+    )
+    moonshot_base_url: str = Field(
+        default="https://api.moonshot.cn/v1",
+        description="Base URL for Moonshot OpenAI-compatible API",
+    )
+
     media_gcs_bucket_name: str = Field(
         default="",
         description="The name of the Google Cloud Storage bucket for media files",
@@ -575,6 +592,10 @@ class Secrets(UpdateTrackingModel["Secrets"], BaseSettings):
     anthropic_api_key: str = Field(default="", description="Anthropic API key")
     groq_api_key: str = Field(default="", description="Groq API key")
     open_router_api_key: str = Field(default="", description="Open Router API Key")
+    deepseek_api_key: str = Field(default="", description="DeepSeek API key")
+    qwen_api_key: str = Field(default="", description="Qwen API key")
+    zhipuai_api_key: str = Field(default="", description="ZhipuAI API key")
+    moonshot_api_key: str = Field(default="", description="Moonshot API key")
     llama_api_key: str = Field(default="", description="Llama API Key")
     v0_api_key: str = Field(default="", description="v0 by Vercel API key")
     webshare_proxy_username: str = Field(

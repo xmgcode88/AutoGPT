@@ -49,8 +49,8 @@ export const useAPIkeysModals = () => {
       setIsKeyDialogOpen(true);
     } catch {
       toast({
-        title: "Error",
-        description: "Failed to create AutoGPT Platform API key",
+        title: "错误",
+        description: "创建 AutoGPT Platform API 密钥失败",
         variant: "destructive",
       });
     }
@@ -59,8 +59,8 @@ export const useAPIkeysModals = () => {
   const handleCopyKey = () => {
     navigator.clipboard.writeText(keyState.newApiKey);
     toast({
-      title: "Copied",
-      description: "AutoGPT Platform API key copied to clipboard",
+      title: "已复制",
+      description: "AutoGPT Platform API 密钥已复制到剪贴板",
     });
   };
 

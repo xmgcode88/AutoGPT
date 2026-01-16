@@ -1124,6 +1124,21 @@ export type AddUserCreditsResponse = {
   new_balance: number;
   transaction_key: string;
 };
+
+export type AdminUserSummary = {
+  id: string;
+  email: string;
+  name?: string | null;
+  email_verified: boolean;
+  timezone: string;
+  created_at: string;
+  updated_at: string;
+};
+
+export type AdminUsersResponse = {
+  users: AdminUserSummary[];
+  pagination: Pagination;
+};
 const _stringFormatToDataTypeMap: Partial<Record<string, DataType>> = {
   date: DataType.DATE,
   time: DataType.TIME,

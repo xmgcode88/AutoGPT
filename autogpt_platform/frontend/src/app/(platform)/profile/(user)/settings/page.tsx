@@ -41,7 +41,7 @@ export default function SettingsPage() {
   useTimezoneDetection(!!user ? timezone : undefined);
 
   useEffect(() => {
-    document.title = "Settings – AutoGPT Platform";
+    document.title = "设置 – AutoGPT Platform";
   }, []);
 
   if (preferencesError) {
@@ -71,9 +71,9 @@ export default function SettingsPage() {
   return (
     <div className="container max-w-2xl space-y-6 py-10">
       <div className="flex flex-col gap-2">
-        <Text variant="h3">My account</Text>
+        <Text variant="h3">我的账户</Text>
         <Text variant="large">
-          Manage your account settings and preferences.
+          管理您的账户设置和偏好。
         </Text>
       </div>
       <SettingsForm preferences={preferences} user={user} timezone={timezone} />

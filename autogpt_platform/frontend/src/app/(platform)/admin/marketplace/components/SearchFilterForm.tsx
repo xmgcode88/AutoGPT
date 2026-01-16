@@ -61,7 +61,7 @@ export function SearchAndFilterAdminMarketplace({
     <div className="flex items-center justify-between">
       <div className="flex w-full items-center gap-2">
         <Input
-          placeholder="Search agents by Name, Creator, or Description..."
+          placeholder="按名称、创建者或描述搜索智能体..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSearch()}
@@ -86,13 +86,13 @@ export function SearchAndFilterAdminMarketplace({
         }}
       >
         <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select Status" />
+          <SelectValue placeholder="选择状态" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="ALL">All</SelectItem>
-          <SelectItem value={SubmissionStatus.PENDING}>Pending</SelectItem>
-          <SelectItem value={SubmissionStatus.APPROVED}>Approved</SelectItem>
-          <SelectItem value={SubmissionStatus.REJECTED}>Rejected</SelectItem>
+          <SelectItem value="ALL">全部</SelectItem>
+          <SelectItem value={SubmissionStatus.PENDING}>待审核</SelectItem>
+          <SelectItem value={SubmissionStatus.APPROVED}>已通过</SelectItem>
+          <SelectItem value={SubmissionStatus.REJECTED}>已拒绝</SelectItem>
         </SelectContent>
       </Select>
     </div>

@@ -17,6 +17,7 @@ class ProviderName(str, Enum):
     COMPASS = "compass"
     DISCORD = "discord"
     D_ID = "d_id"
+    DEEPSEEK = "deepseek"
     E2B = "e2b"
     FAL = "fal"
     GITHUB = "github"
@@ -31,6 +32,7 @@ class ProviderName(str, Enum):
     LLAMA_API = "llama_api"
     MEDIUM = "medium"
     MEM0 = "mem0"
+    MOONSHOT = "moonshot"
     NOTION = "notion"
     NVIDIA = "nvidia"
     OLLAMA = "ollama"
@@ -47,10 +49,12 @@ class ProviderName(str, Enum):
     SMTP = "smtp"
     TWITTER = "twitter"
     TODOIST = "todoist"
+    QWEN = "qwen"
     UNREAL_SPEECH = "unreal_speech"
     V0 = "v0"
     WEBSHARE_PROXY = "webshare_proxy"
     ZEROBOUNCE = "zerobounce"
+    ZHIPUAI = "zhipuai"
 
     @classmethod
     def _missing_(cls, value: Any) -> "ProviderName":

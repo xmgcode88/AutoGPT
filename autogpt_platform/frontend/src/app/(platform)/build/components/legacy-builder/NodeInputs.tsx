@@ -45,6 +45,10 @@ import {
   DataType,
   determineDataType,
 } from "@/lib/autogpt-server-api/types";
+import {
+  isLlmModelSchema,
+  toDomesticLlmOptionsFromValues,
+} from "@/lib/llm-models";
 import { beautifyString, cn } from "@/lib/utils";
 import { Cross2Icon, Pencil2Icon, PlusIcon } from "@radix-ui/react-icons";
 import { Node, useNodeId, useNodesData } from "@xyflow/react";
@@ -1122,6 +1126,21 @@ const NodeStringInput: FC<{
   displayName,
 }) => {
   value ||= schema.default || "";
+  const selectOptions = schema.enum
+    ? isLlmModelSchema(schema)
+      ? toDomesticLlmOptionsFromValues(
+          schema.enum,
+          (option) => beautifyString(option),
+          value,
+        )
+      : schema.enum
+          .filter((option) => option)
+          .map((option) => ({
+            value: option,
+            label: beautifyString(option),
+            disabled: false,
+          }))
+    : [];
   return (
     <div className={className}>
       {schema.enum && schema.enum.length > 0 ? (
@@ -1133,13 +1152,15 @@ const NodeStringInput: FC<{
             <SelectValue placeholder={schema.placeholder || displayName} />
           </SelectTrigger>
           <SelectContent className="nodrag">
-            {schema.enum
-              .filter((option) => option)
-              .map((option, index) => (
-                <SelectItem key={index} value={option}>
-                  {beautifyString(option)}
-                </SelectItem>
-              ))}
+            {selectOptions.map((option) => (
+              <SelectItem
+                key={option.value}
+                value={option.value}
+                disabled={option.disabled}
+              >
+                {option.label}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
       ) : (

@@ -53,10 +53,10 @@ export function NavbarView({ isLoggedIn, previewBranchName }: NavbarViewProps) {
         {shouldShowPreviewBanner && previewBranchName ? (
           <PreviewBanner branchName={previewBranchName} />
         ) : null}
-        <nav className="border-zinc-[#EFEFF0] inline-flex h-[60px] w-full items-center border border-[#EFEFF0] bg-[#F3F4F6]/20 p-3 backdrop-blur-[26px]">
+        <nav className="border-zinc-[#EFEFF0] relative flex h-[60px] w-full items-center border border-[#EFEFF0] bg-[#F3F4F6]/20 p-3 backdrop-blur-[26px]">
           {/* Left section */}
           {!isSmallScreen ? (
-            <div className="flex flex-1 items-center gap-5">
+            <div className="flex min-w-0 flex-1 items-center gap-5">
               {isLoggedIn
                 ? linksWithChat.map((link) => (
                     <NavbarLink
@@ -96,7 +96,7 @@ export function NavbarView({ isLoggedIn, previewBranchName }: NavbarViewProps) {
               </div>
             </div>
           ) : !isLoggedIn ? (
-            <div className="flex w-full items-center justify-end">
+            <div className="flex flex-1 items-center justify-end">
               <LoginButton />
             </div>
           ) : null}

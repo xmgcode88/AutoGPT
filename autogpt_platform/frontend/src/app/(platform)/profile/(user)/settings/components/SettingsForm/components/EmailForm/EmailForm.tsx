@@ -25,7 +25,7 @@ export function EmailForm({ user }: EmailFormProps) {
   return (
     <div>
       <Text variant="h3" size="large-semibold">
-        Security & Access
+        安全与访问
       </Text>
       <Form {...form}>
         <form
@@ -40,7 +40,7 @@ export function EmailForm({ user }: EmailFormProps) {
                 <FormControl>
                   <Input
                     id={field.name}
-                    label="Email"
+                    label="邮箱"
                     placeholder="m@example.com"
                     type="text"
                     autoComplete="off"
@@ -61,7 +61,7 @@ export function EmailForm({ user }: EmailFormProps) {
               className="min-w-[10rem]"
               size="small"
             >
-              Reset password
+              重置密码
             </Button>
             <Button
               type="submit"
@@ -70,7 +70,7 @@ export function EmailForm({ user }: EmailFormProps) {
               className="min-w-[10rem]"
               size="small"
             >
-              {isLoading ? "Saving..." : "Update email"}
+              {isLoading ? "保存中..." : "更新邮箱"}
             </Button>
           </div>
         </form>

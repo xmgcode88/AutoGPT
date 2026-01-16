@@ -15,10 +15,10 @@ export function AdminImpersonationBanner() {
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <strong className="font-semibold">
-            ⚠️ ADMIN IMPERSONATION ACTIVE
+            ⚠️ 已启用管理员模拟
           </strong>
           <span>
-            You are currently acting as user:{" "}
+            你当前正在以该用户身份操作：{" "}
             <code className="rounded bg-amber-100 px-1 font-mono text-sm">
               {impersonatedUserId}
             </code>
@@ -28,7 +28,7 @@ export function AdminImpersonationBanner() {
           onClick={stopImpersonating}
           className="ml-4 flex h-8 items-center rounded-md border border-amber-300 bg-transparent px-3 text-sm hover:bg-amber-100"
         >
-          Stop Impersonation
+          停止模拟
         </button>
       </div>
     </div>

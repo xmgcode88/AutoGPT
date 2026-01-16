@@ -60,7 +60,7 @@ export function ProfileInfoForm({ profile }: { profile: ProfileDetails }) {
         data-testid="profile-info-form-title"
         className="font-circular mb-6 text-[28px] font-normal text-neutral-900 dark:text-neutral-100 sm:mb-8 sm:text-[35px]"
       >
-        Profile
+        个人资料
       </h1>
 
       <div className="mb-8 sm:mb-12">
@@ -89,7 +89,7 @@ export function ProfileInfoForm({ profile }: { profile: ProfileDetails }) {
                 }
               }}
             />
-            Edit photo
+            编辑头像
           </label>
         </div>
 
@@ -99,7 +99,7 @@ export function ProfileInfoForm({ profile }: { profile: ProfileDetails }) {
               htmlFor="displayName"
               className="font-circular mb-1.5 block text-base font-normal leading-tight text-neutral-700 dark:text-neutral-300"
             >
-              Display name
+              显示名称
             </label>
             <div className="rounded-[55px] border border-slate-200 px-4 py-2.5 dark:border-slate-700 dark:bg-slate-800">
               <input
@@ -108,7 +108,7 @@ export function ProfileInfoForm({ profile }: { profile: ProfileDetails }) {
                 name="displayName"
                 data-testid="profile-info-form-display-name"
                 defaultValue={profileData.name}
-                placeholder="Enter your display name"
+                placeholder="请输入您的显示名称"
                 className="font-circular w-full border-none bg-transparent text-base font-normal text-neutral-900 placeholder:text-neutral-400 focus:outline-none dark:text-white dark:placeholder:text-neutral-500"
                 onChange={(e) => {
                   const newProfileData = {
@@ -126,7 +126,7 @@ export function ProfileInfoForm({ profile }: { profile: ProfileDetails }) {
               htmlFor="handle"
               className="font-circular mb-1.5 block text-base font-normal leading-tight text-neutral-700 dark:text-neutral-300"
             >
-              Handle
+              用户名
             </label>
             <div className="rounded-[55px] border border-slate-200 px-4 py-2.5 dark:border-slate-700 dark:bg-slate-800">
               <input
@@ -152,14 +152,14 @@ export function ProfileInfoForm({ profile }: { profile: ProfileDetails }) {
               htmlFor="bio"
               className="font-circular mb-1.5 block text-base font-normal leading-tight text-neutral-700 dark:text-neutral-300"
             >
-              Bio
+              个人简介
             </label>
             <div className="h-[220px] rounded-2xl border border-slate-200 py-2.5 pl-4 pr-4 dark:border-slate-700 dark:bg-slate-800">
               <textarea
                 name="bio"
                 id="bio"
                 defaultValue={profileData.description}
-                placeholder="Tell us about yourself..."
+                placeholder="介绍一下您自己..."
                 className="font-circular h-full w-full resize-none border-none bg-transparent text-base font-normal text-neutral-900 placeholder:text-neutral-400 focus:outline-none dark:text-white dark:placeholder:text-neutral-500"
                 onChange={(e) => {
                   const newProfileData = {
@@ -174,10 +174,10 @@ export function ProfileInfoForm({ profile }: { profile: ProfileDetails }) {
 
           <section className="mb-8">
             <h2 className="font-circular mb-4 text-lg font-normal leading-7 text-neutral-700 dark:text-neutral-300">
-              Your links
+              您的链接
             </h2>
             <p className="font-circular mb-6 text-base font-normal leading-tight text-neutral-600 dark:text-neutral-400">
-              You can display up to 5 links on your profile
+              您可以在个人资料上显示最多5个链接
             </p>
 
             <div className="space-y-4 sm:space-y-6">
@@ -189,7 +189,7 @@ export function ProfileInfoForm({ profile }: { profile: ProfileDetails }) {
                       htmlFor={`link${linkNum}`}
                       className="font-circular mb-1.5 block text-base font-normal leading-tight text-neutral-700 dark:text-neutral-300"
                     >
-                      Link {linkNum}
+                      链接 {linkNum}
                     </label>
                     <div className="rounded-[55px] border border-slate-200 px-4 py-2.5 dark:border-slate-700 dark:bg-slate-800">
                       <input
@@ -236,7 +236,7 @@ export function ProfileInfoForm({ profile }: { profile: ProfileDetails }) {
               className="font-circular h-[50px] rounded-[35px] bg-neutral-800 px-6 py-3 text-base font-medium text-white transition-colors hover:bg-neutral-900 dark:bg-neutral-200 dark:text-neutral-900 dark:hover:bg-neutral-100"
               onClick={submitForm}
             >
-              {isSubmitting ? "Saving..." : "Save changes"}
+              {isSubmitting ? "保存中..." : "保存更改"}
             </Button>
           </div>
         </form>

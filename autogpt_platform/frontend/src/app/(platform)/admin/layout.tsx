@@ -7,27 +7,27 @@ const sidebarLinkGroups = [
   {
     links: [
       {
-        text: "Marketplace Management",
+        text: "市场管理",
         href: "/admin/marketplace",
         icon: <Users className="h-6 w-6" />,
       },
       {
-        text: "User Spending",
+        text: "用户消费",
         href: "/admin/spending",
         icon: <DollarSign className="h-6 w-6" />,
       },
       {
-        text: "User Impersonation",
+        text: "用户模拟",
         href: "/admin/impersonation",
         icon: <UserSearch className="h-6 w-6" />,
       },
       {
-        text: "Execution Analytics",
+        text: "执行分析",
         href: "/admin/execution-analytics",
         icon: <FileText className="h-6 w-6" />,
       },
       {
-        text: "Admin User Management",
+        text: "管理员用户管理",
         href: "/admin/settings",
         icon: <IconSliders className="h-6 w-6" />,
       },

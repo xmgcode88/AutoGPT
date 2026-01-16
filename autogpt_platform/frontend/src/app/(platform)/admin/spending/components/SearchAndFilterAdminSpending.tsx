@@ -61,7 +61,7 @@ export function SearchAndFilterAdminSpending({
     <div className="flex items-center justify-between">
       <div className="flex w-full items-center gap-2">
         <Input
-          placeholder="Search users by Name or Email..."
+          placeholder="按姓名或邮箱搜索用户..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSearch()}
@@ -86,16 +86,16 @@ export function SearchAndFilterAdminSpending({
         }}
       >
         <SelectTrigger className="w-1/4">
-          <SelectValue placeholder="Select Status" />
+          <SelectValue placeholder="选择类型" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="ALL">All</SelectItem>
-          <SelectItem value={CreditTransactionType.TOP_UP}>Top Up</SelectItem>
-          <SelectItem value={CreditTransactionType.USAGE}>Usage</SelectItem>
-          <SelectItem value={CreditTransactionType.REFUND}>Refund</SelectItem>
-          <SelectItem value={CreditTransactionType.GRANT}>Grant</SelectItem>
+          <SelectItem value="ALL">全部</SelectItem>
+          <SelectItem value={CreditTransactionType.TOP_UP}>充值</SelectItem>
+          <SelectItem value={CreditTransactionType.USAGE}>消费</SelectItem>
+          <SelectItem value={CreditTransactionType.REFUND}>退款</SelectItem>
+          <SelectItem value={CreditTransactionType.GRANT}>赠送</SelectItem>
           <SelectItem value={CreditTransactionType.CARD_CHECK}>
-            Card Check
+            卡验证
           </SelectItem>
         </SelectContent>
       </Select>

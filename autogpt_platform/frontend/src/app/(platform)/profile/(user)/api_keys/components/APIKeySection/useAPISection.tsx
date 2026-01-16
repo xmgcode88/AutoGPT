@@ -39,13 +39,13 @@ export const useAPISection = () => {
       });
 
       toast({
-        title: "Success",
-        description: "AutoGPT Platform API key revoked successfully",
+        title: "成功",
+        description: "AutoGPT Platform API 密钥已成功撤销",
       });
     } catch {
       toast({
-        title: "Error",
-        description: "Failed to revoke AutoGPT Platform API key",
+        title: "错误",
+        description: "撤销 AutoGPT Platform API 密钥失败",
         variant: "destructive",
       });
     }

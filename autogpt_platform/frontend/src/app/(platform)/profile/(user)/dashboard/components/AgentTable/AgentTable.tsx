@@ -42,19 +42,19 @@ export const AgentTable: React.FC<AgentTableProps> = ({
         <div className="flex items-center px-4 py-2">
           <div className="grid w-full grid-cols-[minmax(400px,1fr),180px,140px,100px,100px,40px] items-center gap-4">
             <div className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
-              Agent info
+              Agent 信息
             </div>
             <div className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
-              Date submitted
+              提交日期
             </div>
             <div className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
-              Status
+              状态
             </div>
             <div className="text-right text-sm font-medium text-neutral-800 dark:text-neutral-200">
-              Runs
+              运行次数
             </div>
             <div className="text-right text-sm font-medium text-neutral-800 dark:text-neutral-200">
-              Reviews
+              评价
             </div>
             <div></div>
           </div>
@@ -84,7 +84,7 @@ export const AgentTable: React.FC<AgentTableProps> = ({
         </div>
       ) : (
         <div className="py-4 text-center font-sans text-base text-neutral-600 dark:text-neutral-400">
-          No agents available. Create your first agent to get started!
+          没有可用的 Agent。创建您的第一个 Agent 开始使用！
         </div>
       )}
     </div>

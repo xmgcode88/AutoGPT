@@ -32,7 +32,7 @@ export const MainDashboardPage = () => {
       <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div className="space-y-6">
           <Text variant="h1" size="h3">
-            Agent dashboard
+            Agent 仪表板
           </Text>
           <div className="space-y-2">
             <Text
@@ -40,11 +40,10 @@ export const MainDashboardPage = () => {
               size="large-medium"
               className="text-neutral-900 dark:text-neutral-100"
             >
-              Submit a New Agent
+              提交新的 Agent
             </Text>
             <Text variant="body" size="small">
-              Select from the list of agents you currently have, or upload from
-              your local machine.
+              从您当前的 Agent 列表中选择，或从本地计算机上传。
             </Text>
           </div>
         </div>
@@ -57,7 +56,7 @@ export const MainDashboardPage = () => {
               size="small"
               onClick={onOpenSubmitModal}
             >
-              Submit agent
+              提交 Agent
             </Button>
           }
         />
@@ -72,7 +71,7 @@ export const MainDashboardPage = () => {
           size="large-medium"
           className="mb-4 text-neutral-900 dark:text-neutral-100"
         >
-          Your uploaded agents
+          您上传的 Agent
         </Text>
 
         {error ? (

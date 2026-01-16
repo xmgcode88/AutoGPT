@@ -12,11 +12,24 @@ import {
   MultiSelectorList,
   MultiSelectorTrigger,
 } from "@/components/__legacy__/ui/multiselect";
+import {
+  isLlmModelSchema,
+  toDomesticLlmOptions,
+} from "@/lib/llm-models";
 
 export const SelectWidget = (props: WidgetProps) => {
   const { options, value, onChange, disabled, readonly, id, formContext } =
     props;
-  const enumOptions = options.enumOptions || [];
+  const rawEnumOptions = options.enumOptions || [];
+  const enumOptions = isLlmModelSchema(props.schema)
+    ? toDomesticLlmOptions(
+        rawEnumOptions.map((option) => ({
+          value: option.value,
+          label: option.label ?? option.value,
+        })),
+        value,
+      )
+    : rawEnumOptions;
   const type = mapJsonSchemaTypeToInputType(props.schema);
   const { size = "small" } = formContext || {};
 
@@ -59,6 +72,7 @@ export const SelectWidget = (props: WidgetProps) => {
           enumOptions?.map((option) => ({
             value: option.value,
             label: option.label,
+            disabled: "disabled" in option ? option.disabled : undefined,
           })) || []
         }
         wrapperClassName="!mb-0 "

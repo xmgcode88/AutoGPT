@@ -3998,6 +3998,58 @@
         "security": [{ "HTTPBearerJWT": [] }]
       }
     },
+    "/api/admin/admin/users": {
+      "get": {
+        "tags": ["v2", "admin", "admin", "users"],
+        "summary": "List users",
+        "operationId": "getV2List users",
+        "security": [{ "HTTPBearerJWT": [] }],
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Search"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 1, "title": "Page" }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 20, "title": "Page Size" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AdminUsersResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/HTTP401NotAuthenticatedError"
+          }
+        }
+      }
+    },
     "/api/review/pending": {
       "get": {
         "tags": [
@@ -5363,6 +5415,51 @@
         "type": "object",
         "required": ["new_balance", "transaction_key"],
         "title": "AddUserCreditsResponse"
+      },
+      "AdminUserSummary": {
+        "properties": {
+          "id": { "type": "string", "title": "Id" },
+          "email": { "type": "string", "title": "Email" },
+          "name": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Name"
+          },
+          "email_verified": { "type": "boolean", "title": "Email Verified" },
+          "timezone": { "type": "string", "title": "Timezone" },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "email",
+          "email_verified",
+          "timezone",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "AdminUserSummary"
+      },
+      "AdminUsersResponse": {
+        "properties": {
+          "users": {
+            "items": { "$ref": "#/components/schemas/AdminUserSummary" },
+            "type": "array",
+            "title": "Users"
+          },
+          "pagination": { "$ref": "#/components/schemas/Pagination" }
+        },
+        "type": "object",
+        "required": ["users", "pagination"],
+        "title": "AdminUsersResponse"
       },
       "AgentExecutionStatus": {
         "type": "string",

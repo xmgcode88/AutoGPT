@@ -1,13 +1,7 @@
-version: "3.8"
-
 services:
   studio:
-    build:
-      context: ..
-      dockerfile: studio/Dockerfile
-      target: dev
     ports:
-      - 8082:8082
+      - 8082:3000
   mail:
     container_name: supabase-mail
     image: inbucket/inbucket:3.0.3
@@ -28,7 +22,7 @@ services:
       # Always use a fresh database when developing
       - /var/lib/postgresql/data
       # Seed data should be inserted last (alphabetical order)
-      - ./dev/data.sql:/docker-entrypoint-initdb.d/seed.sql
+      - ./db/docker/dev/data.sql:/docker-entrypoint-initdb.d/seed.sql
   storage:
     volumes:
       - /var/lib/storage

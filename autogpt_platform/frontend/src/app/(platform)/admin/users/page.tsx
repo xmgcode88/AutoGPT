@@ -4,7 +4,7 @@ import React from "react";
 function AdminUsers() {
   return (
     <div>
-      <h1>Users Dashboard</h1>
+      <h1>用户仪表盘</h1>
       {/* Add your admin-only content here */}
     </div>
   );

@@ -29,7 +29,7 @@ export function useAdminImpersonation(): AdminImpersonationHook {
     (userId: string) => {
       if (!userId.trim()) {
         toast({
-          title: "User ID is required for impersonation",
+          title: "模拟需要填写用户 ID",
           variant: "destructive",
         });
         return;
@@ -42,8 +42,8 @@ export function useAdminImpersonation(): AdminImpersonationHook {
       } catch (error) {
         console.error("Failed to start impersonation:", error);
         toast({
-          title: "Failed to start impersonation",
-          description: error instanceof Error ? error.message : "Unknown error",
+          title: "开始模拟失败",
+          description: error instanceof Error ? error.message : "未知错误",
           variant: "destructive",
         });
       }
@@ -59,8 +59,8 @@ export function useAdminImpersonation(): AdminImpersonationHook {
     } catch (error) {
       console.error("Failed to stop impersonation:", error);
       toast({
-        title: "Failed to stop impersonation",
-        description: error instanceof Error ? error.message : "Unknown error",
+        title: "停止模拟失败",
+        description: error instanceof Error ? error.message : "未知错误",
         variant: "destructive",
       });
     }

@@ -154,7 +154,7 @@ class SmartDecisionMakerBlock(Block):
         )
         model: llm.LlmModel = SchemaField(
             title="LLM Model",
-            default=llm.LlmModel.GPT4O,
+            default=llm.LlmModel.DEEPSEEK_CHAT,
             description="The language model to use for answering the prompt.",
             advanced=False,
         )

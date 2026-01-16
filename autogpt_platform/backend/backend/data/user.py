@@ -10,7 +10,7 @@ from autogpt_libs.auth.models import DEFAULT_USER_ID
 from fastapi import HTTPException
 from prisma.enums import NotificationType
 from prisma.models import User as PrismaUser
-from prisma.types import JsonFilter, UserCreateInput, UserUpdateInput
+from prisma.types import JsonFilter, UserCreateInput, UserUpdateInput, UserWhereInput
 
 from backend.data.db import prisma
 from backend.data.model import User, UserIntegrations, UserMetadata
@@ -19,7 +19,9 @@ from backend.util.cache import cached
 from backend.util.encryption import JSONCryptor
 from backend.util.exceptions import DatabaseError
 from backend.util.json import SafeJson
+from backend.util.models import Pagination
 from backend.util.settings import Settings
+from backend.server.v2.admin.model import AdminUserSummary, AdminUsersResponse
 
 logger = logging.getLogger(__name__)
 settings = Settings()
@@ -96,6 +98,55 @@ async def update_user_email(user_id: str, email: str):
         raise DatabaseError(
             f"Failed to update user email for user {user_id}: {e}"
         ) from e
+
+
+async def admin_list_users(
+    page: int = 1,
+    page_size: int = 20,
+    search: str | None = None,
+) -> AdminUsersResponse:
+    if page < 1 or page_size < 1:
+        raise ValueError("Invalid pagination input")
+
+    where_clause: UserWhereInput = {}
+    if search:
+        where_clause["OR"] = [
+            {"id": {"contains": search, "mode": "insensitive"}},
+            {"email": {"contains": search, "mode": "insensitive"}},
+            {"name": {"contains": search, "mode": "insensitive"}},
+        ]
+
+    users = await PrismaUser.prisma().find_many(
+        where=where_clause,
+        skip=(page - 1) * page_size,
+        take=page_size,
+        order={"createdAt": "desc"},
+    )
+    total = await PrismaUser.prisma().count(where=where_clause)
+    total_pages = (total + page_size - 1) // page_size
+
+    summaries = [
+        AdminUserSummary(
+            id=user.id,
+            email=user.email,
+            name=user.name,
+            email_verified=user.emailVerified,
+            timezone=user.timezone,
+            created_at=user.createdAt,
+            updated_at=user.updatedAt,
+        )
+        for user in users
+    ]
+
+    return AdminUsersResponse(
+        users=summaries,
+        pagination=Pagination(
+            total_items=total,
+            total_pages=total_pages,
+            current_page=page,
+            page_size=page_size,
+        ),
+    )
 
 
 async def create_default_user() -> Optional[User]:

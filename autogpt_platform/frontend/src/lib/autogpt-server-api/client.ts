@@ -9,6 +9,7 @@ import { createBrowserClient } from "@supabase/ssr";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type {
   AddUserCreditsResponse,
+  AdminUsersResponse,
   AnalyticsDetails,
   AnalyticsMetrics,
   APIKey,
@@ -642,6 +643,14 @@ export default class BackendAPI {
     transaction_filter?: string;
   }): Promise<UsersBalanceHistoryResponse> {
     return this._get("/credits/admin/users_history", params);
+  }
+
+  getAdminUsers(params?: {
+    search?: string;
+    page?: number;
+    page_size?: number;
+  }): Promise<AdminUsersResponse> {
+    return this._get("/admin/users", params);
   }
 
   downloadStoreAgentAdmin(storeListingVersionId: string): Promise<BlobPart> {

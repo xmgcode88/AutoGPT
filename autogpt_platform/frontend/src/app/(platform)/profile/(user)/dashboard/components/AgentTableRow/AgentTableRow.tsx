@@ -151,7 +151,7 @@ export const AgentTableRow = ({
             </div>
           ) : (
             <span className="text-sm text-neutral-600 dark:text-neutral-400">
-              No reviews
+              暂无评价
             </span>
           )}
         </div>
@@ -169,7 +169,7 @@ export const AgentTableRow = ({
                   className="flex cursor-pointer items-center rounded-md px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   <PencilSimple className="mr-2 h-4 w-4 dark:text-gray-100" />
-                  <span className="dark:text-gray-100">Edit</span>
+                  <span className="dark:text-gray-100">编辑</span>
                 </DropdownMenu.Item>
               ) : (
                 <DropdownMenu.Item
@@ -177,7 +177,7 @@ export const AgentTableRow = ({
                   className="flex cursor-pointer items-center rounded-md px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   <Eye className="mr-2 h-4 w-4 dark:text-gray-100" />
-                  <span className="dark:text-gray-100">View</span>
+                  <span className="dark:text-gray-100">查看</span>
                 </DropdownMenu.Item>
               )}
               <DropdownMenu.Separator className="my-1 h-px bg-gray-300 dark:bg-gray-600" />
@@ -186,7 +186,7 @@ export const AgentTableRow = ({
                 className="flex cursor-pointer items-center rounded-md px-3 py-2 text-red-500 hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 <Trash className="mr-2 h-4 w-4 text-red-500 dark:text-red-400" />
-                <span className="dark:text-red-400">Delete</span>
+                <span className="dark:text-red-400">删除</span>
               </DropdownMenu.Item>
             </DropdownMenu.Content>
           </DropdownMenu.Root>

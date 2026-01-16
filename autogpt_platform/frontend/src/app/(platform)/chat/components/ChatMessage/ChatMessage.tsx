@@ -12,7 +12,7 @@ import { ChatCredentialsSetup } from "@/app/(platform)/chat/components/ChatCrede
 import { useSupabase } from "@/lib/supabase/hooks/useSupabase";
 import { useChatMessage, type ChatMessageData } from "./useChatMessage";
 import { getToolActionPhrase } from "@/app/(platform)/chat/helpers";
-import { CHAT_MESSAGE_USER_ZH, CHAT_MESSAGE_ASSISTANT_ZH } from "../../i18n";
+
 export interface ChatMessageProps {
   message: ChatMessageData;
   className?: string;

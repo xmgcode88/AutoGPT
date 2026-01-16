@@ -108,6 +108,34 @@ open_router_credentials = APIKeyCredentials(
     title="Use Credits for Open Router",
     expires_at=None,
 )
+deepseek_credentials = APIKeyCredentials(
+    id="c6a2b21b-2d77-4f4d-9c4a-6f3b458dfc1a",
+    provider="deepseek",
+    api_key=SecretStr(settings.secrets.deepseek_api_key),
+    title="Use Credits for DeepSeek",
+    expires_at=None,
+)
+qwen_credentials = APIKeyCredentials(
+    id="d3f5f36a-4d34-4b11-9d3e-8b5c2b7a1f2d",
+    provider="qwen",
+    api_key=SecretStr(settings.secrets.qwen_api_key),
+    title="Use Credits for Qwen",
+    expires_at=None,
+)
+zhipuai_credentials = APIKeyCredentials(
+    id="f3a1b3c4-5d6e-4f70-9a1b-2c3d4e5f6a7b",
+    provider="zhipuai",
+    api_key=SecretStr(settings.secrets.zhipuai_api_key),
+    title="Use Credits for ZhipuAI",
+    expires_at=None,
+)
+moonshot_credentials = APIKeyCredentials(
+    id="a3b4c5d6-7e8f-49a0-b1c2-d3e4f5a6b7c8",
+    provider="moonshot",
+    api_key=SecretStr(settings.secrets.moonshot_api_key),
+    title="Use Credits for Moonshot",
+    expires_at=None,
+)
 fal_credentials = APIKeyCredentials(
     id="6c0f5bd0-9008-4638-9d79-4b40b631803e",
     provider="fal",
@@ -229,6 +257,10 @@ DEFAULT_CREDENTIALS = [
     jina_credentials,
     unreal_credentials,
     open_router_credentials,
+    deepseek_credentials,
+    qwen_credentials,
+    zhipuai_credentials,
+    moonshot_credentials,
     enrichlayer_credentials,
     fal_credentials,
     exa_credentials,
@@ -309,6 +341,14 @@ class IntegrationCredentialsStore:
             all_credentials.append(unreal_credentials)
         if settings.secrets.open_router_api_key:
             all_credentials.append(open_router_credentials)
+        if settings.secrets.deepseek_api_key:
+            all_credentials.append(deepseek_credentials)
+        if settings.secrets.qwen_api_key:
+            all_credentials.append(qwen_credentials)
+        if settings.secrets.zhipuai_api_key:
+            all_credentials.append(zhipuai_credentials)
+        if settings.secrets.moonshot_api_key:
+            all_credentials.append(moonshot_credentials)
         if settings.secrets.enrichlayer_api_key:
             all_credentials.append(enrichlayer_credentials)
         if settings.secrets.fal_api_key:

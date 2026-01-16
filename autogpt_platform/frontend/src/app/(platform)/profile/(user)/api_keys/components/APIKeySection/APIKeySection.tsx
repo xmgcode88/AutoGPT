@@ -34,11 +34,11 @@ export function APIKeysSection() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Name</TableHead>
-                <TableHead>API Key</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Created</TableHead>
-                <TableHead>Last Used</TableHead>
+                <TableHead>名称</TableHead>
+                <TableHead>API 密钥</TableHead>
+                <TableHead>状态</TableHead>
+                <TableHead>创建时间</TableHead>
+                <TableHead>最后使用</TableHead>
                 <TableHead></TableHead>
               </TableRow>
             </TableHeader>
@@ -62,7 +62,7 @@ export function APIKeysSection() {
                           : "border-red-600 bg-red-100 text-red-800"
                       }
                     >
-                      {key.status}
+                      {key.status === "ACTIVE" ? "活跃" : "已撤销"}
                     </Badge>
                   </TableCell>
                   <TableCell>
@@ -71,7 +71,7 @@ export function APIKeysSection() {
                   <TableCell>
                     {key.last_used_at
                       ? new Date(key.last_used_at).toLocaleDateString()
-                      : "Never"}
+                      : "从未使用"}
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>
@@ -90,7 +90,7 @@ export function APIKeysSection() {
                           onClick={() => handleRevokeKey(key.id)}
                           disabled={isDeleting}
                         >
-                          Revoke
+                          撤销
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -100,6 +100,14 @@ export function APIKeysSection() {
             </TableBody>
           </Table>
         )
+      )}
+      {!isLoading && apiKeys && apiKeys.length === 0 && (
+        <div className="flex flex-col items-center justify-center py-12 text-center">
+          <p className="text-muted-foreground mb-4">您还没有创建任何 API 密钥</p>
+          <p className="text-sm text-muted-foreground">
+            点击右上角的&quot;创建密钥&quot;按钮来创建您的第一个 API 密钥
+          </p>
+        </div>
       )}
     </>
   );

@@ -52,7 +52,7 @@ export function DownloadAgentAdminButton({
       disabled={isLoading}
     >
       <ExternalLink className="mr-2 h-4 w-4" />
-      {isLoading ? "Downloading..." : "Download"}
+      {isLoading ? "下载中..." : "下载"}
     </Button>
   );
 }

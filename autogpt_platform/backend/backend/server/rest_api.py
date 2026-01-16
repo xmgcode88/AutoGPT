@@ -26,6 +26,7 @@ import backend.server.routers.v1
 import backend.server.v2.admin.credit_admin_routes
 import backend.server.v2.admin.execution_analytics_routes
 import backend.server.v2.admin.store_admin_routes
+import backend.server.v2.admin.user_admin_routes
 import backend.server.v2.builder
 import backend.server.v2.builder.routes
 import backend.server.v2.chat.routes as chat_routes
@@ -108,7 +109,7 @@ async def lifespan_context(app: fastapi.FastAPI):
 
     await backend.data.user.migrate_and_encrypt_user_integrations()
     await backend.data.graph.fix_llm_provider_credentials()
-    await backend.data.graph.migrate_llm_models(LlmModel.GPT4O)
+    await backend.data.graph.migrate_llm_models(LlmModel.DEEPSEEK_CHAT)
     await backend.integrations.webhooks.utils.migrate_legacy_triggered_graphs()
 
     with launch_darkly_context():
@@ -274,6 +275,11 @@ app.include_router(
     backend.server.v2.admin.execution_analytics_routes.router,
     tags=["v2", "admin"],
     prefix="/api/executions",
+)
+app.include_router(
+    backend.server.v2.admin.user_admin_routes.router,
+    tags=["v2", "admin"],
+    prefix="/api/admin",
 )
 app.include_router(
     backend.server.v2.executions.review.routes.router,

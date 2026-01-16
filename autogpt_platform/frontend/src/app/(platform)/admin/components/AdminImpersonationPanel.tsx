@@ -30,7 +30,7 @@ export function AdminImpersonationPanel() {
     setError("");
 
     if (!userIdInput.trim()) {
-      setError("Please enter a valid user ID");
+      setError("请输入有效的用户 ID");
       return;
     }
 
@@ -38,7 +38,7 @@ export function AdminImpersonationPanel() {
     const uuidRegex =
       /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
     if (!uuidRegex.test(userIdInput.trim())) {
-      setError("Please enter a valid UUID format user ID");
+      setError("请输入有效的 UUID 格式用户 ID");
       return;
     }
 
@@ -47,7 +47,7 @@ export function AdminImpersonationPanel() {
       setUserIdInput("");
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : "Failed to start impersonation",
+        err instanceof Error ? err.message : "开始模拟失败",
       );
     }
   }
@@ -63,19 +63,18 @@ export function AdminImpersonationPanel() {
         <div className="border-b pb-4">
           <div className="mb-2 flex items-center space-x-2">
             <UserCheck className="h-5 w-5" />
-            <h2 className="text-xl font-semibold">Admin User Impersonation</h2>
+            <h2 className="text-xl font-semibold">管理员用户模拟</h2>
           </div>
           <p className="text-sm text-gray-600">
-            Act on behalf of another user for debugging and support purposes
+            用于调试与支持，以管理员身份代表其他用户操作
           </p>
         </div>
 
         {/* Security Warning */}
         <Alert variant="error">
           <AlertDescription>
-            <strong>Security Notice:</strong> This feature is for admin
-            debugging and support only. All impersonation actions are logged for
-            audit purposes.
+            <strong>安全提示：</strong>此功能仅用于管理员调试与支持。所有
+            模拟操作都会记录以便审计。
           </AlertDescription>
         </Alert>
 
@@ -83,7 +82,7 @@ export function AdminImpersonationPanel() {
         {isImpersonating && (
           <Alert variant="warning">
             <AlertDescription>
-              <strong>Currently impersonating:</strong>{" "}
+              <strong>当前模拟用户：</strong>{" "}
               <code className="rounded bg-amber-100 px-1 font-mono text-sm">
                 {impersonatedUserId}
               </code>
@@ -94,9 +93,9 @@ export function AdminImpersonationPanel() {
         {/* Impersonation Controls */}
         <div className="space-y-3">
           <Input
-            label="User ID to Impersonate"
+            label="要模拟的用户 ID"
             id="user-id-input"
-            placeholder="e.g., 2e7ea138-2097-425d-9cad-c660f29cc251"
+            placeholder="例如：2e7ea138-2097-425d-9cad-c660f29cc251"
             value={userIdInput}
             onChange={(e) => setUserIdInput(e.target.value)}
             disabled={isImpersonating}
@@ -109,7 +108,7 @@ export function AdminImpersonationPanel() {
               disabled={isImpersonating || !userIdInput.trim()}
               className="min-w-[100px]"
             >
-              {isImpersonating ? "Active" : "Start"}
+              {isImpersonating ? "已启用" : "开始"}
             </Button>
 
             {isImpersonating && (
@@ -118,7 +117,7 @@ export function AdminImpersonationPanel() {
                 variant="secondary"
                 leftIcon={<UserMinus className="h-4 w-4" />}
               >
-                Stop Impersonation
+                停止模拟
               </Button>
             )}
           </div>
@@ -129,20 +128,20 @@ export function AdminImpersonationPanel() {
           <div className="space-y-3">
             <div className="flex items-center space-x-2">
               <CreditCard className="h-4 w-4" />
-              <h3 className="text-sm font-medium">Live Demo: User Credits</h3>
+              <h3 className="text-sm font-medium">实时演示：用户积分</h3>
             </div>
 
             {creditsLoading ? (
-              <p className="text-sm text-gray-600">Loading credits...</p>
+              <p className="text-sm text-gray-600">正在加载积分...</p>
             ) : creditsError ? (
               <Alert variant="error">
                 <AlertDescription className="text-sm">
-                  Error loading credits:{" "}
+                  加载积分出错：{" "}
                   {creditsError &&
                   typeof creditsError === "object" &&
                   "message" in creditsError
                     ? String(creditsError.message)
-                    : "Unknown error"}
+                    : "未知错误"}
                 </AlertDescription>
               </Alert>
             ) : creditsResponse?.data ? (
@@ -153,23 +152,23 @@ export function AdminImpersonationPanel() {
                     typeof creditsResponse.data === "object" &&
                     "credits" in creditsResponse.data
                       ? String(creditsResponse.data.credits)
-                      : "N/A"}
+                      : "无"}
                   </strong>{" "}
-                  credits available
+                  可用积分
                   {isImpersonating && (
                     <span className="ml-2 text-amber-600">
-                      (via impersonation)
+                      （通过模拟）
                     </span>
                   )}
                 </p>
                 <p className="text-xs text-gray-500">
                   {isImpersonating
-                    ? `Showing credits for user ${impersonatedUserId}`
-                    : "Showing your own credits"}
+                    ? `显示用户 ${impersonatedUserId} 的积分`
+                    : "显示你自己的积分"}
                 </p>
               </div>
             ) : (
-              <p className="text-sm text-gray-600">No credits data available</p>
+              <p className="text-sm text-gray-600">暂无积分数据</p>
             )}
           </div>
         </Card>
@@ -177,16 +176,16 @@ export function AdminImpersonationPanel() {
         {/* Instructions */}
         <div className="space-y-1 text-sm text-gray-600">
           <p>
-            <strong>Instructions:</strong>
+            <strong>说明：</strong>
           </p>
           <ul className="ml-2 list-inside list-disc space-y-1">
-            <li>Enter the UUID of the user you want to impersonate</li>
+            <li>输入要模拟用户的 UUID</li>
             <li>
-              All existing API endpoints automatically work with impersonation
+              现有 API 会自动使用模拟身份
             </li>
-            <li>A warning banner will appear while impersonation is active</li>
+            <li>模拟启用时会显示警告横幅</li>
             <li>
-              Impersonation persists across page refreshes in this session
+              本次会话刷新页面后模拟仍会保持
             </li>
           </ul>
         </div>

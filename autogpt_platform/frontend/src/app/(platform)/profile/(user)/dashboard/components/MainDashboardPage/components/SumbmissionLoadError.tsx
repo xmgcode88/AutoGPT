@@ -14,13 +14,13 @@ export function SubmissionLoadError() {
             variant="large-medium"
             className="text-neutral-900 dark:text-neutral-100"
           >
-            Failed to load agents
+            加载 Agent 失败
           </Text>
           <Text
             variant="body"
             className="text-neutral-600 dark:text-neutral-400"
           >
-            Something went wrong while loading your submitted agents.
+            加载您提交的 Agent 时出现错误。
           </Text>
         </div>
         <Button
@@ -28,7 +28,7 @@ export function SubmissionLoadError() {
           size="small"
           onClick={() => window.location.reload()}
         >
-          Try again
+          重试
         </Button>
       </div>
     </div>

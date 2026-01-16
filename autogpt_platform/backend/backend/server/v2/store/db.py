@@ -39,6 +39,85 @@ DEFAULT_ADMIN_NAME = "AutoGPT Admin"
 DEFAULT_ADMIN_EMAIL = "admin@autogpt.co"
 
 
+def _sanitize_username(username: str | None) -> str:
+    """Allow only letters, numbers, and hyphens in usernames."""
+    if not username:
+        return ""
+    return "".join(
+        c for c in username if c.isalpha() or c.isnumeric() or c == "-"
+    ).lower()
+
+
+async def _generate_unique_username(
+    base_username: str, user_id: str
+) -> str:
+    """
+    Generate a unique, sanitized username.
+
+    Falls back to a deterministic value derived from the user_id when the
+    provided username is empty after sanitization.
+    """
+    sanitized_username = _sanitize_username(base_username) or f"user-{user_id[:8]}"
+    suffix = 0
+
+    while True:
+        candidate = (
+            sanitized_username if suffix == 0 else f"{sanitized_username}-{suffix}"
+        )
+        existing_profile = await prisma.models.Profile.prisma().find_first(
+            where={"username": candidate}
+        )
+
+        if not existing_profile or existing_profile.userId == user_id:
+            return candidate
+
+        suffix += 1
+
+
+def _profile_to_details(
+    profile: prisma.models.Profile,
+) -> backend.server.v2.store.model.ProfileDetails:
+    return backend.server.v2.store.model.ProfileDetails(
+        name=profile.name,
+        username=profile.username,
+        description=profile.description,
+        links=profile.links,
+        avatar_url=profile.avatarUrl,
+    )
+
+
+async def _create_profile_for_user(user_id: str) -> prisma.models.Profile:
+    """
+    Create a default profile for a user when none exists.
+
+    Uses the user's name or email prefix when available, falling back to a
+    deterministic username derived from the user_id.
+    """
+    logger.info(f"Creating default store profile for user {user_id}")
+
+    user = await prisma.models.User.prisma().find_unique(where={"id": user_id})
+
+    base_username = ""
+    if user:
+        base_username = user.name or ""
+        if not base_username and user.email:
+            base_username = user.email.split("@")[0]
+
+    username = await _generate_unique_username(base_username, user_id)
+    display_name = (user.name if user else None) or username
+
+    return await prisma.models.Profile.prisma().create(
+        data=prisma.types.ProfileCreateInput(
+            userId=user_id,
+            name=display_name,
+            username=username,
+            description="",
+            links=[],
+            avatarUrl=None,
+        )
+    )
+
+
 async def get_store_agents(
     featured: bool = False,
     creators: list[str] | None = None,
@@ -1158,7 +1237,7 @@ async def create_store_review(
 
 async def get_user_profile(
     user_id: str,
-) -> backend.server.v2.store.model.ProfileDetails | None:
+) -> backend.server.v2.store.model.ProfileDetails:
     logger.debug(f"Getting user profile for {user_id}")
 
     try:
@@ -1167,14 +1246,9 @@ async def get_user_profile(
         )
 
         if not profile:
-            return None
-        return backend.server.v2.store.model.ProfileDetails(
-            name=profile.name,
-            username=profile.username,
-            description=profile.description,
-            links=profile.links,
-            avatar_url=profile.avatarUrl,
-        )
+            profile = await _create_profile_for_user(user_id)
+
+        return _profile_to_details(profile)
     except Exception as e:
         logger.error(f"Error getting user profile: {e}")
         raise DatabaseError("Failed to get user profile") from e
@@ -1196,17 +1270,35 @@ async def update_profile(
     logger.info(f"Updating profile for user {user_id} with data: {profile}")
     try:
         # Sanitize username to allow only letters, numbers, and hyphens
-        username = "".join(
-            c if c.isalpha() or c == "-" or c.isnumeric() else ""
-            for c in profile.username
-        ).lower()
+        username = _sanitize_username(profile.username)
         # Check if profile exists for the given user_id
         existing_profile = await prisma.models.Profile.prisma().find_first(
             where={"userId": user_id}
         )
         if not existing_profile:
-            raise backend.server.v2.store.exceptions.ProfileNotFoundError(
-                f"Profile not found for user {user_id}. This should not be possible."
+            logger.info(
+                f"No profile found for user {user_id}. Creating a new profile."
+            )
+            created_profile = await prisma.models.Profile.prisma().create(
+                data=prisma.types.ProfileCreateInput(
+                    userId=user_id,
+                    name=profile.name,
+                    username=await _generate_unique_username(username, user_id),
+                    description=profile.description,
+                    links=profile.links,
+                    avatarUrl=profile.avatar_url or None,
+                    isFeatured=profile.is_featured,
+                )
+            )
+            return backend.server.v2.store.model.CreatorDetails(
+                name=created_profile.name,
+                username=created_profile.username,
+                description=created_profile.description,
+                links=created_profile.links,
+                avatar_url=created_profile.avatarUrl or "",
+                agent_rating=0.0,
+                agent_runs=0,
+                top_categories=[],
             )
 
         # Verify that the user is authorized to update this profile
@@ -1224,7 +1316,9 @@ async def update_profile(
         if profile.name is not None:
             update_data["name"] = profile.name
         if profile.username is not None:
-            update_data["username"] = username
+            update_data["username"] = await _generate_unique_username(
+                username or existing_profile.username, user_id
+            )
         if profile.description is not None:
             update_data["description"] = profile.description
         if profile.links is not None:

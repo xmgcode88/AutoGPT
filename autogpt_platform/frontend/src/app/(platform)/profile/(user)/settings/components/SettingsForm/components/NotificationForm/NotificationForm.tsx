@@ -27,7 +27,7 @@ export function NotificationForm({ preferences, user }: NotificationFormProps) {
   return (
     <div>
       <Text variant="h3" size="large-semibold">
-        Notifications
+        通知设置
       </Text>
       <Form {...form}>
         <form
@@ -37,7 +37,7 @@ export function NotificationForm({ preferences, user }: NotificationFormProps) {
           {/* Agent Notifications */}
           <div className="flex flex-col gap-6">
             <Text variant="h4" size="body-medium" className="text-slate-400">
-              Agent Notifications
+              代理通知
             </Text>
             <FormField
               control={form.control}
@@ -46,11 +46,10 @@ export function NotificationForm({ preferences, user }: NotificationFormProps) {
                 <FormItem className="flex flex-row items-center justify-between">
                   <div className="space-y-0.5">
                     <Text variant="h4" size="body-medium">
-                      Agent Run Notifications
+                      代理运行通知
                     </Text>
                     <Text variant="body">
-                      Receive notifications when an agent starts or completes a
-                      run
+                      当代理启动或完成运行时接收通知
                     </Text>
                   </div>
                   <FormControl>
@@ -70,11 +69,10 @@ export function NotificationForm({ preferences, user }: NotificationFormProps) {
                 <FormItem className="flex flex-row items-center justify-between">
                   <div className="space-y-0.5">
                     <Text variant="h4" size="body-medium">
-                      Block Execution Failures
+                      模块执行失败
                     </Text>
                     <Text variant="body">
-                      Get notified when a block execution fails during agent
-                      runs
+                      当代理运行期间模块执行失败时获得通知
                     </Text>
                   </div>
                   <FormControl>
@@ -94,10 +92,10 @@ export function NotificationForm({ preferences, user }: NotificationFormProps) {
                 <FormItem className="flex flex-row items-center justify-between">
                   <div className="space-y-0.5">
                     <Text variant="h4" size="body-medium">
-                      Continuous Agent Errors
+                      连续代理错误
                     </Text>
                     <Text variant="body">
-                      Receive alerts when an agent encounters repeated errors
+                      当代理遇到重复错误时接收警报
                     </Text>
                   </div>
                   <FormControl>
@@ -114,7 +112,7 @@ export function NotificationForm({ preferences, user }: NotificationFormProps) {
           {/* Store Notifications */}
           <div className="flex flex-col gap-6">
             <Text variant="h4" size="body-medium" className="text-slate-400">
-              Store Notifications
+              商店通知
             </Text>
             <FormField
               control={form.control}
@@ -123,11 +121,10 @@ export function NotificationForm({ preferences, user }: NotificationFormProps) {
                 <FormItem className="flex flex-row items-center justify-between">
                   <div className="space-y-0.5">
                     <Text variant="h4" size="body-medium">
-                      Agent Approved
+                      代理已批准
                     </Text>
                     <Text variant="body">
-                      Get notified when your submitted agent is approved for the
-                      store
+                      当您提交的代理被商店批准时获得通知
                     </Text>
                   </div>
                   <FormControl>
@@ -147,11 +144,10 @@ export function NotificationForm({ preferences, user }: NotificationFormProps) {
                 <FormItem className="flex flex-row items-center justify-between">
                   <div className="space-y-0.5">
                     <Text variant="h4" size="body-medium">
-                      Agent Rejected
+                      代理已拒绝
                     </Text>
                     <Text variant="body">
-                      Receive notifications when your agent submission needs
-                      updates
+                      当您的代理提交需要更新时接收通知
                     </Text>
                   </div>
                   <FormControl>
@@ -168,7 +164,7 @@ export function NotificationForm({ preferences, user }: NotificationFormProps) {
           {/* Balance Notifications */}
           <div className="flex flex-col gap-4">
             <Text variant="h4" size="body-medium" className="text-slate-400">
-              Balance Notifications
+              余额通知
             </Text>
             <FormField
               control={form.control}
@@ -177,10 +173,10 @@ export function NotificationForm({ preferences, user }: NotificationFormProps) {
                 <FormItem className="flex flex-row items-center justify-between">
                   <div className="space-y-0.5">
                     <Text variant="h4" size="body-medium">
-                      Zero Balance Alert
+                      零余额警报
                     </Text>
                     <Text variant="body">
-                      Get notified when your account balance reaches zero
+                      当您的账户余额降至零时获得通知
                     </Text>
                   </div>
                   <FormControl>
@@ -200,10 +196,10 @@ export function NotificationForm({ preferences, user }: NotificationFormProps) {
                 <FormItem className="flex flex-row items-center justify-between">
                   <div className="space-y-0.5">
                     <Text variant="h4" size="body-medium">
-                      Low Balance Warning
+                      低余额警告
                     </Text>
                     <Text variant="body">
-                      Receive warnings when your balance is running low
+                      当您的余额不足时接收警告
                     </Text>
                   </div>
                   <FormControl>
@@ -220,7 +216,7 @@ export function NotificationForm({ preferences, user }: NotificationFormProps) {
           {/* Summary Reports */}
           <div className="flex flex-col gap-4">
             <Text variant="h4" size="body-medium" className="text-slate-400">
-              Summary reports
+              摘要报告
             </Text>
             <FormField
               control={form.control}
@@ -229,10 +225,10 @@ export function NotificationForm({ preferences, user }: NotificationFormProps) {
                 <FormItem className="flex flex-row items-center justify-between">
                   <div className="space-y-1">
                     <Text variant="h4" size="body-medium">
-                      Daily Summary
+                      每日摘要
                     </Text>
                     <Text variant="body">
-                      Receive a daily summary of your account activity
+                      接收您账户活动的每日摘要
                     </Text>
                   </div>
                   <FormControl>
@@ -252,10 +248,10 @@ export function NotificationForm({ preferences, user }: NotificationFormProps) {
                 <FormItem className="flex flex-row items-center justify-between">
                   <div className="space-y-0.5">
                     <Text variant="h4" size="body-medium">
-                      Weekly Summary
+                      每周摘要
                     </Text>
                     <Text variant="body">
-                      Get a weekly overview of your account performance
+                      获取您账户表现的每周概览
                     </Text>
                   </div>
                   <FormControl>
@@ -275,10 +271,10 @@ export function NotificationForm({ preferences, user }: NotificationFormProps) {
                 <FormItem className="flex flex-row items-center justify-between">
                   <div className="space-y-0.5">
                     <Text variant="h4" size="body-medium">
-                      Monthly Summary
+                      每月摘要
                     </Text>
                     <Text variant="body">
-                      Receive a comprehensive monthly report of your account
+                      接收您账户的月度综合报告
                     </Text>
                   </div>
                   <FormControl>
@@ -301,7 +297,7 @@ export function NotificationForm({ preferences, user }: NotificationFormProps) {
               disabled={isLoading}
               className="min-w-[10rem]"
             >
-              Cancel
+              取消
             </Button>
             <Button
               type="submit"
@@ -309,7 +305,7 @@ export function NotificationForm({ preferences, user }: NotificationFormProps) {
               className="min-w-[10rem]"
               loading={isLoading}
             >
-              {isLoading ? "Saving..." : "Save preferences"}
+              {isLoading ? "保存中..." : "保存偏好"}
             </Button>
           </div>
         </form>

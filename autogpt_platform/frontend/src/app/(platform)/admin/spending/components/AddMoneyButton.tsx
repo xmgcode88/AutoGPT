@@ -44,15 +44,15 @@ export function AdminAddMoneyButton({
       await addDollars(formData);
       setIsAddMoneyDialogOpen(false);
       toast({
-        title: "Success",
-        description: `Added $${dollarAmount} to ${userEmail}'s balance`,
+        title: "成功",
+        description: `已向 ${userEmail} 余额添加 $${dollarAmount}`,
       });
       router.refresh(); // Refresh the current route
     } catch (error) {
       console.error("Error adding dollars:", error);
       toast({
-        title: "Error",
-        description: "Failed to add dollars. Please try again.",
+        title: "错误",
+        description: "添加金额失败，请重试。",
         variant: "destructive",
       });
     } finally {
@@ -70,7 +70,7 @@ export function AdminAddMoneyButton({
           setIsAddMoneyDialogOpen(true);
         }}
       >
-        Add Dollars
+        添加金额
       </Button>
 
       {/* Add $$$ Dialog */}
@@ -80,13 +80,13 @@ export function AdminAddMoneyButton({
       >
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Add Dollars</DialogTitle>
+            <DialogTitle>添加金额</DialogTitle>
             <DialogDescription className="pt-2">
               <div className="mb-2">
-                <span className="font-medium">User:</span> {userEmail}
+                <span className="font-medium">用户：</span> {userEmail}
               </div>
               <div>
-                <span className="font-medium">Current balance:</span> $
+                <span className="font-medium">当前余额：</span> $
                 {(currentBalance / 100).toFixed(2)}
               </div>
             </DialogDescription>
@@ -102,7 +102,7 @@ export function AdminAddMoneyButton({
 
             <div className="grid gap-4 py-4">
               <div className="grid gap-2">
-                <Label htmlFor="dollarAmount">Amount (in dollars)</Label>
+                <Label htmlFor="dollarAmount">金额（美元）</Label>
                 <div className="flex">
                   <div className="flex items-center justify-center rounded-l-md border border-r-0 bg-gray-50 px-3 text-gray-500">
                     $
@@ -122,12 +122,12 @@ export function AdminAddMoneyButton({
 
             <div className="grid gap-4 py-4">
               <div className="grid gap-2">
-                <Label htmlFor="comments">Comments (Optional)</Label>
+                <Label htmlFor="comments">备注（可选）</Label>
                 <Textarea
                   id="comments"
                   name="comments"
-                  placeholder="Why are you adding dollars?"
-                  defaultValue={defaultComments || "We love you!"}
+                  placeholder="请输入添加金额的原因"
+                  defaultValue={defaultComments || "感谢支持！"}
                 />
               </div>
             </div>
@@ -139,10 +139,10 @@ export function AdminAddMoneyButton({
                 onClick={() => setIsAddMoneyDialogOpen(false)}
                 disabled={isSubmitting}
               >
-                Cancel
+                取消
               </Button>
               <Button type="submit" disabled={isSubmitting}>
-                {isSubmitting ? "Adding..." : "Add Dollars"}
+                {isSubmitting ? "添加中..." : "添加金额"}
               </Button>
             </DialogFooter>
           </form>

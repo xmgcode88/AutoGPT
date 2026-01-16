@@ -124,7 +124,7 @@ services:
       file: ./db/docker/docker-compose.yml
       service: db
     ports:
-      - 5432:5432 # We don't use Supavisor locally, so we expose the db directly.
+      - 15432:5432 # We don't use Supavisor locally, so we expose the db directly.
 
   # Studio and its dependencies for local development only
   meta:
@@ -145,6 +145,8 @@ services:
     depends_on:
       meta:
         condition: service_healthy
+    environment:
+      HOSTNAME: 0.0.0.0
     # environment:
     #   NEXT_PUBLIC_ENABLE_LOGS: false  # Disable analytics/logging features
 

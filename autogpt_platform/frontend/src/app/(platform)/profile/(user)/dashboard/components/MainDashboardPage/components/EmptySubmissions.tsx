@@ -13,15 +13,15 @@ export function EmptySubmissions() {
             variant="large-medium"
             className="text-neutral-900 dark:text-neutral-100"
           >
-            No agents submitted yet
+            尚未提交任何 Agent
           </Text>
           <Text
             variant="body"
             className="text-neutral-600 dark:text-neutral-400"
           >
-            You haven&apos;t submitted any agents to the store yet.
+            您还没有向商店提交任何 Agent。
             <br />
-            Click &ldquo;Submit agent&rdquo; above to get started.
+            点击上方的&quot;提交 Agent&quot;开始使用。
           </Text>
         </div>
       </div>

@@ -46,22 +46,22 @@ export function ExecutionAnalyticsForm() {
     mutation: {
       onSuccess: (res) => {
         if (res.status !== 200) {
-          throw new Error("Something went wrong!");
+          throw new Error("出错了！");
         }
         const result = res.data;
         setResults(result);
         toast({
-          title: "Analytics Generated",
-          description: `Processed ${result.processed_executions} executions. ${result.successful_analytics} successful, ${result.failed_analytics} failed, ${result.skipped_executions} skipped.`,
+          title: "分析已生成",
+          description: `已处理 ${result.processed_executions} 次执行。成功 ${result.successful_analytics}，失败 ${result.failed_analytics}，跳过 ${result.skipped_executions}。`,
           variant: "default",
         });
       },
       onError: (error: any) => {
         console.error("Analytics generation error:", error);
         toast({
-          title: "Analytics Generation Failed",
+          title: "分析生成失败",
           description:
-            error?.message || error?.detail || "An unexpected error occurred",
+            error?.message || error?.detail || "发生未知错误",
           variant: "destructive",
         });
       },
@@ -92,8 +92,8 @@ export function ExecutionAnalyticsForm() {
 
     if (!formData.graph_id.trim()) {
       toast({
-        title: "Validation Error",
-        description: "Graph ID is required",
+        title: "校验错误",
+        description: "必须填写图 ID",
         variant: "destructive",
       });
       return;
@@ -144,7 +144,7 @@ export function ExecutionAnalyticsForm() {
   if (configLoading) {
     return (
       <div className="flex items-center justify-center py-8">
-        <div className="text-gray-500">Loading configuration...</div>
+        <div className="text-gray-500">正在加载配置...</div>
       </div>
     );
   }
@@ -153,7 +153,7 @@ export function ExecutionAnalyticsForm() {
   if (configError || !config?.data || config.status !== 200) {
     return (
       <div className="flex items-center justify-center py-8">
-        <div className="text-red-500">Failed to load configuration</div>
+        <div className="text-red-500">加载配置失败</div>
       </div>
     );
   }
@@ -166,19 +166,19 @@ export function ExecutionAnalyticsForm() {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <div className="space-y-2">
             <Label htmlFor="graph_id">
-              Graph ID <span className="text-red-500">*</span>
+              图 ID <span className="text-red-500">*</span>
             </Label>
             <Input
               id="graph_id"
               value={formData.graph_id}
               onChange={(e) => handleInputChange("graph_id", e.target.value)}
-              placeholder="Enter graph/agent ID"
+              placeholder="输入图/智能体 ID"
               required
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="graph_version">Graph Version</Label>
+            <Label htmlFor="graph_version">图版本</Label>
             <Input
               id="graph_version"
               type="number"
@@ -189,22 +189,22 @@ export function ExecutionAnalyticsForm() {
                   e.target.value ? parseInt(e.target.value) : undefined,
                 )
               }
-              placeholder="Optional - leave empty for all versions"
+              placeholder="可选 - 留空表示所有版本"
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="user_id">User ID</Label>
+            <Label htmlFor="user_id">用户 ID</Label>
             <Input
               id="user_id"
               value={formData.user_id || ""}
               onChange={(e) => handleInputChange("user_id", e.target.value)}
-              placeholder="Optional - leave empty for all users"
+              placeholder="可选 - 留空表示所有用户"
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="created_after">Created After</Label>
+            <Label htmlFor="created_after">创建时间晚于</Label>
             <Input
               id="created_after"
               type="datetime-local"
@@ -216,13 +216,13 @@ export function ExecutionAnalyticsForm() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="model_name">AI Model</Label>
+            <Label htmlFor="model_name">AI 模型</Label>
             <Select
               value={formData.model_name}
               onValueChange={(value) => handleInputChange("model_name", value)}
             >
               <SelectTrigger>
-                <SelectValue placeholder="Select AI model" />
+                <SelectValue placeholder="选择 AI 模型" />
               </SelectTrigger>
               <SelectContent>
                 {configData.available_models.map((model) => (
@@ -240,7 +240,7 @@ export function ExecutionAnalyticsForm() {
           <Collapsible
             trigger={
               <h3 className="text-lg font-semibold text-gray-700">
-                Advanced Options
+                高级选项
               </h3>
             }
             defaultOpen={false}
@@ -257,15 +257,14 @@ export function ExecutionAnalyticsForm() {
                   }
                 />
                 <Label htmlFor="skip_existing" className="text-sm">
-                  Skip executions that already have activity status and
-                  correctness score
+                  跳过已包含活动状态与正确性评分的执行
                 </Label>
               </div>
 
               {/* Custom System Prompt */}
               <div className="space-y-2">
                 <Label htmlFor="system_prompt">
-                  Custom System Prompt (Optional)
+                  自定义系统提示词（可选）
                 </Label>
                 <Textarea
                   id="system_prompt"
@@ -278,15 +277,14 @@ export function ExecutionAnalyticsForm() {
                   className="resize-y"
                 />
                 <p className="text-sm text-gray-600">
-                  Customize how the AI evaluates execution success and failure.
-                  Leave empty to use the default prompt shown above.
+                  自定义 AI 评估执行成功与失败的方式。留空则使用上方默认提示词。
                 </p>
               </div>
 
               {/* Custom User Prompt */}
               <div className="space-y-2">
                 <Label htmlFor="user_prompt">
-                  Custom User Prompt Template (Optional)
+                  自定义用户提示词模板（可选）
                 </Label>
                 <Textarea
                   id="user_prompt"
@@ -299,16 +297,15 @@ export function ExecutionAnalyticsForm() {
                   className="resize-y"
                 />
                 <p className="text-sm text-gray-600">
-                  Customize the analysis instructions. Use{" "}
+                  自定义分析指令。使用{" "}
                   <code className="rounded bg-gray-100 px-1">
                     {"{{GRAPH_NAME}}"}
                   </code>{" "}
-                  and{" "}
+                  和{" "}
                   <code className="rounded bg-gray-100 px-1">
                     {"{{EXECUTION_DATA}}"}
                   </code>{" "}
-                  as placeholders. Leave empty to use the default template shown
-                  above.
+                  作为占位符。留空则使用上方默认模板。
                 </p>
               </div>
 
@@ -325,7 +322,7 @@ export function ExecutionAnalyticsForm() {
                     );
                   }}
                 >
-                  Reset System Prompt
+                  重置系统提示词
                 </Button>
                 <Button
                   type="button"
@@ -338,7 +335,7 @@ export function ExecutionAnalyticsForm() {
                     );
                   }}
                 >
-                  Reset User Prompt
+                  重置用户提示词
                 </Button>
                 <Button
                   type="button"
@@ -349,7 +346,7 @@ export function ExecutionAnalyticsForm() {
                     handleInputChange("user_prompt", "");
                   }}
                 >
-                  Clear All Prompts
+                  清空所有提示词
                 </Button>
               </div>
             </div>
@@ -364,8 +361,8 @@ export function ExecutionAnalyticsForm() {
             disabled={generateAnalytics.isPending}
           >
             {generateAnalytics.isPending
-              ? "Processing..."
-              : "Generate Analytics"}
+              ? "处理中..."
+              : "生成分析"}
           </Button>
         </div>
       </form>

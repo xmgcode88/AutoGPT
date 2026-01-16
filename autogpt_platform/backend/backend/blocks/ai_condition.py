@@ -49,7 +49,7 @@ class AIConditionBlock(AIBlockBase):
         )
         model: LlmModel = SchemaField(
             title="LLM Model",
-            default=LlmModel.GPT4O,
+            default=LlmModel.DEEPSEEK_CHAT,
             description="The language model to use for evaluating the condition.",
             advanced=False,
         )

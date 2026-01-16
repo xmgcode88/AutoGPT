@@ -28,7 +28,7 @@ export default function UserIntegrationsPage() {
   const { toast } = useToast();
 
   useEffect(() => {
-    document.title = "Integrations – AutoGPT Platform";
+    document.title = "集成管理 – AutoGPT 平台";
   }, []);
 
   const [confirmationDialogState, setConfirmationDialogState] = useState<
@@ -56,7 +56,7 @@ export default function UserIntegrationsPage() {
         result = await providers[provider].deleteCredentials(id, force);
       } catch (error: any) {
         toast({
-          title: "Something went wrong when deleting credentials: " + error,
+          title: "删除凭证时出现错误: " + error,
           variant: "destructive",
           duration: 2000,
         });
@@ -66,13 +66,13 @@ export default function UserIntegrationsPage() {
       if (result.deleted) {
         if (result.revoked) {
           toast({
-            title: "Credentials deleted",
+            title: "凭证已删除",
             duration: 2000,
           });
         } else {
           toast({
-            title: "Credentials deleted from AutoGPT",
-            description: `You may also manually remove the connection to AutoGPT at ${provider}!`,
+            title: "凭证已从 AutoGPT 删除",
+            description: `您也可以在 ${provider} 手动移除与 AutoGPT 的连接！`,
             duration: 3000,
           });
         }
@@ -158,13 +158,13 @@ export default function UserIntegrationsPage() {
 
   return (
     <div className="mx-auto max-w-3xl md:py-8">
-      <h2 className="mb-4 text-lg">Connections & Credentials</h2>
+      <h2 className="mb-4 text-lg">连接与凭证</h2>
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Provider</TableHead>
-            <TableHead>Name</TableHead>
-            <TableHead>Actions</TableHead>
+            <TableHead>服务商</TableHead>
+            <TableHead>名称</TableHead>
+            <TableHead>操作</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -184,10 +184,10 @@ export default function UserIntegrationsPage() {
                 <small className="text-muted-foreground">
                   {
                     {
-                      oauth2: "OAuth2 credentials",
-                      api_key: "API key",
-                      user_password: "Username & password",
-                      host_scoped: "Host-scoped credentials",
+                      oauth2: "OAuth2 凭证",
+                      api_key: "API 密钥",
+                      user_password: "用户名和密码",
+                      host_scoped: "主机范围凭证",
                     }[cred.type]
                   }{" "}
                   - <code>{cred.id}</code>
@@ -198,7 +198,7 @@ export default function UserIntegrationsPage() {
                   variant="destructive"
                   onClick={() => removeCredentials(cred.provider, cred.id)}
                 >
-                  <Trash2Icon className="mr-1.5 size-4" /> Delete
+                  <Trash2Icon className="mr-1.5 size-4" /> 删除
                 </Button>
               </TableCell>
             </TableRow>
@@ -213,7 +213,7 @@ export default function UserIntegrationsPage() {
             if (!open) setConfirmationDialogState({ open: false });
           },
         }}
-        title="Are you sure?"
+        title="您确定吗？"
         onClose={() => setConfirmationDialogState({ open: false })}
         styling={{ maxWidth: "32rem" }}
       >
@@ -229,7 +229,7 @@ export default function UserIntegrationsPage() {
                 confirmationDialogState.onReject()
               }
             >
-              Cancel
+              取消
             </Button>
             <Button
               variant="destructive"
@@ -238,7 +238,7 @@ export default function UserIntegrationsPage() {
                 confirmationDialogState.onConfirm()
               }
             >
-              Continue
+              继续
             </Button>
           </Dialog.Footer>
         </Dialog.Content>

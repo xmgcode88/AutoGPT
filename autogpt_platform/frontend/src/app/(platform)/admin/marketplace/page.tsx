@@ -23,16 +23,16 @@ async function AdminMarketplaceDashboard({
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">Marketplace Management</h1>
+            <h1 className="text-3xl font-bold">市场管理</h1>
             <p className="text-gray-500">
-              Unified view for marketplace management and approval history
+              统一查看市场管理与审核记录
             </p>
           </div>
         </div>
 
         <Suspense
           fallback={
-            <div className="py-10 text-center">Loading submissions...</div>
+            <div className="py-10 text-center">正在加载提交记录...</div>
           }
         >
           <AdminAgentsDataTable
